@@ -41,5 +41,16 @@ namespace Qwf.UnitTests {
                 Assert.Contains( obstacle.GetData(), obstacleData );
             }
         }
+
+        [Test]
+        public void IfNotEnoughRemainingObstaclesExist_CurrentObstaclesAreFilledToCapacity() {
+            List<GameObstacleData> obstacleData = CreateObstacleData( MAX_CURRENT_OBSTACLES - 1 );
+            GameBoard systemUnderTest = CreateSystemUnderTest( obstacleData );
+            List<IGameObstacle> currentObstacles = systemUnderTest.GetCurrentObstacles();
+            List<IGameObstacle> remainingObstacles = systemUnderTest.GetRemainingObstacles();
+
+            Assert.AreEqual( MAX_CURRENT_OBSTACLES - 1, currentObstacles.Count );
+            Assert.AreEqual( 0, remainingObstacles.Count );
+        }
     }
 }
