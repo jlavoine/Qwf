@@ -52,5 +52,27 @@ namespace Qwf.UnitTests {
             Assert.AreEqual( MAX_CURRENT_OBSTACLES - 1, currentObstacles.Count );
             Assert.AreEqual( 0, remainingObstacles.Count );
         }
+
+        [Test]
+        public void IsObstacleCurrent_ReturnsTrue_WhenObstacleIsCurrent() {
+            List<GameObstacleData> obstacleData = CreateObstacleData( 1 );
+            GameBoard systemUnderTest = CreateSystemUnderTest( obstacleData );
+
+            IGameObstacle currentObstacle = systemUnderTest.GetCurrentObstacles()[0];
+            bool isObstacleCurrent = systemUnderTest.IsObstacleCurrent( currentObstacle );
+
+            Assert.IsTrue( isObstacleCurrent );
+        }
+
+        [Test]
+        public void IsObstacleCurrent_ReturnsFalse_WhenObstacleIsNotCurrent() {
+            List<GameObstacleData> obstacleData = CreateObstacleData( 1 );
+            GameBoard systemUnderTest = CreateSystemUnderTest( obstacleData );
+
+            IGameObstacle nonCurrentObstacle = Substitute.For<IGameObstacle>();
+            bool isObstacleCurrent = systemUnderTest.IsObstacleCurrent( nonCurrentObstacle );
+
+            Assert.IsFalse( isObstacleCurrent );
+        }
     }
 }

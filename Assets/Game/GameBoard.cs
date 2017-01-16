@@ -22,6 +22,10 @@ namespace Qwf {
             return mCurrentObstacles;
         }
 
+        public bool IsObstacleCurrent( IGameObstacle i_obstacle ) {
+            return mCurrentObstacles.Contains( i_obstacle );
+        }
+
         public void MakeMove( List<IGameMove> i_moves ) {
 
         }

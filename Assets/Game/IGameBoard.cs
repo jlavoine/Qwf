@@ -5,6 +5,6 @@ namespace Qwf {
         List<IGameObstacle> GetRemainingObstacles();
         List<IGameObstacle> GetCurrentObstacles();
 
-        void MakeMove( List<IGameMove> i_moves );
+        bool IsObstacleCurrent( IGameObstacle i_obstacle );
     }
 }
