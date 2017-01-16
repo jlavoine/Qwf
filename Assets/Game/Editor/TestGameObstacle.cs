@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using NSubstitute;
 using System.Collections.Generic;
 
 namespace Qwf.UnitTests {
