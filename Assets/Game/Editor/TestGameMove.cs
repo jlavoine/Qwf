@@ -70,5 +70,17 @@ namespace Qwf.UnitTests {
 
             Assert.IsTrue( systemUnderTest.IsLegal( mockBoard ) );
         }
+
+        [Test]
+        public void WhenMoveIsMade_TargetPieceNowInTargetSlot() {
+            IGamePiece targetPiece = Substitute.For<IGamePiece>();
+            IGamePieceSlot targetSlot = Substitute.For<IGamePieceSlot>();
+            IGameObstacle targetObstacle = Substitute.For<IGameObstacle>();
+            GameMove systemUnderTest = new GameMove( targetPiece, targetObstacle, targetSlot );
+            
+            systemUnderTest.MakeMove();
+            
+            targetSlot.Received( 1 ).PlacePieceIntoSlot( targetPiece );
+        }
     }
 }

@@ -31,8 +31,12 @@ namespace Qwf {
             return doesPlayerCurrentlyHoldPiece && isObstacleCurrent && canPieceBePlacedInObstacleSlot;
         }
 
-        public void MakeMove( IGameBoard i_board ) {
+        public void MakeMove() {
+            mTargetSlot.PlacePieceIntoSlot( mTargetPiece );
+        }
 
+        public void MyTest( IGamePieceSlot slot) {
+            slot.PlacePieceIntoSlot( mTargetPiece );
         }
     }
 }

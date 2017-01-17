@@ -26,7 +26,7 @@ namespace Qwf {
 
         private void MakeMoves( List<IGameMove> i_moves ) {
             foreach ( IGameMove move in i_moves ) {
-                move.MakeMove( mBoard );
+                move.MakeMove();
             }
         }
     }

@@ -15,7 +15,7 @@ namespace Qwf.UnitTests {
             systemUnderTest.AttemptMoves( moves );
 
             foreach ( IGameMove move in moves ) {
-                move.DidNotReceive().MakeMove( Arg.Any<IGameBoard>() );
+                move.DidNotReceive().MakeMove();
             }
         }
 
@@ -29,7 +29,7 @@ namespace Qwf.UnitTests {
             systemUnderTest.AttemptMoves( moves );
 
             foreach ( IGameMove move in moves ) {
-                move.Received( 1 ).MakeMove( Arg.Any<IGameBoard>() );
+                move.Received( 1 ).MakeMove();
             }
         }
 

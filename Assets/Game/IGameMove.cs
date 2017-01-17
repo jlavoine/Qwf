@@ -7,6 +7,8 @@ namespace Qwf {
 
         bool IsLegal( IGameBoard i_board );
 
-        void MakeMove( IGameBoard i_board );
+        void MakeMove();
+
+        void MyTest( IGamePieceSlot test );
     }
 }
