@@ -11,6 +11,10 @@ namespace Qwf {
             CreateSlots();
         }
 
+        public GameObstacle( List<IGamePieceSlot> i_slots ) {
+            mSlots = i_slots;
+        }
+
         private void CreateSlots() {
             mSlots = new List<IGamePieceSlot>();
             foreach ( GamePieceSlotData slotData in mData.SlotsData ) {
@@ -24,6 +28,18 @@ namespace Qwf {
 
         public GameObstacleData GetData() {
             return mData;
+        }
+
+        public bool CanPieceBePlacedIntoSlot( IGamePiece i_piece, IGamePieceSlot i_slot ) {
+            if ( DoesObstacleHaveSlot( i_slot ) ) {
+                return i_slot.CanPlacePieceIntoSlot( i_piece );
+            } else {
+                return false;
+            }
+        }
+
+        public bool DoesObstacleHaveSlot( IGamePieceSlot i_slot ) {
+            return mSlots.Contains( i_slot );
         }
     }
 }
