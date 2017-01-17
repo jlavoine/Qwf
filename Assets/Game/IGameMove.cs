@@ -6,5 +6,7 @@ namespace Qwf {
         IGamePieceSlot GetTargetSlot();
 
         bool IsLegal( IGameBoard i_board );
+
+        void MakeMove( IGameBoard i_board );
     }
 }
