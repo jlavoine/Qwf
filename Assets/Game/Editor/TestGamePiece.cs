@@ -95,5 +95,23 @@ namespace Qwf.UnitTests {
 
             Assert.IsFalse( canOvertake );
         }
+
+        [Test]
+        public void IfOwnerDoesNotHoldPiece_PieceIsHeldReturnsFalse() {
+            mMockOwner.IsGamePieceHeld( Arg.Any<IGamePiece>() ).Returns( false );
+            GamePieceData data = new GamePieceData() { PieceType = PIECE_TYPE_A, Value = PIECE_VALUE };
+            GamePiece systemUnderTest = new GamePiece( mMockOwner, data );
+
+            Assert.IsFalse( systemUnderTest.IsPieceCurrentlyHeld() );
+        }
+
+        [Test]
+        public void IfOwnerHoldsPieces_PieceIsHeldReturnsTrue() {
+            mMockOwner.IsGamePieceHeld( Arg.Any<IGamePiece>() ).Returns( true );
+            GamePieceData data = new GamePieceData() { PieceType = PIECE_TYPE_A, Value = PIECE_VALUE };
+            GamePiece systemUnderTest = new GamePiece( mMockOwner, data );
+
+            Assert.IsTrue( systemUnderTest.IsPieceCurrentlyHeld() );
+        }
     }
 }

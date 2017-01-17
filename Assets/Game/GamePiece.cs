@@ -32,5 +32,9 @@ namespace Qwf {
         public IGamePlayer GetOwner() {
             return mOwner;
         }
+
+        public bool IsPieceCurrentlyHeld() {
+            return GetOwner().IsGamePieceHeld( this );
+        }
     }
 }
