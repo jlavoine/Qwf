@@ -22,5 +22,13 @@ namespace Qwf {
         public IGamePieceSlot GetTargetSlot() {
             return mTargetSlot;
         }
+
+        public bool IsLegal( IGameBoard i_board ) {
+            bool doesPlayerCurrentlyHoldPiece = mTargetPiece.IsCurrentlyHeld();
+            bool isObstacleCurrent = i_board.IsObstacleCurrent( mTargetObstacle );
+            bool canPieceBePlacedInObstacleSlot = mTargetObstacle.CanPieceBePlacedIntoSlot( mTargetPiece, mTargetSlot );
+
+            return doesPlayerCurrentlyHoldPiece && isObstacleCurrent && canPieceBePlacedInObstacleSlot;
+        }
     }
 }

@@ -102,7 +102,7 @@ namespace Qwf.UnitTests {
             GamePieceData data = new GamePieceData() { PieceType = PIECE_TYPE_A, Value = PIECE_VALUE };
             GamePiece systemUnderTest = new GamePiece( mMockOwner, data );
 
-            Assert.IsFalse( systemUnderTest.IsPieceCurrentlyHeld() );
+            Assert.IsFalse( systemUnderTest.IsCurrentlyHeld() );
         }
 
         [Test]
@@ -111,7 +111,7 @@ namespace Qwf.UnitTests {
             GamePieceData data = new GamePieceData() { PieceType = PIECE_TYPE_A, Value = PIECE_VALUE };
             GamePiece systemUnderTest = new GamePiece( mMockOwner, data );
 
-            Assert.IsTrue( systemUnderTest.IsPieceCurrentlyHeld() );
+            Assert.IsTrue( systemUnderTest.IsCurrentlyHeld() );
         }
     }
 }

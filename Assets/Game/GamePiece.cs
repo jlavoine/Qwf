@@ -33,7 +33,7 @@ namespace Qwf {
             return mOwner;
         }
 
-        public bool IsPieceCurrentlyHeld() {
+        public bool IsCurrentlyHeld() {
             return GetOwner().IsGamePieceHeld( this );
         }
     }

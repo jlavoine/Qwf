@@ -4,5 +4,7 @@ namespace Qwf {
         IGamePiece GetTargetPiece();
         IGameObstacle GetTargetObstacle();
         IGamePieceSlot GetTargetSlot();
+
+        bool IsLegal( IGameBoard i_board );
     }
 }
