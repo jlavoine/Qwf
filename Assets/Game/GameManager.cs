@@ -8,9 +8,10 @@ namespace Qwf {
             mBoard = i_board;
         }
 
-        public void AttemptMoves( List<IGameMove> i_moves ) {
+        public void AttemptMoves( IGamePlayer i_player, List<IGameMove> i_moves ) {
             if ( AreMovesLegal( i_moves ) ) {
                 MakeMoves( i_moves );
+                i_player.DrawToFillHand();
             }
         }
 

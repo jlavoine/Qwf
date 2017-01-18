@@ -2,6 +2,6 @@
 
 namespace Qwf {
     public interface IGameManager {
-        void AttemptMoves( List<IGameMove> i_moves );
+        void AttemptMoves( IGamePlayer i_player, List<IGameMove> i_moves );
     }
 }
