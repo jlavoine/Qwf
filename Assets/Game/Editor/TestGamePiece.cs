@@ -113,5 +113,17 @@ namespace Qwf.UnitTests {
 
             Assert.IsTrue( systemUnderTest.IsCurrentlyHeld() );
         }
+
+        [Test]
+        public void PlacingPieceIntoSlot_RemovesFromPlayerHand_AndPlacesIntoSlot() {
+            GamePieceData data = new GamePieceData() { PieceType = PIECE_TYPE_A, Value = PIECE_VALUE };
+            GamePiece systemUnderTest = new GamePiece( mMockOwner, data );
+            IGamePieceSlot mockSlot = Substitute.For<IGamePieceSlot>();
+
+            systemUnderTest.PlaceFromPlayerHandIntoSlot( mockSlot );
+
+            mockSlot.Received( 1 ).PlacePieceIntoSlot( systemUnderTest );
+            mMockOwner.Received( 1 ).RemovePieceFromHand( systemUnderTest );
+        }
     }
 }

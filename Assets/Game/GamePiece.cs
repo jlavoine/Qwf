@@ -36,5 +36,10 @@ namespace Qwf {
         public bool IsCurrentlyHeld() {
             return GetOwner().IsGamePieceHeld( this );
         }
+
+        public void PlaceFromPlayerHandIntoSlot( IGamePieceSlot i_slot ) {
+            i_slot.PlacePieceIntoSlot( this );
+            mOwner.RemovePieceFromHand( this );
+        }
     }
 }

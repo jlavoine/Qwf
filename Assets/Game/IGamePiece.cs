@@ -10,5 +10,7 @@ namespace Qwf {
         bool IsCurrentlyHeld();
 
         IGamePlayer GetOwner();
+
+        void PlaceFromPlayerHandIntoSlot( IGamePieceSlot i_slot );
     }
 }
