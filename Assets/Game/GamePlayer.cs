@@ -30,6 +30,17 @@ namespace Qwf {
             return 0;
         }
 
+        public void DrawToFillHand() {
+            int numPiecesToDraw = mRules.GetPlayerHandSize() - mHeldPieces.Count;
+            DrawGamePieces( numPiecesToDraw );
+        }
+
+        public void RemovePieceFromHand( IGamePiece i_piece ) {
+            if ( mHeldPieces.Contains( i_piece ) ) {
+                mHeldPieces.Remove( i_piece );
+            }
+        }
+
         private void SetAndShuffleUndrawnPieces( List<IGamePiece> i_allPieces ) {
             foreach ( IGamePiece piece in i_allPieces ) {
                 mUndrawnPieces.Add( piece );
@@ -39,7 +50,7 @@ namespace Qwf {
         }
 
         private void DrawStartingHand() {
-            DrawGamePieces( mRules.GetPlayerHandSize() );
+            DrawToFillHand();
         }
 
         private void DrawGamePieces( int i_numPieces ) {

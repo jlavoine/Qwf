@@ -59,6 +59,40 @@ namespace Qwf.UnitTests {
             Assert.IsFalse( isPieceHeld );
         }
 
+        [Test]
+        public void RemovingPieceFromHand_IfPlayerHoldsPiece_ReducesHandSize() {
+            IGameRules mockRules = GetStandardRules();
+            List<IGamePiece> mockPieces = CreateGamePieces( PLAYER_HAND_SIZE );
+            GamePlayer systemUnderTest = new GamePlayer( mockRules, mockPieces );
+
+            systemUnderTest.RemovePieceFromHand( mockPieces[0] );
+
+            Assert.AreEqual( PLAYER_HAND_SIZE - 1, systemUnderTest.GetHeldPieces().Count );
+        }
+
+        [Test]
+        public void RemovingPieceFromHand_IfPlayerDoesNotHoldPiece_DoesNotReducesHandSize() {
+            IGameRules mockRules = GetStandardRules();
+            List<IGamePiece> mockPieces = CreateGamePieces( PLAYER_HAND_SIZE );
+            GamePlayer systemUnderTest = new GamePlayer( mockRules, mockPieces );
+
+            systemUnderTest.RemovePieceFromHand( Substitute.For<IGamePiece>() );
+
+            Assert.AreEqual( PLAYER_HAND_SIZE, systemUnderTest.GetHeldPieces().Count );
+        }
+
+        [Test]
+        public void DrawToFillHand_FillsHand() {
+            IGameRules mockRules = GetStandardRules();
+            List<IGamePiece> mockPieces = CreateGamePieces( PLAYER_HAND_SIZE * 2 );
+            GamePlayer systemUnderTest = new GamePlayer( mockRules, mockPieces );
+
+            systemUnderTest.RemovePieceFromHand( mockPieces[0] );
+            systemUnderTest.DrawToFillHand();            
+
+            Assert.AreEqual( PLAYER_HAND_SIZE, systemUnderTest.GetHeldPieces().Count );
+        }
+
         private IGameRules GetStandardRules() {
             IGameRules mockRules = Substitute.For<IGameRules>();
             mockRules.GetPlayerHandSize().Returns( PLAYER_HAND_SIZE );

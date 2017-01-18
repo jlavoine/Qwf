@@ -6,6 +6,9 @@ namespace Qwf {
 
         bool IsGamePieceHeld( IGamePiece i_piece );
 
+        void DrawToFillHand();
+        void RemovePieceFromHand( IGamePiece i_piece );
+
         List<IGamePiece> GetHeldPieces();
         List<IGamePiece> GetUndrawnPieces();
     }
