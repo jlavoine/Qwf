@@ -80,7 +80,7 @@ namespace Qwf.UnitTests {
             
             systemUnderTest.MakeMove();
             
-            targetSlot.Received( 1 ).PlacePieceIntoSlot( targetPiece );
+            targetPiece.Received( 1 ).PlaceFromPlayerHandIntoSlot( targetSlot );
         }
     }
 }

@@ -32,11 +32,7 @@ namespace Qwf {
         }
 
         public void MakeMove() {
-            mTargetSlot.PlacePieceIntoSlot( mTargetPiece );
-        }
-
-        public void MyTest( IGamePieceSlot slot) {
-            slot.PlacePieceIntoSlot( mTargetPiece );
+            mTargetPiece.PlaceFromPlayerHandIntoSlot( mTargetSlot );
         }
     }
 }
