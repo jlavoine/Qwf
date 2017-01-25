@@ -45,6 +45,22 @@ namespace Qwf.UnitTests {
             mockPlayer.Received( 1 ).DrawToFillHand();
         }
 
+        [Test]
+        public void DuplicateTargetPiecesInMoves_AreNotLegal() {
+            IGamePlayer mockPlayer = Substitute.For<IGamePlayer>();
+            List<IGameMove> moves = new List<IGameMove>();
+            IGameMove sameMove = GetMoveOfLegalStatus( true );
+            sameMove.GetTargetPiece().Returns( Substitute.For<IGamePiece>() );
+            moves.Add( sameMove );
+            moves.Add( sameMove );
+            moves.Add( sameMove );
+
+            GameManager systemUnderTest = new GameManager( Substitute.For<IGameBoard>() );
+            systemUnderTest.AttemptMoves( mockPlayer, moves );
+
+            sameMove.DidNotReceive().MakeMove();
+        }
+
         private IGameMove GetMoveOfLegalStatus( bool i_status ) {
             IGameMove move = Substitute.For<IGameMove>();
             move.IsLegal( Arg.Any<IGameBoard>() ).Returns( i_status );
