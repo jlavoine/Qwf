@@ -280,9 +280,6 @@ namespace TMPro
 #if UNITY_5_3 || UNITY_5_4
                     case RuntimePlatform.tvOS:
 #endif
-#if !UNITY_5_4
-                    case RuntimePlatform.BlackBerryPlayer:
-#endif
                         return m_HideMobileInput;
                 }
 
@@ -984,7 +981,7 @@ namespace TMPro
 #if UNITY_5_4
             bool isMac = (rp == RuntimePlatform.OSXEditor || rp == RuntimePlatform.OSXPlayer);
 #else
-            bool isMac = (rp == RuntimePlatform.OSXEditor || rp == RuntimePlatform.OSXPlayer || rp == RuntimePlatform.OSXWebPlayer);
+            bool isMac = (rp == RuntimePlatform.OSXEditor || rp == RuntimePlatform.OSXPlayer);
 #endif
             bool ctrl = isMac ? (currentEventModifiers & EventModifiers.Command) != 0 : (currentEventModifiers & EventModifiers.Control) != 0;
             bool shift = (currentEventModifiers & EventModifiers.Shift) != 0;

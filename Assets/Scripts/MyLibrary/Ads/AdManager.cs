@@ -1,4 +1,6 @@
-﻿using UnityEngine.Advertisements;
+﻿#if UNITY_IOS || UNITY_ANDROID
+using UnityEngine.Advertisements;
+#endif
 
 namespace MyLibrary {
     public class AdManager : IAdManager {
