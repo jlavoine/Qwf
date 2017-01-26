@@ -56,5 +56,34 @@ namespace Qwf.UnitTests {
 
             Assert.IsTrue( canPlace );
         }
+
+        [Test]
+        public void WhenAllSlotsAreFull_ObstacleIsComplete() {
+            IGamePieceSlot fullSlot = Substitute.For<IGamePieceSlot>();
+            fullSlot.IsEmpty().Returns( false );
+            List<IGamePieceSlot> mockSlots = new List<IGamePieceSlot>();
+            mockSlots.Add( fullSlot );
+
+            GameObstacle systemUnderTest = new GameObstacle( mockSlots );
+
+            Assert.IsTrue( systemUnderTest.IsComplete() );
+        }
+
+        [Test]
+        public void WhenAnySlotIsEmpty_ObstacleIsNotComplete() {
+            IGamePieceSlot fullSlot = Substitute.For<IGamePieceSlot>();
+            fullSlot.IsEmpty().Returns( false );
+
+            IGamePieceSlot emptySlot = Substitute.For<IGamePieceSlot>();
+            emptySlot.IsEmpty().Returns( true );
+
+            List<IGamePieceSlot> mockSlots = new List<IGamePieceSlot>();
+            mockSlots.Add( fullSlot );
+            mockSlots.Add( emptySlot );
+
+            GameObstacle systemUnderTest = new GameObstacle( mockSlots );
+
+            Assert.IsFalse( systemUnderTest.IsComplete() );
+        }
     }
 }

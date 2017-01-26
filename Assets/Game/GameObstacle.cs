@@ -41,5 +41,15 @@ namespace Qwf {
         public bool DoesObstacleHaveSlot( IGamePieceSlot i_slot ) {
             return mSlots.Contains( i_slot );
         }
+
+        public bool IsComplete() {
+            foreach ( IGamePieceSlot slot in mSlots ) {
+                if ( slot.IsEmpty() ) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
 }
