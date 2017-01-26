@@ -2,32 +2,17 @@
 
 namespace Qwf {
     public class GameObstacle : IGameObstacle {
-        private GameObstacleData mData;
         private List<IGamePieceSlot> mSlots;
 
-        public GameObstacle( GameObstacleData i_data ) {
-            mData = i_data;
+        private int mScoreValue;
 
-            CreateSlots();
-        }
-
-        public GameObstacle( List<IGamePieceSlot> i_slots ) {
+        public GameObstacle( List<IGamePieceSlot> i_slots, int i_scoreValue ) {
+            mScoreValue = i_scoreValue;
             mSlots = i_slots;
-        }
-
-        private void CreateSlots() {
-            mSlots = new List<IGamePieceSlot>();
-            foreach ( GamePieceSlotData slotData in mData.SlotsData ) {
-                mSlots.Add( new GamePieceSlot( slotData ) );
-            }
         }
 
         public List<IGamePieceSlot> GetSlots() {
             return mSlots;
-        }
-
-        public GameObstacleData GetData() {
-            return mData;
         }
 
         public bool CanPieceBePlacedIntoSlot( IGamePiece i_piece, IGamePieceSlot i_slot ) {
@@ -52,8 +37,19 @@ namespace Qwf {
             return true;
         }
 
-        public void Score( IScoreKeeper i_scoreKeeper ) {
+        public void Score( IScoreKeeper i_scoreKeeper, IGamePlayer i_currentPlayer ) {
+            AwardPointsToCurrentPlayer( i_scoreKeeper, i_currentPlayer );
+            ScoreAllSlots( i_scoreKeeper );
+        }
 
+        private void AwardPointsToCurrentPlayer( IScoreKeeper i_scoreKeeper, IGamePlayer i_player ) {
+            i_scoreKeeper.AddPointsToPlayer( i_player, mScoreValue );
+        }
+
+        private void ScoreAllSlots( IScoreKeeper i_scoreKeeper ) {
+            foreach ( IGamePieceSlot slot in mSlots ) {
+                slot.Score( i_scoreKeeper );
+            }
         }
     }
 }

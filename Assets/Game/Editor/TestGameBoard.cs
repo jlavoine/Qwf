@@ -68,11 +68,11 @@ namespace Qwf.UnitTests {
             obstacles[2].IsComplete().Returns( true );
 
             GameBoard systemUnderTest = CreateSystemUnderTest( obstacles );
-            systemUnderTest.UpdateBoardState( Substitute.For<IScoreKeeper>() );
+            systemUnderTest.UpdateBoardState( Substitute.For<IScoreKeeper>(), Substitute.For<IGamePlayer>() );
 
-            obstacles[0].Received().Score( Arg.Any<IScoreKeeper>() );
-            obstacles[1].DidNotReceive().Score( Arg.Any<IScoreKeeper>() );
-            obstacles[2].Received().Score( Arg.Any<IScoreKeeper>() );
+            obstacles[0].Received().Score( Arg.Any<IScoreKeeper>(), Arg.Any<IGamePlayer>() );
+            obstacles[1].DidNotReceive().Score( Arg.Any<IScoreKeeper>(), Arg.Any<IGamePlayer>() );
+            obstacles[2].Received().Score( Arg.Any<IScoreKeeper>(), Arg.Any<IGamePlayer>() );
         }
 
         [Test]
@@ -83,7 +83,7 @@ namespace Qwf.UnitTests {
             obstacles[2].IsComplete().Returns( true );
 
             GameBoard systemUnderTest = CreateSystemUnderTest( obstacles );
-            systemUnderTest.UpdateBoardState( Substitute.For<IScoreKeeper>() );
+            systemUnderTest.UpdateBoardState( Substitute.For<IScoreKeeper>(), Substitute.For<IGamePlayer>() );
 
             List<IGameObstacle> currentObstacles = systemUnderTest.GetCurrentObstacles();
             bool hasCompleted0 = currentObstacles.Contains( obstacles[0] );

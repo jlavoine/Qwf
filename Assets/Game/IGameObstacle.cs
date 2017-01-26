@@ -2,13 +2,11 @@
 
 namespace Qwf {
     public interface IGameObstacle {
-        GameObstacleData GetData();
-
         List<IGamePieceSlot> GetSlots();
 
         bool CanPieceBePlacedIntoSlot( IGamePiece i_piece, IGamePieceSlot i_slot );
         bool IsComplete();
 
-        void Score( IScoreKeeper i_scoreKeeper );
+        void Score( IScoreKeeper i_scoreKeeper, IGamePlayer i_currentPlayer );
     }
 }

@@ -49,7 +49,7 @@ namespace Qwf.UnitTests {
             GameManager systemUnderTest = new GameManager( mockBoard, Substitute.For<IScoreKeeper>() );
             systemUnderTest.TryPlayerTurn( mockTurn );
 
-            mockBoard.Received().UpdateBoardState( Arg.Any<IScoreKeeper>() );
+            mockBoard.Received().UpdateBoardState( Arg.Any<IScoreKeeper>(), Arg.Any<IGamePlayer>() );
         }
     }
 }

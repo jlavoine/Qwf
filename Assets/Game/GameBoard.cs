@@ -26,16 +26,16 @@ namespace Qwf {
             return mCurrentObstacles.Contains( i_obstacle );
         }
 
-        public void UpdateBoardState( IScoreKeeper i_scoreKeeper ) {
-            ScoreCompletedObstacles( i_scoreKeeper );
+        public void UpdateBoardState( IScoreKeeper i_scoreKeeper, IGamePlayer i_currentPlayer ) {
+            ScoreCompletedObstacles( i_scoreKeeper, i_currentPlayer );
             RemoveCompletedObstaclesFromCurrentList();
             FillCurrentObstacles();
         }
 
-        private void ScoreCompletedObstacles( IScoreKeeper i_scoreKeeper ) {
+        private void ScoreCompletedObstacles( IScoreKeeper i_scoreKeeper, IGamePlayer i_currentPlayer ) {
             foreach ( IGameObstacle obstacle in mCurrentObstacles ) {
                 if ( obstacle.IsComplete() ) {
-                    obstacle.Score( i_scoreKeeper );
+                    obstacle.Score( i_scoreKeeper, i_currentPlayer );
                 }
             }
         }

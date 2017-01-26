@@ -14,7 +14,7 @@ namespace Qwf {
             if ( i_turn.IsValid( mBoard ) ) {
                 ProcessTurn( i_turn );
                 FillPlayerHandAfterTurn( i_turn.GetPlayer() );
-                UpdateBoardStateAfterTurn();
+                UpdateBoardStateAfterTurn( i_turn.GetPlayer() );
             }
         }
 
@@ -26,8 +26,8 @@ namespace Qwf {
             i_player.DrawToFillHand();
         }
 
-        private void UpdateBoardStateAfterTurn() {
-            mBoard.UpdateBoardState( mScoreKeeper );
+        private void UpdateBoardStateAfterTurn( IGamePlayer i_currentPlayer ) {
+            mBoard.UpdateBoardState( mScoreKeeper, i_currentPlayer );
         }
     }
 }
