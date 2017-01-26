@@ -4,20 +4,18 @@ namespace Qwf {
     public class PlayerTurn : IPlayerTurn {
         private IGamePlayer mPlayer;
         private List<IGameMove> mMoves;
-        private IGameBoard mBoard;
 
-        public PlayerTurn( IGamePlayer i_player, List<IGameMove> i_moves, IGameBoard i_board ) {
+        public PlayerTurn( IGamePlayer i_player, List<IGameMove> i_moves ) {
             mPlayer = i_player;
             mMoves = i_moves;
-            mBoard = i_board;
         }
 
         public IGamePlayer GetPlayer() {
             return mPlayer;
         }
 
-        public bool IsValid() {
-            return AreMovesLegal() && !AreAnyDuplicatePiecesInMoves();
+        public bool IsValid( IGameBoard i_board ) {
+            return AreMovesLegal( i_board ) && !AreAnyDuplicatePiecesInMoves();
         }
 
         public void Process() {
@@ -26,9 +24,9 @@ namespace Qwf {
             }
         }
 
-        private bool AreMovesLegal() {
+        private bool AreMovesLegal( IGameBoard i_board ) {
             foreach ( IGameMove move in mMoves ) {
-                if ( !move.IsLegal( mBoard ) ) {
+                if ( !move.IsLegal( i_board ) ) {
                     return false;
                 }
             }

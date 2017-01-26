@@ -12,9 +12,9 @@ namespace Qwf.UnitTests {
             moves.Add( GetMoveOfLegalStatus( true ) );
             moves.Add( GetMoveOfLegalStatus( false ) );
 
-            PlayerTurn systemUnderTest = new PlayerTurn( Substitute.For<IGamePlayer>(), moves, Substitute.For<IGameBoard>() );
+            PlayerTurn systemUnderTest = new PlayerTurn( Substitute.For<IGamePlayer>(), moves );
 
-            bool isValid = systemUnderTest.IsValid();
+            bool isValid = systemUnderTest.IsValid( Substitute.For<IGameBoard>() );
             Assert.IsFalse( isValid );
         }
 
@@ -24,9 +24,9 @@ namespace Qwf.UnitTests {
             moves.Add( GetMoveOfLegalStatus( true ) );
             moves.Add( GetMoveOfLegalStatus( true ) );
 
-            PlayerTurn systemUnderTest = new PlayerTurn( Substitute.For<IGamePlayer>(), moves, Substitute.For<IGameBoard>() );
+            PlayerTurn systemUnderTest = new PlayerTurn( Substitute.For<IGamePlayer>(), moves );
 
-            bool isValid = systemUnderTest.IsValid();
+            bool isValid = systemUnderTest.IsValid( Substitute.For<IGameBoard>() );
             Assert.IsTrue( isValid );
         }
 
@@ -39,9 +39,9 @@ namespace Qwf.UnitTests {
             moves.Add( sameMove );
             moves.Add( sameMove );
 
-            PlayerTurn systemUnderTest = new PlayerTurn( Substitute.For<IGamePlayer>(), moves, Substitute.For<IGameBoard>() );
+            PlayerTurn systemUnderTest = new PlayerTurn( Substitute.For<IGamePlayer>(), moves );
 
-            bool isValid = systemUnderTest.IsValid();
+            bool isValid = systemUnderTest.IsValid( Substitute.For<IGameBoard>() );
             Assert.IsFalse( isValid );
         }
 
@@ -49,7 +49,7 @@ namespace Qwf.UnitTests {
         public void GetPlayerReturnsPlayerOwnsTurn() {
             IGamePlayer mockPlayer = Substitute.For<IGamePlayer>();
 
-            PlayerTurn systemUnderTest = new PlayerTurn( mockPlayer, new List<IGameMove>(), Substitute.For<IGameBoard>() );
+            PlayerTurn systemUnderTest = new PlayerTurn( mockPlayer, new List<IGameMove>() );
 
             IGamePlayer turnOwner = systemUnderTest.GetPlayer();
 
@@ -63,7 +63,7 @@ namespace Qwf.UnitTests {
             moves.Add( GetMoveOfLegalStatus( true ) );
             moves.Add( GetMoveOfLegalStatus( true ) );
 
-            PlayerTurn systemUnderTest = new PlayerTurn( Substitute.For<IGamePlayer>(), moves, Substitute.For<IGameBoard>() );
+            PlayerTurn systemUnderTest = new PlayerTurn( Substitute.For<IGamePlayer>(), moves );
             systemUnderTest.Process();
 
             foreach ( IGameMove move in moves ) {

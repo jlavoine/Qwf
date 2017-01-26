@@ -8,45 +8,24 @@ namespace Qwf {
             mBoard = i_board;
         }
 
-        public void AttemptMoves( IGamePlayer i_player, List<IGameMove> i_moves ) {
-            if ( !AreAnyDuplicatePiecesInMoves( i_moves ) && AreMovesLegal( i_moves ) ) {
-                MakeMoves( i_moves );
-                i_player.DrawToFillHand();
+        public void TryPlayerTurn( IPlayerTurn i_turn ) {
+            if ( i_turn.IsValid( mBoard ) ) {
+                ProcessTurn( i_turn );
+                FillPlayerHandAfterTurn( i_turn.GetPlayer() );
+                CheckBoardStateAfterTurn();
             }
         }
 
-        private bool AreMovesLegal( List<IGameMove> i_moves ) {
-            foreach (IGameMove move in i_moves ) {
-                if ( !move.IsLegal( mBoard ) ) {
-                    return false;
-                }
-            }
-
-            return true;
+        private void ProcessTurn( IPlayerTurn i_turn ) {
+            i_turn.Process();
         }
 
-        private bool AreAnyDuplicatePiecesInMoves( List<IGameMove> i_moves ) {
-            foreach ( IGameMove move in i_moves ) {
-                int count = 0;
-                IGamePiece targetPiece = move.GetTargetPiece();
-                foreach ( IGameMove otherMove in i_moves ) {
-                    if ( otherMove.GetTargetPiece() == targetPiece ) {
-                        count++;
-                    }
-                }
-
-                if ( count > 1 ) {
-                    return true;
-                }
-            }
-
-            return false;
+        private void FillPlayerHandAfterTurn( IGamePlayer i_player ) {
+            i_player.DrawToFillHand();
         }
 
-        private void MakeMoves( List<IGameMove> i_moves ) {
-            foreach ( IGameMove move in i_moves ) {
-                move.MakeMove();
-            }
+        private void CheckBoardStateAfterTurn() {
+
         }
     }
 }

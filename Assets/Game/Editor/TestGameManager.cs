@@ -6,66 +6,38 @@ namespace Qwf.UnitTests {
     [TestFixture]
     public class TestGameManager {
         [Test]
-        public void OnAttemptMove_IfAnyMoveIsNotLegal_NoMovesMade() {
-            List<IGameMove> moves = new List<IGameMove>();
-            moves.Add( GetMoveOfLegalStatus( true ) );
-            moves.Add( GetMoveOfLegalStatus( false ) );
+        public void IfPlayerTurnIsNotValid_TurnIsNotProcessed() {
+            IPlayerTurn mockTurn = Substitute.For<IPlayerTurn>();
+            mockTurn.IsValid( Arg.Any<IGameBoard>() ).Returns( false );
 
             GameManager systemUnderTest = new GameManager( Substitute.For<IGameBoard>() );
-            systemUnderTest.AttemptMoves( Substitute.For<IGamePlayer>(), moves );
+            systemUnderTest.TryPlayerTurn( mockTurn );
 
-            foreach ( IGameMove move in moves ) {
-                move.DidNotReceive().MakeMove();
-            }
+            mockTurn.DidNotReceive().Process();
         }
 
         [Test]
-        public void OnAttemptMove_IfAllMovesLegal_MovesAreMade() {
-            List<IGameMove> moves = new List<IGameMove>();
-            moves.Add( GetMoveOfLegalStatus( true ) );
-            moves.Add( GetMoveOfLegalStatus( true ) );
+        public void IfPlayerTurnIsValid_TurnIsProcessed() {
+            IPlayerTurn mockTurn = Substitute.For<IPlayerTurn>();
+            mockTurn.IsValid( Arg.Any<IGameBoard>() ).Returns( true );
 
             GameManager systemUnderTest = new GameManager( Substitute.For<IGameBoard>() );
-            systemUnderTest.AttemptMoves( Substitute.For<IGamePlayer>(), moves );
+            systemUnderTest.TryPlayerTurn( mockTurn );
 
-            foreach ( IGameMove move in moves ) {
-                move.Received( 1 ).MakeMove();
-            }
+            mockTurn.Received().Process();
         }
 
         [Test]
-        public void OnLegalMoveAttempt_PlayerHasHandRefilled() {
+        public void AfterTurnIsProcessed_PlayersHandIsFilled() {
             IGamePlayer mockPlayer = Substitute.For<IGamePlayer>();
-            List<IGameMove> moves = new List<IGameMove>();
-            moves.Add( GetMoveOfLegalStatus( true ) );
+            IPlayerTurn mockTurn = Substitute.For<IPlayerTurn>();
+            mockTurn.IsValid( Arg.Any<IGameBoard>() ).Returns( true );
+            mockTurn.GetPlayer().Returns( mockPlayer );
 
             GameManager systemUnderTest = new GameManager( Substitute.For<IGameBoard>() );
-            systemUnderTest.AttemptMoves( mockPlayer, moves );
+            systemUnderTest.TryPlayerTurn( mockTurn );
 
-            mockPlayer.Received( 1 ).DrawToFillHand();
-        }
-
-        [Test]
-        public void DuplicateTargetPiecesInMoves_AreNotLegal() {
-            IGamePlayer mockPlayer = Substitute.For<IGamePlayer>();
-            List<IGameMove> moves = new List<IGameMove>();
-            IGameMove sameMove = GetMoveOfLegalStatus( true );
-            sameMove.GetTargetPiece().Returns( Substitute.For<IGamePiece>() );
-            moves.Add( sameMove );
-            moves.Add( sameMove );
-            moves.Add( sameMove );
-
-            GameManager systemUnderTest = new GameManager( Substitute.For<IGameBoard>() );
-            systemUnderTest.AttemptMoves( mockPlayer, moves );
-
-            sameMove.DidNotReceive().MakeMove();
-        }
-
-        private IGameMove GetMoveOfLegalStatus( bool i_status ) {
-            IGameMove move = Substitute.For<IGameMove>();
-            move.IsLegal( Arg.Any<IGameBoard>() ).Returns( i_status );
-
-            return move;
+            mockPlayer.Received().DrawToFillHand();
         }
     }
 }

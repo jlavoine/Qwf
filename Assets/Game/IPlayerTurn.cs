@@ -1,7 +1,7 @@
 ﻿
 namespace Qwf {
     public interface IPlayerTurn {
-        bool IsValid();
+        bool IsValid( IGameBoard i_board );
         void Process();
 
         IGamePlayer GetPlayer();
