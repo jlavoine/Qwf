@@ -43,5 +43,9 @@ namespace Qwf {
         public bool IsEmpty() {
             return GetCurrentPiece() == null;
         }
+
+        public void Score( IScoreKeeper i_scoreKeeper ) {
+
+        }
     }
 }

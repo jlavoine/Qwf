@@ -8,6 +8,8 @@ namespace Qwf {
         bool CanPlacePieceIntoSlot( IGamePiece i_piece );
 
         void PlacePieceIntoSlot( IGamePiece i_piece );
+        void Score( IScoreKeeper i_scoreKeeper );
+
         IGamePiece GetCurrentPiece();
     }
 }
