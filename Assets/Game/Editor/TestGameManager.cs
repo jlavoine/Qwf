@@ -10,7 +10,7 @@ namespace Qwf.UnitTests {
             IPlayerTurn mockTurn = Substitute.For<IPlayerTurn>();
             mockTurn.IsValid( Arg.Any<IGameBoard>() ).Returns( false );
 
-            GameManager systemUnderTest = new GameManager( Substitute.For<IGameBoard>() );
+            GameManager systemUnderTest = new GameManager( Substitute.For<IGameBoard>(), Substitute.For<IScoreKeeper>() );
             systemUnderTest.TryPlayerTurn( mockTurn );
 
             mockTurn.DidNotReceive().Process();
@@ -21,7 +21,7 @@ namespace Qwf.UnitTests {
             IPlayerTurn mockTurn = Substitute.For<IPlayerTurn>();
             mockTurn.IsValid( Arg.Any<IGameBoard>() ).Returns( true );
 
-            GameManager systemUnderTest = new GameManager( Substitute.For<IGameBoard>() );
+            GameManager systemUnderTest = new GameManager( Substitute.For<IGameBoard>(), Substitute.For<IScoreKeeper>() );
             systemUnderTest.TryPlayerTurn( mockTurn );
 
             mockTurn.Received().Process();
@@ -34,7 +34,7 @@ namespace Qwf.UnitTests {
             mockTurn.IsValid( Arg.Any<IGameBoard>() ).Returns( true );
             mockTurn.GetPlayer().Returns( mockPlayer );
 
-            GameManager systemUnderTest = new GameManager( Substitute.For<IGameBoard>() );
+            GameManager systemUnderTest = new GameManager( Substitute.For<IGameBoard>(), Substitute.For<IScoreKeeper>() );
             systemUnderTest.TryPlayerTurn( mockTurn );
 
             mockPlayer.Received().DrawToFillHand();
@@ -46,10 +46,10 @@ namespace Qwf.UnitTests {
             IPlayerTurn mockTurn = Substitute.For<IPlayerTurn>();
             mockTurn.IsValid( Arg.Any<IGameBoard>() ).Returns( true );            
 
-            GameManager systemUnderTest = new GameManager( mockBoard );
+            GameManager systemUnderTest = new GameManager( mockBoard, Substitute.For<IScoreKeeper>() );
             systemUnderTest.TryPlayerTurn( mockTurn );
 
-            mockBoard.Received().UpdateBoardState();
+            mockBoard.Received().UpdateBoardState( Arg.Any<IScoreKeeper>() );
         }
     }
 }

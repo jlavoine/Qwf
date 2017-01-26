@@ -2,15 +2,15 @@
 
 namespace Qwf {
     public class GameBoard : IGameBoard {
-        private GameBoardData mData;
-
         private List<IGameObstacle> mRemainingObstacles = new List<IGameObstacle>();
         private List<IGameObstacle> mCurrentObstacles = new List<IGameObstacle>();
 
-        public GameBoard( GameBoardData i_data ) {
-            mData = i_data;
+        private int mMaxCurrentObstacles;
 
-            CreateRemainingObstacles();
+        public GameBoard( List<IGameObstacle> i_allObstacles, int i_maxCurrentObstacles ) {
+            mMaxCurrentObstacles = i_maxCurrentObstacles;
+
+            CreateRemainingObstacles( i_allObstacles );
             FillCurrentObstacles();
         }
 
@@ -26,13 +26,34 @@ namespace Qwf {
             return mCurrentObstacles.Contains( i_obstacle );
         }
 
-        public void UpdateBoardState() {
-
+        public void UpdateBoardState( IScoreKeeper i_scoreKeeper ) {
+            ScoreCompletedObstacles( i_scoreKeeper );
+            RemoveCompletedObstaclesFromCurrentList();
+            FillCurrentObstacles();
         }
 
-        private void CreateRemainingObstacles() {
-            foreach ( GameObstacleData obstacleData in mData.ObstacleData ) {
-                mRemainingObstacles.Add( new GameObstacle( obstacleData ) );
+        private void ScoreCompletedObstacles( IScoreKeeper i_scoreKeeper ) {
+            foreach ( IGameObstacle obstacle in mCurrentObstacles ) {
+                if ( obstacle.IsComplete() ) {
+                    obstacle.Score( i_scoreKeeper );
+                }
+            }
+        }
+
+        private void RemoveCompletedObstaclesFromCurrentList() {
+            List<IGameObstacle> newCurrentList = new List<IGameObstacle>();
+            foreach ( IGameObstacle obstacle in mCurrentObstacles ) {
+                if ( !obstacle.IsComplete() ) {
+                    newCurrentList.Add( obstacle );
+                }
+            }
+
+            mCurrentObstacles = newCurrentList;
+        }
+
+        private void CreateRemainingObstacles( List<IGameObstacle> i_allObstacles ) {
+            foreach ( IGameObstacle obstacle in i_allObstacles ) {
+                mRemainingObstacles.Add( obstacle );
             }
 
             mRemainingObstacles.Shuffle<IGameObstacle>();
@@ -45,7 +66,7 @@ namespace Qwf {
 
         private List<IGameObstacle> PickNewObstaclesToBeCurrentAndRemoveFromRemainingObstacles() {
             List<IGameObstacle> pickedObstacles = new List<IGameObstacle>();
-            int neededObstacles = mData.MaxCurrentObstacles - mCurrentObstacles.Count;
+            int neededObstacles = mMaxCurrentObstacles - mCurrentObstacles.Count;
 
             for ( int i = 0; i < neededObstacles; ++i ) {
                 if ( mRemainingObstacles.Count > 0 ) {

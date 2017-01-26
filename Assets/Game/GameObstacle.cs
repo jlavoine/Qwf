@@ -51,5 +51,9 @@ namespace Qwf {
 
             return true;
         }
+
+        public void Score( IScoreKeeper i_scoreKeeper ) {
+
+        }
     }
 }

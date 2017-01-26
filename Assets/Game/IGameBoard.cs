@@ -7,6 +7,6 @@ namespace Qwf {
 
         bool IsObstacleCurrent( IGameObstacle i_obstacle );
 
-        void UpdateBoardState();
+        void UpdateBoardState( IScoreKeeper i_scoreKeeper );
     }
 }

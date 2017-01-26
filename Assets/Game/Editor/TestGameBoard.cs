@@ -8,25 +8,10 @@ namespace Qwf.UnitTests {
         private const int MAX_CURRENT_OBSTACLES = 3;
         private const int STANDARD_OBSTACLE_COUNT = 12;
 
-        private GameBoard CreateSystemUnderTest( List<GameObstacleData> i_obstacleData ) {
-            GameBoardData data = new GameBoardData() { MaxCurrentObstacles = 3, ObstacleData = i_obstacleData };
-            return new GameBoard( data );
-        }
-
-        private List<GameObstacleData> CreateObstacleData( int i_obstacleCount ) {
-            List<GameObstacleData> obstacleData = new List<GameObstacleData>();
-
-            for ( int i = 0; i < i_obstacleCount; ++i ) {
-                obstacleData.Add( new GameObstacleData() { SlotsData = new List<GamePieceSlotData>() } );
-            }
-
-            return obstacleData;
-        }
-
         [Test]
         public void AfterCreation_CurrentAndRemainingObstacles_MatchOriginalData() {
-            List<GameObstacleData> obstacleData = CreateObstacleData( STANDARD_OBSTACLE_COUNT );
-            GameBoard systemUnderTest = CreateSystemUnderTest( obstacleData );
+            List<IGameObstacle> obstacles = GetObstacleList( STANDARD_OBSTACLE_COUNT );
+            GameBoard systemUnderTest = CreateSystemUnderTest( obstacles );
             List<IGameObstacle> currentObstacles = systemUnderTest.GetCurrentObstacles();
             List<IGameObstacle> remainingObstacles = systemUnderTest.GetRemainingObstacles();
 
@@ -34,18 +19,18 @@ namespace Qwf.UnitTests {
             Assert.AreEqual( STANDARD_OBSTACLE_COUNT - MAX_CURRENT_OBSTACLES, remainingObstacles.Count );
 
             foreach ( IGameObstacle obstacle in currentObstacles ) {
-                Assert.Contains( obstacle.GetData(), obstacleData );
+                Assert.Contains( obstacle, obstacles );
             }
 
             foreach ( IGameObstacle obstacle in remainingObstacles ) {
-                Assert.Contains( obstacle.GetData(), obstacleData );
+                Assert.Contains( obstacle, obstacles );
             }
         }
 
         [Test]
         public void IfNotEnoughRemainingObstaclesExist_CurrentObstaclesAreFilledToCapacity() {
-            List<GameObstacleData> obstacleData = CreateObstacleData( MAX_CURRENT_OBSTACLES - 1 );
-            GameBoard systemUnderTest = CreateSystemUnderTest( obstacleData );
+            List<IGameObstacle> obstacles = GetObstacleList( MAX_CURRENT_OBSTACLES - 1 );
+            GameBoard systemUnderTest = CreateSystemUnderTest( obstacles );
             List<IGameObstacle> currentObstacles = systemUnderTest.GetCurrentObstacles();
             List<IGameObstacle> remainingObstacles = systemUnderTest.GetRemainingObstacles();
 
@@ -55,8 +40,8 @@ namespace Qwf.UnitTests {
 
         [Test]
         public void IsObstacleCurrent_ReturnsTrue_WhenObstacleIsCurrent() {
-            List<GameObstacleData> obstacleData = CreateObstacleData( 1 );
-            GameBoard systemUnderTest = CreateSystemUnderTest( obstacleData );
+            List<IGameObstacle> obstacles = GetObstacleList( 1 );
+            GameBoard systemUnderTest = CreateSystemUnderTest( obstacles );
 
             IGameObstacle currentObstacle = systemUnderTest.GetCurrentObstacles()[0];
             bool isObstacleCurrent = systemUnderTest.IsObstacleCurrent( currentObstacle );
@@ -66,13 +51,62 @@ namespace Qwf.UnitTests {
 
         [Test]
         public void IsObstacleCurrent_ReturnsFalse_WhenObstacleIsNotCurrent() {
-            List<GameObstacleData> obstacleData = CreateObstacleData( 1 );
-            GameBoard systemUnderTest = CreateSystemUnderTest( obstacleData );
+            List<IGameObstacle> obstacles = GetObstacleList( 1 );
+            GameBoard systemUnderTest = CreateSystemUnderTest( obstacles );
 
             IGameObstacle nonCurrentObstacle = Substitute.For<IGameObstacle>();
             bool isObstacleCurrent = systemUnderTest.IsObstacleCurrent( nonCurrentObstacle );
 
             Assert.IsFalse( isObstacleCurrent );
+        }
+
+        [Test]
+        public void WhenUpdatingBoardState_OnlyCompletedObstaclesAreScored() {
+            List<IGameObstacle> obstacles = GetObstacleList( 3 );
+            obstacles[0].IsComplete().Returns( true );
+            obstacles[1].IsComplete().Returns( false );
+            obstacles[2].IsComplete().Returns( true );
+
+            GameBoard systemUnderTest = CreateSystemUnderTest( obstacles );
+            systemUnderTest.UpdateBoardState( Substitute.For<IScoreKeeper>() );
+
+            obstacles[0].Received().Score( Arg.Any<IScoreKeeper>() );
+            obstacles[1].DidNotReceive().Score( Arg.Any<IScoreKeeper>() );
+            obstacles[2].Received().Score( Arg.Any<IScoreKeeper>() );
+        }
+
+        [Test]
+        public void WhenUpdatingBoardState_CompletedObstaclesAreRemovedFromCurrentObstacles() {
+            List<IGameObstacle> obstacles = GetObstacleList( 3 );
+            obstacles[0].IsComplete().Returns( true );
+            obstacles[1].IsComplete().Returns( false );
+            obstacles[2].IsComplete().Returns( true );
+
+            GameBoard systemUnderTest = CreateSystemUnderTest( obstacles );
+            systemUnderTest.UpdateBoardState( Substitute.For<IScoreKeeper>() );
+
+            List<IGameObstacle> currentObstacles = systemUnderTest.GetCurrentObstacles();
+            bool hasCompleted0 = currentObstacles.Contains( obstacles[0] );
+            bool hasCompleted1 = currentObstacles.Contains( obstacles[1] );
+            bool hasCompleted2 = currentObstacles.Contains( obstacles[2] );
+
+            Assert.IsFalse( hasCompleted0 );
+            Assert.IsTrue( hasCompleted1 );
+            Assert.IsFalse( hasCompleted2 );
+        }
+
+        private GameBoard CreateSystemUnderTest( List<IGameObstacle> i_obstacles ) {
+            return new GameBoard( i_obstacles, MAX_CURRENT_OBSTACLES );
+        }
+
+        private List<IGameObstacle> GetObstacleList( int i_obstacleCount ) {
+            List<IGameObstacle> obstacleData = new List<IGameObstacle>();
+
+            for ( int i = 0; i < i_obstacleCount; ++i ) {
+                obstacleData.Add( Substitute.For<IGameObstacle>() );
+            }
+
+            return obstacleData;
         }
     }
 }
