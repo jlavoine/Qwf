@@ -26,7 +26,7 @@ namespace Qwf {
             return mCurrentObstacles.Contains( i_obstacle );
         }
 
-        public void MakeMove( List<IGameMove> i_moves ) {
+        public void UpdateBoardState() {
 
         }
 

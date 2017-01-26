@@ -6,5 +6,7 @@ namespace Qwf {
         List<IGameObstacle> GetCurrentObstacles();
 
         bool IsObstacleCurrent( IGameObstacle i_obstacle );
+
+        void UpdateBoardState();
     }
 }

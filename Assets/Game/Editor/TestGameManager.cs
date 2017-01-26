@@ -39,5 +39,17 @@ namespace Qwf.UnitTests {
 
             mockPlayer.Received().DrawToFillHand();
         }
+
+        [Test]
+        public void AfterTurnIsProcessed_GameBoardIsUpdated() {
+            IGameBoard mockBoard = Substitute.For<IGameBoard>();
+            IPlayerTurn mockTurn = Substitute.For<IPlayerTurn>();
+            mockTurn.IsValid( Arg.Any<IGameBoard>() ).Returns( true );            
+
+            GameManager systemUnderTest = new GameManager( mockBoard );
+            systemUnderTest.TryPlayerTurn( mockTurn );
+
+            mockBoard.Received().UpdateBoardState();
+        }
     }
 }
