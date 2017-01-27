@@ -28,6 +28,16 @@ namespace Qwf.UnitTests {
         }
 
         [Test]
+        public void AfterTurnIsProcessed_CheckForGameOver() {
+            IGameBoard mockBoard = Substitute.For<IGameBoard>();
+            GameManager systemUnderTest = new GameManager( mockBoard, Substitute.For<IScoreKeeper>() );
+
+            TakeValidTurn( systemUnderTest );
+
+            mockBoard.Received().IsGameOver();
+        }
+
+        [Test]
         public void AfterTurnIsProcessed_PlayersHandIsFilled() {
             IGamePlayer mockPlayer = Substitute.For<IGamePlayer>();
             IPlayerTurn mockTurn = Substitute.For<IPlayerTurn>();
@@ -43,13 +53,19 @@ namespace Qwf.UnitTests {
         [Test]
         public void AfterTurnIsProcessed_GameBoardIsUpdated() {
             IGameBoard mockBoard = Substitute.For<IGameBoard>();
-            IPlayerTurn mockTurn = Substitute.For<IPlayerTurn>();
-            mockTurn.IsValid( Arg.Any<IGameBoard>() ).Returns( true );            
-
             GameManager systemUnderTest = new GameManager( mockBoard, Substitute.For<IScoreKeeper>() );
-            systemUnderTest.TryPlayerTurn( mockTurn );
+
+            TakeValidTurn( systemUnderTest );
 
             mockBoard.Received().UpdateBoardState( Arg.Any<IScoreKeeper>(), Arg.Any<IGamePlayer>() );
+        }
+
+        private void TakeValidTurn( GameManager i_manager ) {
+            IGameBoard mockBoard = Substitute.For<IGameBoard>();
+            IPlayerTurn mockTurn = Substitute.For<IPlayerTurn>();
+            mockTurn.IsValid( Arg.Any<IGameBoard>() ).Returns( true );
+
+            i_manager.TryPlayerTurn( mockTurn );
         }
     }
 }

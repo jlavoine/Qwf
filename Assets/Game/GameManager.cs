@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-
+﻿
 namespace Qwf {
     public class GameManager : IGameManager {
         private IGameBoard mBoard;
@@ -15,6 +14,7 @@ namespace Qwf {
                 ProcessTurn( i_turn );
                 FillPlayerHandAfterTurn( i_turn.GetPlayer() );
                 UpdateBoardStateAfterTurn( i_turn.GetPlayer() );
+                CheckForGameOver();
             }
         }
 
@@ -28,6 +28,11 @@ namespace Qwf {
 
         private void UpdateBoardStateAfterTurn( IGamePlayer i_currentPlayer ) {
             mBoard.UpdateBoardState( mScoreKeeper, i_currentPlayer );
+        }
+
+        private void CheckForGameOver() {
+            if ( mBoard.IsGameOver() ) {
+            }
         }
     }
 }
