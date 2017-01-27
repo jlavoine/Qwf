@@ -32,6 +32,10 @@ namespace Qwf {
             FillCurrentObstacles();
         }
 
+        public bool IsGameOver() {
+            return mCurrentObstacles.Count == 0;
+        }
+
         private void ScoreCompletedObstacles( IScoreKeeper i_scoreKeeper, IGamePlayer i_currentPlayer ) {
             foreach ( IGameObstacle obstacle in mCurrentObstacles ) {
                 if ( obstacle.CanScore() ) {

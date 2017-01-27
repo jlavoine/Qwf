@@ -95,6 +95,26 @@ namespace Qwf.UnitTests {
             Assert.IsFalse( hasScored2 );
         }
 
+        [Test]
+        public void WhenNoCurrentObstacles_GameIsOver() {
+            List<IGameObstacle> obstacles = GetObstacleList( 0 );
+            GameBoard systemUnderTest = CreateSystemUnderTest( obstacles );
+
+            bool isGameOver = systemUnderTest.IsGameOver();
+
+            Assert.IsTrue( isGameOver );
+        }
+
+        [Test]
+        public void WhenCurrentObstacles_GameIsNotOver() {
+            List<IGameObstacle> obstacles = GetObstacleList( 3 );
+            GameBoard systemUnderTest = CreateSystemUnderTest( obstacles );
+
+            bool isGameOver = systemUnderTest.IsGameOver();
+
+            Assert.IsFalse( isGameOver );
+        }
+
         private GameBoard CreateSystemUnderTest( List<IGameObstacle> i_obstacles ) {
             return new GameBoard( i_obstacles, MAX_CURRENT_OBSTACLES );
         }
