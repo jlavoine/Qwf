@@ -61,11 +61,11 @@ namespace Qwf.UnitTests {
         }
 
         [Test]
-        public void WhenUpdatingBoardState_OnlyCompletedObstaclesAreScored() {
+        public void WhenUpdatingBoardState_OnlyScorableObstaclesAreScored() {
             List<IGameObstacle> obstacles = GetObstacleList( 3 );
-            obstacles[0].IsComplete().Returns( true );
-            obstacles[1].IsComplete().Returns( false );
-            obstacles[2].IsComplete().Returns( true );
+            obstacles[0].CanScore().Returns( true );
+            obstacles[1].CanScore().Returns( false );
+            obstacles[2].CanScore().Returns( true );
 
             GameBoard systemUnderTest = CreateSystemUnderTest( obstacles );
             systemUnderTest.UpdateBoardState( Substitute.For<IScoreKeeper>(), Substitute.For<IGamePlayer>() );
@@ -76,23 +76,23 @@ namespace Qwf.UnitTests {
         }
 
         [Test]
-        public void WhenUpdatingBoardState_CompletedObstaclesAreRemovedFromCurrentObstacles() {
+        public void WhenUpdatingBoardState_ScoredObstaclesAreRemovedFromCurrentObstacles() {
             List<IGameObstacle> obstacles = GetObstacleList( 3 );
-            obstacles[0].IsComplete().Returns( true );
-            obstacles[1].IsComplete().Returns( false );
-            obstacles[2].IsComplete().Returns( true );
+            obstacles[0].CanScore().Returns( true );
+            obstacles[1].CanScore().Returns( false );
+            obstacles[2].CanScore().Returns( true );
 
             GameBoard systemUnderTest = CreateSystemUnderTest( obstacles );
             systemUnderTest.UpdateBoardState( Substitute.For<IScoreKeeper>(), Substitute.For<IGamePlayer>() );
 
             List<IGameObstacle> currentObstacles = systemUnderTest.GetCurrentObstacles();
-            bool hasCompleted0 = currentObstacles.Contains( obstacles[0] );
-            bool hasCompleted1 = currentObstacles.Contains( obstacles[1] );
-            bool hasCompleted2 = currentObstacles.Contains( obstacles[2] );
+            bool hasScored0 = currentObstacles.Contains( obstacles[0] );
+            bool hasScored1 = currentObstacles.Contains( obstacles[1] );
+            bool hasScored2 = currentObstacles.Contains( obstacles[2] );
 
-            Assert.IsFalse( hasCompleted0 );
-            Assert.IsTrue( hasCompleted1 );
-            Assert.IsFalse( hasCompleted2 );
+            Assert.IsFalse( hasScored0 );
+            Assert.IsTrue( hasScored1 );
+            Assert.IsFalse( hasScored2 );
         }
 
         private GameBoard CreateSystemUnderTest( List<IGameObstacle> i_obstacles ) {

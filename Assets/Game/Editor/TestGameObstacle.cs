@@ -69,6 +69,18 @@ namespace Qwf.UnitTests {
         }
 
         [Test]
+        public void WhenAllSlotsAreFull_ObstacleCanBeScored() {
+            IGamePieceSlot fullSlot = Substitute.For<IGamePieceSlot>();
+            fullSlot.IsEmpty().Returns( false );
+            List<IGamePieceSlot> mockSlots = new List<IGamePieceSlot>();
+            mockSlots.Add( fullSlot );
+
+            GameObstacle systemUnderTest = new GameObstacle( mockSlots, OBSTACLE_SCORE_VALUE );
+
+            Assert.IsTrue( systemUnderTest.CanScore() );
+        }
+
+        [Test]
         public void WhenAnySlotIsEmpty_ObstacleIsNotComplete() {
             IGamePieceSlot fullSlot = Substitute.For<IGamePieceSlot>();
             fullSlot.IsEmpty().Returns( false );
@@ -83,6 +95,23 @@ namespace Qwf.UnitTests {
             GameObstacle systemUnderTest = new GameObstacle( mockSlots, OBSTACLE_SCORE_VALUE );
 
             Assert.IsFalse( systemUnderTest.IsComplete() );
+        }
+
+        [Test]
+        public void WhenAnySlotIsEmpty_ObstacleCannotBeScored() {
+            IGamePieceSlot fullSlot = Substitute.For<IGamePieceSlot>();
+            fullSlot.IsEmpty().Returns( false );
+
+            IGamePieceSlot emptySlot = Substitute.For<IGamePieceSlot>();
+            emptySlot.IsEmpty().Returns( true );
+
+            List<IGamePieceSlot> mockSlots = new List<IGamePieceSlot>();
+            mockSlots.Add( fullSlot );
+            mockSlots.Add( emptySlot );
+
+            GameObstacle systemUnderTest = new GameObstacle( mockSlots, OBSTACLE_SCORE_VALUE );
+
+            Assert.IsFalse( systemUnderTest.CanScore() );
         }
 
         [Test]

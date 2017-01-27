@@ -28,22 +28,22 @@ namespace Qwf {
 
         public void UpdateBoardState( IScoreKeeper i_scoreKeeper, IGamePlayer i_currentPlayer ) {
             ScoreCompletedObstacles( i_scoreKeeper, i_currentPlayer );
-            RemoveCompletedObstaclesFromCurrentList();
+            RemoveScoredObstaclesFromCurrentList();
             FillCurrentObstacles();
         }
 
         private void ScoreCompletedObstacles( IScoreKeeper i_scoreKeeper, IGamePlayer i_currentPlayer ) {
             foreach ( IGameObstacle obstacle in mCurrentObstacles ) {
-                if ( obstacle.IsComplete() ) {
+                if ( obstacle.CanScore() ) {
                     obstacle.Score( i_scoreKeeper, i_currentPlayer );
                 }
             }
         }
 
-        private void RemoveCompletedObstaclesFromCurrentList() {
+        private void RemoveScoredObstaclesFromCurrentList() {
             List<IGameObstacle> newCurrentList = new List<IGameObstacle>();
             foreach ( IGameObstacle obstacle in mCurrentObstacles ) {
-                if ( !obstacle.IsComplete() ) {
+                if ( !obstacle.CanScore() ) {
                     newCurrentList.Add( obstacle );
                 }
             }

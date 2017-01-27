@@ -27,6 +27,10 @@ namespace Qwf {
             return mSlots.Contains( i_slot );
         }
 
+        public bool CanScore() {
+            return IsComplete();
+        }
+
         public bool IsComplete() {
             foreach ( IGamePieceSlot slot in mSlots ) {
                 if ( slot.IsEmpty() ) {

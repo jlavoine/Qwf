@@ -6,6 +6,7 @@ namespace Qwf {
 
         bool CanPieceBePlacedIntoSlot( IGamePiece i_piece, IGamePieceSlot i_slot );
         bool IsComplete();
+        bool CanScore();
 
         void Score( IScoreKeeper i_scoreKeeper, IGamePlayer i_currentPlayer );
     }
