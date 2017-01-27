@@ -12,5 +12,6 @@ namespace Qwf {
         IGamePlayer GetOwner();
 
         void PlaceFromPlayerHandIntoSlot( IGamePieceSlot i_slot );
+        void Score( IScoreKeeper i_scoreKeeper );
     }
 }

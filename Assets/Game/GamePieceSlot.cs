@@ -45,7 +45,7 @@ namespace Qwf {
         }
 
         public void Score( IScoreKeeper i_scoreKeeper ) {
-
+            mCurrentPiece.Score( i_scoreKeeper );
         }
     }
 }

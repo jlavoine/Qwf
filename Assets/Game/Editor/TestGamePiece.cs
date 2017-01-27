@@ -125,5 +125,16 @@ namespace Qwf.UnitTests {
             mockSlot.Received( 1 ).PlacePieceIntoSlot( systemUnderTest );
             mMockOwner.Received( 1 ).RemovePieceFromHand( systemUnderTest );
         }
+
+        [Test]
+        public void WhenScoringPiece_PointsAwardedToOwner() {
+            GamePieceData data = new GamePieceData() { PieceType = PIECE_TYPE_A, Value = PIECE_VALUE };
+            GamePiece systemUnderTest = new GamePiece( mMockOwner, data );
+            IScoreKeeper mockScoreKeeper = Substitute.For<IScoreKeeper>();
+
+            systemUnderTest.Score( mockScoreKeeper );
+
+            mockScoreKeeper.Received().AddPointsToPlayer( mMockOwner, systemUnderTest.GetValue() );
+        }
     }
 }

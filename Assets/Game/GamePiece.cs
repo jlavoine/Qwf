@@ -41,5 +41,9 @@ namespace Qwf {
             i_slot.PlacePieceIntoSlot( this );
             mOwner.RemovePieceFromHand( this );
         }
+
+        public void Score( IScoreKeeper i_scoreKeeper ) {
+            i_scoreKeeper.AddPointsToPlayer( GetOwner(), GetValue() );
+        }
     }
 }

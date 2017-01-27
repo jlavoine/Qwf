@@ -92,5 +92,13 @@ namespace Qwf.UnitTests {
 
             Assert.IsTrue( isEmpty );
         }
+
+        [Test]
+        public void WhenSlotIsScored_PieceIsScored() {
+            mSystemUnderTest.PlacePieceIntoSlot( Substitute.For<IGamePiece>() );
+            mSystemUnderTest.Score( Substitute.For<IScoreKeeper>() );
+
+            mSystemUnderTest.GetCurrentPiece().Received().Score( Arg.Any<IScoreKeeper>() );
+        }
     }
 }
