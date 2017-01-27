@@ -84,5 +84,33 @@ namespace Qwf.UnitTests {
 
             Assert.IsFalse( systemUnderTest.IsComplete() );
         }
+
+        [Test]
+        public void ScoringObstacle_ScoresAllSlots() {
+            List<IGamePieceSlot> mockSlots = new List<IGamePieceSlot>();
+            mockSlots.Add( Substitute.For<IGamePieceSlot>() );
+            mockSlots.Add( Substitute.For<IGamePieceSlot>() );
+            mockSlots.Add( Substitute.For<IGamePieceSlot>() );
+
+            GameObstacle systemUnderTest = new GameObstacle( mockSlots, OBSTACLE_SCORE_VALUE );
+            systemUnderTest.Score( Substitute.For<IScoreKeeper>(), Substitute.For<IGamePlayer>() );
+
+            foreach ( IGamePieceSlot slot in mockSlots ) {
+                slot.Received().Score( Arg.Any<IScoreKeeper>() );
+            }
+        }
+
+        [Test]
+        public void ScoringObstacles_GivesPlayerPoints() {
+            IScoreKeeper mockScoreKeeper = Substitute.For<IScoreKeeper>();
+            IGamePlayer mockPlayer = Substitute.For<IGamePlayer>();
+            List<IGamePieceSlot> mockSlots = new List<IGamePieceSlot>();
+            mockSlots.Add( Substitute.For<IGamePieceSlot>() );
+
+            GameObstacle systemUnderTest = new GameObstacle( mockSlots, OBSTACLE_SCORE_VALUE );
+            systemUnderTest.Score( mockScoreKeeper, mockPlayer );
+
+            mockScoreKeeper.Received().AddPointsToPlayer( mockPlayer, OBSTACLE_SCORE_VALUE );
+        }
     }
 }
