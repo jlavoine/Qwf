@@ -7,14 +7,16 @@ namespace Qwf.Client {
         public PlayerHandView View;
 
         void Start() {
-            List<IGamePiece> pieces = new List<IGamePiece>();
-            pieces.Add( new GamePiece( null, new GamePieceData() { Value = 1, PieceType = 0 } ) );
-            pieces.Add( new GamePiece( null, new GamePieceData() { Value = 2, PieceType = 1 } ) );
-            pieces.Add( new GamePiece( null, new GamePieceData() { Value = 3, PieceType = 2 } ) );
-            pieces.Add( new GamePiece( null, new GamePieceData() { Value = 4, PieceType = 3 } ) );
-            pieces.Add( new GamePiece( null, new GamePieceData() { Value = 5, PieceType = 4 } ) );
+            IGamePlayer player = new ClientPlayer( 0 );
 
-            View.Init( new PlayerHandPM( pieces ) );
+            List<IGamePiece> pieces = new List<IGamePiece>();
+            pieces.Add( new GamePiece( player, new GamePieceData() { Value = 1, PieceType = 0 } ) );
+            pieces.Add( new GamePiece( player, new GamePieceData() { Value = 2, PieceType = 1 } ) );
+            pieces.Add( new GamePiece( player, new GamePieceData() { Value = 3, PieceType = 2 } ) );
+            pieces.Add( new GamePiece( player, new GamePieceData() { Value = 4, PieceType = 3 } ) );
+            pieces.Add( new GamePiece( player, new GamePieceData() { Value = 5, PieceType = 4 } ) );
+
+            View.Init( new PlayerHandPM( pieces, 0 ) );
         }
 
     }
