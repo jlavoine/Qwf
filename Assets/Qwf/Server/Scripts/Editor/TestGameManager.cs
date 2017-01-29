@@ -61,7 +61,6 @@ namespace Qwf.UnitTests {
         }
 
         private void TakeValidTurn( GameManager i_manager ) {
-            IGameBoard mockBoard = Substitute.For<IGameBoard>();
             IPlayerTurn mockTurn = Substitute.For<IPlayerTurn>();
             mockTurn.IsValid( Arg.Any<IGameBoard>() ).Returns( true );
 
