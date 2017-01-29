@@ -1,20 +1,28 @@
 ﻿
 namespace Qwf {
     public class GamePiece : IGamePiece {
-        private GamePieceData mData;
         private IGamePlayer mOwner;
+        private int mValue;
+        private int mType;
+
+        public GamePiece( IGamePlayer i_owner, int i_type, int i_value ) {
+            mOwner = i_owner;
+            mValue = i_value;
+            mType = i_type;
+        }
 
         public GamePiece( IGamePlayer i_owner, GamePieceData i_data ) {
             mOwner = i_owner;
-            mData = i_data;
+            mValue = i_data.Value;
+            mType = i_data.PieceType;
         }
 
         public int GetPieceType() {
-            return mData.PieceType;
+            return mType;
         }
 
         public int GetValue() {
-            return mData.Value;
+            return mValue;
         }
 
         public bool MatchesPieceType( int i_pieceType ) {

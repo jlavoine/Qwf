@@ -7,6 +7,14 @@ namespace Qwf {
 
         private IGameRules mRules;
 
+        // C# doesn't let you call one ctor from another...!
+        public GamePlayer( IGameRules i_rules, PlayerDeckData i_deckData ) {
+            mRules = i_rules;
+
+            SetAndShuffleUndrawnPieces( i_deckData.GetListOfPiecesFromDeck( this ) );
+            DrawStartingHand();
+        }
+
         public GamePlayer( IGameRules i_rules, List<IGamePiece> i_allPieces ) {
             mRules = i_rules;
 
