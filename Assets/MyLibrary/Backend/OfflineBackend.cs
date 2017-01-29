@@ -7,6 +7,18 @@ using Newtonsoft.Json;
 
 namespace MyLibrary {
     public class OfflineBackend : IBasicBackend {
+        public string PlayFabId {
+            get {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string SessionTicket {
+            get {
+                throw new NotImplementedException();
+            }
+        }
+
         public void Authenticate( string i_id ) {
             throw new NotImplementedException();
         }

@@ -26,7 +26,6 @@ public class NewExampleMediator : Mediator {
     public LogSignal Logger { get; set; }
 
     public override void OnRegister() {
-        UnityEngine.Debug.LogError( "In my on register" );
         GetTitleDataSignal.Dispatch( new GetTitleDataRequest() {
             Keys = new List<string> { "SampleDeck" }
         });
@@ -47,11 +46,10 @@ public class NewExampleMediator : Mediator {
 
         ClientDisconnectedSignal.AddListener( OnUserDisconnected );
 
-        NetworkServer.RegisterHandler( 200, OnAuthenticateConnection );
+        //NetworkServer.RegisterHandler( 200, OnAuthenticateConnection );
     }
 
     private void OnAuthenticateConnection( NetworkMessage netMsg ) {
-        UnityEngine.Debug.Log( "*()&*(&()" );
         Logger.Dispatch( LoggerTypes.Info, string.Format( "Hey there was an auth" ) );
     }
 

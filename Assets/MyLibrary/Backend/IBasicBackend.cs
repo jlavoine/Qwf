@@ -3,6 +3,9 @@ using System.Collections;
 
 namespace MyLibrary {
     public interface IBasicBackend  {
+        string PlayFabId { get; }
+        string SessionTicket { get; }
+
         void Authenticate( string i_id );
         //void SetUpCloudServices( bool i_testing );
 

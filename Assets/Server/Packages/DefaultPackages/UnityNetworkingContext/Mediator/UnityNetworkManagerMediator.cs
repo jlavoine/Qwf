@@ -29,6 +29,7 @@ public class UnityNetworkManagerMediator : EventMediator {
 
     public override void OnRegister()
     {
+        Debug.LogError( "Registering the network manager" );
         NetworkServer.RegisterHandler(MsgType.Connect, OnServerConnect);
         NetworkServer.RegisterHandler(MsgType.Disconnect, OnServerDisconnect);
         NetworkServer.RegisterHandler(MsgType.Error, OnServerError);
@@ -61,6 +62,7 @@ public class UnityNetworkManagerMediator : EventMediator {
 
     private void OnAuthenticateConnection(NetworkMessage netMsg)
     {
+        UnityEngine.Debug.LogError( "OnAuthenticateConnection(), wtf" );
         var uconn = UnityNetworkingData.Connections.Find(c => c.ConnectionId == netMsg.conn.connectionId);
         if (uconn != null)
         {

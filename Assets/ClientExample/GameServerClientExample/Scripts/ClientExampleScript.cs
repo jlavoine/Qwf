@@ -7,6 +7,7 @@ using UnityEngine.Networking;
 using UnityEngine.Networking.NetworkSystem;
 using UnityEngine.UI;
 using Region = PlayFab.ClientModels.Region;
+using MyLibrary;
 
 public class ClientExampleScript : MonoBehaviour
 {
@@ -66,7 +67,7 @@ public class ClientExampleScript : MonoBehaviour
 
         if (string.IsNullOrEmpty(TitleId))
         {
-            Debug.LogError("Please Enter your Title Id on the ClientExampleGameObject");
+            UnityEngine.Debug.LogError("Please Enter your Title Id on the ClientExampleGameObject");
             return;
         }
 
@@ -91,7 +92,7 @@ public class ClientExampleScript : MonoBehaviour
             PlayFabId = result.PlayFabId;
             SessionTicket = result.SessionTicket;
 
-            Debug.Log("PlayFab Logged In Successfully");
+            UnityEngine.Debug.Log("PlayFab Logged In Successfully");
             StartText.text = "PlayFab Logged In Successfully";
             //If you want to test locally where you are running the server in the Unity Editor
             if (IsLocalNetwork)
@@ -116,23 +117,23 @@ public class ClientExampleScript : MonoBehaviour
 
         }, PlayFabErrorHandler.HandlePlayFabError);
 #else
-        //PlayFabId = result.PlayFabId;
-        //SessionTicket = result.SessionTicket;
+        PlayFabId = BackendManager.GetBackend<PlayFabBackend>().PlayFabId;
+        SessionTicket = BackendManager.GetBackend<PlayFabBackend>().SessionTicket;
 
-        Debug.Log("PlayFab Logged In Successfully");
+        UnityEngine.Debug.Log("PlayFab Logged In Successfully");
         StartText.text = "PlayFab Logged In Successfully";
         //If you want to test locally where you are running the server in the Unity Editor
         if ( IsLocalNetwork ) {
             ConnectNetworkClient();
         }
         else {
-            Debug.Log( "about to match make with " + BuildVersion + " - " + GameMode + " - " + GameRegion );
+            UnityEngine.Debug.Log( "about to match make with " + BuildVersion + " - " + GameMode + " - " + GameRegion );
             PlayFabClientAPI.Matchmake( new MatchmakeRequest() {
                 BuildVersion = BuildVersion,
                 GameMode = GameMode,
                 Region = GameRegion
             }, ( matchMakeResult ) => {
-                Debug.Log( "got a result!" );
+                UnityEngine.Debug.Log( "got a result!" );
                 int port = matchMakeResult.ServerPort ?? 7777;
                 GameServerAuthTicket = matchMakeResult.Ticket;
                 ConnectNetworkClient( matchMakeResult.ServerHostname, port );
@@ -153,8 +154,6 @@ public class ClientExampleScript : MonoBehaviour
         _network.RegisterHandler(MsgType.Error, OnClientNetworkingError);
         _network.RegisterHandler(MsgType.Disconnect, OnClientDisconnect);
 
-        _network.RegisterHandler(GameServerMsgTypes.OnTitleNewsUpdate, OnTitleNewsUpdate);
-
         //If this fails, it will automatically disconnect from the server.
         if (IsLocalNetwork)
         {
@@ -162,7 +161,7 @@ public class ClientExampleScript : MonoBehaviour
             port = this.port;
         }
         _network.Connect(host, port);
-        Debug.LogFormat("Network Client Created, waiting for connection on ServerHost:{0} Port:{1}", host, port);
+        UnityEngine.Debug.LogFormat("Network Client Created, waiting for connection on ServerHost:{0} Port:{1}", host, port);
 
         /*  I wanted to expand on the statement above,  Unity Networking has a NetworkingManager that is a 
          *  monobehaviour that you can instantiate into the scene and it also has a HUD for debugging, 
@@ -176,23 +175,10 @@ public class ClientExampleScript : MonoBehaviour
 
     }
 
-    private void OnTitleNewsUpdate(NetworkMessage netMsg)
-    {
-        /*
-        var message = netMsg.ReadMessage<TitleNewsItemMessage>();
-        Debug.LogFormat("{0} New Title News '{1}' Message Received: {2}", message.NewsId, message.Title, message.Body);
-
-        Header.text = message.Title;
-        Message.text = message.Body;
-        SmallWindow.SetActive(true);
-        */
-    }
-
-    private void OnConnected(NetworkMessage netMsg)
-    {
+    private void OnConnected(NetworkMessage netMsg) {
         StartText.text = "Connected, waiting for Authorization";
-        Debug.Log("Network Client connected, You have 30 seconds to Authenticate or you get booted by the server.");
-        Debug.Log( "Authing with " + GameServerAuthTicket + " or " + SessionTicket );
+        UnityEngine.Debug.Log("Network Client connected, You have 30 seconds to Authenticate or you get booted by the server.");
+        UnityEngine.Debug.Log( "Authing with " + GameServerAuthTicket + " or " + SessionTicket );
         _network.Send(GameServerMsgTypes.Authenticate, new AuthTicketMessage()
         {
             PlayFabId = PlayFabId,
@@ -201,13 +187,12 @@ public class ClientExampleScript : MonoBehaviour
         });
     }
 
-    private void OnAuthenticated(NetworkMessage netMsg)
-    {
+    private void OnAuthenticated(NetworkMessage netMsg) {
         StartText.text = "Ready";
-        Debug.Log("Sending Custom Message to the server, telling it to do something ");
-        _network.Send(GameServerMsgTypes.MsgRecieverExample, new StringMessage());
+        UnityEngine.Debug.Log("Sending Custom Message to the server, telling it to do something ");
+        //_network.Send(GameServerMsgTypes.MsgRecieverExample, new StringMessage());
 
-        _network.Send(GameServerMsgTypes.RegisterForEvents, new RegisterForEventsMessage() { Subscription = new PlayStreamSubscription() { EventName = "player_inventory_item_added", PlayFabId = PlayFabId } });
+        //_network.Send(GameServerMsgTypes.RegisterForEvents, new RegisterForEventsMessage() { Subscription = new PlayStreamSubscription() { EventName = "player_inventory_item_added", PlayFabId = PlayFabId } });
     }
 
     private void OnMsgRecieverExampleResponse(NetworkMessage netMsg)
@@ -220,18 +205,18 @@ public class ClientExampleScript : MonoBehaviour
          * Here I am keeping it simple and passing a String message back from the server.
          */
         var message = netMsg.ReadMessage<StringMessage>();
-        Debug.Log(message.value);
+        UnityEngine.Debug.Log(message.value);
     }
 
     private void OnClientNetworkingError(NetworkMessage netMsg)
     {
         var errorMessage = netMsg.ReadMessage<ErrorMessage>();
-        Debug.LogErrorFormat("Oops Something went wrong. ErrorCode:{0}", errorMessage.errorCode);
+        UnityEngine.Debug.LogErrorFormat("Oops Something went wrong. ErrorCode:{0}", errorMessage.errorCode);
     }
 
     private void OnClientDisconnect(NetworkMessage netMsg)
     {
-        Debug.Log("Diconnected From Server");
+        UnityEngine.Debug.Log("Diconnected From Server");
         StartText.text = "Disconnected";
         //TODO: Find out why it disconnected, and retry if needed.
     }

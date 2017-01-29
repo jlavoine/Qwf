@@ -37,7 +37,11 @@ namespace MyLibrary {
             }
         }
 
-        public string PlayFabId;
+        public string mPlayFabId;
+        public string PlayFabId { get { return mPlayFabId; } }
+
+        public string mSessionTicket;
+        public string SessionTicket { get { return mSessionTicket; } }
 
         public PlayFabBackend() {
         }
@@ -58,7 +62,9 @@ namespace MyLibrary {
             };
 
             PlayFabClientAPI.LoginWithCustomID( request, ( result ) => {
-                PlayFabId = result.PlayFabId;
+                mPlayFabId = result.PlayFabId;
+                mSessionTicket = result.SessionTicket;
+                
                 IAuthenticationSuccess successResult = null;
                 MyMessenger.Send<IAuthenticationSuccess>( BackendMessages.AUTH_SUCCESS, successResult );
             },
