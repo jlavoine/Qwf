@@ -6,6 +6,8 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.Networking.NetworkSystem;
 
+using Qwf.Server;
+
 public class UnityNetworkManagerMediator : EventMediator {
     [Inject] public UnityNetworkManagerView View { get; set; }
     [Inject] public UnityNetworkingData UnityNetworkingData { get; set; }
@@ -19,6 +21,9 @@ public class UnityNetworkManagerMediator : EventMediator {
     [Inject] public NotifyMatchmakerPlayerLeftSignal PlayerLeftSignal { get; set; }
     [Inject] public NotifyMatchmakerPlayerLeftResponseSignal PlayerLeftResponse { get; set; }
     [Inject] public ClientDisconnectedSignal ClientDisconnectedSignal { get; set; }
+
+    [Inject]
+    public CreateGamePlayerSignal CreateGamePlayerSignal { get; set; }
 
     public class AuthTicketMessage : MessageBase
     {
@@ -62,7 +67,6 @@ public class UnityNetworkManagerMediator : EventMediator {
 
     private void OnAuthenticateConnection(NetworkMessage netMsg)
     {
-        UnityEngine.Debug.LogError( "OnAuthenticateConnection(), wtf" );
         var uconn = UnityNetworkingData.Connections.Find(c => c.ConnectionId == netMsg.conn.connectionId);
         if (uconn != null)
         {
@@ -101,6 +105,8 @@ public class UnityNetworkManagerMediator : EventMediator {
             {
                 value = "Client Authenticated Successfully"
             });
+
+            CreateGamePlayerSignal.Dispatch();
         }
     }
 
@@ -115,6 +121,8 @@ public class UnityNetworkManagerMediator : EventMediator {
             {
                 value = "Client Authenticated Successfully"
             });
+
+            CreateGamePlayerSignal.Dispatch();
         }
     }
 
