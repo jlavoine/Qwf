@@ -23,7 +23,6 @@ public class ClientExampleScript : MonoBehaviour
     public string SessionTicket;
     public string GameServerAuthTicket;
 
-    public Button CancelButton;
     public Text Header;
     public Text Message;
     public Text StartText;
@@ -64,11 +63,6 @@ public class ClientExampleScript : MonoBehaviour
     void Start()
     {
         StartText.text = "Loading...";
-        CancelButton.onClick.AddListener(() =>
-        {
-            Header.text = string.Empty;
-            Message.text = string.Empty;
-        });
 
         if (string.IsNullOrEmpty(TitleId))
         {
@@ -122,44 +116,28 @@ public class ClientExampleScript : MonoBehaviour
 
         }, PlayFabErrorHandler.HandlePlayFabError);
 #else
-        var randomId = UnityEngine.Random.Range(0, 100);
-        PlayFabClientAPI.LoginWithCustomID(new LoginWithCustomIDRequest()
-        {
-            TitleId = TitleId,
-            CustomId = string.Format("{0}-{1}", SystemInfo.deviceUniqueIdentifier, randomId),
-            CreateAccount = true
-        }, (result) =>
-        {
-            PlayFabId = result.PlayFabId;
-            SessionTicket = result.SessionTicket;
+        //PlayFabId = result.PlayFabId;
+        //SessionTicket = result.SessionTicket;
 
-            Debug.Log("PlayFab Logged In Successfully");
-            StartText.text = "PlayFab Logged In Successfully";
-            //If you want to test locally where you are running the server in the Unity Editor
-            if (IsLocalNetwork)
-            {
-                ConnectNetworkClient();
-            }
-            else
-            {
-                Debug.Log( "about to match make with " + BuildVersion + " - " + GameMode + " - " + GameRegion );
-                PlayFabClientAPI.Matchmake(new MatchmakeRequest()
-                {
-                    BuildVersion = BuildVersion,
-                    GameMode = GameMode,
-                    Region = GameRegion
-                }, (matchMakeResult) =>
-                {
-                    Debug.Log( "got a result!" );
-                    int port = matchMakeResult.ServerPort ?? 7777;
-                    GameServerAuthTicket = matchMakeResult.Ticket;
-                    ConnectNetworkClient(matchMakeResult.ServerHostname, port);
-                }, PlayFabErrorHandler.HandlePlayFabError);
-
-            }
-
-        }, PlayFabErrorHandler.HandlePlayFabError);
-
+        Debug.Log("PlayFab Logged In Successfully");
+        StartText.text = "PlayFab Logged In Successfully";
+        //If you want to test locally where you are running the server in the Unity Editor
+        if ( IsLocalNetwork ) {
+            ConnectNetworkClient();
+        }
+        else {
+            Debug.Log( "about to match make with " + BuildVersion + " - " + GameMode + " - " + GameRegion );
+            PlayFabClientAPI.Matchmake( new MatchmakeRequest() {
+                BuildVersion = BuildVersion,
+                GameMode = GameMode,
+                Region = GameRegion
+            }, ( matchMakeResult ) => {
+                Debug.Log( "got a result!" );
+                int port = matchMakeResult.ServerPort ?? 7777;
+                GameServerAuthTicket = matchMakeResult.Ticket;
+                ConnectNetworkClient( matchMakeResult.ServerHostname, port );
+            }, PlayFabErrorHandler.HandlePlayFabError );
+        }
 #endif
 
     }
@@ -175,7 +153,6 @@ public class ClientExampleScript : MonoBehaviour
         _network.RegisterHandler(MsgType.Error, OnClientNetworkingError);
         _network.RegisterHandler(MsgType.Disconnect, OnClientDisconnect);
 
-        _network.RegisterHandler(GameServerMsgTypes.OnPlayStreamEventReceived, OnReceivedPlayStreamEvent);
         _network.RegisterHandler(GameServerMsgTypes.OnTitleNewsUpdate, OnTitleNewsUpdate);
 
         //If this fails, it will automatically disconnect from the server.
@@ -257,33 +234,6 @@ public class ClientExampleScript : MonoBehaviour
         Debug.Log("Diconnected From Server");
         StartText.text = "Disconnected";
         //TODO: Find out why it disconnected, and retry if needed.
-    }
-
-    private void OnReceivedPlayStreamEvent(NetworkMessage netMsg)
-    {
-        var psEvent = netMsg.ReadMessage<PlayStreamEventMessage>();
-        if (psEvent == null) return;
-        Debug.Log("there is a event");
-        var nobodycares = JsonWrapper.DeserializeObject<PlayerInventoryItemAddedEventData>(psEvent.EventData);
-        if (nobodycares.EventName == "title_statistic_version_changed")
-        {
-            StartText.text = "New Tournament Season Begins!";
-            Invoke("ClearText", 6.0f);
-
-        }
-        else if (nobodycares.EventName == "player_inventory_item_added")
-        {
-            StartText.text = "You received " + nobodycares.DisplayName + "!";
-            Invoke("ClearText", 6.0f);
-        }
-        else if (nobodycares.EventName == "player_virtual_currency_balance_changed")
-        {
-            var vcevent = JsonWrapper.DeserializeObject<PlayerVirtualCurrencyBalanceChangedEventData>(psEvent.EventData);
-            if (vcevent.VirtualCurrencyBalance == 0) return;
-            StartText.text = "You Virtual Currency " + vcevent.VirtualCurrencyName + " just changed from " +
-                             vcevent.VirtualCurrencyPreviousBalance + " to " + vcevent.VirtualCurrencyBalance;
-            Invoke("ClearText", 6.0f);
-        }
     }
 
     void ClearText()
