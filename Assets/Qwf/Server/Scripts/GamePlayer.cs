@@ -1,21 +1,26 @@
 ﻿using System.Collections.Generic;
 
-namespace Qwf {
+namespace Qwf.Server {
     public class GamePlayer : IGamePlayer {
         private List<IGamePiece> mUndrawnPieces = new List<IGamePiece>();
         private List<IGamePiece> mHeldPieces = new List<IGamePiece>();
 
         private IGameRules mRules;
 
+        private string mId;
+        public string Id { get { return mId; } private set { mId = value; } }
+
         // C# doesn't let you call one ctor from another...!
-        public GamePlayer( IGameRules i_rules, PlayerDeckData i_deckData ) {
+        public GamePlayer( IGameRules i_rules, PlayerDeckData i_deckData, string i_id ) {
+            Id = i_id;
             mRules = i_rules;
 
             SetAndShuffleUndrawnPieces( i_deckData.GetListOfPiecesFromDeck( this ) );
             DrawStartingHand();
         }
 
-        public GamePlayer( IGameRules i_rules, List<IGamePiece> i_allPieces ) {
+        public GamePlayer( IGameRules i_rules, List<IGamePiece> i_allPieces, string i_id ) {
+            Id = i_id;
             mRules = i_rules;
 
             SetAndShuffleUndrawnPieces( i_allPieces );
@@ -32,10 +37,6 @@ namespace Qwf {
 
         public bool IsGamePieceHeld( IGamePiece i_piece ) {
             return mHeldPieces.Contains( i_piece );
-        }
-
-        public int GetId() {
-            return 0;
         }
 
         public void DrawToFillHand() {

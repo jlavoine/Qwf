@@ -2,7 +2,7 @@
 using NSubstitute;
 using System.Collections.Generic;
 
-namespace Qwf.UnitTests {
+namespace Qwf.Server.UnitTests {
     [TestFixture]
     public class TestGamePlayer {
         private const int PLAYER_HAND_SIZE = 6;
@@ -12,7 +12,7 @@ namespace Qwf.UnitTests {
         public void AfterPlayIsCreated_HeldAndUndrawnPieces_MatchOriginalData() {
             IGameRules mockRules = GetStandardRules();
             List<IGamePiece> mockPieces = CreateGamePieces( TOTAL_GAME_PIECES );
-            GamePlayer systemUnderTest = new GamePlayer( mockRules, mockPieces );
+            GamePlayer systemUnderTest = new GamePlayer( mockRules, mockPieces, string.Empty );
 
             Assert.AreEqual( PLAYER_HAND_SIZE, systemUnderTest.GetHeldPieces().Count );
             Assert.AreEqual( TOTAL_GAME_PIECES - PLAYER_HAND_SIZE, systemUnderTest.GetUndrawnPieces().Count );
@@ -30,7 +30,7 @@ namespace Qwf.UnitTests {
         public void IfUndrawnPiecesAreNotEnough_PlayerDrawsRemainingPieces() {
             IGameRules mockRules = GetStandardRules();
             List<IGamePiece> mockPieces = CreateGamePieces( PLAYER_HAND_SIZE - 1 );
-            GamePlayer systemUnderTest = new GamePlayer( mockRules, mockPieces );
+            GamePlayer systemUnderTest = new GamePlayer( mockRules, mockPieces, string.Empty );
 
             Assert.AreEqual( mockPieces.Count, systemUnderTest.GetHeldPieces().Count );
             Assert.AreEqual( 0, systemUnderTest.GetUndrawnPieces().Count );
@@ -40,7 +40,7 @@ namespace Qwf.UnitTests {
         public void IsGamePieceHeld_ReturnsTrue_WhenGamePieceHeld() {
             IGameRules mockRules = GetStandardRules();
             List<IGamePiece> mockPieces = CreateGamePieces( 1 );
-            GamePlayer systemUnderTest = new GamePlayer( mockRules, mockPieces );
+            GamePlayer systemUnderTest = new GamePlayer( mockRules, mockPieces, string.Empty );
 
             bool isPieceHeld = systemUnderTest.IsGamePieceHeld( mockPieces[0] );
 
@@ -51,7 +51,7 @@ namespace Qwf.UnitTests {
         public void IsGamePieceHeld_ReturnsFalse_WhenGamePieceNotHeld() {
             IGameRules mockRules = GetStandardRules();
             List<IGamePiece> mockPieces = CreateGamePieces( 1 );
-            GamePlayer systemUnderTest = new GamePlayer( mockRules, mockPieces );
+            GamePlayer systemUnderTest = new GamePlayer( mockRules, mockPieces, string.Empty );
 
             IGamePiece unheldGamePiece = Substitute.For<IGamePiece>();
             bool isPieceHeld = systemUnderTest.IsGamePieceHeld( unheldGamePiece );
@@ -63,7 +63,7 @@ namespace Qwf.UnitTests {
         public void RemovingPieceFromHand_IfPlayerHoldsPiece_ReducesHandSize() {
             IGameRules mockRules = GetStandardRules();
             List<IGamePiece> mockPieces = CreateGamePieces( PLAYER_HAND_SIZE );
-            GamePlayer systemUnderTest = new GamePlayer( mockRules, mockPieces );
+            GamePlayer systemUnderTest = new GamePlayer( mockRules, mockPieces, string.Empty );
 
             systemUnderTest.RemovePieceFromHand( mockPieces[0] );
 
@@ -74,7 +74,7 @@ namespace Qwf.UnitTests {
         public void RemovingPieceFromHand_IfPlayerDoesNotHoldPiece_DoesNotReducesHandSize() {
             IGameRules mockRules = GetStandardRules();
             List<IGamePiece> mockPieces = CreateGamePieces( PLAYER_HAND_SIZE );
-            GamePlayer systemUnderTest = new GamePlayer( mockRules, mockPieces );
+            GamePlayer systemUnderTest = new GamePlayer( mockRules, mockPieces, string.Empty );
 
             systemUnderTest.RemovePieceFromHand( Substitute.For<IGamePiece>() );
 
@@ -85,7 +85,7 @@ namespace Qwf.UnitTests {
         public void DrawToFillHand_FillsHand() {
             IGameRules mockRules = GetStandardRules();
             List<IGamePiece> mockPieces = CreateGamePieces( PLAYER_HAND_SIZE * 2 );
-            GamePlayer systemUnderTest = new GamePlayer( mockRules, mockPieces );
+            GamePlayer systemUnderTest = new GamePlayer( mockRules, mockPieces, string.Empty );
 
             systemUnderTest.RemovePieceFromHand( mockPieces[0] );
             systemUnderTest.DrawToFillHand();            

@@ -8,9 +8,9 @@ namespace Qwf.Client {
         public const string OUTLINE_PROPERTY = "OutlineColor";
 
         private IGamePiece mGamePiece;
-        private int mPlayerViewing;
+        private string mPlayerViewing;
 
-        public GamePiecePM( IGamePiece i_piece, int i_playerViewing ) {
+        public GamePiecePM( IGamePiece i_piece, string i_playerViewing ) {
             mPlayerViewing = i_playerViewing;
             mGamePiece = i_piece;
 
@@ -36,7 +36,7 @@ namespace Qwf.Client {
         }
 
         private bool DoesViewingPlayerOwnGamePiece() {
-            return mPlayerViewing == mGamePiece.GetOwner().GetId();
+            return mPlayerViewing == mGamePiece.GetOwner().Id;
         }
     }
 }

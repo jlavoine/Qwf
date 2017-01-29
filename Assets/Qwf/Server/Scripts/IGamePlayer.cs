@@ -2,7 +2,7 @@
 
 namespace Qwf {
     public interface IGamePlayer {
-        int GetId();
+        string Id { get; }
 
         bool IsGamePieceHeld( IGamePiece i_piece );
 

@@ -4,15 +4,12 @@ using System.Collections.Generic;
 
 namespace Qwf.Client {
     public class ClientPlayer : IGamePlayer {
-        private int mId;
+        private string mId;
+        public string Id { get { return mId; } private set { mId = value; } }
 
-        public ClientPlayer( int i_id ) {
-            mId = i_id;
-        }
-
-        public int GetId() {
-            return mId;
-        }
+        public ClientPlayer( string i_id ) {
+            Id = i_id;
+        }        
 
         public void DrawToFillHand() {
             throw new NotImplementedException();

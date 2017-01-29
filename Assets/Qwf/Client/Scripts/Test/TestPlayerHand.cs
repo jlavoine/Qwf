@@ -7,7 +7,7 @@ namespace Qwf.Client {
         public PlayerHandView View;
 
         void Start() {
-            IGamePlayer player = new ClientPlayer( 0 );
+            IGamePlayer player = new ClientPlayer( "0" );
 
             List<IGamePiece> pieces = new List<IGamePiece>();
             pieces.Add( new GamePiece( player, new GamePieceData() { Value = 1, PieceType = 0 } ) );
@@ -16,7 +16,7 @@ namespace Qwf.Client {
             pieces.Add( new GamePiece( player, new GamePieceData() { Value = 4, PieceType = 3 } ) );
             pieces.Add( new GamePiece( player, new GamePieceData() { Value = 5, PieceType = 4 } ) );
 
-            View.Init( new PlayerHandPM( pieces, 0 ) );
+            View.Init( new PlayerHandPM( pieces, "0" ) );
         }
 
     }
