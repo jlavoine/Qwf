@@ -26,17 +26,16 @@ public class NewExampleMediator : Mediator {
     public LogSignal Logger { get; set; }
 
     public override void OnRegister() {
-        UnityEngine.Debug.Log( View.TestFloat );
-
+        UnityEngine.Debug.LogError( "In my on register" );
         GetTitleDataSignal.Dispatch( new GetTitleDataRequest() {
-            Keys = new List<string> { "MyTitleKey1" }
+            Keys = new List<string> { "SampleDeck" }
         });
 
         GetTitleDataResponseSignal.AddOnce( ( result ) => {
             foreach (KeyValuePair<string, string> kvp in result.Data ) {
                 UnityEngine.Debug.Log( "Key is " + kvp.Key + " and result is " + kvp.Value );
-                TestNetworking();
-                Logger.Dispatch( LoggerTypes.Info, string.Format( "Hey I got some title data" ) );
+                //TestNetworking();
+                //Logger.Dispatch( LoggerTypes.Info, string.Format( "Hey I got some title data" ) );
             }
         } );
 
