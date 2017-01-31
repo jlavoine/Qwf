@@ -8,8 +8,11 @@ namespace Qwf.Server {
         public override void MapBindings( ICommandBinder commandBinder, ICrossContextInjectionBinder injectionBinder, IMediationBinder mediationBinder ) {
             // mediationBinder.Bind<NewExampleView>().To<NewExampleMediator>();
 
-            //Bind Commands and Signals
+            injectionBinder.Bind<IGameRules>().To<GameRules>();
+
+            //Bind Commands and Signals            
             commandBinder.Bind<CreateGamePlayerSignal>().To<CreateGamePlayerCommand>();
+            commandBinder.Bind<SendGamePlayerHandSignal>().To<SendGamePlayerHandCommand>();
             //commandBinder.Bind<SetupUnityNetworkingCompleteSignal>();
             //commandBinder.Bind<ClientDisconnectedSignal>();
         }

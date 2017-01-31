@@ -106,7 +106,7 @@ public class UnityNetworkManagerMediator : EventMediator {
                 value = "Client Authenticated Successfully"
             });
 
-            CreateGamePlayerSignal.Dispatch();
+            CreateGamePlayerSignal.Dispatch( response.UserInfo.PlayFabId );
         }
     }
 
@@ -122,7 +122,8 @@ public class UnityNetworkManagerMediator : EventMediator {
                 value = "Client Authenticated Successfully"
             });
 
-            CreateGamePlayerSignal.Dispatch();
+            UnityEngine.Debug.LogError( "about to send auth with " + response.UserInfo.PlayFabId );
+            CreateGamePlayerSignal.Dispatch( response.UserInfo.PlayFabId);
         }
     }
 

@@ -8,6 +8,7 @@ using UnityEngine.Networking.NetworkSystem;
 using UnityEngine.UI;
 using Region = PlayFab.ClientModels.Region;
 using MyLibrary;
+using Qwf;
 
 public class ClientExampleScript : MonoBehaviour
 {
@@ -153,6 +154,7 @@ public class ClientExampleScript : MonoBehaviour
         _network.RegisterHandler(GameServerMsgTypes.MsgRecieverExampleResponse, OnMsgRecieverExampleResponse);
         _network.RegisterHandler(MsgType.Error, OnClientNetworkingError);
         _network.RegisterHandler(MsgType.Disconnect, OnClientDisconnect);
+        _network.RegisterHandler( NetworkMessages.UpdatePlayerHand, OnUpdatePlayerHand );
 
         //If this fails, it will automatically disconnect from the server.
         if (IsLocalNetwork)
@@ -170,9 +172,11 @@ public class ClientExampleScript : MonoBehaviour
          *  property.  This would allow you to virtually do the same code above, but on that game object.
          *  For this example, I'm taking the most simple and direct path.
          */
+    }
 
-
-
+    private void OnUpdatePlayerHand(NetworkMessage netMsg) {
+        StringMessage message = netMsg.ReadMessage<StringMessage>();
+        UnityEngine.Debug.LogError( "The player's hand update: " + message.value );
     }
 
     private void OnConnected(NetworkMessage netMsg) {
