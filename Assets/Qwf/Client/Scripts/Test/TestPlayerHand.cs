@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MyLibrary;
 
 namespace Qwf.Client {
     public class TestPlayerHand : MonoBehaviour {
@@ -9,14 +10,31 @@ namespace Qwf.Client {
         void Start() {
             IGamePlayer player = new ClientPlayer( "0" );
 
-            List<IGamePiece> pieces = new List<IGamePiece>();
-            pieces.Add( new GamePiece( player, new GamePieceData() { Value = 1, PieceType = 0 } ) );
-            pieces.Add( new GamePiece( player, new GamePieceData() { Value = 2, PieceType = 1 } ) );
-            pieces.Add( new GamePiece( player, new GamePieceData() { Value = 3, PieceType = 2 } ) );
-            pieces.Add( new GamePiece( player, new GamePieceData() { Value = 4, PieceType = 3 } ) );
-            pieces.Add( new GamePiece( player, new GamePieceData() { Value = 5, PieceType = 4 } ) );
+            List<GamePieceData> pieces = CreateRandom(5);
 
             View.Init( new PlayerHandPM( pieces, "0" ) );
+        }
+
+        public List<GamePieceData> CreateRandom( int i_num ) {
+            List<GamePieceData> pieces = new List<GamePieceData>();
+
+            for ( int i = 0; i < i_num; ++i ) {
+                pieces.Add( new GamePieceData() { Value = Random.Range( 1, 5 ), PieceType = Random.Range( 0, 5 ), Owner = "0" } );
+            }
+
+            return pieces;
+
+        }
+
+        void Update() {
+            if ( Input.GetKeyDown( KeyCode.Space ) ) {
+                List<GamePieceData> pieces = CreateRandom(Random.Range(2,5));
+                //OnUpdatePlayerHand
+
+                PlayerHandUpdateData data = new PlayerHandUpdateData();
+                data.GamePieces = pieces;
+                MyMessenger.Send<PlayerHandUpdateData>( ClientMessages.UPDATE_HAND, data );
+            }
         }
 
     }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 namespace MyLibrary {
-    public class GroupView : MonoBehaviour {
+    public abstract class GroupView : MonoBehaviour {
 
         public virtual void Init( IViewModel i_viewModel ) {
             SetModel( i_viewModel );

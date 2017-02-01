@@ -6,25 +6,37 @@ namespace Qwf.Client {
         public const string VALUE_PROPERTY = "Value";
         public const string ICON_PROPERTY = "PieceType";
         public const string OUTLINE_PROPERTY = "OutlineColor";
+        public const string VISIBLE_PROPERTY = "IsVisible";
 
-        private IGamePiece mGamePiece;
+        private GamePieceData mGamePiece;
         private string mPlayerViewing;
 
-        public GamePiecePM( IGamePiece i_piece, string i_playerViewing ) {
+        public GamePiecePM( GamePieceData i_piece, string i_playerViewing ) {
             mPlayerViewing = i_playerViewing;
+            mGamePiece = i_piece;
+
+            SetProperties( i_piece );   
+        }
+
+        public void SetProperties( GamePieceData i_piece ) {
             mGamePiece = i_piece;
 
             SetValueProperty();
             SetIconProperty();
             SetOutlineProperty();
+            SetVisibility( true );
+        }
+
+        public void SetVisibility( bool i_visible) {
+            ViewModel.SetProperty( VISIBLE_PROPERTY, i_visible ? 1f : 0f );
         }
 
         private void SetValueProperty() {
-            ViewModel.SetProperty( VALUE_PROPERTY, mGamePiece.GetValue() );
+            ViewModel.SetProperty( VALUE_PROPERTY, mGamePiece.Value );
         }
 
         private void SetIconProperty() {
-            ViewModel.SetProperty( ICON_PROPERTY, mGamePiece.GetPieceType().ToString() );
+            ViewModel.SetProperty( ICON_PROPERTY, mGamePiece.PieceType.ToString() );
         }
 
         private void SetOutlineProperty() {
@@ -36,7 +48,7 @@ namespace Qwf.Client {
         }
 
         private bool DoesViewingPlayerOwnGamePiece() {
-            return mPlayerViewing == mGamePiece.GetOwner().Id;
+            return mPlayerViewing == mGamePiece.Owner;
         }
     }
 }

@@ -1,14 +1,13 @@
 ﻿using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
-using PlayFab.Json;
-using PlayFab.PlayStreamModels;
 using UnityEngine.Networking;
 using UnityEngine.Networking.NetworkSystem;
 using UnityEngine.UI;
 using Region = PlayFab.ClientModels.Region;
 using MyLibrary;
 using Qwf;
+using Newtonsoft.Json;
 
 public class ClientExampleScript : MonoBehaviour
 {
@@ -176,7 +175,8 @@ public class ClientExampleScript : MonoBehaviour
 
     private void OnUpdatePlayerHand(NetworkMessage netMsg) {
         StringMessage message = netMsg.ReadMessage<StringMessage>();
-        UnityEngine.Debug.LogError( "The player's hand update: " + message.value );
+        PlayerHandUpdateData data = JsonConvert.DeserializeObject<PlayerHandUpdateData>( message.value );
+        MyMessenger.Send<PlayerHandUpdateData>( ClientMessages.UPDATE_HAND, data );
     }
 
     private void OnConnected(NetworkMessage netMsg) {
