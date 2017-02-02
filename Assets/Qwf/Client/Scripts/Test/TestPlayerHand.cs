@@ -11,8 +11,12 @@ namespace Qwf.Client {
             IGamePlayer player = new ClientPlayer( "0" );
 
             List<GamePieceData> pieces = CreateRandom(5);
+            List<IGamePieceData> pieces2 = new List<IGamePieceData>();
+            foreach (GamePieceData piece in pieces ) {
+                pieces2.Add( piece );
+            }
 
-            View.Init( new PlayerHandPM( pieces, "0" ) );
+            View.Init( new PlayerHandPM( pieces2, "0" ) );
         }
 
         public List<GamePieceData> CreateRandom( int i_num ) {
@@ -30,10 +34,11 @@ namespace Qwf.Client {
             if ( Input.GetKeyDown( KeyCode.Space ) ) {
                 List<GamePieceData> pieces = CreateRandom(Random.Range(2,5));
                 //OnUpdatePlayerHand
-
+             
                 PlayerHandUpdateData data = new PlayerHandUpdateData();
                 data.GamePieces = pieces;
-                MyMessenger.Send<PlayerHandUpdateData>( ClientMessages.UPDATE_HAND, data );
+                data.Id = "0";
+                MyMessenger.Instance.Send<PlayerHandUpdateData>( ClientMessages.UPDATE_HAND, data );
             }
         }
 

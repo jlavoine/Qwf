@@ -5,10 +5,10 @@ namespace Qwf.Client {
     public class PlayerHandPM : GenericViewModel {
         private string m_id;
 
-        public List<GamePiecePM> mGamePiecePMs;
-        public List<GamePiecePM> GamePiecePMs { get { return mGamePiecePMs; } }
+        public List<IGamePiecePM> mGamePiecePMs;
+        public List<IGamePiecePM> GamePiecePMs { get { return mGamePiecePMs; } }
 
-        public PlayerHandPM( List<GamePieceData> i_gamePieces, string i_playerID ) {
+        public PlayerHandPM( List<IGamePieceData> i_gamePieces, string i_playerID ) {
             m_id = i_playerID;
 
             CreateGamePiecePMs( i_gamePieces, i_playerID );
@@ -22,20 +22,20 @@ namespace Qwf.Client {
 
         private void ListenForMessages( bool i_shouldListen ) {
             if ( i_shouldListen ) {
-                MyMessenger.AddListener<PlayerHandUpdateData>( ClientMessages.UPDATE_HAND, OnUpdate );
+                MyMessenger.Instance.AddListener<PlayerHandUpdateData>( ClientMessages.UPDATE_HAND, OnUpdate );
             } else {
-                MyMessenger.RemoveListener<PlayerHandUpdateData>( ClientMessages.UPDATE_HAND, OnUpdate );
+                MyMessenger.Instance.RemoveListener<PlayerHandUpdateData>( ClientMessages.UPDATE_HAND, OnUpdate );
             }
         }
 
-        private void CreateGamePiecePMs( List<GamePieceData> i_gamePieces, string i_playerID ) { 
-            mGamePiecePMs = new List<GamePiecePM>();
-            foreach ( GamePieceData gamePiece in i_gamePieces ) {
+        private void CreateGamePiecePMs( List<IGamePieceData> i_gamePieces, string i_playerID ) { 
+            mGamePiecePMs = new List<IGamePiecePM>();
+            foreach ( IGamePieceData gamePiece in i_gamePieces ) {
                 mGamePiecePMs.Add( new GamePiecePM( gamePiece, i_playerID ));
             }
         }
 
-        private void OnUpdate( PlayerHandUpdateData i_data ) {
+        public void OnUpdate( PlayerHandUpdateData i_data ) {
             if ( UpdateBelongsToPlayer( i_data ) ) {
                 ProcessUpdateData( i_data );
             }
