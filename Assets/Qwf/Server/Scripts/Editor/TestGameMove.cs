@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using NSubstitute;
 
-namespace Qwf.UnitTests {
+namespace Qwf {
     [TestFixture]
     public class TestGameMove {
 

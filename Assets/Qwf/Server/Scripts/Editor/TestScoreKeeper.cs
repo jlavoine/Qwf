@@ -2,7 +2,7 @@
 using NSubstitute;
 using System.Collections.Generic;
 
-namespace Qwf.UnitTests {
+namespace Qwf {
     [TestFixture]
     public class TestScoreKeeper {
 

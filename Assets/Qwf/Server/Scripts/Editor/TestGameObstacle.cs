@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using NSubstitute;
 
-namespace Qwf.UnitTests {
+namespace Qwf {
     [TestFixture]
     public class TestGameObstacle {
         public const int OBSTACLE_SCORE_VALUE = 5;
