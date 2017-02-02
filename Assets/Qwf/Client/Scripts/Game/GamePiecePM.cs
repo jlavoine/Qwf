@@ -2,23 +2,23 @@
 using UnityEngine;
 
 namespace Qwf.Client {
-    public class GamePiecePM : GenericViewModel {
+    public class GamePiecePM : GenericViewModel, IGamePiecePM {
         public const string VALUE_PROPERTY = "Value";
         public const string ICON_PROPERTY = "PieceType";
         public const string OUTLINE_PROPERTY = "OutlineColor";
         public const string VISIBLE_PROPERTY = "IsVisible";
 
-        private GamePieceData mGamePiece;
+        private IGamePieceData mGamePiece;
         private string mPlayerViewing;
 
-        public GamePiecePM( GamePieceData i_piece, string i_playerViewing ) {
+        public GamePiecePM( IGamePieceData i_piece, string i_playerViewing ) {
             mPlayerViewing = i_playerViewing;
             mGamePiece = i_piece;
 
             SetProperties( i_piece );   
         }
 
-        public void SetProperties( GamePieceData i_piece ) {
+        public void SetProperties( IGamePieceData i_piece ) {
             mGamePiece = i_piece;
 
             SetValueProperty();
@@ -32,11 +32,11 @@ namespace Qwf.Client {
         }
 
         private void SetValueProperty() {
-            ViewModel.SetProperty( VALUE_PROPERTY, mGamePiece.Value );
+            ViewModel.SetProperty( VALUE_PROPERTY, mGamePiece.GetValue() );
         }
 
         private void SetIconProperty() {
-            ViewModel.SetProperty( ICON_PROPERTY, mGamePiece.PieceType.ToString() );
+            ViewModel.SetProperty( ICON_PROPERTY, mGamePiece.GetPieceType().ToString() );
         }
 
         private void SetOutlineProperty() {
@@ -48,7 +48,7 @@ namespace Qwf.Client {
         }
 
         private bool DoesViewingPlayerOwnGamePiece() {
-            return mPlayerViewing == mGamePiece.Owner;
+            return mPlayerViewing == mGamePiece.GetOwner();
         }
     }
 }

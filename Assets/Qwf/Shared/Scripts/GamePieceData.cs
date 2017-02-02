@@ -1,6 +1,6 @@
 ﻿
 namespace Qwf {
-    public class GamePieceData {
+    public class GamePieceData : IGamePieceData {
         public int PieceType;
         public int Value;
         public string Owner;
@@ -12,6 +12,18 @@ namespace Qwf {
             data.Owner = i_piece.GetOwner().Id;
 
             return data;
+        }
+
+        public string GetOwner() {
+            return Owner;
+        }
+
+        public int GetValue() {
+            return Value;
+        }
+
+        public int GetPieceType() {
+            return PieceType;
         }
     }
 }
