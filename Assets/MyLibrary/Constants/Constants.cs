@@ -23,7 +23,7 @@ namespace MyLibrary {
         private static Hashtable mConstants = new Hashtable();
 
         public static void Init( IBasicBackend i_backend ) {
-            MyMessenger.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Info, "Initing constants", "" );
+            MyMessenger.Instance.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Info, "Initing constants", "" );
 
             i_backend.GetTitleData( TITLE_DATA_KEY, CreateConstantsFromJSON );
         }
@@ -71,14 +71,14 @@ namespace MyLibrary {
                     mConstants[i_entry.ID] = ParseList<int>( i_entry.Value );
                     break;
                 default:
-                    MyMessenger.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Error, "Illegal constant type " + i_entry.Type + " for key " + i_entry.ID, "" );
+                    MyMessenger.Instance.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Error, "Illegal constant type " + i_entry.Type + " for key " + i_entry.ID, "" );
                     break;
             }
         }
 
         public static T GetConstant<T>( string strKey, T defaultVal ) {
             if ( mConstants.Count == 0 ) {
-                MyMessenger.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Fatal, "Constants being accessed before init!", "" );
+                MyMessenger.Instance.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Fatal, "Constants being accessed before init!", "" );
             }
 
             T data = defaultVal;
@@ -86,7 +86,7 @@ namespace MyLibrary {
                 data = (T) mConstants[strKey];
             }
             else {
-                MyMessenger.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Fatal, "No such constant for key " + strKey, "" );
+                MyMessenger.Instance.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Fatal, "No such constant for key " + strKey, "" );
             }
 
             return data;
@@ -105,7 +105,7 @@ namespace MyLibrary {
                                      float.Parse( arrayVector3[2] ) );
             }
             else {
-                MyMessenger.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Fatal, "Illegal vector3 parsing for " + i_str + " -- reverting to 0,0,0", "" );
+                MyMessenger.Instance.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Fatal, "Illegal vector3 parsing for " + i_str + " -- reverting to 0,0,0", "" );
             }
 
             return vector;
@@ -144,7 +144,7 @@ namespace MyLibrary {
                                   float.Parse( arrayColor[3] ) / 255 );
             }
             else {
-                MyMessenger.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Fatal, "Illegal color parsing for " + i_str + " -- reverting to white", "" );
+                MyMessenger.Instance.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Fatal, "Illegal color parsing for " + i_str + " -- reverting to white", "" );
             }
 
             return color;

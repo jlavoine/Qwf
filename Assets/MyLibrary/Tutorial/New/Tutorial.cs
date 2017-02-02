@@ -36,16 +36,16 @@ namespace MyLibrary {
         }
 
         private void FinishTutorial() {
-            MyMessenger.Send( TUTORIAL_FINISHED, TutorialName );
+            MyMessenger.Instance.Send( TUTORIAL_FINISHED, TutorialName );
             Destroy( gameObject );
         }
 
         private void SubscribeToMessages() {
-            MyMessenger.AddListener( END_STEP_MESSAGE, OnEndStep );
+            MyMessenger.Instance.AddListener( END_STEP_MESSAGE, OnEndStep );
         }
 
         private void UnsubscribeFromMessages() {
-            MyMessenger.RemoveListener( END_STEP_MESSAGE, OnEndStep );
+            MyMessenger.Instance.RemoveListener( END_STEP_MESSAGE, OnEndStep );
         }
 
         private void StartTutorial() {

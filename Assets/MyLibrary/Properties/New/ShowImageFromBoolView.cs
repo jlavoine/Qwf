@@ -23,7 +23,7 @@ namespace MyLibrary {
                 Image.enabled = show;
             }
             else {
-                MyMessenger.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Error, "No image element for ShowImageFromBool: " + PropertyName, "UI" );
+                MyMessenger.Instance.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Error, "No image element for ShowImageFromBool: " + PropertyName, "UI" );
             }
         }
     }

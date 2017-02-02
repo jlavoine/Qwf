@@ -31,8 +31,8 @@ namespace MyLibrary {
                 mClientOutOfSync = value;
 
                 if ( mClientOutOfSync ) {
-                    MyMessenger.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Warn, "Client is out of sync", PLAYFAB );
-                    MyMessenger.Send<string>( BackendMessages.BACKEND_OUT_OF_SYNC, "Reason incoming" );
+                    MyMessenger.Instance.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Warn, "Client is out of sync", PLAYFAB );
+                    MyMessenger.Instance.Send<string>( BackendMessages.BACKEND_OUT_OF_SYNC, "Reason incoming" );
                 }
             }
         }
@@ -51,7 +51,7 @@ namespace MyLibrary {
         }
 
         public void Authenticate( string i_id ) {
-            MyMessenger.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Info, "Authentication attempt for title " + TITLE_ID, PLAYFAB );
+            MyMessenger.Instance.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Info, "Authentication attempt for title " + TITLE_ID, PLAYFAB );
 
             PlayFabSettings.TitleId = TITLE_ID;
 
@@ -66,13 +66,13 @@ namespace MyLibrary {
                 mSessionTicket = result.SessionTicket;
                 
                 IAuthenticationSuccess successResult = null;
-                MyMessenger.Send<IAuthenticationSuccess>( BackendMessages.AUTH_SUCCESS, successResult );
+                MyMessenger.Instance.Send<IAuthenticationSuccess>( BackendMessages.AUTH_SUCCESS, successResult );
             },
             ( error ) => { HandleError( error, BackendMessages.AUTH_FAIL ); } );
         }
 
         /*public void SetUpCloudServices( bool i_testing ) {
-            MyMessenger.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Info, "Starting cloud service setup call", PLAYFAB );
+            MyMessenger.Instance.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Info, "Starting cloud service setup call", PLAYFAB );
 
             GetCloudScriptUrlRequest request = new GetCloudScriptUrlRequest() {
                 Testing = i_testing
@@ -80,7 +80,7 @@ namespace MyLibrary {
 
             PlayFabClientAPI.GetCloudScriptUrl( request, ( result ) => {
                 mCloudServicesSetUp = true;
-                MyMessenger.Send( BackendMessages.CLOUD_SETUP_SUCCESS );
+                MyMessenger.Instance.Send( BackendMessages.CLOUD_SETUP_SUCCESS );
             },
             ( error ) => { HandleError( error, BackendMessages.CLOUD_SETUP_FAIL ); } );
         }*/
@@ -138,7 +138,7 @@ namespace MyLibrary {
 
         private void OutputResultLogs( List<LogStatement> i_logs ) {
             foreach ( LogStatement log in i_logs ) {
-                MyMessenger.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Info, "Log type: " + log.Level + "\n" + log.Message, PLAYFAB );
+                MyMessenger.Instance.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Info, "Log type: " + log.Level + "\n" + log.Message, PLAYFAB );
             }
         }
 
@@ -154,7 +154,7 @@ namespace MyLibrary {
                 foreach ( KeyValuePair<string, string> pair in i_params ) {
                     paramsAsString += "\n" + pair.Key + " : " + pair.Value;
                 }
-                MyMessenger.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Info, paramsAsString, PLAYFAB );
+                MyMessenger.Instance.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Info, paramsAsString, PLAYFAB );
             }
         }
 
@@ -188,7 +188,7 @@ namespace MyLibrary {
                 RequestComplete( "Player data request complete: " + i_key, LogTypes.Info );
 
                 if ( ( result.Data == null ) || ( result.Data.Count == 0 ) ) {
-                    MyMessenger.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Error, "No user data for " + i_key, PLAYFAB );
+                    MyMessenger.Instance.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Error, "No user data for " + i_key, PLAYFAB );
                 }
                 else {
                     // should only call the callback ONCE because there is only one key
@@ -211,7 +211,7 @@ namespace MyLibrary {
                 RequestComplete( "Player data request complete: " + i_key, LogTypes.Info );
 
                 if ( ( result.Data == null ) || ( result.Data.Count == 0 ) ) {
-                    MyMessenger.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Error, "No user data for " + i_key, PLAYFAB );
+                    MyMessenger.Instance.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Error, "No user data for " + i_key, PLAYFAB );
                 }
                 else {
                     // should only call the callback ONCE because there is only one key
@@ -235,7 +235,7 @@ namespace MyLibrary {
                     currency = result.InfoResultPayload.UserVirtualCurrency[i_key];
                 }
                 else {
-                    MyMessenger.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Error, "No virtual currency for: " + i_key, PLAYFAB );
+                    MyMessenger.Instance.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Error, "No virtual currency for: " + i_key, PLAYFAB );
                 }
 
                 requestSuccessCallback( currency );
@@ -272,17 +272,17 @@ namespace MyLibrary {
             RequestComplete( "Backend failure(" + i_messageType + "): " + i_error.ErrorMessage, LogTypes.Error );
 
             IBackendFailure failure = new BackendFailure( i_error.ErrorMessage );
-            MyMessenger.Send<IBackendFailure>( BackendMessages.BACKEND_REQUEST_FAIL, failure );
-            MyMessenger.Send<IBackendFailure>( i_messageType, failure );
+            MyMessenger.Instance.Send<IBackendFailure>( BackendMessages.BACKEND_REQUEST_FAIL, failure );
+            MyMessenger.Instance.Send<IBackendFailure>( i_messageType, failure );
         }
 
         protected void StartRequest( string i_message ) {
-            MyMessenger.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Info, "START REQUEST: " + i_message, PLAYFAB );
+            MyMessenger.Instance.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Info, "START REQUEST: " + i_message, PLAYFAB );
             CloudRequestCount++;
         }
 
         protected void RequestComplete( string i_message, LogTypes i_messageType ) {
-            MyMessenger.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, i_messageType, "REQUEST COMPLETE: " + i_message, PLAYFAB );
+            MyMessenger.Instance.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, i_messageType, "REQUEST COMPLETE: " + i_message, PLAYFAB );
             CloudRequestCount--;
         }
 

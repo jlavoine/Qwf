@@ -4,11 +4,11 @@ namespace MyLibrary {
         public const string LOG_EVENT = "Log";
 
         public MyLogger() {
-            MyMessenger.AddListener<LogTypes, string, string>( LOG_EVENT, LogWithCategory );
+            MyMessenger.Instance.AddListener<LogTypes, string, string>( LOG_EVENT, LogWithCategory );
         }
 
         public void Dispose() {
-            MyMessenger.RemoveListener<LogTypes, string, string>( LOG_EVENT, LogWithCategory );
+            MyMessenger.Instance.RemoveListener<LogTypes, string, string>( LOG_EVENT, LogWithCategory );
         }
 
         public void LogWithCategory( LogTypes i_type, string i_message, string i_category ) {

@@ -5,7 +5,7 @@ namespace MyLibrary {
         protected override void OnDestroy() {
             base.OnDestroy();
 
-            MyMessenger.Send( InfoPopupEvents.CLOSE );
+            MyMessenger.Instance.Send( InfoPopupEvents.CLOSE );
         }
     }
 }

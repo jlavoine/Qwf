@@ -9,11 +9,11 @@ namespace MyLibrary {
 
         public UnityAnalyticsManager( IUnityAnalytics i_unityAnalytics ) {
             mAnalytics = i_unityAnalytics;
-            MyMessenger.AddListener<string, IDictionary<string, object>>( LibraryAnalyticEvents.SEND_ANALYTIC_EVENT, OnAnalyticEvent );
+            MyMessenger.Instance.AddListener<string, IDictionary<string, object>>( LibraryAnalyticEvents.SEND_ANALYTIC_EVENT, OnAnalyticEvent );
         }
 
         public void Dispose() {
-            MyMessenger.RemoveListener<string, IDictionary<string, object>>( LibraryAnalyticEvents.SEND_ANALYTIC_EVENT, OnAnalyticEvent );
+            MyMessenger.Instance.RemoveListener<string, IDictionary<string, object>>( LibraryAnalyticEvents.SEND_ANALYTIC_EVENT, OnAnalyticEvent );
         }
 
         private void OnAnalyticEvent( string i_eventName, IDictionary<string, object> i_eventData ) {

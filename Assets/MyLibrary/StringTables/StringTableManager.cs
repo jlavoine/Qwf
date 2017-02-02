@@ -6,7 +6,7 @@ namespace MyLibrary {
         private static StringTable mStringTable;
 
         public static void Init( string i_langauge, IBasicBackend i_backend ) {
-            MyMessenger.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Info, "Initing string table for " + i_langauge, "" );
+            MyMessenger.Instance.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Info, "Initing string table for " + i_langauge, "" );
 
             string tableKey = "SimpleStringTable_" + i_langauge;
             i_backend.GetTitleData( tableKey, CreateTableFromJSON );

@@ -52,7 +52,7 @@ namespace MyLibrary {
         private void SendAnalytic() {
             mStepData.Add( LibraryAnalyticEvents.TOTAL_TIME, mTotalTime );
 
-            MyMessenger.Send<string, IDictionary<string, object>>( LibraryAnalyticEvents.SEND_ANALYTIC_EVENT, mAnalyticName, mStepData );
+            MyMessenger.Instance.Send<string, IDictionary<string, object>>( LibraryAnalyticEvents.SEND_ANALYTIC_EVENT, mAnalyticName, mStepData );
         }
     }
 }

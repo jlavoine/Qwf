@@ -33,8 +33,8 @@ namespace Qwf {
             mBackend = new QwfBackend();
             BackendManager.Init( mBackend );
 
-            MyMessenger.AddListener( BackendMessages.LOGIN_SUCCESS, OnLoginSuccess );
-            MyMessenger.AddListener<IBackendFailure>( BackendMessages.BACKEND_REQUEST_FAIL, OnBackendFailure );
+            MyMessenger.Instance.AddListener( BackendMessages.LOGIN_SUCCESS, OnLoginSuccess );
+            MyMessenger.Instance.AddListener<IBackendFailure>( BackendMessages.BACKEND_REQUEST_FAIL, OnBackendFailure );
 
             LoginStatusText.text = STATUS_WAITING_TO_CHOOSE;
         }
@@ -65,8 +65,8 @@ namespace Qwf {
 
         void OnDestroy() {
             mLogin.OnDestroy();
-            MyMessenger.RemoveListener( BackendMessages.LOGIN_SUCCESS, OnLoginSuccess );
-            MyMessenger.RemoveListener<IBackendFailure>( BackendMessages.BACKEND_REQUEST_FAIL, OnBackendFailure );
+            MyMessenger.Instance.RemoveListener( BackendMessages.LOGIN_SUCCESS, OnLoginSuccess );
+            MyMessenger.Instance.RemoveListener<IBackendFailure>( BackendMessages.BACKEND_REQUEST_FAIL, OnBackendFailure );
         }
 
         private void OnBackendFailure( IBackendFailure i_failure ) {

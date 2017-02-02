@@ -21,7 +21,7 @@ namespace MyLibrary {
             if ( Interactable != null ) {
                 Interactable.interactable = state == TargetBoolValue; ;
             } else {
-                MyMessenger.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Error, "No interactable element for SetInteractableView: " + PropertyName, "UI" );
+                MyMessenger.Instance.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Error, "No interactable element for SetInteractableView: " + PropertyName, "UI" );
             }
         }
     }

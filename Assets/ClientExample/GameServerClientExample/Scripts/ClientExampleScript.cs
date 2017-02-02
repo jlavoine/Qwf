@@ -176,7 +176,7 @@ public class ClientExampleScript : MonoBehaviour
     private void OnUpdatePlayerHand(NetworkMessage netMsg) {
         StringMessage message = netMsg.ReadMessage<StringMessage>();
         PlayerHandUpdateData data = JsonConvert.DeserializeObject<PlayerHandUpdateData>( message.value );
-        MyMessenger.Send<PlayerHandUpdateData>( ClientMessages.UPDATE_HAND, data );
+        MyMessenger.Instance.Send<PlayerHandUpdateData>( ClientMessages.UPDATE_HAND, data );
     }
 
     private void OnConnected(NetworkMessage netMsg) {

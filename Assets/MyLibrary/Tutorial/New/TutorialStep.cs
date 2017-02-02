@@ -22,20 +22,20 @@ namespace MyLibrary {
         }
 
         private void SubscribeToMessages() {
-            MyMessenger.AddListener( EndStepOnMessage, EndStep );
+            MyMessenger.Instance.AddListener( EndStepOnMessage, EndStep );
         }
 
         private void UnsubscribeFromMessages() {
-            MyMessenger.RemoveListener( EndStepOnMessage, EndStep );
+            MyMessenger.Instance.RemoveListener( EndStepOnMessage, EndStep );
         }
 
         private void EndStep() {
-            MyMessenger.Send( Tutorial.END_STEP_MESSAGE );
+            MyMessenger.Instance.Send( Tutorial.END_STEP_MESSAGE );
         }
 
         private void SendStartingMessages() {
             foreach ( string message in SendMessagesOnStart ) {
-                MyMessenger.Send( message );
+                MyMessenger.Instance.Send( message );
             }
         }
 

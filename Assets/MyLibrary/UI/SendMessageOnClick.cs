@@ -5,7 +5,7 @@ namespace MyLibrary {
         public string Message;
 
         public void OnClick() {
-            MyMessenger.Send( Message );
+            MyMessenger.Instance.Send( Message );
         }
     }
 }

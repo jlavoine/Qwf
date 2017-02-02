@@ -22,13 +22,13 @@ namespace MyLibrary {
         }
 
         private void SubscribeForMessages() {
-            MyMessenger.AddListener<string, ViewModel>( InfoPopupEvents.QUEUE, QueueInfoPopup );
-            MyMessenger.AddListener( InfoPopupEvents.CLOSE, OnPopupClosed );
+            MyMessenger.Instance.AddListener<string, ViewModel>( InfoPopupEvents.QUEUE, QueueInfoPopup );
+            MyMessenger.Instance.AddListener( InfoPopupEvents.CLOSE, OnPopupClosed );
         }
 
         private void UnsubscribeFromMessages() {
-            MyMessenger.RemoveListener<string, ViewModel>( InfoPopupEvents.QUEUE, QueueInfoPopup );
-            MyMessenger.RemoveListener( InfoPopupEvents.CLOSE, OnPopupClosed );
+            MyMessenger.Instance.RemoveListener<string, ViewModel>( InfoPopupEvents.QUEUE, QueueInfoPopup );
+            MyMessenger.Instance.RemoveListener( InfoPopupEvents.CLOSE, OnPopupClosed );
         }
 
         public void QueueInfoPopup( string i_prefabName, IViewModel i_viewModel ) {
@@ -59,7 +59,7 @@ namespace MyLibrary {
                 GameObject popupObject = InstantiatePopup( i_popupData );
                 InitPopup( popupObject, i_popupData );
             } else {
-                MyMessenger.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Error, "InfoPopupManager trying to show a popup, but the parent panel does not exist.", "InfoPopup" );
+                MyMessenger.Instance.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Error, "InfoPopupManager trying to show a popup, but the parent panel does not exist.", "InfoPopup" );
             }
         }
 

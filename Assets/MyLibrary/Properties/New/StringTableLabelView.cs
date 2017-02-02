@@ -36,7 +36,7 @@ namespace MyLibrary {
                 TextField.text = i_text;
             }
             else {
-                MyMessenger.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Error, "No text element for LabelView: " + gameObject, "UI" );
+                MyMessenger.Instance.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Error, "No text element for LabelView: " + gameObject, "UI" );
             }
         }
 

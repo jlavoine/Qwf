@@ -13,7 +13,7 @@ namespace MyLibrary {
             string strResult = "???";
 
             if ( mStringTable.ContainsKey( i_strKey ) == false ) {
-                MyMessenger.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Warn, "String table had no key for " + i_strKey, "" );
+                MyMessenger.Instance.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Warn, "String table had no key for " + i_strKey, "" );
             }
             else {
                 strResult = mStringTable[i_strKey];

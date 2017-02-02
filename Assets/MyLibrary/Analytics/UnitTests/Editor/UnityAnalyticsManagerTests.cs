@@ -29,7 +29,7 @@ namespace MyLibrary.UnitTests {
         public void OnSendMessage_CustomAnalyticIsSent() {
             IUnityAnalytics okAnalytics = GetAnalyticsForResult( AnalyticsResult.Ok );
             mManagerUnderTest = new UnityAnalyticsManager( okAnalytics );
-            MyMessenger.Send<string, IDictionary<string, object>>( LibraryAnalyticEvents.SEND_ANALYTIC_EVENT, ANALYTIC_NAME, ANALYTIC_DATA );
+            MyMessenger.Instance.Send<string, IDictionary<string, object>>( LibraryAnalyticEvents.SEND_ANALYTIC_EVENT, ANALYTIC_NAME, ANALYTIC_DATA );
 
             okAnalytics.Received().SendCustomEvent( ANALYTIC_NAME, ANALYTIC_DATA );
         }
@@ -38,7 +38,7 @@ namespace MyLibrary.UnitTests {
         public void OnSendMessage_InfoLogIsSent() {
             IUnityAnalytics okAnalytics = GetAnalyticsForResult( AnalyticsResult.Ok );
             mManagerUnderTest = new UnityAnalyticsManager( okAnalytics );
-            MyMessenger.Send<string, IDictionary<string, object>>( LibraryAnalyticEvents.SEND_ANALYTIC_EVENT, ANALYTIC_NAME, ANALYTIC_DATA );
+            MyMessenger.Instance.Send<string, IDictionary<string, object>>( LibraryAnalyticEvents.SEND_ANALYTIC_EVENT, ANALYTIC_NAME, ANALYTIC_DATA );
 
             EasyLogger.Instance.Received().Log( LogTypes.Info, Arg.Any<string>(), Arg.Any<string>() );
         }
@@ -47,7 +47,7 @@ namespace MyLibrary.UnitTests {
         public void OnSentMessage_OkAnalytic_NoWarningLog() {
             IUnityAnalytics okAnalytics = GetAnalyticsForResult( AnalyticsResult.Ok );
             mManagerUnderTest = new UnityAnalyticsManager( okAnalytics );
-            MyMessenger.Send<string, IDictionary<string, object>>( LibraryAnalyticEvents.SEND_ANALYTIC_EVENT, ANALYTIC_NAME, ANALYTIC_DATA );
+            MyMessenger.Instance.Send<string, IDictionary<string, object>>( LibraryAnalyticEvents.SEND_ANALYTIC_EVENT, ANALYTIC_NAME, ANALYTIC_DATA );
 
             EasyLogger.Instance.DidNotReceive().Log( LogTypes.Warn, Arg.Any<string>(), Arg.Any<string>() );
         }
@@ -56,7 +56,7 @@ namespace MyLibrary.UnitTests {
         public void OnSentMessage_FailedAnalytic_WarningLogSent() {
             IUnityAnalytics badAnalytics = GetAnalyticsForResult( AnalyticsResult.InvalidData );
             mManagerUnderTest = new UnityAnalyticsManager( badAnalytics );
-            MyMessenger.Send<string, IDictionary<string, object>>( LibraryAnalyticEvents.SEND_ANALYTIC_EVENT, ANALYTIC_NAME, ANALYTIC_DATA );
+            MyMessenger.Instance.Send<string, IDictionary<string, object>>( LibraryAnalyticEvents.SEND_ANALYTIC_EVENT, ANALYTIC_NAME, ANALYTIC_DATA );
 
             EasyLogger.Instance.Received().Log( LogTypes.Warn, Arg.Any<string>(), Arg.Any<string>() );
         }

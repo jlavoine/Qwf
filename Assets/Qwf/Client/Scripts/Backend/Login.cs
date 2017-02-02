@@ -18,8 +18,8 @@ namespace Qwf {
         }
 
         public void Start() {
-            MyMessenger.AddListener<IAuthenticationSuccess>( BackendMessages.AUTH_SUCCESS, OnAuthenticationSucess );            
-            MyMessenger.AddListener<IBackendFailure>( BackendMessages.BACKEND_REQUEST_FAIL, OnBackendFailure );
+            MyMessenger.Instance.AddListener<IAuthenticationSuccess>( BackendMessages.AUTH_SUCCESS, OnAuthenticationSucess );            
+            MyMessenger.Instance.AddListener<IBackendFailure>( BackendMessages.BACKEND_REQUEST_FAIL, OnBackendFailure );
 
             mLoginTimer.Start();
 
@@ -29,14 +29,14 @@ namespace Qwf {
         }
 
         public void OnDestroy() {
-            MyMessenger.RemoveListener<IAuthenticationSuccess>( BackendMessages.AUTH_SUCCESS, OnAuthenticationSucess );
-            MyMessenger.RemoveListener<IBackendFailure>( BackendMessages.BACKEND_REQUEST_FAIL, OnBackendFailure );
+            MyMessenger.Instance.RemoveListener<IAuthenticationSuccess>( BackendMessages.AUTH_SUCCESS, OnAuthenticationSucess );
+            MyMessenger.Instance.RemoveListener<IBackendFailure>( BackendMessages.BACKEND_REQUEST_FAIL, OnBackendFailure );
         }
 
         private void OnAuthenticationSucess( IAuthenticationSuccess i_success ) {
             mLoginTimer.StepComplete( LibraryAnalyticEvents.AUTH_TIME );
 
-            MyMessenger.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Info, "Authenticate success", "" );
+            MyMessenger.Instance.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Info, "Authenticate success", "" );
 
             mBackend.MakeCloudCall( "onLogin", null, OnLogin );
         }
@@ -46,13 +46,13 @@ namespace Qwf {
             QwfBackend backend = (QwfBackend) mBackend;
             backend.SetLoggedInTime();
 
-            MyMessenger.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Info, "Login success", "" );
+            MyMessenger.Instance.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Info, "Login success", "" );
 
-            MyMessenger.Send( BackendMessages.LOGIN_SUCCESS );
+            MyMessenger.Instance.Send( BackendMessages.LOGIN_SUCCESS );
         }
 
         private void OnBackendFailure( IBackendFailure i_failure ) {
-            MyMessenger.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Info, i_failure.GetMessage(), "" );
+            MyMessenger.Instance.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Info, i_failure.GetMessage(), "" );
             mLoginTimer.StopTimer();
         }
     }

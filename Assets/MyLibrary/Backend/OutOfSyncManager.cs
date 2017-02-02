@@ -18,11 +18,11 @@ namespace MyLibrary {
         }
 
         private void SubscribeForMessages() {
-            MyMessenger.AddListener<string>( BackendMessages.BACKEND_OUT_OF_SYNC, OnBackendOutOfSync );
+            MyMessenger.Instance.AddListener<string>( BackendMessages.BACKEND_OUT_OF_SYNC, OnBackendOutOfSync );
         }
 
         private void UnsubscribeFromMessages() {
-            MyMessenger.RemoveListener<string>( BackendMessages.BACKEND_OUT_OF_SYNC, OnBackendOutOfSync );
+            MyMessenger.Instance.RemoveListener<string>( BackendMessages.BACKEND_OUT_OF_SYNC, OnBackendOutOfSync );
         }     
 
         private void OnBackendOutOfSync( string i_reason ) {
@@ -34,7 +34,7 @@ namespace MyLibrary {
             Dictionary<string, object> eventData = new Dictionary<string, object>();
             eventData.Add( LibraryAnalyticEvents.REASON, i_reason );
 
-            MyMessenger.Send<string, IDictionary<string, object>>( LibraryAnalyticEvents.SEND_ANALYTIC_EVENT, LibraryAnalyticEvents.CLIENT_LOST_SYNC, eventData );
+            MyMessenger.Instance.Send<string, IDictionary<string, object>>( LibraryAnalyticEvents.SEND_ANALYTIC_EVENT, LibraryAnalyticEvents.CLIENT_LOST_SYNC, eventData );
         }
 
         private void RestartClient() {

@@ -13,7 +13,7 @@ namespace MyLibrary {
             ViewModel model = new ViewModel();
             model.SetProperty( InfoPopupProperties.MAIN_TEXT, System.Guid.NewGuid().ToString() );
 
-            MyMessenger.Send<string, ViewModel>( InfoPopupEvents.QUEUE, "StandardInfoPopup", model );
+            MyMessenger.Instance.Send<string, ViewModel>( InfoPopupEvents.QUEUE, "StandardInfoPopup", model );
         }
     }
 }

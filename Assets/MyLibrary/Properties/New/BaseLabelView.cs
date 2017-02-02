@@ -31,7 +31,7 @@ namespace MyLibrary {
             } else if ( TextField != null ) {
                 TextField.text = i_text;
             } else {
-                MyMessenger.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Error, "No text element for LabelView: " + PropertyName, "UI" );
+                MyMessenger.Instance.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Error, "No text element for LabelView: " + PropertyName, "UI" );
             }
         }
     }

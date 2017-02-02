@@ -11,7 +11,7 @@ namespace MyLibrary {
                 }
 
                 if ( m_instance == null ) {
-                    MyMessenger.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Fatal, "Missing singleton for " + typeof( T ), "" );
+                    MyMessenger.Instance.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Fatal, "Missing singleton for " + typeof( T ), "" );
                 }
 
                 return m_instance;

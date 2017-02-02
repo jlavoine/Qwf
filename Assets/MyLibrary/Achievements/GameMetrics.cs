@@ -13,7 +13,7 @@ namespace MyLibrary {
             AddMetricIfMissing( i_metric );
             Metrics[i_metric]++;
 
-            MyMessenger.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Info, "Incremented " + i_metric + " to " + Metrics[i_metric], "GameMetrics" );
+            MyMessenger.Instance.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Info, "Incremented " + i_metric + " to " + Metrics[i_metric], "GameMetrics" );
         }
 
         private void AddMetricIfMissing( string i_metric ) {
