@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 namespace Qwf {
-    public class PlayerHandUpdateData : IPlayerHandUpdateData {
+    public class PlayerHandUpdateData {
         public string Id;
         public List<GamePieceData> GamePieces;
 
