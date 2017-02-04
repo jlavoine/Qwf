@@ -6,7 +6,11 @@ namespace Qwf.Client {
         public const string PLAYER_SCORE_PROPERTY = "PlayerScore";
         public const string OPPONENT_SCORE_PROPERTY = "OpponentScore";
 
-        public MatchScorePM() {
+        private string mPlayerId;
+
+        public MatchScorePM( string i_playerId ) {
+            mPlayerId = i_playerId;
+
             SetPlayerScoreProperty( 0 );
             SetOpponentScoreProperty( 0 );
 
@@ -19,14 +23,15 @@ namespace Qwf.Client {
 
         private void ListenForMessages( bool i_listen ) {
             if ( i_listen ) {
-                MyMessenger.Instance.AddListener<MatchScoreUpdateData>( ClientMessages.UPDATE_SCORE, OnUpdateScore ); 
+                MyMessenger.Instance.AddListener<IMatchScoreUpdateData>( ClientMessages.UPDATE_SCORE, OnUpdateScore ); 
             } else {
-                MyMessenger.Instance.RemoveListener<MatchScoreUpdateData>( ClientMessages.UPDATE_SCORE, OnUpdateScore );
+                MyMessenger.Instance.RemoveListener<IMatchScoreUpdateData>( ClientMessages.UPDATE_SCORE, OnUpdateScore );
             }
         }
 
-        public void OnUpdateScore( MatchScoreUpdateData i_update ) {
-
+        public void OnUpdateScore( IMatchScoreUpdateData i_update ) {
+            SetPlayerScoreProperty( i_update.GetScoreForPlayer( mPlayerId ) );
+            SetOpponentScoreProperty( i_update.GetScoreForOpponent( mPlayerId ) );
         }
 
         private void SetPlayerScoreProperty( int i_score ) {

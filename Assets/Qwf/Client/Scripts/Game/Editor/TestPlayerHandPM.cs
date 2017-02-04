@@ -4,6 +4,8 @@ using UnityEngine;
 using MyLibrary;
 using System.Collections.Generic;
 
+#pragma warning disable 0219
+
 namespace Qwf.Client {
     [TestFixture]
     public class TestPlayerHandPM {
