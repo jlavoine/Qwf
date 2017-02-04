@@ -8,7 +8,7 @@ public class MyJsonTester : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        PlayerDeckData test = new PlayerDeckData();
+        /*PlayerDeckData test = new PlayerDeckData();
         test.GamePieces = new List<DeckGamePieceData>();
         DeckGamePieceData one = new DeckGamePieceData();
         one.PieceType = 0;
@@ -23,5 +23,32 @@ public class MyJsonTester : MonoBehaviour {
 
         string json = JsonConvert.SerializeObject( test );
         UnityEngine.Debug.LogError( json );
+        */
+
+        TestInterfaces();
+    }
+
+    private void TestInterfaces() {
+        GameObstaclesUpdate obstacles = new GameObstaclesUpdate();
+        obstacles.Obstacles = new List<GameObstacleUpdate>();
+
+        GameObstacleUpdate one = new GameObstacleUpdate();
+        one.Id = "Goblin";        
+
+        GameObstacleUpdate two = new GameObstacleUpdate();
+        two.Id = "Blob";
+
+        obstacles.Obstacles.Add( one );
+        obstacles.Obstacles.Add( two );
+
+        string json = JsonConvert.SerializeObject( obstacles );
+        UnityEngine.Debug.LogError( json );
+
+        GameObstaclesUpdate deserial = JsonConvert.DeserializeObject<GameObstaclesUpdate>( json );
+        IGameObstacleUpdate update1 = deserial.GetUpdate( 0 );
+        UnityEngine.Debug.LogError( update1.GetId() );
+
+        IGameObstacleUpdate update2 = deserial.GetUpdate( 1 );
+        UnityEngine.Debug.LogError( update2.GetId() );
     }
 }
