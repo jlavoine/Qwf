@@ -38,7 +38,7 @@ namespace Qwf.Client {
         public void WhenCreating_SystemSubscribesToUpdate() {
             MatchScorePM systemUnderTest = new MatchScorePM( string.Empty );
 
-            MyMessenger.Instance.Received().AddListener<MatchScoreUpdateData>( ClientMessages.UPDATE_SCORE, Arg.Any<Callback<MatchScoreUpdateData>>() );
+            MyMessenger.Instance.Received().AddListener<IMatchScoreUpdateData>( ClientMessages.UPDATE_SCORE, Arg.Any<Callback<IMatchScoreUpdateData>>() );
         }
 
         [Test]
@@ -47,7 +47,7 @@ namespace Qwf.Client {
 
             systemUnderTest.Dispose();
 
-            MyMessenger.Instance.Received().RemoveListener<MatchScoreUpdateData>( ClientMessages.UPDATE_SCORE, Arg.Any<Callback<MatchScoreUpdateData>>() );
+            MyMessenger.Instance.Received().RemoveListener<IMatchScoreUpdateData>( ClientMessages.UPDATE_SCORE, Arg.Any<Callback<IMatchScoreUpdateData>>() );
         }
 
         [Test]
