@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MyLibrary;
 
 namespace Qwf.Client {
     public class TestObstaclesView : MonoBehaviour {
@@ -8,20 +9,26 @@ namespace Qwf.Client {
 
         // Use this for initialization
         void Start() {
-            IGameObstaclesUpdate randomUpdate = CreateRandomUpdate();
+            IGameObstaclesUpdate randomUpdate = CreateRandomUpdate( 3 );
             GameObstaclesPM pm = new GameObstaclesPM( randomUpdate );
 
             View.Init( pm );
         }
 
-        private IGameObstaclesUpdate CreateRandomUpdate() {
+        private IGameObstaclesUpdate CreateRandomUpdate( int i_numObstacles ) {
             GameObstaclesUpdate update = new GameObstaclesUpdate();
             update.Obstacles = new List<GameObstacleUpdate>();
 
-            GameObstacleUpdate one = new GameObstacleUpdate();
-            one.Id = GetRandomObstacleId();
+            for ( int i = 0; i < i_numObstacles; ++i ) {
+                update.Obstacles.Add( CreateRandomObstacleUpdate() );
+            }
 
-            update.Obstacles.Add( one );
+            return update;
+        }
+
+        private GameObstacleUpdate CreateRandomObstacleUpdate() {
+            GameObstacleUpdate update = new GameObstacleUpdate();
+            update.Id = GetRandomObstacleId();
 
             return update;
         }
@@ -33,7 +40,14 @@ namespace Qwf.Client {
 
         // Update is called once per frame
         void Update() {
+            if ( Input.GetKeyDown( KeyCode.M ) ) {
+                SendRandomUpdate();
+            }
+        }
 
+        private void SendRandomUpdate() {
+            IGameObstaclesUpdate randomUpdate = CreateRandomUpdate( Random.Range(1,4) );
+            MyMessenger.Instance.Send<IGameObstaclesUpdate>( ClientMessages.UPDATE_OBSTACLES, randomUpdate );
         }
     }
 }

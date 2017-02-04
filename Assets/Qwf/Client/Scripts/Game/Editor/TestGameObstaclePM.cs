@@ -15,5 +15,12 @@ namespace Qwf.Client {
 
             Assert.AreEqual( "TestKey", systemUnderTest.ViewModel.GetPropertyValue<string>( GameObstaclePM.IMAGE_PROPERTY ) );
         }
+
+        [Test]
+        public void WhenCreatingPM_DefaultsToVisible() {
+            GameObstaclePM systemUnderTest = new GameObstaclePM( Substitute.For<IGameObstacleUpdate>() );
+
+            Assert.AreEqual( 1f, systemUnderTest.ViewModel.GetPropertyValue<float>( GameObstaclePM.VISIBLE_PROPERTY ) );
+        }
     }
 }
