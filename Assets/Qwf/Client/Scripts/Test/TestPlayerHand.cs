@@ -8,8 +8,6 @@ namespace Qwf.Client {
         public PlayerHandView View;
 
         void Start() {
-            IGamePlayer player = new ClientPlayer( "0" );
-
             List<GamePieceData> pieces = CreateRandom(5);
             List<IGamePieceData> pieces2 = new List<IGamePieceData>();
             foreach (GamePieceData piece in pieces ) {

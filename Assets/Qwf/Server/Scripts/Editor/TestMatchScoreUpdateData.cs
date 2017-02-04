@@ -1,6 +1,8 @@
 ﻿using NUnit.Framework;
 using System.Collections.Generic;
 
+#pragma warning disable 0414
+
 namespace Qwf {
     [TestFixture]
     public class TestMatchScoreUpdateData {
