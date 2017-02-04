@@ -4,6 +4,8 @@ using UnityEngine;
 using System.Collections;
 using PlayFab.Internal;
 
+#pragma warning disable 0618
+
 namespace PlayFab
 {
     public static partial class PlayFabSettings
