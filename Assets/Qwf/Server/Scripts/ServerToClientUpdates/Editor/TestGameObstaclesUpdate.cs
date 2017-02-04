@@ -18,5 +18,18 @@ namespace Qwf {
 
             Assert.AreEqual( obs1, systemUnderTest.GetUpdate( 0 ) );
         }
+
+        [Test]
+        public void GetCountCall_ReturnsCorrectCount() {
+            GameObstaclesUpdate systemUnderTest = new GameObstaclesUpdate();
+
+            List<GameObstacleUpdate> obs = new List<GameObstacleUpdate>();
+            obs.Add( new GameObstacleUpdate() );
+            obs.Add( new GameObstacleUpdate() );
+            obs.Add( new GameObstacleUpdate() );
+            systemUnderTest.Obstacles = obs;
+
+            Assert.AreEqual( 3, systemUnderTest.GetObstaclesCount() );
+        }
     }
 }
