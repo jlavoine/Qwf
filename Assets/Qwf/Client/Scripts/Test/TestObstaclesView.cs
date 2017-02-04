@@ -29,6 +29,7 @@ namespace Qwf.Client {
         private GameObstacleUpdate CreateRandomObstacleUpdate() {
             GameObstacleUpdate update = new GameObstacleUpdate();
             update.Id = GetRandomObstacleId();
+            update.FinalBlowValue = Random.Range( 1, 6 );
 
             return update;
         }
