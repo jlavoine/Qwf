@@ -1,8 +1,11 @@
 ﻿using MyLibrary;
 using System.Collections.Generic;
+using System;
 
 namespace Qwf.Client {
     public class PlayerHandPM : GenericViewModel {
+        public const int DEFAULT_HAND_SIZE = 5; // TODO this should be in a config?
+
         private string m_id;
 
         public List<IGamePiecePM> mGamePiecePMs;
@@ -31,7 +34,15 @@ namespace Qwf.Client {
         private void CreateGamePiecePMs( List<IGamePieceData> i_gamePieces, string i_playerID ) { 
             mGamePiecePMs = new List<IGamePiecePM>();
             foreach ( IGamePieceData gamePiece in i_gamePieces ) {
-                mGamePiecePMs.Add( new GamePiecePM( gamePiece, i_playerID ));
+                mGamePiecePMs.Add( new GamePiecePM( gamePiece, i_playerID ) );
+            }
+
+            AddMissingGamePiecesIfNecessary( i_playerID );
+        }
+
+        private void AddMissingGamePiecesIfNecessary( string i_playerID ) {
+            for ( int i = mGamePiecePMs.Count; i < DEFAULT_HAND_SIZE; ++i ) {
+                mGamePiecePMs.Add( new GamePiecePM( null, i_playerID ) );
             }
         }
 

@@ -8,7 +8,7 @@ namespace Qwf.Client {
         public PlayerHandView View;
 
         void Start() {
-            List<GamePieceData> pieces = CreateRandom(5);
+            List<GamePieceData> pieces = CreateRandom( Random.Range( 2, 6 ) );
             List<IGamePieceData> pieces2 = new List<IGamePieceData>();
             foreach (GamePieceData piece in pieces ) {
                 pieces2.Add( piece );
@@ -30,7 +30,7 @@ namespace Qwf.Client {
 
         void Update() {
             if ( Input.GetKeyDown( KeyCode.Space ) ) {
-                List<GamePieceData> pieces = CreateRandom(Random.Range(2,5));
+                List<GamePieceData> pieces = CreateRandom(Random.Range(2,6));
                 //OnUpdatePlayerHand
              
                 PlayerHandUpdateData data = new PlayerHandUpdateData();

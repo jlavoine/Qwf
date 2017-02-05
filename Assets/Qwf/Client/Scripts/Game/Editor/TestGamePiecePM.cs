@@ -52,5 +52,15 @@ namespace Qwf.Client {
 
             Assert.AreEqual( new Color(255, 0, 0 ), systemUnderTest.ViewModel.GetPropertyValue<Color>( GamePiecePM.OUTLINE_PROPERTY ) );
         }
+
+        [Test]
+        public void WhenUpdatingWithMissingPiece_PropertiesAsExpect() {
+            GamePiecePM systemUnderTest = new GamePiecePM( null, "Joe" );
+
+            Assert.AreEqual( new Color( 255, 0, 0 ), systemUnderTest.ViewModel.GetPropertyValue<Color>( GamePiecePM.OUTLINE_PROPERTY ) );
+            Assert.AreEqual( "0", systemUnderTest.ViewModel.GetPropertyValue<string>( GamePiecePM.ICON_PROPERTY ) );
+            Assert.AreEqual( 0, systemUnderTest.ViewModel.GetPropertyValue<int>( GamePiecePM.VALUE_PROPERTY ) );
+            Assert.AreEqual( 0f, systemUnderTest.ViewModel.GetPropertyValue<float>( GamePiecePM.VISIBLE_PROPERTY ) );
+        }
     }
 }
