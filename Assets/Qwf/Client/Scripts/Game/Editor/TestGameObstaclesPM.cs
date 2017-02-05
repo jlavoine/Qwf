@@ -3,6 +3,7 @@ using NSubstitute;
 using MyLibrary;
 
 #pragma warning disable 0414
+#pragma warning disable 0219
 
 namespace Qwf.Client {
     [TestFixture]
