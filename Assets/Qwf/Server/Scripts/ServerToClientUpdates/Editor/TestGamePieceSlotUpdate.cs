@@ -15,10 +15,14 @@ namespace Qwf {
         }
 
         [Test]
-        public void WhenCreating_SlotPieceTypeMatchesData() {
+        public void WhenCreating_VariablesAreExpected() {
+            GamePieceData blankPiece = new GamePieceData();
+
             mSystemUnderTest.SlotPieceType = 3;
+            mSystemUnderTest.PieceInSlot = blankPiece;
 
             Assert.AreEqual( 3, mSystemUnderTest.GetSlotPieceType() );
+            Assert.AreEqual( blankPiece, mSystemUnderTest.GetPieceInSlot() );
         }
     }
 }
