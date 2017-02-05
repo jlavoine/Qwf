@@ -24,7 +24,7 @@ namespace Qwf {
             if ( IsEmpty() ) {
                 return true;
             } else {
-                if ( GetCurrentPiece().DoOwnersMatch( i_piece.GetOwner() ) ) {
+                if ( GetCurrentPiece().DoOwnersMatch( i_piece.GetOwner().Id ) ) {
                     return false;
                 } else {
                     return i_piece.CanOvertakePiece( GetCurrentPiece() );

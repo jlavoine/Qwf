@@ -29,8 +29,8 @@ namespace Qwf {
             return i_pieceType == 0 || GetPieceType() == 0 || GetPieceType() == i_pieceType;
         }
 
-        public bool DoOwnersMatch( IGamePlayer i_owner ) {
-            return i_owner == GetOwner();
+        public bool DoOwnersMatch( string i_ownerId ) {
+            return i_ownerId == GetOwner().Id;
         }
 
         public bool CanOvertakePiece( IGamePiece i_piece ) {

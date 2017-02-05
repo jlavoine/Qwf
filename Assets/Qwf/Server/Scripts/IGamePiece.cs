@@ -5,7 +5,7 @@ namespace Qwf {
         int GetValue();
 
         bool MatchesPieceType( int i_pieceType );
-        bool DoOwnersMatch( IGamePlayer i_player );
+        bool DoOwnersMatch( string i_playerId );
         bool CanOvertakePiece( IGamePiece i_piece );
         bool IsCurrentlyHeld();
 

@@ -38,7 +38,7 @@ namespace Qwf {
             incomingPiece.MatchesPieceType( Arg.Any<int>() ).Returns( true );
             
             IGamePiece currentPieceInSlot = Substitute.For<IGamePiece>();
-            currentPieceInSlot.DoOwnersMatch( Arg.Any<IGamePlayer>() ).Returns( true );
+            currentPieceInSlot.DoOwnersMatch( Arg.Any<string>() ).Returns( true );
             mSystemUnderTest.PlacePieceIntoSlot( currentPieceInSlot );
 
             bool canPlace = mSystemUnderTest.CanPlacePieceIntoSlot( incomingPiece );
@@ -53,7 +53,7 @@ namespace Qwf {
             incomingPiece.CanOvertakePiece( Arg.Any<IGamePiece>() ).Returns( true );
 
             IGamePiece currentPieceInSlot = Substitute.For<IGamePiece>();
-            currentPieceInSlot.DoOwnersMatch( Arg.Any<IGamePlayer>() ).Returns( false );
+            currentPieceInSlot.DoOwnersMatch( Arg.Any<string>() ).Returns( false );
             mSystemUnderTest.PlacePieceIntoSlot( currentPieceInSlot );
 
             bool canPlace = mSystemUnderTest.CanPlacePieceIntoSlot( incomingPiece );
@@ -68,7 +68,7 @@ namespace Qwf {
             incomingPiece.CanOvertakePiece( Arg.Any<IGamePiece>() ).Returns( false );
 
             IGamePiece currentPieceInSlot = Substitute.For<IGamePiece>();
-            currentPieceInSlot.DoOwnersMatch( Arg.Any<IGamePlayer>() ).Returns( false );
+            currentPieceInSlot.DoOwnersMatch( Arg.Any<string>() ).Returns( false );
             mSystemUnderTest.PlacePieceIntoSlot( currentPieceInSlot );
 
             bool canPlace = mSystemUnderTest.CanPlacePieceIntoSlot( incomingPiece );
