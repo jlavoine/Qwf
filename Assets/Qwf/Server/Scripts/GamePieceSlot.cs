@@ -1,19 +1,19 @@
 ﻿
 namespace Qwf {
     public class GamePieceSlot : IGamePieceSlot {
-        private GamePieceSlotData mData;
+        private IGamePieceSlotData mData;
         private IGamePiece mCurrentPiece;
 
-        public GamePieceSlot( GamePieceSlotData i_data ) {
+        public GamePieceSlot( IGamePieceSlotData i_data ) {
             mData = i_data;
         }
 
         public int GetGamePieceType() {
-            return mData.PieceType;
+            return mData.GetPieceType();
         }
 
         public int GetScoreValue() {
-            return mData.ScoreValue;
+            return mData.GetScoreValue();
         }
 
         public bool CanPlacePieceIntoSlot( IGamePiece i_piece ) {

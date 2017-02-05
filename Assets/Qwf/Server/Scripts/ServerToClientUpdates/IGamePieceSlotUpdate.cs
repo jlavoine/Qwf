@@ -1,8 +1,6 @@
 ﻿
 namespace Qwf {
-    public interface IGamePieceSlotUpdate {
-        int GetSlotPieceType();
-
+    public interface IGamePieceSlotUpdate : IGamePieceSlotData {
         GamePieceData GetPieceInSlot();
     }
 }

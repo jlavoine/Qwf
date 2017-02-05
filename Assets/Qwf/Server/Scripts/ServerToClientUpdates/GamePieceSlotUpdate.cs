@@ -2,6 +2,7 @@
 namespace Qwf {
     public class GamePieceSlotUpdate : IGamePieceSlotUpdate {
         public int SlotPieceType;
+        public int ScoreValue;
         public GamePieceData PieceInSlot;
 
         public int GetSlotPieceType() {
@@ -10,6 +11,14 @@ namespace Qwf {
 
         public GamePieceData GetPieceInSlot() {
             return PieceInSlot;
+        }
+
+        public int GetPieceType() {
+            return SlotPieceType;
+        }
+
+        public int GetScoreValue() {
+            return ScoreValue;
         }
     }
 }

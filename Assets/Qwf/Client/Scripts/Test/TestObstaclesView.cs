@@ -41,6 +41,7 @@ namespace Qwf.Client {
                 GamePieceSlotUpdate update = new GamePieceSlotUpdate();
                 update.SlotPieceType = Random.Range( 0, 5 );
                 update.PieceInSlot = GetRandomPieceInSlot();
+                update.ScoreValue = 1;
                 updates.Add( update );
             }
 

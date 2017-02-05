@@ -18,7 +18,7 @@ namespace Qwf.Client {
         [Test]
         public void WhenCreated_SlotPieceTypePropertyMatchesData() {
             IGamePieceSlotUpdate mockUpdate = Substitute.For<IGamePieceSlotUpdate>();
-            mockUpdate.GetSlotPieceType().Returns( 3 );
+            mockUpdate.GetPieceType().Returns( 3 );
 
             GamePieceSlotPM systemUnderTest = new GamePieceSlotPM( mockUpdate );
 
