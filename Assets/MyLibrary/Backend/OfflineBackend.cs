@@ -9,7 +9,7 @@ namespace MyLibrary {
     public class OfflineBackend : IBasicBackend {
         public string PlayerId {
             get {
-                throw new NotImplementedException();
+                return "Me";
             }
         }
 
