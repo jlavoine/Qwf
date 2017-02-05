@@ -5,5 +5,8 @@ namespace Qwf {
         string GetImageKey();
 
         int GetFinalBlowValue();
+        int GetSlotCount();
+
+        IGamePieceSlotUpdate GetSlotUpdate( int i_index );
     }
 }
