@@ -9,16 +9,16 @@ namespace Qwf.Client {
 
         private Vector3 mStartPosition;
 
-        public void OnBeginDrag( PointerEventData eventData ) {
+        public void OnBeginDrag( PointerEventData i_eventData ) {
             BlockRaycasts( false );
             SaveStartPosition();
         }
 
-        public void OnDrag( PointerEventData eventData ) {
-            UpdatePosition( eventData );
+        public void OnDrag( PointerEventData i_eventData ) {
+            UpdatePosition( i_eventData );
         }
 
-        public void OnEndDrag( PointerEventData eventData ) {
+        public void OnEndDrag( PointerEventData i_eventData ) {
             BlockRaycasts( true );
             ResetPosition();
         }
