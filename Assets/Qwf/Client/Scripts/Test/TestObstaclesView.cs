@@ -30,7 +30,7 @@ namespace Qwf.Client {
             GameObstacleUpdate update = new GameObstacleUpdate();
             update.Id = GetRandomObstacleId();
             update.FinalBlowValue = Random.Range( 1, 6 );
-            update.PieceSlots = GetRandomPieceSlots( Random.Range(3,6) );
+            update.PieceSlots = GetRandomPieceSlots( Random.Range(3,6) );         
 
             return update;
         }
@@ -40,10 +40,34 @@ namespace Qwf.Client {
             for ( int i = 0; i < i_numSlots; ++i ) {
                 GamePieceSlotUpdate update = new GamePieceSlotUpdate();
                 update.SlotPieceType = Random.Range( 0, 5 );
+                update.PieceInSlot = GetRandomPieceInSlot();
                 updates.Add( update );
             }
 
             return updates;
+        }
+
+        private GamePieceData GetRandomPieceInSlot() {
+            int random = Random.Range( 0, 3 );
+            switch ( random ) {
+                case 0:
+                    // null; no piece in slot
+                    return null;
+                case 1:
+                    // the player's own piece
+                    GamePieceData myPiece = new GamePieceData();
+                    myPiece.Owner = "Me";
+                    myPiece.Value = Random.Range( 1, 5 );
+                    myPiece.PieceType = Random.Range( 0, 5 );
+                    return myPiece;
+                default:
+                    // opponent piece
+                    GamePieceData theirPiece = new GamePieceData();
+                    theirPiece.Owner = "Them";
+                    theirPiece.Value = Random.Range( 1, 5 );
+                    theirPiece.PieceType = Random.Range( 0, 5 );
+                    return theirPiece;
+            }
         }
 
         private string GetRandomObstacleId() {
