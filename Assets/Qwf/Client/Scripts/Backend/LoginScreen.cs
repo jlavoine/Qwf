@@ -31,7 +31,7 @@ namespace Qwf {
 
         void Start() {
             mBackend = new QwfBackend();
-            BackendManager.Init( mBackend );
+            BackendManager.Instance.Init( mBackend );
 
             MyMessenger.Instance.AddListener( BackendMessages.LOGIN_SUCCESS, OnLoginSuccess );
             MyMessenger.Instance.AddListener<IBackendFailure>( BackendMessages.BACKEND_REQUEST_FAIL, OnBackendFailure );

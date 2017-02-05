@@ -1,13 +1,26 @@
 ﻿
 namespace MyLibrary {
-    public static class BackendManager {
-        private static IBasicBackend mBackend;
+    public class BackendManager : IBackendManager {
+        private IBasicBackend mBackend;
 
-        public static void Init( IBasicBackend i_backend ) {
+        private static IBackendManager mInstance;
+        public static IBackendManager Instance {
+            get {
+                if ( mInstance == null ) {
+                    mInstance = new BackendManager();
+                }
+                return mInstance;
+            }
+            set {
+                mInstance = value;  // testing only!!!
+            }
+        }
+
+        public void Init( IBasicBackend i_backend ) {
             mBackend = i_backend;
         }
 
-        public static T GetBackend<T>() {
+        public T GetBackend<T>() {
             return (T) mBackend;
         }
     }
