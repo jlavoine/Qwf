@@ -18,6 +18,11 @@ namespace Qwf.Client {
             CreateAllGamePieceSlotPMs( i_data );
         }
 
+        public void Update( IGameObstacleUpdate i_data ) {
+            SetProperties( i_data );
+            UpdateSlotPMs( i_data );
+        }
+
         public void SetProperties( IGameObstacleUpdate i_data ) {
             SetImageProperty( i_data );
             SetFinalBlowProperty( i_data );
@@ -35,11 +40,23 @@ namespace Qwf.Client {
         private void SetFinalBlowProperty( IGameObstacleUpdate i_data ) {
             ViewModel.SetProperty( FINAL_BLOW_PROPERTY, FINAL_BLOW_PREFIX + i_data.GetFinalBlowValue() );
         }
+
         private void CreateAllGamePieceSlotPMs( IGameObstacleUpdate i_data ) {
             SlotPiecePMs = new List<GamePieceSlotPM>();
             int slotCount = i_data.GetSlotCount();
             for ( int i = 0; i < slotCount; ++i ) {
                 SlotPiecePMs.Add( new GamePieceSlotPM( i_data.GetSlotUpdate( i ) ) );
+            }
+        }
+
+        private void UpdateSlotPMs( IGameObstacleUpdate i_data ) {
+            int slotCount = i_data.GetSlotCount();
+            for ( int i = 0; i < SlotPiecePMs.Count; ++i ) {
+                if ( i < slotCount ) {
+                    SlotPiecePMs[i].SetProperties( i_data.GetSlotUpdate( i ) );
+                } else {
+                    SlotPiecePMs[i].SetVisibility( false );
+                }
             }
         }
     }

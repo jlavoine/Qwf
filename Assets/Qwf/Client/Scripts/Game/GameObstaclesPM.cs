@@ -41,7 +41,7 @@ namespace Qwf.Client {
             int obstacleCount = i_update.GetObstaclesCount();
             for ( int i = 0; i < ObstaclePMs.Count; ++i ) {
                 if ( i < obstacleCount ) {
-                    ObstaclePMs[i].SetProperties( i_update.GetUpdate( i ) );
+                    ObstaclePMs[i].Update( i_update.GetUpdate( i ) );
                 }
                 else {
                     ObstaclePMs[i].SetVisibility( false );
