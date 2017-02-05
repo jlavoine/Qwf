@@ -37,7 +37,7 @@ namespace Qwf.Client {
         }
 
         [Test]
-        public void WhenCreatingPM_CorrectNumberOfGamePiecePMsAreCreated() {
+        public void WhenCreatingPM_DefaultNumberOfGamePiecePMsAreCreated() {
             List<IGamePieceData> pieceData = new List<IGamePieceData>();
             pieceData.Add( Substitute.For<IGamePieceData>() );
             pieceData.Add( Substitute.For<IGamePieceData>() );
@@ -45,7 +45,7 @@ namespace Qwf.Client {
 
             PlayerHandPM systemUnderTest = new PlayerHandPM( pieceData, string.Empty );
 
-            Assert.AreEqual( 3, systemUnderTest.GamePiecePMs.Count );
+            Assert.AreEqual( PlayerHandPM.DEFAULT_HAND_SIZE, systemUnderTest.GamePiecePMs.Count );
         }
     }
 }
