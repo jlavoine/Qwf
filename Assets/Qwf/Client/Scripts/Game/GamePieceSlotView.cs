@@ -11,7 +11,7 @@ namespace Qwf.Client {
         }
 
         private void InitGamePieceInSlotView( GamePieceSlotPM i_pm ) {
-            //GamePieceInSlotView.Init( i_pm. );
+            GamePieceInSlotView.Init( i_pm.GamePieceInSlot );
         }
     }
 }
