@@ -30,8 +30,20 @@ namespace Qwf.Client {
             GameObstacleUpdate update = new GameObstacleUpdate();
             update.Id = GetRandomObstacleId();
             update.FinalBlowValue = Random.Range( 1, 6 );
+            update.PieceSlots = GetRandomPieceSlots( 5 );
 
             return update;
+        }
+
+        private List<GamePieceSlotUpdate> GetRandomPieceSlots( int i_numSlots ) {
+            List<GamePieceSlotUpdate> updates = new List<GamePieceSlotUpdate>();
+            for ( int i = 0; i < i_numSlots; ++i ) {
+                GamePieceSlotUpdate update = new GamePieceSlotUpdate();
+                update.SlotPieceType = Random.Range( 0, 5 );
+                updates.Add( update );
+            }
+
+            return updates;
         }
 
         private string GetRandomObstacleId() {

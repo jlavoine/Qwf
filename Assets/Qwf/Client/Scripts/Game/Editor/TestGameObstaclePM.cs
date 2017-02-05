@@ -32,5 +32,15 @@ namespace Qwf.Client {
 
             Assert.AreEqual( 1f, systemUnderTest.ViewModel.GetPropertyValue<float>( GameObstaclePM.VISIBLE_PROPERTY ) );
         }
+
+        [Test]
+        public void WhenCreatingPM_SlotPMsCountMatchesData() {
+            IGameObstacleUpdate mockUpdate = Substitute.For<IGameObstacleUpdate>();
+            mockUpdate.GetSlotCount().Returns( 5 );
+
+            GameObstaclePM systemUnderTest = new GameObstaclePM( mockUpdate );
+
+            Assert.AreEqual( 5, systemUnderTest.SlotPiecePMs.Count );
+        }
     }
 }

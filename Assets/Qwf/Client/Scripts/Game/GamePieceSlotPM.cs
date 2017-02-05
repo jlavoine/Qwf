@@ -3,7 +3,7 @@ using MyLibrary;
 
 namespace Qwf.Client {
     public class GamePieceSlotPM : GenericViewModel, IGamePieceSlotPM {
-        public const string SLOT_PIECE_TYPE_PROPERTY = "SlotPieceType";
+        public const string SLOT_PIECE_TYPE_PROPERTY = "PieceType";
         public const string VISIBLE_PROPERTY = "IsVisible";
 
         public GamePieceSlotPM( IGamePieceSlotUpdate i_data ) {
@@ -20,7 +20,7 @@ namespace Qwf.Client {
         }
 
         private void SetSlotPieceTypeProperty( IGamePieceSlotUpdate i_data ) {
-            ViewModel.SetProperty( SLOT_PIECE_TYPE_PROPERTY, i_data.GetSlotPieceType() );
+            ViewModel.SetProperty( SLOT_PIECE_TYPE_PROPERTY, i_data.GetSlotPieceType().ToString() );
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Qwf.Client {
 
             GamePieceSlotPM systemUnderTest = new GamePieceSlotPM( mockUpdate );
 
-            Assert.AreEqual( 3, systemUnderTest.ViewModel.GetPropertyValue<int>( GamePieceSlotPM.SLOT_PIECE_TYPE_PROPERTY ) );
+            Assert.AreEqual( "3", systemUnderTest.ViewModel.GetPropertyValue<string>( GamePieceSlotPM.SLOT_PIECE_TYPE_PROPERTY ) );
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using MyLibrary;
+﻿using System;
+using MyLibrary;
+using System.Collections.Generic;
 
 namespace Qwf.Client {
     public class GameObstaclePM : GenericViewModel, IGameObstaclePM {
@@ -8,8 +10,12 @@ namespace Qwf.Client {
 
         public const string FINAL_BLOW_PREFIX = "+";
 
+        private List<GamePieceSlotPM> mSlotPiecePMs;
+        public List<GamePieceSlotPM> SlotPiecePMs { get { return mSlotPiecePMs; } private set { mSlotPiecePMs = value; } }
+
         public GameObstaclePM( IGameObstacleUpdate i_data ) {
-            SetProperties( i_data );            
+            SetProperties( i_data );
+            CreateAllGamePieceSlotPMs( i_data );
         }
 
         public void SetProperties( IGameObstacleUpdate i_data ) {
@@ -28,6 +34,13 @@ namespace Qwf.Client {
 
         private void SetFinalBlowProperty( IGameObstacleUpdate i_data ) {
             ViewModel.SetProperty( FINAL_BLOW_PROPERTY, FINAL_BLOW_PREFIX + i_data.GetFinalBlowValue() );
-        }   
+        }
+        private void CreateAllGamePieceSlotPMs( IGameObstacleUpdate i_data ) {
+            SlotPiecePMs = new List<GamePieceSlotPM>();
+            int slotCount = i_data.GetSlotCount();
+            for ( int i = 0; i < slotCount; ++i ) {
+                SlotPiecePMs.Add( new GamePieceSlotPM( i_data.GetSlotUpdate( i ) ) );
+            }
+        }
     }
 }
