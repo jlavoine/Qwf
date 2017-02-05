@@ -10,6 +10,8 @@ namespace Qwf.Client {
 
         public const string FINAL_BLOW_PREFIX = "+";
 
+        private const int DEFAULT_SLOT_COUNT = 5; // TODO this should be pulled from a config file
+
         private List<GamePieceSlotPM> mSlotPiecePMs;
         public List<GamePieceSlotPM> SlotPiecePMs { get { return mSlotPiecePMs; } private set { mSlotPiecePMs = value; } }
 
@@ -44,9 +46,17 @@ namespace Qwf.Client {
         private void CreateAllGamePieceSlotPMs( IGameObstacleUpdate i_data ) {
             SlotPiecePMs = new List<GamePieceSlotPM>();
             int slotCount = i_data.GetSlotCount();
-            for ( int i = 0; i < slotCount; ++i ) {
-                SlotPiecePMs.Add( new GamePieceSlotPM( i_data.GetSlotUpdate( i ) ) );
+            for ( int i = 0; i < DEFAULT_SLOT_COUNT; ++i ) {
+                if ( i < slotCount ) {
+                    AddSlotPiecePM( i_data.GetSlotUpdate( i ) );                    
+                } else {
+                    AddSlotPiecePM( null );
+                }
             }
+        }
+
+        private void AddSlotPiecePM( IGamePieceSlotUpdate i_gamePieceSlotUpdate ) {
+            SlotPiecePMs.Add( new GamePieceSlotPM( i_gamePieceSlotUpdate ) );
         }
 
         private void UpdateSlotPMs( IGameObstacleUpdate i_data ) {

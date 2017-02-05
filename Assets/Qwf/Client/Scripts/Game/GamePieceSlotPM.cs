@@ -15,12 +15,26 @@ namespace Qwf.Client {
         }
 
         public void SetProperties( IGamePieceSlotUpdate i_data ) {
-            SetSlotPieceTypeProperty( i_data );
+            if ( i_data != null ) {
+                SetPropertiesForValidPieceUpdate( i_data );
+            } else {
+                SetPropertiesForMissingPieceUpdate();
+            }
+        }
+
+        private void SetPropertiesForValidPieceUpdate( IGamePieceSlotUpdate i_data ) {
+            SetSlotPieceTypeProperty( i_data.GetSlotPieceType().ToString() );
             SetVisibility( true );
         }
 
-        private void SetSlotPieceTypeProperty( IGamePieceSlotUpdate i_data ) {
-            ViewModel.SetProperty( SLOT_PIECE_TYPE_PROPERTY, i_data.GetSlotPieceType().ToString() );
+        private void SetPropertiesForMissingPieceUpdate() {
+            // this is actually valid -- it just means there's no piece slot
+            SetSlotPieceTypeProperty( "0" );
+            SetVisibility( false );            
+        }
+
+        private void SetSlotPieceTypeProperty( string i_pieceType ) {
+            ViewModel.SetProperty( SLOT_PIECE_TYPE_PROPERTY, i_pieceType );
         }
     }
 }
