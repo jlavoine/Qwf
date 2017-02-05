@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace MyLibrary {
     public interface IBasicBackend  {
-        string PlayFabId { get; }
+        string PlayerId { get; }
         string SessionTicket { get; }
 
         void Authenticate( string i_id );

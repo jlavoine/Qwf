@@ -7,16 +7,7 @@ using MyLibrary;
 
 namespace Qwf.Client {
     [TestFixture]
-    public class TestGameObstaclesPM {
-        [SetUp]
-        public void BeforeTest() {
-            MyMessenger.Instance = Substitute.For<IMessageService>();
-        }
-
-        [TearDown]
-        public void AfterTest() {
-            MyMessenger.Instance = null;
-        }
+    public class TestGameObstaclesPM : QwfUnitTest {
 
         [Test]
         public void WhenCreating_IndividualPMsCountMatchesCreationData() {

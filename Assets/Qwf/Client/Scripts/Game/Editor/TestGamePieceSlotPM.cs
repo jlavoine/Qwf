@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Qwf.Client {
     [TestFixture]
-    public class TestGamePieceSlotPM {
+    public class TestGamePieceSlotPM : QwfUnitTest {
 
         [Test]
         public void WhenCreated_VisibilityDefaultsOn() {

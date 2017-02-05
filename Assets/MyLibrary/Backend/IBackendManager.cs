@@ -4,5 +4,7 @@ namespace MyLibrary {
         T GetBackend<T>();
 
         void Init( IBasicBackend i_backend );
+
+        string GetPlayerId();
     }
 }

@@ -23,5 +23,9 @@ namespace MyLibrary {
         public T GetBackend<T>() {
             return (T) mBackend;
         }
+
+        public string GetPlayerId() {
+            return mBackend.PlayerId;
+        }
     }
 }

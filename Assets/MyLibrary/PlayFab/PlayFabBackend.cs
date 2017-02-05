@@ -38,7 +38,7 @@ namespace MyLibrary {
         }
 
         public string mPlayFabId;
-        public string PlayFabId { get { return mPlayFabId; } }
+        public string PlayerId { get { return mPlayFabId; } }
 
         public string mSessionTicket;
         public string SessionTicket { get { return mSessionTicket; } }
@@ -180,7 +180,7 @@ namespace MyLibrary {
             StartRequest( "Request player data " + i_key );
 
             GetUserDataRequest request = new GetUserDataRequest() {
-                PlayFabId = PlayFabId,
+                PlayFabId = PlayerId,
                 Keys = new List<string>() { i_key }
             };
 
@@ -203,7 +203,7 @@ namespace MyLibrary {
             StartRequest( "Request player data " + i_key );
 
             GetUserDataRequest request = new GetUserDataRequest() {
-                PlayFabId = PlayFabId,
+                PlayFabId = PlayerId,
                 Keys = new List<string>() { i_key }
             };
 

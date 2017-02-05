@@ -117,7 +117,7 @@ public class ClientExampleScript : MonoBehaviour
 
         }, PlayFabErrorHandler.HandlePlayFabError);
 #else
-        PlayFabId = BackendManager.Instance.GetBackend<PlayFabBackend>().PlayFabId;
+        PlayFabId = BackendManager.Instance.GetBackend<PlayFabBackend>().PlayerId;
         SessionTicket = BackendManager.Instance.GetBackend<PlayFabBackend>().SessionTicket;
 
         UnityEngine.Debug.Log("PlayFab Logged In Successfully");

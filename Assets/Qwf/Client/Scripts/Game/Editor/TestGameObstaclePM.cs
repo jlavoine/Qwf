@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Qwf.Client {
     [TestFixture]
-    public class TestGameObstaclePM {
+    public class TestGameObstaclePM : QwfUnitTest {
 
         [Test]
         public void WhenUpdating_PropertiesSetToExpected() {

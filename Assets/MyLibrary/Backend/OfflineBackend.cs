@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace MyLibrary {
     public class OfflineBackend : IBasicBackend {
-        public string PlayFabId {
+        public string PlayerId {
             get {
                 throw new NotImplementedException();
             }
