@@ -136,5 +136,27 @@ namespace Qwf {
 
             mockScoreKeeper.Received().AddPointsToPlayer( mMockOwner, systemUnderTest.GetValue() );
         }
+
+        [Test]
+        public void WhenOwnersMatch_DoOwnersMatchCall_ReturnsTrue() {
+            mMockOwner.Id.Returns( "Me" );
+            GamePieceData data = new GamePieceData() { PieceType = PIECE_TYPE_A, Value = PIECE_VALUE };
+            GamePiece systemUnderTest = new GamePiece( mMockOwner, data );
+
+            bool match = systemUnderTest.DoOwnersMatch( "Me" );
+
+            Assert.IsTrue( match );
+        }
+
+        [Test]
+        public void WhenOwnersDoNotMatch_DoOwnersMatchCall_ReturnsFalse() {
+            mMockOwner.Id.Returns( "Me" );
+            GamePieceData data = new GamePieceData() { PieceType = PIECE_TYPE_A, Value = PIECE_VALUE };
+            GamePiece systemUnderTest = new GamePiece( mMockOwner, data );
+
+            bool match = systemUnderTest.DoOwnersMatch( "Them" );
+
+            Assert.IsFalse( match );
+        }
     }
 }
