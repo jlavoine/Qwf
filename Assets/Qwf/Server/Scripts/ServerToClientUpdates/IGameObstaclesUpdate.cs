@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-
+﻿
 namespace Qwf {
     public interface IGameObstaclesUpdate {
         int GetObstaclesCount();
