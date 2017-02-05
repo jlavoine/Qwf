@@ -5,7 +5,7 @@ namespace Qwf {
         public int Value;
         public string Owner;
 
-        public static GamePieceData Create( IGamePiece i_piece ) {
+        public static GamePieceData Create( IServerGamePiece i_piece ) {
             GamePieceData data = new GamePieceData();
             data.Value = i_piece.GetValue();
             data.PieceType = i_piece.GetPieceType();

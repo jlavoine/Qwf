@@ -2,8 +2,8 @@
 
 namespace Qwf.Server {
     public class GamePlayer : IGamePlayer {
-        private List<IGamePiece> mUndrawnPieces = new List<IGamePiece>();
-        private List<IGamePiece> mHeldPieces = new List<IGamePiece>();
+        private List<IServerGamePiece> mUndrawnPieces = new List<IServerGamePiece>();
+        private List<IServerGamePiece> mHeldPieces = new List<IServerGamePiece>();
 
         private IGameRules mRules;
 
@@ -19,7 +19,7 @@ namespace Qwf.Server {
             DrawStartingHand();
         }
 
-        public GamePlayer( IGameRules i_rules, List<IGamePiece> i_allPieces, string i_id ) {
+        public GamePlayer( IGameRules i_rules, List<IServerGamePiece> i_allPieces, string i_id ) {
             Id = i_id;
             mRules = i_rules;
 
@@ -27,15 +27,15 @@ namespace Qwf.Server {
             DrawStartingHand();
         }      
 
-        public List<IGamePiece> GetHeldPieces() {
+        public List<IServerGamePiece> GetHeldPieces() {
             return mHeldPieces;
         }
 
-        public List<IGamePiece> GetUndrawnPieces() {
+        public List<IServerGamePiece> GetUndrawnPieces() {
             return mUndrawnPieces;
         }
 
-        public bool IsGamePieceHeld( IGamePiece i_piece ) {
+        public bool IsGamePieceHeld( IServerGamePiece i_piece ) {
             return mHeldPieces.Contains( i_piece );
         }
 
@@ -44,18 +44,18 @@ namespace Qwf.Server {
             DrawGamePieces( numPiecesToDraw );
         }
 
-        public void RemovePieceFromHand( IGamePiece i_piece ) {
+        public void RemovePieceFromHand( IServerGamePiece i_piece ) {
             if ( mHeldPieces.Contains( i_piece ) ) {
                 mHeldPieces.Remove( i_piece );
             }
         }
 
-        private void SetAndShuffleUndrawnPieces( List<IGamePiece> i_allPieces ) {
-            foreach ( IGamePiece piece in i_allPieces ) {
+        private void SetAndShuffleUndrawnPieces( List<IServerGamePiece> i_allPieces ) {
+            foreach ( IServerGamePiece piece in i_allPieces ) {
                 mUndrawnPieces.Add( piece );
             }
 
-            mUndrawnPieces.Shuffle<IGamePiece>();
+            mUndrawnPieces.Shuffle<IServerGamePiece>();
         }
 
         private void DrawStartingHand() {
@@ -65,7 +65,7 @@ namespace Qwf.Server {
         private void DrawGamePieces( int i_numPieces ) {
             for ( int i = 0; i < i_numPieces; ++i ) {
                 if ( mUndrawnPieces.Count > 0 ) {
-                    IGamePiece pieceToDraw = mUndrawnPieces[0];
+                    IServerGamePiece pieceToDraw = mUndrawnPieces[0];
                     mUndrawnPieces.RemoveAt( 0 );
                     mHeldPieces.Add( pieceToDraw );
                 }

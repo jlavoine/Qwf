@@ -15,19 +15,19 @@ namespace Qwf.Client {
             throw new NotImplementedException();
         }
 
-        public List<IGamePiece> GetHeldPieces() {
+        public List<IServerGamePiece> GetHeldPieces() {
             throw new NotImplementedException();
         }
 
-        public List<IGamePiece> GetUndrawnPieces() {
+        public List<IServerGamePiece> GetUndrawnPieces() {
             throw new NotImplementedException();
         }
 
-        public bool IsGamePieceHeld( IGamePiece i_piece ) {
+        public bool IsGamePieceHeld( IServerGamePiece i_piece ) {
             throw new NotImplementedException();
         }
 
-        public void RemovePieceFromHand( IGamePiece i_piece ) {
+        public void RemovePieceFromHand( IServerGamePiece i_piece ) {
             throw new NotImplementedException();
         }
     }

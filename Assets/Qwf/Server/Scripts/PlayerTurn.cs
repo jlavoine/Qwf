@@ -37,7 +37,7 @@ namespace Qwf {
         private bool AreAnyDuplicatePiecesInMoves() {
             foreach ( IGameMove move in mMoves ) {
                 int count = 0;
-                IGamePiece targetPiece = move.GetTargetPiece();
+                IServerGamePiece targetPiece = move.GetTargetPiece();
                 foreach ( IGameMove otherMove in mMoves ) {
                     if ( otherMove.GetTargetPiece() == targetPiece ) {
                         count++;

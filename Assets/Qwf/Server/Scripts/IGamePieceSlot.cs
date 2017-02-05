@@ -5,11 +5,11 @@ namespace Qwf {
         int GetScoreValue();
 
         bool IsEmpty();
-        bool CanPlacePieceIntoSlot( IGamePiece i_piece );
+        bool CanPlacePieceIntoSlot( IServerGamePiece i_piece );
 
-        void PlacePieceIntoSlot( IGamePiece i_piece );
+        void PlacePieceIntoSlot( IServerGamePiece i_piece );
         void Score( IScoreKeeper i_scoreKeeper );
 
-        IGamePiece GetCurrentPiece();
+        IServerGamePiece GetCurrentPiece();
     }
 }

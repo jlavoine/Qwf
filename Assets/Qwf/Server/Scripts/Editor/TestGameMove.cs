@@ -7,7 +7,7 @@ namespace Qwf {
 
         [Test]
         public void TargetVariablesAreSameAsUsedToCreate() {
-            IGamePiece targetPiece = Substitute.For<IGamePiece>();
+            IServerGamePiece targetPiece = Substitute.For<IServerGamePiece>();
             IGamePieceSlot targetSlot = Substitute.For<IGamePieceSlot>();
             IGameObstacle targetObstacle = Substitute.For<IGameObstacle>();
             GameMove systemUnderTest = new GameMove( targetPiece, targetObstacle, targetSlot );
@@ -19,13 +19,13 @@ namespace Qwf {
 
         [Test]
         public void IfPlayerDoesNotHavePiece_ButAllOtherPartsLegal_MoveIsNotLegal() {
-            IGamePiece targetPiece = Substitute.For<IGamePiece>();
+            IServerGamePiece targetPiece = Substitute.For<IServerGamePiece>();
             targetPiece.IsCurrentlyHeld().Returns( false );
 
             IGamePieceSlot targetSlot = Substitute.For<IGamePieceSlot>();
 
             IGameObstacle targetObstacle = Substitute.For<IGameObstacle>();
-            targetObstacle.CanPieceBePlacedIntoSlot( Arg.Any<IGamePiece>(), Arg.Any<IGamePieceSlot>() ).Returns( true );
+            targetObstacle.CanPieceBePlacedIntoSlot( Arg.Any<IServerGamePiece>(), Arg.Any<IGamePieceSlot>() ).Returns( true );
 
             IGameBoard mockBoard = Substitute.For<IGameBoard>();
             mockBoard.IsObstacleCurrent( Arg.Any<IGameObstacle>() ).Returns( true );
@@ -37,13 +37,13 @@ namespace Qwf {
 
         [Test]
         public void IfObstacleSlotTestFails_ButAllOtherPartsLegal_MoveIsNotLegal() {
-            IGamePiece targetPiece = Substitute.For<IGamePiece>();
+            IServerGamePiece targetPiece = Substitute.For<IServerGamePiece>();
             targetPiece.IsCurrentlyHeld().Returns( true );
 
             IGamePieceSlot targetSlot = Substitute.For<IGamePieceSlot>();
 
             IGameObstacle targetObstacle = Substitute.For<IGameObstacle>();
-            targetObstacle.CanPieceBePlacedIntoSlot( Arg.Any<IGamePiece>(), Arg.Any<IGamePieceSlot>() ).Returns( false );
+            targetObstacle.CanPieceBePlacedIntoSlot( Arg.Any<IServerGamePiece>(), Arg.Any<IGamePieceSlot>() ).Returns( false );
 
             IGameBoard mockBoard = Substitute.For<IGameBoard>();
             mockBoard.IsObstacleCurrent( Arg.Any<IGameObstacle>() ).Returns( true );
@@ -55,13 +55,13 @@ namespace Qwf {
 
         [Test]
         public void IfPlayerHasPiece_AndObstacleIsCurrent_AndTargetSlotTakesPiece_MoveIsLegal() {
-            IGamePiece targetPiece = Substitute.For<IGamePiece>();
+            IServerGamePiece targetPiece = Substitute.For<IServerGamePiece>();
             targetPiece.IsCurrentlyHeld().Returns( true );
 
             IGamePieceSlot targetSlot = Substitute.For<IGamePieceSlot>();
 
             IGameObstacle targetObstacle = Substitute.For<IGameObstacle>();
-            targetObstacle.CanPieceBePlacedIntoSlot( Arg.Any<IGamePiece>(), Arg.Any<IGamePieceSlot>() ).Returns( true );
+            targetObstacle.CanPieceBePlacedIntoSlot( Arg.Any<IServerGamePiece>(), Arg.Any<IGamePieceSlot>() ).Returns( true );
 
             IGameBoard mockBoard = Substitute.For<IGameBoard>();
             mockBoard.IsObstacleCurrent( Arg.Any<IGameObstacle>() ).Returns( true );
@@ -73,7 +73,7 @@ namespace Qwf {
 
         [Test]
         public void WhenMoveIsMade_TargetPieceNowInTargetSlot() {
-            IGamePiece targetPiece = Substitute.For<IGamePiece>();
+            IServerGamePiece targetPiece = Substitute.For<IServerGamePiece>();
             IGamePieceSlot targetSlot = Substitute.For<IGamePieceSlot>();
             IGameObstacle targetObstacle = Substitute.For<IGameObstacle>();
             GameMove systemUnderTest = new GameMove( targetPiece, targetObstacle, targetSlot );

@@ -34,7 +34,7 @@ namespace Qwf {
         public void IfMoveContainsDuplicatePieces_PlayerTurnNotValid() {
             List<IGameMove> moves = new List<IGameMove>();
             IGameMove sameMove = GetMoveOfLegalStatus( true );
-            sameMove.GetTargetPiece().Returns( Substitute.For<IGamePiece>() );
+            sameMove.GetTargetPiece().Returns( Substitute.For<IServerGamePiece>() );
             moves.Add( sameMove );
             moves.Add( sameMove );
             moves.Add( sameMove );

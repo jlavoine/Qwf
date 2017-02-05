@@ -27,7 +27,7 @@ namespace Qwf {
             GameObstacle systemUnderTest = new GameObstacle( slots, OBSTACLE_SCORE_VALUE );
 
             IGamePieceSlot differentSlot = Substitute.For<IGamePieceSlot>();
-            bool canPlace = systemUnderTest.CanPieceBePlacedIntoSlot( Substitute.For<IGamePiece>(), differentSlot );
+            bool canPlace = systemUnderTest.CanPieceBePlacedIntoSlot( Substitute.For<IServerGamePiece>(), differentSlot );
 
             Assert.IsFalse( canPlace );
         }
@@ -38,8 +38,8 @@ namespace Qwf {
             mockSlots.Add( Substitute.For<IGamePieceSlot>() );
             GameObstacle systemUnderTest = new GameObstacle( mockSlots, OBSTACLE_SCORE_VALUE );
 
-            mockSlots[0].CanPlacePieceIntoSlot( Arg.Any<IGamePiece>() ).Returns( false );
-            bool canPlace = systemUnderTest.CanPieceBePlacedIntoSlot( Substitute.For<IGamePiece>(), mockSlots[0] );
+            mockSlots[0].CanPlacePieceIntoSlot( Arg.Any<IServerGamePiece>() ).Returns( false );
+            bool canPlace = systemUnderTest.CanPieceBePlacedIntoSlot( Substitute.For<IServerGamePiece>(), mockSlots[0] );
 
             Assert.IsFalse( canPlace );
         }
@@ -50,8 +50,8 @@ namespace Qwf {
             mockSlots.Add( Substitute.For<IGamePieceSlot>() );
             GameObstacle systemUnderTest = new GameObstacle( mockSlots, OBSTACLE_SCORE_VALUE );
             
-            mockSlots[0].CanPlacePieceIntoSlot( Arg.Any<IGamePiece>() ).Returns( true );
-            bool canPlace = systemUnderTest.CanPieceBePlacedIntoSlot( Substitute.For<IGamePiece>(), mockSlots[0] );
+            mockSlots[0].CanPlacePieceIntoSlot( Arg.Any<IServerGamePiece>() ).Returns( true );
+            bool canPlace = systemUnderTest.CanPieceBePlacedIntoSlot( Substitute.For<IServerGamePiece>(), mockSlots[0] );
 
             Assert.IsTrue( canPlace );
         }

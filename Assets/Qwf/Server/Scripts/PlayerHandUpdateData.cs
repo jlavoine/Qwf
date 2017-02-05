@@ -10,7 +10,7 @@ namespace Qwf {
             data.Id = i_player.Id;
 
             data.GamePieces = new List<GamePieceData>();
-            foreach ( IGamePiece piece in i_player.GetHeldPieces() ) {
+            foreach ( IServerGamePiece piece in i_player.GetHeldPieces() ) {
                 data.GamePieces.Add( GamePieceData.Create( piece ) );
             }
 

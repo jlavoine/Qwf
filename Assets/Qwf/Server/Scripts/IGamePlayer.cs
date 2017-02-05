@@ -4,12 +4,12 @@ namespace Qwf {
     public interface IGamePlayer {
         string Id { get; }
 
-        bool IsGamePieceHeld( IGamePiece i_piece );
+        bool IsGamePieceHeld( IServerGamePiece i_piece );
 
         void DrawToFillHand();
-        void RemovePieceFromHand( IGamePiece i_piece );
+        void RemovePieceFromHand( IServerGamePiece i_piece );
 
-        List<IGamePiece> GetHeldPieces();
-        List<IGamePiece> GetUndrawnPieces();
+        List<IServerGamePiece> GetHeldPieces();
+        List<IServerGamePiece> GetUndrawnPieces();
     }
 }

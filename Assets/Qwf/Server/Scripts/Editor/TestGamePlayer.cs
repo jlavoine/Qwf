@@ -11,17 +11,17 @@ namespace Qwf.Server.UnitTests {
         [Test]
         public void AfterPlayIsCreated_HeldAndUndrawnPieces_MatchOriginalData() {
             IGameRules mockRules = GetStandardRules();
-            List<IGamePiece> mockPieces = CreateGamePieces( TOTAL_GAME_PIECES );
+            List<IServerGamePiece> mockPieces = CreateGamePieces( TOTAL_GAME_PIECES );
             GamePlayer systemUnderTest = new GamePlayer( mockRules, mockPieces, string.Empty );
 
             Assert.AreEqual( PLAYER_HAND_SIZE, systemUnderTest.GetHeldPieces().Count );
             Assert.AreEqual( TOTAL_GAME_PIECES - PLAYER_HAND_SIZE, systemUnderTest.GetUndrawnPieces().Count );
 
-            foreach ( IGamePiece piece in systemUnderTest.GetHeldPieces() ) {
+            foreach ( IServerGamePiece piece in systemUnderTest.GetHeldPieces() ) {
                 Assert.Contains( piece, mockPieces );
             }
 
-            foreach ( IGamePiece piece in systemUnderTest.GetUndrawnPieces() ) {
+            foreach ( IServerGamePiece piece in systemUnderTest.GetUndrawnPieces() ) {
                 Assert.Contains( piece, mockPieces );
             }
         }
@@ -29,7 +29,7 @@ namespace Qwf.Server.UnitTests {
         [Test]
         public void IfUndrawnPiecesAreNotEnough_PlayerDrawsRemainingPieces() {
             IGameRules mockRules = GetStandardRules();
-            List<IGamePiece> mockPieces = CreateGamePieces( PLAYER_HAND_SIZE - 1 );
+            List<IServerGamePiece> mockPieces = CreateGamePieces( PLAYER_HAND_SIZE - 1 );
             GamePlayer systemUnderTest = new GamePlayer( mockRules, mockPieces, string.Empty );
 
             Assert.AreEqual( mockPieces.Count, systemUnderTest.GetHeldPieces().Count );
@@ -39,7 +39,7 @@ namespace Qwf.Server.UnitTests {
         [Test]
         public void IsGamePieceHeld_ReturnsTrue_WhenGamePieceHeld() {
             IGameRules mockRules = GetStandardRules();
-            List<IGamePiece> mockPieces = CreateGamePieces( 1 );
+            List<IServerGamePiece> mockPieces = CreateGamePieces( 1 );
             GamePlayer systemUnderTest = new GamePlayer( mockRules, mockPieces, string.Empty );
 
             bool isPieceHeld = systemUnderTest.IsGamePieceHeld( mockPieces[0] );
@@ -50,10 +50,10 @@ namespace Qwf.Server.UnitTests {
         [Test]
         public void IsGamePieceHeld_ReturnsFalse_WhenGamePieceNotHeld() {
             IGameRules mockRules = GetStandardRules();
-            List<IGamePiece> mockPieces = CreateGamePieces( 1 );
+            List<IServerGamePiece> mockPieces = CreateGamePieces( 1 );
             GamePlayer systemUnderTest = new GamePlayer( mockRules, mockPieces, string.Empty );
 
-            IGamePiece unheldGamePiece = Substitute.For<IGamePiece>();
+            IServerGamePiece unheldGamePiece = Substitute.For<IServerGamePiece>();
             bool isPieceHeld = systemUnderTest.IsGamePieceHeld( unheldGamePiece );
 
             Assert.IsFalse( isPieceHeld );
@@ -62,7 +62,7 @@ namespace Qwf.Server.UnitTests {
         [Test]
         public void RemovingPieceFromHand_IfPlayerHoldsPiece_ReducesHandSize() {
             IGameRules mockRules = GetStandardRules();
-            List<IGamePiece> mockPieces = CreateGamePieces( PLAYER_HAND_SIZE );
+            List<IServerGamePiece> mockPieces = CreateGamePieces( PLAYER_HAND_SIZE );
             GamePlayer systemUnderTest = new GamePlayer( mockRules, mockPieces, string.Empty );
 
             systemUnderTest.RemovePieceFromHand( mockPieces[0] );
@@ -73,10 +73,10 @@ namespace Qwf.Server.UnitTests {
         [Test]
         public void RemovingPieceFromHand_IfPlayerDoesNotHoldPiece_DoesNotReducesHandSize() {
             IGameRules mockRules = GetStandardRules();
-            List<IGamePiece> mockPieces = CreateGamePieces( PLAYER_HAND_SIZE );
+            List<IServerGamePiece> mockPieces = CreateGamePieces( PLAYER_HAND_SIZE );
             GamePlayer systemUnderTest = new GamePlayer( mockRules, mockPieces, string.Empty );
 
-            systemUnderTest.RemovePieceFromHand( Substitute.For<IGamePiece>() );
+            systemUnderTest.RemovePieceFromHand( Substitute.For<IServerGamePiece>() );
 
             Assert.AreEqual( PLAYER_HAND_SIZE, systemUnderTest.GetHeldPieces().Count );
         }
@@ -84,7 +84,7 @@ namespace Qwf.Server.UnitTests {
         [Test]
         public void DrawToFillHand_FillsHand() {
             IGameRules mockRules = GetStandardRules();
-            List<IGamePiece> mockPieces = CreateGamePieces( PLAYER_HAND_SIZE * 2 );
+            List<IServerGamePiece> mockPieces = CreateGamePieces( PLAYER_HAND_SIZE * 2 );
             GamePlayer systemUnderTest = new GamePlayer( mockRules, mockPieces, string.Empty );
 
             systemUnderTest.RemovePieceFromHand( mockPieces[0] );
@@ -100,10 +100,10 @@ namespace Qwf.Server.UnitTests {
             return mockRules;
         }
 
-        private List<IGamePiece> CreateGamePieces( int i_pieceCount ) {
-            List<IGamePiece> mockPieces = new List<IGamePiece>();
+        private List<IServerGamePiece> CreateGamePieces( int i_pieceCount ) {
+            List<IServerGamePiece> mockPieces = new List<IServerGamePiece>();
             for ( int i = 0; i < i_pieceCount; ++i ) {
-                mockPieces.Add( Substitute.For<IGamePiece>() );
+                mockPieces.Add( Substitute.For<IServerGamePiece>() );
             }
 
             return mockPieces;

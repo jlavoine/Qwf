@@ -14,7 +14,7 @@ namespace Qwf {
 
         [Test]
         public void IfIncomingPieceTypeDoesNotMatchSlotType_CannotPlace() {
-            IGamePiece incomingPiece = Substitute.For<IGamePiece>();
+            IServerGamePiece incomingPiece = Substitute.For<IServerGamePiece>();
             incomingPiece.MatchesPieceType( Arg.Any<int>() ).Returns( false );
 
             bool canPlace = mSystemUnderTest.CanPlacePieceIntoSlot( incomingPiece );
@@ -24,7 +24,7 @@ namespace Qwf {
 
         [Test]
         public void IfIncomingPieceTypeMatchesSlotType_AndSlotIsEmpty_CanPlace() {
-            IGamePiece incomingPiece = Substitute.For<IGamePiece>();
+            IServerGamePiece incomingPiece = Substitute.For<IServerGamePiece>();
             incomingPiece.MatchesPieceType( Arg.Any<int>() ).Returns( true );
 
             bool canPlace = mSystemUnderTest.CanPlacePieceIntoSlot( incomingPiece );
@@ -34,10 +34,10 @@ namespace Qwf {
 
         [Test]
         public void IfIncomingPieceTypeMatchesSlotType_ButSamePlayerAlreadyOwnsSlot_CannotPlace() {
-            IGamePiece incomingPiece = Substitute.For<IGamePiece>();
+            IServerGamePiece incomingPiece = Substitute.For<IServerGamePiece>();
             incomingPiece.MatchesPieceType( Arg.Any<int>() ).Returns( true );
             
-            IGamePiece currentPieceInSlot = Substitute.For<IGamePiece>();
+            IServerGamePiece currentPieceInSlot = Substitute.For<IServerGamePiece>();
             currentPieceInSlot.DoOwnersMatch( Arg.Any<string>() ).Returns( true );
             mSystemUnderTest.PlacePieceIntoSlot( currentPieceInSlot );
 
@@ -48,11 +48,11 @@ namespace Qwf {
 
         [Test]
         public void IfIncomingPieceTypeMatchesSlotType_AndIncomingPlayerDoesNotOwnSlot_CanPlaceIfHigherValuePiece() {
-            IGamePiece incomingPiece = Substitute.For<IGamePiece>();
+            IServerGamePiece incomingPiece = Substitute.For<IServerGamePiece>();
             incomingPiece.MatchesPieceType( Arg.Any<int>() ).Returns( true );            
-            incomingPiece.CanOvertakePiece( Arg.Any<IGamePiece>() ).Returns( true );
+            incomingPiece.CanOvertakePiece( Arg.Any<IServerGamePiece>() ).Returns( true );
 
-            IGamePiece currentPieceInSlot = Substitute.For<IGamePiece>();
+            IServerGamePiece currentPieceInSlot = Substitute.For<IServerGamePiece>();
             currentPieceInSlot.DoOwnersMatch( Arg.Any<string>() ).Returns( false );
             mSystemUnderTest.PlacePieceIntoSlot( currentPieceInSlot );
 
@@ -63,11 +63,11 @@ namespace Qwf {
 
         [Test]
         public void IfIncomingPieceTypeMatchesSlotType_AndIncomingPlayerDoesNotOwnSlot_CannotPlaceIfLowerValuePiece() {
-            IGamePiece incomingPiece = Substitute.For<IGamePiece>();
+            IServerGamePiece incomingPiece = Substitute.For<IServerGamePiece>();
             incomingPiece.MatchesPieceType( Arg.Any<int>() ).Returns( true );
-            incomingPiece.CanOvertakePiece( Arg.Any<IGamePiece>() ).Returns( false );
+            incomingPiece.CanOvertakePiece( Arg.Any<IServerGamePiece>() ).Returns( false );
 
-            IGamePiece currentPieceInSlot = Substitute.For<IGamePiece>();
+            IServerGamePiece currentPieceInSlot = Substitute.For<IServerGamePiece>();
             currentPieceInSlot.DoOwnersMatch( Arg.Any<string>() ).Returns( false );
             mSystemUnderTest.PlacePieceIntoSlot( currentPieceInSlot );
 
@@ -78,7 +78,7 @@ namespace Qwf {
 
         [Test]
         public void IfSlotHasCurrentPiece_IsEmptyIsFalse() {
-            IGamePiece currentPieceInSlot = Substitute.For<IGamePiece>();
+            IServerGamePiece currentPieceInSlot = Substitute.For<IServerGamePiece>();
             mSystemUnderTest.PlacePieceIntoSlot( currentPieceInSlot );
 
             bool isEmpty = mSystemUnderTest.IsEmpty();
@@ -95,7 +95,7 @@ namespace Qwf {
 
         [Test]
         public void WhenSlotIsScored_PieceIsScored() {
-            mSystemUnderTest.PlacePieceIntoSlot( Substitute.For<IGamePiece>() );
+            mSystemUnderTest.PlacePieceIntoSlot( Substitute.For<IServerGamePiece>() );
             mSystemUnderTest.Score( Substitute.For<IScoreKeeper>() );
 
             mSystemUnderTest.GetCurrentPiece().Received().Score( Arg.Any<IScoreKeeper>() );

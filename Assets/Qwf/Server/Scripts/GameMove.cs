@@ -1,17 +1,17 @@
 ﻿
 namespace Qwf {
     public class GameMove : IGameMove {
-        private IGamePiece mTargetPiece;
+        private IServerGamePiece mTargetPiece;
         private IGameObstacle mTargetObstacle;
         private IGamePieceSlot mTargetSlot;
 
-        public GameMove( IGamePiece i_targetPiece, IGameObstacle i_targetObstacle, IGamePieceSlot i_targetSlot ) {
+        public GameMove( IServerGamePiece i_targetPiece, IGameObstacle i_targetObstacle, IGamePieceSlot i_targetSlot ) {
             mTargetPiece = i_targetPiece;
             mTargetObstacle = i_targetObstacle;
             mTargetSlot = i_targetSlot;
         }
 
-        public IGamePiece GetTargetPiece() {
+        public IServerGamePiece GetTargetPiece() {
             return mTargetPiece;
         }
 

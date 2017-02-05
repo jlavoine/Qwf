@@ -1,7 +1,7 @@
 ﻿
 namespace Qwf {
     public interface IGameMove {
-        IGamePiece GetTargetPiece();
+        IServerGamePiece GetTargetPiece();
         IGameObstacle GetTargetObstacle();
         IGamePieceSlot GetTargetSlot();
 

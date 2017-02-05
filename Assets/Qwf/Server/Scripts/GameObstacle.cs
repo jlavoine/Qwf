@@ -15,7 +15,7 @@ namespace Qwf {
             return mSlots;
         }
 
-        public bool CanPieceBePlacedIntoSlot( IGamePiece i_piece, IGamePieceSlot i_slot ) {
+        public bool CanPieceBePlacedIntoSlot( IServerGamePiece i_piece, IGamePieceSlot i_slot ) {
             if ( DoesObstacleHaveSlot( i_slot ) ) {
                 return i_slot.CanPlacePieceIntoSlot( i_piece );
             } else {

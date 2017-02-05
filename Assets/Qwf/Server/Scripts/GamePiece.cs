@@ -1,17 +1,17 @@
 ﻿
 namespace Qwf {
-    public class GamePiece : IGamePiece {
+    public class ServerGamePiece : IServerGamePiece {
         private IGamePlayer mOwner;
         private int mValue;
         private int mType;
 
-        public GamePiece( IGamePlayer i_owner, int i_type, int i_value ) {
+        public ServerGamePiece( IGamePlayer i_owner, int i_type, int i_value ) {
             mOwner = i_owner;
             mValue = i_value;
             mType = i_type;
         }
 
-        public GamePiece( IGamePlayer i_owner, GamePieceData i_data ) {
+        public ServerGamePiece( IGamePlayer i_owner, GamePieceData i_data ) {
             mOwner = i_owner;
             mValue = i_data.Value;
             mType = i_data.PieceType;
@@ -33,7 +33,7 @@ namespace Qwf {
             return i_ownerId == GetOwner().Id;
         }
 
-        public bool CanOvertakePiece( IGamePiece i_piece ) {
+        public bool CanOvertakePiece( IServerGamePiece i_piece ) {
             return GetValue() > i_piece.GetValue();
         }
 
