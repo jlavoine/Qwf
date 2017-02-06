@@ -10,7 +10,8 @@ namespace Qwf {
             foreach ( DeckGamePieceData onePieceType in GamePieces ) {
                 foreach ( KeyValuePair<int,int> pieceValueToCount in onePieceType.PieceValueToCount ) {
                     for ( int i = 0; i < pieceValueToCount.Value; ++i ) {
-                        allPieces.Add( new ServerGamePiece( i_owner, onePieceType.PieceType, pieceValueToCount.Key ) );
+                        IGamePieceData gamePieceData = new GamePieceData() { Value = pieceValueToCount.Key, Owner = i_owner.Id, PieceType = onePieceType.PieceType };
+                        allPieces.Add( new ServerGamePiece( i_owner, gamePieceData ) );
                     }
                 }
             }

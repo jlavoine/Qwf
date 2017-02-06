@@ -3,7 +3,7 @@ using NSubstitute;
 
 namespace Qwf {
     [TestFixture]
-    public class TestGamePiece {
+    public class TestServerGamePiece {
         private const int PIECE_TYPE_A = 1;
         private const int PIECE_TYPE_B = 2;
         private const int PIECE_TYPE_ANY = 0;
@@ -15,85 +15,6 @@ namespace Qwf {
         [SetUp]
         public void BeforeTest() {
             mMockOwner = Substitute.For<IGamePlayer>();
-        }
-
-        [Test]
-        public void IfIncomingTypeMatchesPieceType_MatchesIsTrue() {
-            GamePieceData data = new GamePieceData() { PieceType = PIECE_TYPE_A };
-            ServerGamePiece systemUnderTest = new ServerGamePiece( mMockOwner, data );
-
-            bool doesMatch = systemUnderTest.MatchesPieceType( PIECE_TYPE_A );
-
-            Assert.IsTrue( doesMatch );
-        }
-
-        [Test]
-        public void IfIncomingTypeDoesNotMatchPieceType_MatchesIsFalse() {
-            GamePieceData data = new GamePieceData() { PieceType = PIECE_TYPE_A };
-            ServerGamePiece systemUnderTest = new ServerGamePiece( mMockOwner, data );
-
-            bool doesMatch = systemUnderTest.MatchesPieceType( PIECE_TYPE_B );
-
-            Assert.IsFalse( doesMatch );
-        }
-
-        [Test]
-        public void IfIncomingTypeIsAny_MatchesIsTrue() {
-            GamePieceData data = new GamePieceData() { PieceType = PIECE_TYPE_A };
-            ServerGamePiece systemUnderTest = new ServerGamePiece( mMockOwner, data );
-
-            bool doesMatch = systemUnderTest.MatchesPieceType( PIECE_TYPE_ANY );
-
-            Assert.IsTrue( doesMatch );
-        }
-
-        [Test]
-        public void IfPieceTypeIsAny_MatchesNonAnyType() {
-            GamePieceData data = new GamePieceData() { PieceType = PIECE_TYPE_ANY };
-            ServerGamePiece systemUnderTest = new ServerGamePiece( mMockOwner, data );
-
-            bool doesMatch = systemUnderTest.MatchesPieceType( PIECE_TYPE_B );
-
-            Assert.IsTrue( doesMatch );
-        }
-
-        [Test]
-        public void IfIncomingPieceHasLowerValue_CanOvertake() {
-            GamePieceData data = new GamePieceData() { PieceType = PIECE_TYPE_A, Value = PIECE_VALUE };
-            ServerGamePiece systemUnderTest = new ServerGamePiece( mMockOwner, data );
-
-            IServerGamePiece incomingPiece = Substitute.For<IServerGamePiece>();
-            incomingPiece.GetValue().Returns( PIECE_VALUE - 1 );
-
-            bool canOvertake = systemUnderTest.CanOvertakePiece( incomingPiece );
-
-            Assert.IsTrue( canOvertake );
-        }
-
-        [Test]
-        public void IfIncomingPieceHasHigherValue_CannotOvertake() {
-            GamePieceData data = new GamePieceData() { PieceType = PIECE_TYPE_A, Value = PIECE_VALUE };
-            ServerGamePiece systemUnderTest = new ServerGamePiece( mMockOwner, data );
-
-            IServerGamePiece incomingPiece = Substitute.For<IServerGamePiece>();
-            incomingPiece.GetValue().Returns( PIECE_VALUE + 1 );
-
-            bool canOvertake = systemUnderTest.CanOvertakePiece( incomingPiece );
-
-            Assert.IsFalse( canOvertake );
-        }
-
-        [Test]
-        public void IfIncomingPieceHasEqualValue_CannotOvertake() {
-            GamePieceData data = new GamePieceData() { PieceType = PIECE_TYPE_A, Value = PIECE_VALUE };
-            ServerGamePiece systemUnderTest = new ServerGamePiece( mMockOwner, data );
-
-            IServerGamePiece incomingPiece = Substitute.For<IServerGamePiece>();
-            incomingPiece.GetValue().Returns( PIECE_VALUE );
-
-            bool canOvertake = systemUnderTest.CanOvertakePiece( incomingPiece );
-
-            Assert.IsFalse( canOvertake );
         }
 
         [Test]
@@ -139,8 +60,7 @@ namespace Qwf {
 
         [Test]
         public void WhenOwnersMatch_DoOwnersMatchCall_ReturnsTrue() {
-            mMockOwner.Id.Returns( "Me" );
-            GamePieceData data = new GamePieceData() { PieceType = PIECE_TYPE_A, Value = PIECE_VALUE };
+            GamePieceData data = new GamePieceData() { PieceType = PIECE_TYPE_A, Value = PIECE_VALUE, Owner = "Me" };
             ServerGamePiece systemUnderTest = new ServerGamePiece( mMockOwner, data );
 
             bool match = systemUnderTest.DoOwnersMatch( "Me" );
