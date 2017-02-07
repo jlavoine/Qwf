@@ -39,8 +39,8 @@ namespace Qwf.Client {
             List<GamePieceSlotUpdate> updates = new List<GamePieceSlotUpdate>();
             for ( int i = 0; i < i_numSlots; ++i ) {
                 GamePieceSlotUpdate update = new GamePieceSlotUpdate();
-                update.SlotPieceType = Random.Range( 0, 5 );
-                update.PieceInSlot = GetRandomPieceInSlot();
+                update.SlotPieceType = Random.Range( 1, 6 );
+                update.PieceInSlot = GetRandomPieceInSlot( update.SlotPieceType );
                 update.ScoreValue = 1;
                 updates.Add( update );
             }
@@ -48,7 +48,7 @@ namespace Qwf.Client {
             return updates;
         }
 
-        private GamePieceData GetRandomPieceInSlot() {
+        private GamePieceData GetRandomPieceInSlot( int i_slotType ) {
             int random = Random.Range( 0, 3 );
             switch ( random ) {
                 case 0:
@@ -59,14 +59,14 @@ namespace Qwf.Client {
                     GamePieceData myPiece = new GamePieceData();
                     myPiece.Owner = "Me";
                     myPiece.Value = Random.Range( 1, 6 );
-                    myPiece.PieceType = Random.Range( 1, 6 );
+                    myPiece.PieceType = i_slotType;
                     return myPiece;
                 default:
                     // opponent piece
                     GamePieceData theirPiece = new GamePieceData();
                     theirPiece.Owner = "Them";
                     theirPiece.Value = Random.Range( 1, 6 );
-                    theirPiece.PieceType = Random.Range( 1, 6 );
+                    theirPiece.PieceType = i_slotType;
                     return theirPiece;
             }
         }
