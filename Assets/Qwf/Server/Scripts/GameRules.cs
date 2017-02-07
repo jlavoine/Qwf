@@ -6,5 +6,9 @@ namespace Qwf {
         public int GetPlayerHandSize() {
             return 6;
         }
+
+        public int GetMaxCurrentObstacles() {
+            return 3;
+        }
     }
 }
