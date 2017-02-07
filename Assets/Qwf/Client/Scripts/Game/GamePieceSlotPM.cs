@@ -26,8 +26,7 @@ namespace Qwf.Client {
 
             if ( i_data != null ) {
                 SetPropertiesForValidPieceUpdate( i_data );
-                UpdateGamePieceInSlot( i_data.GetPieceInSlot() );
-                SetPieceInSlotOnSlot();
+                UpdateGamePieceInSlot( i_data.GetPieceInSlot() );                
             } else {
                 SetPropertiesForMissingPieceUpdate();
             }
@@ -72,6 +71,7 @@ namespace Qwf.Client {
 
         private void UpdateGamePieceInSlot( IGamePieceData i_data ) {
             GamePieceInSlot.SetProperties( i_data );
+            SetPieceInSlotOnSlot();
         }
     }
 }
