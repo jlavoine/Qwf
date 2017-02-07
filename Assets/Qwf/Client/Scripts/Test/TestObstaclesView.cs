@@ -58,15 +58,15 @@ namespace Qwf.Client {
                     // the player's own piece
                     GamePieceData myPiece = new GamePieceData();
                     myPiece.Owner = "Me";
-                    myPiece.Value = Random.Range( 1, 5 );
-                    myPiece.PieceType = Random.Range( 0, 5 );
+                    myPiece.Value = Random.Range( 1, 6 );
+                    myPiece.PieceType = Random.Range( 1, 6 );
                     return myPiece;
                 default:
                     // opponent piece
                     GamePieceData theirPiece = new GamePieceData();
                     theirPiece.Owner = "Them";
-                    theirPiece.Value = Random.Range( 1, 5 );
-                    theirPiece.PieceType = Random.Range( 0, 5 );
+                    theirPiece.Value = Random.Range( 1, 6 );
+                    theirPiece.PieceType = Random.Range( 1, 6 );
                     return theirPiece;
             }
         }
