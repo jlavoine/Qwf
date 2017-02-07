@@ -8,6 +8,7 @@ using Region = PlayFab.ClientModels.Region;
 using MyLibrary;
 using Qwf;
 using Newtonsoft.Json;
+using System;
 
 public class ClientExampleScript : MonoBehaviour
 {
@@ -153,7 +154,8 @@ public class ClientExampleScript : MonoBehaviour
         _network.RegisterHandler(GameServerMsgTypes.MsgRecieverExampleResponse, OnMsgRecieverExampleResponse);
         _network.RegisterHandler(MsgType.Error, OnClientNetworkingError);
         _network.RegisterHandler(MsgType.Disconnect, OnClientDisconnect);
-        _network.RegisterHandler( NetworkMessages.UpdatePlayerHand, OnUpdatePlayerHand );
+
+        RegisterQwfHandlers( _network );        
 
         //If this fails, it will automatically disconnect from the server.
         if (IsLocalNetwork)
@@ -173,10 +175,21 @@ public class ClientExampleScript : MonoBehaviour
          */
     }
 
+    private void RegisterQwfHandlers( NetworkClient i_network ) {
+        i_network.RegisterHandler( NetworkMessages.UpdatePlayerHand, OnUpdatePlayerHand );
+        i_network.RegisterHandler( NetworkMessages.UpdateObstacles, OnUpdateObstacles );
+    }
+
     private void OnUpdatePlayerHand(NetworkMessage netMsg) {
         StringMessage message = netMsg.ReadMessage<StringMessage>();
         PlayerHandUpdateData data = JsonConvert.DeserializeObject<PlayerHandUpdateData>( message.value );
         MyMessenger.Instance.Send<PlayerHandUpdateData>( ClientMessages.UPDATE_HAND, data );
+    }
+
+    private void OnUpdateObstacles(NetworkMessage netMsg) {
+        StringMessage message = netMsg.ReadMessage<StringMessage>();
+        GameObstaclesUpdate data = JsonConvert.DeserializeObject<GameObstaclesUpdate>( message.value );
+        MyMessenger.Instance.Send<GameObstaclesUpdate>( ClientMessages.UPDATE_OBSTACLES, data );
     }
 
     private void OnConnected(NetworkMessage netMsg) {
