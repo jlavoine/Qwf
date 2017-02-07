@@ -21,6 +21,7 @@ public class LogSignalCommand : Command
 
     public override void Execute()
     {
+        Message += "\n";
         switch (LoggerType)
         {
             case LoggerTypes.Info:
