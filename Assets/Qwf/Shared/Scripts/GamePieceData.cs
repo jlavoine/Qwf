@@ -14,7 +14,7 @@ namespace Qwf {
             return data;
         }
 
-        public string GetOwner() {
+        public string GetOwnerId() {
             return Owner;
         }
 

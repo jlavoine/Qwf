@@ -16,7 +16,7 @@ namespace Qwf {
         }
 
         public string GetOwnerId() {
-            return mData.GetOwner();
+            return mData.GetOwnerId();
         }
 
         public bool MatchesPieceType( int i_pieceType ) {
@@ -24,7 +24,7 @@ namespace Qwf {
         }
 
         public bool DoOwnersMatch( string i_ownerId ) {
-            return i_ownerId == mData.GetOwner();
+            return i_ownerId == mData.GetOwnerId();
         }
 
         public bool CanOvertakePiece( IGamePiece i_piece ) {

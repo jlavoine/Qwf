@@ -1,7 +1,7 @@
 ﻿
 namespace Qwf {
     public interface IGamePieceData {
-        string GetOwner();
+        string GetOwnerId();
 
         int GetValue();
         int GetPieceType();

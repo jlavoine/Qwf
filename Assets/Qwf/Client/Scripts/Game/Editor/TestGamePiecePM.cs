@@ -36,7 +36,7 @@ namespace Qwf.Client {
         [Test]
         public void WhenOwnerIsViewingPM_OutlineIsBlue() {
             IGamePieceData mockData = Substitute.For<IGamePieceData>();
-            mockData.GetOwner().Returns( "Joe" );
+            mockData.GetOwnerId().Returns( "Joe" );
 
             GamePiecePM systemUnderTest = new GamePiecePM( mockData, "Joe" );
 
@@ -46,7 +46,7 @@ namespace Qwf.Client {
         [Test]
         public void WhenOwnerIsNotViewingPM_OutlineIsRed() {
             IGamePieceData mockData = Substitute.For<IGamePieceData>();
-            mockData.GetOwner().Returns( "Joe" );
+            mockData.GetOwnerId().Returns( "Joe" );
 
             GamePiecePM systemUnderTest = new GamePiecePM( mockData, "NotJoe" );
 

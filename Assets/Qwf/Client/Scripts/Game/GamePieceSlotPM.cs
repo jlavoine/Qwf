@@ -26,7 +26,7 @@ namespace Qwf.Client {
 
             if ( i_data != null ) {
                 SetPropertiesForValidPieceUpdate( i_data );
-                UpdateGamePieceInSlot( i_data );
+                UpdateGamePieceInSlot( i_data.GetPieceInSlot() );
                 SetPieceInSlotOnSlot();
             } else {
                 SetPropertiesForMissingPieceUpdate();
@@ -36,6 +36,7 @@ namespace Qwf.Client {
         public void AttemptToPlayPieceInSlot( IPlayerHandGamePiecePM i_piecePM ) {
             if ( Slot.CanPlacePieceIntoSlot( i_piecePM.GamePiece ) ) {
                 i_piecePM.Play();
+                UpdateGamePieceInSlot( i_piecePM.GamePiece );
             } else {
                 i_piecePM.InvalidPlayAttempt();
             }
@@ -69,8 +70,8 @@ namespace Qwf.Client {
             GamePieceInSlot = new GamePiecePM( i_data == null ? null : i_data.GetPieceInSlot(), playerId );
         }
 
-        private void UpdateGamePieceInSlot( IGamePieceSlotUpdate i_data ) {
-            GamePieceInSlot.SetProperties( i_data.GetPieceInSlot() );
+        private void UpdateGamePieceInSlot( IGamePieceData i_data ) {
+            GamePieceInSlot.SetProperties( i_data );
         }
     }
 }

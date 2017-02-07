@@ -1,11 +1,6 @@
 ﻿
 namespace Qwf {
-    public interface IGamePiece {
-        int GetPieceType();
-        int GetValue();
-
-        string GetOwnerId();
-
+    public interface IGamePiece : IGamePieceData {
         void Score( IScoreKeeper i_scoreKeeper );
 
         bool MatchesPieceType( int i_pieceType );
