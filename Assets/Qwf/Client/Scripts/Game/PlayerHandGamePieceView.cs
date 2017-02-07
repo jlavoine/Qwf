@@ -28,7 +28,34 @@ namespace Qwf.Client {
         }
 
         public void OnEndDrag( PointerEventData i_eventData ) {
+            TryToMakeMove( i_eventData.pointerCurrentRaycast.gameObject );
             ResetPosition();
+        }
+
+        private void TryToMakeMove( GameObject i_objectDroppedOn ) {
+            bool invalidMove = false;
+
+            if ( i_objectDroppedOn != null ) {
+                GamePieceSlotView slotView = i_objectDroppedOn.GetComponentInParent<GamePieceSlotView>();
+                if ( slotView != null ) {
+                    AttemptMoveToSlot( slotView.PM );
+                }
+                else {
+                    invalidMove = true;
+                }
+            }
+            else {
+                invalidMove = true;
+            }
+
+            if ( invalidMove ) {
+                PM.InvalidPlayAttempt();
+            }
+        }
+
+        private void AttemptMoveToSlot( GamePieceSlotPM i_slotPM ) {
+            i_slotPM.AttemptToPlayPieceInSlot( PM );
+            UnityEngine.Debug.LogError( "Can the incoming piece be placed: " + i_slotPM.Slot.CanPlacePieceIntoSlot( PM.GamePiece ) );
         }
 
         private void BlockRaycasts( bool i_block ) {
