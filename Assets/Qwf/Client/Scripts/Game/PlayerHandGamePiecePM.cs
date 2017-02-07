@@ -3,13 +3,11 @@
 namespace Qwf.Client {
     public class PlayerHandGamePiecePM : GamePiecePM, IPlayerHandGamePiecePM {
         public const string CAN_MOVE_PROPERTY = "CanMovePiece";
-        public const string CAN_SEE_PROPERTY = "CanSeePiece";
 
         public PlayerHandGamePiecePM( IGamePieceData i_piece, string i_playerViewing ) : base( i_piece, i_playerViewing ) {
             ListenForMessages( true );
 
             SetCanMoveProperty( true );
-            SetCanSeeProperty( true );
         }
 
         public override void Dispose() {
@@ -20,7 +18,7 @@ namespace Qwf.Client {
 
         public void Play() {
             MyMessenger.Instance.Send( ClientGameEvents.MADE_MOVE );
-            SetCanSeeProperty( false );
+            SetVisibility( false );
         }
 
         public void AttemptingToPlay() {            
@@ -46,11 +44,6 @@ namespace Qwf.Client {
 
         private void SetCanMoveProperty( bool i_canMove ) {
             ViewModel.SetProperty( CAN_MOVE_PROPERTY, i_canMove );
-        }
-
-        private void SetCanSeeProperty( bool i_canSee ) {
-            float fAlphaValue = i_canSee ? 1f : 0f;
-            ViewModel.SetProperty( CAN_SEE_PROPERTY, fAlphaValue );
         }
     }
 }

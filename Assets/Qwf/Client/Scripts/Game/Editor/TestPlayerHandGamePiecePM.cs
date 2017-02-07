@@ -29,7 +29,7 @@ namespace Qwf.Client {
             PlayerHandGamePiecePM systemUnderTest = new PlayerHandGamePiecePM( Substitute.For<IGamePieceData>(), "" );
 
             Assert.IsTrue( systemUnderTest.ViewModel.GetPropertyValue<bool>( PlayerHandGamePiecePM.CAN_MOVE_PROPERTY ) );
-            Assert.AreEqual( 1f, systemUnderTest.ViewModel.GetPropertyValue<float>( PlayerHandGamePiecePM.CAN_SEE_PROPERTY ) );
+            Assert.AreEqual( 1f, systemUnderTest.ViewModel.GetPropertyValue<float>( PlayerHandGamePiecePM.VISIBLE_PROPERTY ) );
         }
 
         [Test]
@@ -56,7 +56,7 @@ namespace Qwf.Client {
 
             systemUnderTest.Play();
 
-            Assert.AreEqual( 0f, systemUnderTest.ViewModel.GetPropertyValue<float>( PlayerHandGamePiecePM.CAN_SEE_PROPERTY ) );
+            Assert.AreEqual( 0f, systemUnderTest.ViewModel.GetPropertyValue<float>( PlayerHandGamePiecePM.VISIBLE_PROPERTY ) );
         }
 
         [Test]
