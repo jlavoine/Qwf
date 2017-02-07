@@ -6,6 +6,8 @@ namespace Qwf.Client {
 
         public PlayerHandGamePiecePM( IGamePieceData i_piece, string i_playerViewing ) : base( i_piece, i_playerViewing ) {
             ListenForMessages( true );
+
+            SetCanMoveProperty( true );
         }
 
         public override void Dispose() {
@@ -24,7 +26,11 @@ namespace Qwf.Client {
         }
 
         public void OnMaxMovesMade() {
+            SetCanMoveProperty( false );
+        }
 
+        private void SetCanMoveProperty( bool i_canMove ) {
+            ViewModel.SetProperty( CAN_MOVE_PROPERTY, i_canMove );
         }
     }
 }

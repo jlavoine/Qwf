@@ -23,5 +23,21 @@ namespace Qwf.Client {
 
             MyMessenger.Instance.Received().RemoveListener( ClientGameEvents.MAX_MOVES_MADE, Arg.Any<Callback>() );
         }
+
+        [Test]
+        public void WhenCreating_CanMovePropertyIsTrue() {
+            PlayerHandGamePiecePM systemUnderTest = new PlayerHandGamePiecePM( Substitute.For<IGamePieceData>(), "" );
+
+            Assert.IsTrue( systemUnderTest.ViewModel.GetPropertyValue<bool>( PlayerHandGamePiecePM.CAN_MOVE_PROPERTY ) );
+        }
+
+        [Test]
+        public void WhenMaxMovesMade_CanMovePropertyIsFalse() {
+            PlayerHandGamePiecePM systemUnderTest = new PlayerHandGamePiecePM( Substitute.For<IGamePieceData>(), "" );
+
+            systemUnderTest.OnMaxMovesMade();
+
+            Assert.IsFalse( systemUnderTest.ViewModel.GetPropertyValue<bool>( PlayerHandGamePiecePM.CAN_MOVE_PROPERTY ) );
+        }
     }
 }
