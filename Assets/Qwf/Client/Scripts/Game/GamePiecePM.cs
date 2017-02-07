@@ -7,7 +7,7 @@ namespace Qwf.Client {
         public const string VALUE_PROPERTY = "Value";
         public const string ICON_PROPERTY = "PieceType";
         public const string OUTLINE_PROPERTY = "OutlineColor";
-        public const string VISIBLE_PROPERTY = "IsVisible";
+        public const string VISIBLE_PROPERTY = "IsVisible";        
 
         private IGamePiece mGamePiece;
         public IGamePiece GamePiece { get { return mGamePiece; } private set { mGamePiece = value; } }
@@ -18,6 +18,10 @@ namespace Qwf.Client {
             mPlayerViewing = i_playerViewing;
 
             SetProperties( i_piece );   
+        }
+
+        public virtual void Dispose() {
+
         }
 
         public void SetProperties( IGamePieceData i_piece ) {

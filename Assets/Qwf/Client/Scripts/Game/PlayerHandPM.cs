@@ -21,6 +21,10 @@ namespace Qwf.Client {
 
         public void Dispose() {
             ListenForMessages( false );
+
+            foreach ( IGamePiecePM pm in GamePiecePMs ) {
+                pm.Dispose();
+            }
         }
 
         private void ListenForMessages( bool i_shouldListen ) {
@@ -34,7 +38,7 @@ namespace Qwf.Client {
         private void CreateGamePiecePMs( List<IGamePieceData> i_gamePieces, string i_playerID ) { 
             mGamePiecePMs = new List<IGamePiecePM>();
             foreach ( IGamePieceData gamePiece in i_gamePieces ) {
-                mGamePiecePMs.Add( new GamePiecePM( gamePiece, i_playerID ) );
+                mGamePiecePMs.Add( new PlayerHandGamePiecePM( gamePiece, i_playerID ) );
             }
 
             AddMissingGamePiecesIfNecessary( i_playerID );

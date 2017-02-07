@@ -24,14 +24,14 @@ namespace Qwf.Client {
         }
 
         private void CreateGamePieceViews( PlayerHandPM i_pm  ) {
-            foreach ( GamePiecePM piecePM in i_pm.GamePiecePMs ) {
+            foreach ( PlayerHandGamePiecePM piecePM in i_pm.GamePiecePMs ) {
                 CreateGamePieceView( piecePM );
             }
         }
 
         private void CreateGamePieceView( GamePiecePM i_pm ) {
             GameObject viewObject = gameObject.InstantiateUI( GamePieceViewPrefab, GamePieceViewArea );
-            GamePieceView view = viewObject.GetComponent<GamePieceView>();
+            PlayerHandGamePieceView view = viewObject.GetComponent<PlayerHandGamePieceView>();
             view.Init( i_pm );
 
             mPieceViews.Add( view );
