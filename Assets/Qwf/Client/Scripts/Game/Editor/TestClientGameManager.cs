@@ -14,6 +14,7 @@ namespace Qwf.Client {
             ClientGameManager systemUnderTest = new ClientGameManager();
 
             MyMessenger.Instance.Received().AddListener( ClientGameEvents.MADE_MOVE, Arg.Any<Callback>() );
+            MyMessenger.Instance.Received().AddListener( ClientGameEvents.RESET_MOVES, Arg.Any<Callback>() );
         }
 
         [Test]
@@ -23,6 +24,7 @@ namespace Qwf.Client {
             systemUnderTest.Dispose();
 
             MyMessenger.Instance.Received().RemoveListener( ClientGameEvents.MADE_MOVE, Arg.Any<Callback>() );
+            MyMessenger.Instance.Received().RemoveListener( ClientGameEvents.RESET_MOVES, Arg.Any<Callback>() );
         }
 
         [Test]
@@ -45,6 +47,16 @@ namespace Qwf.Client {
             }
 
             MyMessenger.Instance.DidNotReceive().Send( ClientGameEvents.MAX_MOVES_MADE );
+        }
+
+        [Test]
+        public void WhenMovesAreReset_MoveCounterIsZero() {
+            ClientGameManager systemUnderTest = new ClientGameManager();
+            systemUnderTest.MovesMade = 2;
+
+            systemUnderTest.OnResetMoves();
+
+            Assert.AreEqual( 0, systemUnderTest.MovesMade );
         }
     }
 }
