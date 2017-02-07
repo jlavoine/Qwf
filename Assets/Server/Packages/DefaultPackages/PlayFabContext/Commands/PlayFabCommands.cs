@@ -712,7 +712,6 @@ public class GetTitleDataCommand : Command
         PlayFabServerAPI.GetTitleData(Request, (result) =>
         {
             Release();
-            UnityEngine.Debug.LogError( "Sending the thing" );
             ResponseSignal.Dispatch(result);
         }, PlayFabErrorHandler.HandlePlayFabError);
     }

@@ -54,8 +54,7 @@ public class NewExampleMediator : Mediator {
     }
 
     private void OnUserDisconnected( int connId, string playFabId ) {
-        UnityEngine.Debug.Log( "From my mediator, " + playFabId + " disconnected" );
-        Logger.Dispatch( LoggerTypes.Info, string.Format( "Hey there was a disconnection", playFabId ) );
+        Logger.Dispatch( LoggerTypes.Info, string.Format( "Player disconnection", playFabId ) );
     }
 
     private void TestNetworking() {
