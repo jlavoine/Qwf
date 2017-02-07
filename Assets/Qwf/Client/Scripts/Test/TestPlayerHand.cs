@@ -8,13 +8,6 @@ namespace Qwf.Client {
         public PlayerHandView View;
 
         void Start() {
-            List<GamePieceData> pieces = CreateRandom( Random.Range( 4, 6 ) );            
-            List<IGamePieceData> pieces2 = new List<IGamePieceData>();
-            foreach (GamePieceData piece in pieces ) {
-                pieces2.Add( piece );
-            }
-
-            View.Init( new PlayerHandPM( pieces2, "Me" ) );
         }
 
         public List<GamePieceData> CreateRandom( int i_num ) {

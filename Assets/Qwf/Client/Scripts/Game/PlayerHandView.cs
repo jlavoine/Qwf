@@ -10,6 +10,11 @@ namespace Qwf.Client {
         private List<PlayerHandGamePieceView> mPieceViews = new List<PlayerHandGamePieceView>();
         private PlayerHandPM mPM;
 
+        void Start() {
+            PlayerHandPM pm = new PlayerHandPM( new List<IGamePieceData>(), BackendManager.Instance.GetPlayerId() );
+            Init( pm );
+        }
+
         public void Init( PlayerHandPM i_pm ) {
             mPM = i_pm;
             SetModel( i_pm.ViewModel );
