@@ -6,13 +6,11 @@ using MyLibrary;
 namespace Qwf.Client {
     public class TestObstaclesView : MonoBehaviour {
         public GameObstaclesView View;
+        private GameObstaclesPM mPM;
 
         // Use this for initialization
         void Start() {
-            IGameObstaclesUpdate randomUpdate = CreateRandomUpdate( 3 );
-            GameObstaclesPM pm = new GameObstaclesPM( randomUpdate );
 
-            View.Init( pm );
         }
 
         private IGameObstaclesUpdate CreateRandomUpdate( int i_numObstacles ) {
@@ -84,8 +82,17 @@ namespace Qwf.Client {
         }
 
         private void SendRandomUpdate() {
-            IGameObstaclesUpdate randomUpdate = CreateRandomUpdate( Random.Range(1,4) );
-            MyMessenger.Instance.Send<IGameObstaclesUpdate>( ClientMessages.UPDATE_OBSTACLES, randomUpdate );
+            if ( mPM == null ) {
+                IGameObstaclesUpdate randomUpdate = CreateRandomUpdate( 3 );
+                mPM = new GameObstaclesPM( randomUpdate );
+                MyMessenger.Instance.Send<IGameObstaclesUpdate>( ClientMessages.UPDATE_OBSTACLES, randomUpdate );
+
+                View.Init( mPM );
+            }
+            else {
+                IGameObstaclesUpdate randomUpdate = CreateRandomUpdate( Random.Range( 1, 4 ) );
+                MyMessenger.Instance.Send<IGameObstaclesUpdate>( ClientMessages.UPDATE_OBSTACLES, randomUpdate );
+            }
         }
     }
 }
