@@ -5,9 +5,10 @@ using strange.extensions.mediation.api;
 namespace Qwf.Server {
     public class GameServerManager : StrangePackage {
 
-        public override void MapBindings( ICommandBinder commandBinder, ICrossContextInjectionBinder injectionBinder, IMediationBinder mediationBinder ) {
-            // mediationBinder.Bind<NewExampleView>().To<NewExampleMediator>();
+        public override void MapBindings( ICommandBinder commandBinder, ICrossContextInjectionBinder injectionBinder, IMediationBinder mediationBinder ) {            
+            mediationBinder.Bind<CreateGameBoardView>().To<CreateGameBoardMediator>();
 
+            injectionBinder.Bind<GameBoardCreatedSignal>().ToSingleton();
             injectionBinder.Bind<IGameRules>().To<GameRules>();
             injectionBinder.Bind<IScoreKeeper>().To<ScoreKeeper>().ToSingleton();
 
