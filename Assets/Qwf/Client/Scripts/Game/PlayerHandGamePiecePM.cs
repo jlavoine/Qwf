@@ -1,7 +1,7 @@
 ﻿using MyLibrary;
 
 namespace Qwf.Client {
-    public class PlayerHandGamePiecePM : GamePiecePM {
+    public class PlayerHandGamePiecePM : GamePiecePM, IPlayerHandGamePiecePM {
         public const string CAN_MOVE_PROPERTY = "CanMovePiece";
 
         public PlayerHandGamePiecePM( IGamePieceData i_piece, string i_playerViewing ) : base( i_piece, i_playerViewing ) {
@@ -14,6 +14,10 @@ namespace Qwf.Client {
             base.Dispose();
 
             ListenForMessages( false );
+        }
+
+        public void Play() {
+            MyMessenger.Instance.Send( ClientGameEvents.MADE_MOVE );
         }
 
         private void ListenForMessages( bool i_listen ) {
