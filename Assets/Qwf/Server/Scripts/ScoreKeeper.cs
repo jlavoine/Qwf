@@ -6,7 +6,7 @@ namespace Qwf {
 
         public ScoreKeeper() { }
 
-        public void AddPlayer( IGamePlayer i_player ) {
+        public void AddPlayer( IGamePlayer i_player ) {            
             int noScore = 0;
             mPlayerScores.Add( i_player.Id, noScore );
         }

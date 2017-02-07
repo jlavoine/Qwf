@@ -11,6 +11,7 @@ namespace Qwf.Server {
         [Inject] public string PlayFabId { get; set; }
         [Inject] public LogSignal Logger { get; set; }
         [Inject] public IGameRules GameRules { get; set; }
+        [Inject] public IScoreKeeper ScoreKeeper { get; set; }
 
         [Inject] public SendGamePlayerHandSignal UpdatePlayerHandSignal { get; set; }
 
@@ -28,6 +29,7 @@ namespace Qwf.Server {
                 foreach ( KeyValuePair<string, string> kvp in result.Data ) {
                     PlayerDeckData deckData = JsonConvert.DeserializeObject<PlayerDeckData>( kvp.Value );
                     IGamePlayer player = new GamePlayer( GameRules, deckData, PlayFabId );
+                    ScoreKeeper.AddPlayer( player );
                     UpdatePlayerHandSignal.Dispatch( player );
                 }
             } );
