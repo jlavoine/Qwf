@@ -28,5 +28,15 @@ namespace Qwf {
             int score = systemUnderTest.GetPlayerScore( mockPlayer );
             Assert.AreEqual( 100, score );
         }
+
+        [Test]
+        public void ScoreKeeper_GetNumPlayers_IsAccurate() {
+            ScoreKeeper systemUnderTest = new ScoreKeeper();
+
+            Assert.AreEqual( 0, systemUnderTest.GetNumPlayers() );
+
+            systemUnderTest.AddPlayer( Substitute.For<IGamePlayer>() );
+            Assert.AreEqual( 1, systemUnderTest.GetNumPlayers() );
+        }
     }
 }

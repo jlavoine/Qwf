@@ -15,6 +15,10 @@ namespace Qwf {
             return mPlayerScores[i_player.Id];
         }
 
+        public int GetNumPlayers() {
+            return mPlayerScores.Count;
+        }
+
         public void AddPointsToPlayer( IGamePlayer i_player, int i_points ) {
             AddPointsToPlayer( i_player.Id, i_points );
         }

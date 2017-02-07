@@ -14,6 +14,8 @@ namespace Qwf.Server {
 
         [Inject] public IGameRules GameRules { get; set; }
 
+        [Inject] public GameBoardCreatedSignal GameBoardCreatedSignal { get; set; }
+
         [Inject] public GetTitleDataSignal GetTitleDataSignal { get; set; }
         [Inject] public GetTitleDataResponseSignal GetTitleDataResponseSignal { get; set; }
 
@@ -44,6 +46,7 @@ namespace Qwf.Server {
             }
 
             GameBoard board = new GameBoard( allObstacles, GameRules.GetMaxCurrentObstacles() );
+            GameBoardCreatedSignal.Dispatch( board );
         }
 
         private List<IGamePieceSlot> CreateSlotsFromObstacle( GameObstacleData i_obstacleData ) {
