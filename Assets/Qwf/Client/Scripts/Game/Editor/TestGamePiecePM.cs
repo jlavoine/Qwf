@@ -62,5 +62,12 @@ namespace Qwf.Client {
             Assert.AreEqual( 0, systemUnderTest.ViewModel.GetPropertyValue<int>( GamePiecePM.VALUE_PROPERTY ) );
             Assert.AreEqual( 0f, systemUnderTest.ViewModel.GetPropertyValue<float>( GamePiecePM.VISIBLE_PROPERTY ) );
         }
+
+        [Test]
+        public void WhenSettingPropertiesWithNullPieceData_GamePieceVariableIsNull() {
+            GamePiecePM systemUnderTest = new GamePiecePM( null, "Joe" );
+
+            Assert.IsNull( systemUnderTest.GamePiece );
+        }
     }
 }

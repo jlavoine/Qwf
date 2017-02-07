@@ -13,8 +13,8 @@ namespace Qwf.Client {
         public IGamePieceSlot Slot { get { return mSlot; } private set { mSlot = value; } }
 
         public GamePieceSlotPM( IGamePieceSlotUpdate i_data ) {
-            SetProperties( i_data );
             CreateGamePieceInSlotPM( i_data );
+            SetProperties( i_data );            
         }
 
         public void SetVisibility( bool i_visible ) {
@@ -26,6 +26,8 @@ namespace Qwf.Client {
 
             if ( i_data != null ) {
                 SetPropertiesForValidPieceUpdate( i_data );
+                UpdateGamePieceInSlot( i_data );
+                SetPieceInSlotOnSlot();
             } else {
                 SetPropertiesForMissingPieceUpdate();
             }
@@ -33,6 +35,10 @@ namespace Qwf.Client {
 
         private void SetSlot( IGamePieceSlotUpdate i_data ) {
             Slot = new GamePieceSlot( i_data );
+        }
+
+        private void SetPieceInSlotOnSlot() {
+            Slot.PlacePieceIntoSlot( GamePieceInSlot.GamePiece );
         }
 
         private void SetPropertiesForValidPieceUpdate( IGamePieceSlotUpdate i_data ) {
@@ -53,6 +59,10 @@ namespace Qwf.Client {
         private void CreateGamePieceInSlotPM( IGamePieceSlotUpdate i_data ) {
             string playerId = BackendManager.Instance.GetPlayerId();
             GamePieceInSlot = new GamePiecePM( i_data == null ? null : i_data.GetPieceInSlot(), playerId );
+        }
+
+        private void UpdateGamePieceInSlot( IGamePieceSlotUpdate i_data ) {
+            GamePieceInSlot.SetProperties( i_data.GetPieceInSlot() );
         }
     }
 }

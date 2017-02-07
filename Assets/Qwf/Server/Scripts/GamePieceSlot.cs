@@ -2,7 +2,7 @@
 namespace Qwf {
     public class GamePieceSlot : IGamePieceSlot {
         private IGamePieceSlotData mData;
-        private IServerGamePiece mCurrentPiece;
+        private IGamePiece mCurrentPiece;
 
         public GamePieceSlot( IGamePieceSlotData i_data ) {
             mData = i_data;
@@ -16,7 +16,7 @@ namespace Qwf {
             return mData.GetScoreValue();
         }
 
-        public bool CanPlacePieceIntoSlot( IServerGamePiece i_piece ) {
+        public bool CanPlacePieceIntoSlot( IGamePiece i_piece ) {
             if ( !i_piece.MatchesPieceType( GetGamePieceType() ) ) {
                 return false;
             }
@@ -24,7 +24,7 @@ namespace Qwf {
             if ( IsEmpty() ) {
                 return true;
             } else {
-                if ( GetCurrentPiece().DoOwnersMatch( i_piece.GetOwner().Id ) ) {
+                if ( GetCurrentPiece().DoOwnersMatch( i_piece.GetOwnerId() ) ) {
                     return false;
                 } else {
                     return i_piece.CanOvertakePiece( GetCurrentPiece() );
@@ -32,11 +32,11 @@ namespace Qwf {
             }
         }
 
-        public void PlacePieceIntoSlot( IServerGamePiece i_piece ) {
+        public void PlacePieceIntoSlot( IGamePiece i_piece ) {
             mCurrentPiece = i_piece;
         }
 
-        public IServerGamePiece GetCurrentPiece() {
+        public IGamePiece GetCurrentPiece() {
             return mCurrentPiece;
         }
 

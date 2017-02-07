@@ -49,13 +49,13 @@ namespace Qwf {
 
         [Test]
         public void WhenScoringPiece_PointsAwardedToOwner() {
-            GamePieceData data = new GamePieceData() { PieceType = PIECE_TYPE_A, Value = PIECE_VALUE };
+            GamePieceData data = new GamePieceData() { PieceType = PIECE_TYPE_A, Value = PIECE_VALUE, Owner = "Me" };
             ServerGamePiece systemUnderTest = new ServerGamePiece( mMockOwner, data );
             IScoreKeeper mockScoreKeeper = Substitute.For<IScoreKeeper>();
 
             systemUnderTest.Score( mockScoreKeeper );
 
-            mockScoreKeeper.Received().AddPointsToPlayer( mMockOwner, systemUnderTest.GetValue() );
+            mockScoreKeeper.Received().AddPointsToPlayer( "Me", systemUnderTest.GetValue() );
         }
 
         [Test]

@@ -9,7 +9,9 @@ namespace Qwf.Client {
         public const string OUTLINE_PROPERTY = "OutlineColor";
         public const string VISIBLE_PROPERTY = "IsVisible";
 
-        private IGamePieceData mGamePiece;
+        private IGamePiece mGamePiece;
+        public IGamePiece GamePiece { get { return mGamePiece; } private set { mGamePiece = value; } }
+
         private string mPlayerViewing;
 
         public GamePiecePM( IGamePieceData i_piece, string i_playerViewing ) {
@@ -19,12 +21,24 @@ namespace Qwf.Client {
         }
 
         public void SetProperties( IGamePieceData i_piece ) {
-            mGamePiece = i_piece;
-
+            SetGamePiece( i_piece );
+                      
             if ( i_piece != null ) {
                 SetPropertiesForValidData( i_piece );
             } else {
                 SetPropertiesForMissingData();
+            }
+        }
+
+        public int GetValue() {
+            return GamePiece.GetValue();
+        }
+
+        private void SetGamePiece( IGamePieceData i_pieceData ) {
+            if ( i_pieceData != null ) {
+                GamePiece = new GamePiece( i_pieceData );
+            } else {
+                GamePiece = null;
             }
         }
 
@@ -63,7 +77,7 @@ namespace Qwf.Client {
         }
 
         private bool DoesViewingPlayerOwnGamePiece() {
-            return mPlayerViewing == mGamePiece.GetOwner();
+            return mPlayerViewing == GamePiece.GetOwnerId();
         }
     }
 }
