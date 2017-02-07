@@ -13,6 +13,7 @@ namespace Qwf.Client {
             PlayerHandGamePiecePM systemUnderTest = new PlayerHandGamePiecePM( Substitute.For<IGamePieceData>(), "" );
 
             MyMessenger.Instance.Received().AddListener( ClientGameEvents.MAX_MOVES_MADE, Arg.Any<Callback>() );
+            MyMessenger.Instance.Received().AddListener( ClientGameEvents.RESET_MOVES, Arg.Any<Callback>() );
         }
 
         [Test]
@@ -22,6 +23,7 @@ namespace Qwf.Client {
             systemUnderTest.Dispose();
 
             MyMessenger.Instance.Received().RemoveListener( ClientGameEvents.MAX_MOVES_MADE, Arg.Any<Callback>() );
+            MyMessenger.Instance.Received().RemoveListener( ClientGameEvents.RESET_MOVES, Arg.Any<Callback>() );
         }
 
         [Test]
@@ -76,6 +78,25 @@ namespace Qwf.Client {
             systemUnderTest.InvalidPlayAttempt();
 
             Assert.IsTrue( systemUnderTest.ViewModel.GetPropertyValue<bool>( PlayerHandGamePiecePM.CAN_MOVE_PROPERTY ) );
+        }
+
+        [Test]
+        public void AfterMovesAreReset_IfPieceWasPlayed_IsNowVisible() {
+            PlayerHandGamePiecePM systemUnderTest = new PlayerHandGamePiecePM( Substitute.For<IGamePieceData>(), "" );
+            systemUnderTest.ViewModel.SetProperty( PlayerHandGamePiecePM.VISIBLE_PROPERTY, 0f );
+
+            systemUnderTest.OnMovesReset();
+
+            Assert.AreEqual( 1f, systemUnderTest.ViewModel.GetPropertyValue<float>( PlayerHandGamePiecePM.VISIBLE_PROPERTY ) );
+        }
+
+        [Test]
+        public void AfterMovesAreReset_IfPieceDataWasNull_StillNotVisible() {
+            PlayerHandGamePiecePM systemUnderTest = new PlayerHandGamePiecePM( null, "" );
+
+            systemUnderTest.OnMovesReset();
+
+            Assert.AreEqual( 0f, systemUnderTest.ViewModel.GetPropertyValue<float>( PlayerHandGamePiecePM.VISIBLE_PROPERTY ) );
         }
     }
 }

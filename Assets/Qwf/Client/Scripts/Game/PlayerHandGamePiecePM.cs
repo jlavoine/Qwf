@@ -32,14 +32,22 @@ namespace Qwf.Client {
         private void ListenForMessages( bool i_listen ) {
             if ( i_listen ) {
                 MyMessenger.Instance.AddListener( ClientGameEvents.MAX_MOVES_MADE, OnMaxMovesMade );
+                MyMessenger.Instance.AddListener( ClientGameEvents.RESET_MOVES, OnMovesReset );
             }
             else {
                 MyMessenger.Instance.RemoveListener( ClientGameEvents.MAX_MOVES_MADE, OnMaxMovesMade );
+                MyMessenger.Instance.RemoveListener( ClientGameEvents.RESET_MOVES, OnMovesReset );
             }
         }
 
         public void OnMaxMovesMade() {
             SetCanMoveProperty( false );
+        }
+
+        public void OnMovesReset() {
+            if ( GamePiece != null ) {
+                SetVisibility( true );
+            }
         }
 
         private void SetCanMoveProperty( bool i_canMove ) {

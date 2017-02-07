@@ -10,7 +10,7 @@ namespace Qwf.Client {
         public const string VISIBLE_PROPERTY = "IsVisible";        
 
         private IGamePiece mGamePiece;
-        public IGamePiece GamePiece { get { return mGamePiece; } private set { mGamePiece = value; } }
+        public IGamePiece GamePiece { get { return mGamePiece; } set { mGamePiece = value; } }
 
         private string mPlayerViewing;
 
