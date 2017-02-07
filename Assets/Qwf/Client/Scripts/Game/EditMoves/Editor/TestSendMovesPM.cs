@@ -31,7 +31,26 @@ namespace Qwf.Client {
 
             MyMessenger.Instance.Received().RemoveListener( ClientGameEvents.MADE_MOVE, Arg.Any<Callback>() );
             MyMessenger.Instance.Received().RemoveListener( ClientGameEvents.RESET_MOVES, Arg.Any<Callback>() );
+        }
 
+        [Test]
+        public void WhenMoveIsMade_IsVisibleIsTrue() {
+            SendMovesPM systemUnderTest = new SendMovesPM();
+            systemUnderTest.ViewModel.SetProperty( SendMovesPM.VISIBLE_PROPERTY, 0f );
+
+            systemUnderTest.OnMadeMove();
+
+            Assert.AreEqual( 1f, systemUnderTest.ViewModel.GetPropertyValue<float>( SendMovesPM.VISIBLE_PROPERTY ) );
+        }
+
+        [Test]
+        public void WhenMovesReset_IsVisibleIsFalse() {
+            SendMovesPM systemUnderTest = new SendMovesPM();
+            systemUnderTest.ViewModel.SetProperty( SendMovesPM.VISIBLE_PROPERTY, 1f );
+
+            systemUnderTest.OnResetMoves();
+
+            Assert.AreEqual( 0f, systemUnderTest.ViewModel.GetPropertyValue<float>( SendMovesPM.VISIBLE_PROPERTY ) );
         }
     }
 }

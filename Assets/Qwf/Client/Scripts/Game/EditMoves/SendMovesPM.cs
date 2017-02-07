@@ -25,11 +25,11 @@ namespace Qwf.Client {
         }
 
         public void OnMadeMove() {
-
+            SetVisibleProperty( true );
         }
 
         public void OnResetMoves() {
-
+            SetVisibleProperty( false );
         }
 
         private void SetVisibleProperty( bool i_visible ) {
