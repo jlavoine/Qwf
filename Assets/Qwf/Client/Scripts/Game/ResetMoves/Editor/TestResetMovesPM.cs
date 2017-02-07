@@ -21,6 +21,7 @@ namespace Qwf.Client {
             ResetMovesPM systemUnderTest = new ResetMovesPM();
 
             MyMessenger.Instance.Received().AddListener( ClientGameEvents.MADE_MOVE, Arg.Any<Callback>() );
+            MyMessenger.Instance.Received().AddListener<IGameObstaclesUpdate>( ClientMessages.UPDATE_OBSTACLES, Arg.Any<Callback<IGameObstaclesUpdate>>() );
         }
 
         [Test]
@@ -30,6 +31,7 @@ namespace Qwf.Client {
             systemUnderTest.Dispose();
 
             MyMessenger.Instance.Received().RemoveListener( ClientGameEvents.MADE_MOVE, Arg.Any<Callback>() );
+            MyMessenger.Instance.Received().RemoveListener<IGameObstaclesUpdate>( ClientMessages.UPDATE_OBSTACLES, Arg.Any<Callback<IGameObstaclesUpdate>>() );
         }
 
         [Test]
@@ -51,6 +53,15 @@ namespace Qwf.Client {
         }
 
         [Test]
+        public void WhenMovesAreReset_CachedObstaclesUpdateIsSentOut() {
+            ResetMovesPM systemUnderTest = new ResetMovesPM();
+
+            systemUnderTest.ResetMoves();
+
+            MyMessenger.Instance.Received().Send<IGameObstaclesUpdate>( ClientMessages.UPDATE_OBSTACLES, Arg.Any<IGameObstaclesUpdate>() );
+        }
+
+        [Test]
         public void WhenMovesAreReset_IsVisiblePropertyIsFalse() {
             ResetMovesPM systemUnderTest = new ResetMovesPM();
             systemUnderTest.ViewModel.SetProperty( ResetMovesPM.IS_VISIBLE_PROPERTY, 1f );
@@ -58,6 +69,16 @@ namespace Qwf.Client {
             systemUnderTest.ResetMoves();
 
             AssertIsVisibleProperty( systemUnderTest, false );
+        }
+
+        [Test]
+        public void OnReceivingObstaclesUpdate_UpdateIsCached() {
+            IGameObstaclesUpdate mockUpdate = Substitute.For<IGameObstaclesUpdate>();
+            ResetMovesPM systemUnderTest = new ResetMovesPM();
+
+            systemUnderTest.OnUpdateObstacles( mockUpdate );
+
+            Assert.AreEqual( mockUpdate, systemUnderTest.CachedUpdate );
         }
 
         private void AssertIsVisibleProperty( ResetMovesPM i_systemUnderTest, bool i_visible ) {
