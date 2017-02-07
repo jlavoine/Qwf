@@ -47,6 +47,7 @@ namespace Qwf.Client {
         public void OnMovesReset() {
             if ( GamePiece != null ) {
                 SetVisibility( true );
+                SetCanMoveProperty( true );
             }
         }
 

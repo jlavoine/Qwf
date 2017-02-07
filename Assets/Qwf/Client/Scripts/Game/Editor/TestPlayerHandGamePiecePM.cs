@@ -91,6 +91,16 @@ namespace Qwf.Client {
         }
 
         [Test]
+        public void AfterMovesAreReset_IfPieceWasPlayed_CanNowMoveAgain() {
+            PlayerHandGamePiecePM systemUnderTest = new PlayerHandGamePiecePM( Substitute.For<IGamePieceData>(), "" );
+            systemUnderTest.ViewModel.SetProperty( PlayerHandGamePiecePM.CAN_MOVE_PROPERTY, false );
+
+            systemUnderTest.OnMovesReset();
+
+            Assert.IsTrue( systemUnderTest.ViewModel.GetPropertyValue<bool>( PlayerHandGamePiecePM.CAN_MOVE_PROPERTY ) );
+        }
+
+        [Test]
         public void AfterMovesAreReset_IfPieceDataWasNull_StillNotVisible() {
             PlayerHandGamePiecePM systemUnderTest = new PlayerHandGamePiecePM( null, "" );
 
