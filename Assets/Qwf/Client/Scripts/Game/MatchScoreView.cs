@@ -6,9 +6,13 @@ namespace Qwf.Client {
     public class MatchScoreView : GroupView {
         private MatchScorePM mPM;
 
-        public void Init( MatchScorePM i_pm ) {
-            mPM = i_pm;
-            SetModel( i_pm.ViewModel );
+        void Start() {
+            Init();
+        }
+
+        public void Init() {
+            mPM = new MatchScorePM( BackendManager.Instance.GetPlayerId() );
+            SetModel( mPM.ViewModel );
         }
 
         protected override void OnDestroy() {

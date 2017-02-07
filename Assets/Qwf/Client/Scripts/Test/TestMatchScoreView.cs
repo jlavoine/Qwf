@@ -9,20 +9,7 @@ namespace Qwf.Client {
         public MatchScoreView ScoreView;
 
         // Use this for initialization
-        void Start() {
-            /*MatchScoreUpdateData test = new MatchScoreUpdateData();
-            test.Scores = new Dictionary<string, int>();
-            test.Scores.Add( "Hi", 1001 );
-
-            string json = JsonConvert.SerializeObject( test );
-            UnityEngine.Debug.LogError( test );
-
-            IMatchScoreUpdateData test2 = JsonConvert.DeserializeObject<MatchScoreUpdateData>( json );
-            UnityEngine.Debug.LogError( test2.GetScoreForPlayer( "Hi" ) );*/
-
-            MatchScorePM pm = new MatchScorePM( "Me" );
-
-            ScoreView.Init( pm );
+        void Start() {            
         }
 
         // Update is called once per frame
