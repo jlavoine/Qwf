@@ -10,7 +10,7 @@ namespace Qwf.Client {
         public GamePiecePM GamePieceInSlot { get { return mGamePieceInSlot; } private set { mGamePieceInSlot = value; } }
 
         private IGamePieceSlot mSlot;
-        public IGamePieceSlot Slot { get { return mSlot; } private set { mSlot = value; } }
+        public IGamePieceSlot Slot { get { return mSlot; } set { mSlot = value; } }
 
         public GamePieceSlotPM( IGamePieceSlotUpdate i_data ) {
             CreateGamePieceInSlotPM( i_data );
@@ -30,6 +30,12 @@ namespace Qwf.Client {
                 SetPieceInSlotOnSlot();
             } else {
                 SetPropertiesForMissingPieceUpdate();
+            }
+        }
+
+        public void AttemptToPlayPieceInSlot( IPlayerHandGamePiecePM i_piecePM ) {
+            if ( Slot.CanPlacePieceIntoSlot( i_piecePM.GamePiece ) ) {
+                i_piecePM.Play();
             }
         }
 

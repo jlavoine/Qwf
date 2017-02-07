@@ -32,5 +32,31 @@ namespace Qwf.Client {
             Assert.AreEqual( "0", systemUnderTest.ViewModel.GetPropertyValue<string>( GamePieceSlotPM.SLOT_PIECE_TYPE_PROPERTY ) );
             Assert.AreEqual( 0f, systemUnderTest.ViewModel.GetPropertyValue<float>( GamePieceSlotPM.VISIBLE_PROPERTY ) );
         }
+
+        [Test]
+        public void WhenAttemptingToMovePieceIntoSlot_IfValidMove_PieceIsPlayed() {
+            IGamePieceSlot mockSlot = Substitute.For<IGamePieceSlot>();
+            mockSlot.CanPlacePieceIntoSlot( Arg.Any<IGamePiece>() ).Returns( true );
+            GamePieceSlotPM systemUnderTest = new GamePieceSlotPM( null );
+            systemUnderTest.Slot = mockSlot;
+
+            IPlayerHandGamePiecePM mockPlayerHandPiece = Substitute.For<IPlayerHandGamePiecePM>();
+            systemUnderTest.AttemptToPlayPieceInSlot( mockPlayerHandPiece );
+
+            mockPlayerHandPiece.Received( 1 ).Play();
+        }
+
+        [Test]
+        public void WhenAttemptingToMovePieceIntoSlot_IfNotValidMove_PieceIsNotPlayed() {
+            IGamePieceSlot mockSlot = Substitute.For<IGamePieceSlot>();
+            mockSlot.CanPlacePieceIntoSlot( Arg.Any<IGamePiece>() ).Returns( false );
+            GamePieceSlotPM systemUnderTest = new GamePieceSlotPM( null );
+            systemUnderTest.Slot = mockSlot;
+
+            IPlayerHandGamePiecePM mockPlayerHandPiece = Substitute.For<IPlayerHandGamePiecePM>();
+            systemUnderTest.AttemptToPlayPieceInSlot( mockPlayerHandPiece );
+
+            mockPlayerHandPiece.DidNotReceive().Play();
+        }
     }
 }

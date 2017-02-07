@@ -2,9 +2,18 @@
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System;
+using MyLibrary;
 
 namespace Qwf.Client {
-    public class PlayerHandGamePieceView : GamePieceView, IBeginDragHandler, IDragHandler, IEndDragHandler {
+    public class PlayerHandGamePieceView : GroupView, IBeginDragHandler, IDragHandler, IEndDragHandler {
+        private PlayerHandGamePiecePM mPM;
+        public PlayerHandGamePiecePM PM { get { return mPM; } private set { mPM = value; } }
+
+        public void Init( PlayerHandGamePiecePM i_pm ) {
+            PM = i_pm;
+            SetModel( i_pm.ViewModel );
+        }
+
         public CanvasGroup CanvasGroup;
 
         private Vector3 mStartPosition;

@@ -7,7 +7,7 @@ namespace Qwf.Client {
         public GameObject GamePieceViewArea;
         public GameObject GamePieceViewPrefab;
 
-        private List<GamePieceView> mPieceViews = new List<GamePieceView>();
+        private List<PlayerHandGamePieceView> mPieceViews = new List<PlayerHandGamePieceView>();
         private PlayerHandPM mPM;
 
         public void Init( PlayerHandPM i_pm ) {
@@ -29,7 +29,7 @@ namespace Qwf.Client {
             }
         }
 
-        private void CreateGamePieceView( GamePiecePM i_pm ) {
+        private void CreateGamePieceView( PlayerHandGamePiecePM i_pm ) {
             GameObject viewObject = gameObject.InstantiateUI( GamePieceViewPrefab, GamePieceViewArea );
             PlayerHandGamePieceView view = viewObject.GetComponent<PlayerHandGamePieceView>();
             view.Init( i_pm );
