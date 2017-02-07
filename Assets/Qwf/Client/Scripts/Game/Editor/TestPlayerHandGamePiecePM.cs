@@ -25,10 +25,11 @@ namespace Qwf.Client {
         }
 
         [Test]
-        public void WhenCreating_CanMovePropertyIsTrue() {
+        public void WhenCreating_DefaultPropertiesSet() {
             PlayerHandGamePiecePM systemUnderTest = new PlayerHandGamePiecePM( Substitute.For<IGamePieceData>(), "" );
 
             Assert.IsTrue( systemUnderTest.ViewModel.GetPropertyValue<bool>( PlayerHandGamePiecePM.CAN_MOVE_PROPERTY ) );
+            Assert.AreEqual( 1f, systemUnderTest.ViewModel.GetPropertyValue<float>( PlayerHandGamePiecePM.CAN_SEE_PROPERTY ) );
         }
 
         [Test]
@@ -41,12 +42,21 @@ namespace Qwf.Client {
         }
 
         [Test]
-        public void WhenPlayingPiece_MoveMadEventIsSent() {
+        public void WhenPlayingPiece_MoveMadeEventIsSent() {
             PlayerHandGamePiecePM systemUnderTest = new PlayerHandGamePiecePM( Substitute.For<IGamePieceData>(), "" );
 
             systemUnderTest.Play();
 
             MyMessenger.Instance.Received( 1 ).Send( ClientGameEvents.MADE_MOVE );
+        }
+
+        [Test]
+        public void WhenPlayingPiece_CanSeePieceProperty_IsFalse() {
+            PlayerHandGamePiecePM systemUnderTest = new PlayerHandGamePiecePM( Substitute.For<IGamePieceData>(), "" );
+
+            systemUnderTest.Play();
+
+            Assert.AreEqual( 0f, systemUnderTest.ViewModel.GetPropertyValue<float>( PlayerHandGamePiecePM.CAN_SEE_PROPERTY ) );
         }
 
         [Test]
