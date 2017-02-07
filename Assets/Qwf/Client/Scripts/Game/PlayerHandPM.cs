@@ -8,8 +8,8 @@ namespace Qwf.Client {
 
         private string m_id;
 
-        public List<IGamePiecePM> mGamePiecePMs;
-        public List<IGamePiecePM> GamePiecePMs { get { return mGamePiecePMs; } }
+        public List<PlayerHandGamePiecePM> mGamePiecePMs;
+        public List<PlayerHandGamePiecePM> GamePiecePMs { get { return mGamePiecePMs; } }
 
         public PlayerHandPM( List<IGamePieceData> i_gamePieces, string i_playerID ) {
             m_id = i_playerID;
@@ -36,7 +36,7 @@ namespace Qwf.Client {
         }
 
         private void CreateGamePiecePMs( List<IGamePieceData> i_gamePieces, string i_playerID ) { 
-            mGamePiecePMs = new List<IGamePiecePM>();
+            mGamePiecePMs = new List<PlayerHandGamePiecePM>();
             foreach ( IGamePieceData gamePiece in i_gamePieces ) {
                 mGamePiecePMs.Add( new PlayerHandGamePiecePM( gamePiece, i_playerID ) );
             }
@@ -46,7 +46,7 @@ namespace Qwf.Client {
 
         private void AddMissingGamePiecesIfNecessary( string i_playerID ) {
             for ( int i = mGamePiecePMs.Count; i < DEFAULT_HAND_SIZE; ++i ) {
-                mGamePiecePMs.Add( new GamePiecePM( null, i_playerID ) );
+                mGamePiecePMs.Add( new PlayerHandGamePiecePM( null, i_playerID ) );
             }
         }
 
