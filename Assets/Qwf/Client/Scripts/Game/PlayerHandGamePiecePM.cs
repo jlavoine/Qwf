@@ -20,6 +20,14 @@ namespace Qwf.Client {
             MyMessenger.Instance.Send( ClientGameEvents.MADE_MOVE );
         }
 
+        public void AttemptingToPlay() {            
+            SetCanMoveProperty( false ); // this seems illogical; since the piece is already moving, it can't move (allowing its raycast to be off for drop events
+        }
+
+        public void InvalidPlayAttempt() {
+            SetCanMoveProperty( true );
+        }
+
         private void ListenForMessages( bool i_listen ) {
             if ( i_listen ) {
                 MyMessenger.Instance.AddListener( ClientGameEvents.MAX_MOVES_MADE, OnMaxMovesMade );

@@ -57,6 +57,7 @@ namespace Qwf.Client {
             systemUnderTest.AttemptToPlayPieceInSlot( mockPlayerHandPiece );
 
             mockPlayerHandPiece.DidNotReceive().Play();
+            mockPlayerHandPiece.Received().InvalidPlayAttempt();
         }
     }
 }

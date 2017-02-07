@@ -48,5 +48,24 @@ namespace Qwf.Client {
 
             MyMessenger.Instance.Received( 1 ).Send( ClientGameEvents.MADE_MOVE );
         }
+
+        [Test]
+        public void WhenAttemptingToPlay_CanMovePropertyIsFalse() {
+            PlayerHandGamePiecePM systemUnderTest = new PlayerHandGamePiecePM( Substitute.For<IGamePieceData>(), "" );
+
+            systemUnderTest.AttemptingToPlay();
+
+            Assert.IsFalse( systemUnderTest.ViewModel.GetPropertyValue<bool>( PlayerHandGamePiecePM.CAN_MOVE_PROPERTY ) );
+        }
+
+        [Test]
+        public void AfterInvalidMoveAttempt_CanMovePropertyIsTrue() {
+            PlayerHandGamePiecePM systemUnderTest = new PlayerHandGamePiecePM( Substitute.For<IGamePieceData>(), "" );
+            systemUnderTest.ViewModel.SetProperty( PlayerHandGamePiecePM.CAN_MOVE_PROPERTY, false );
+
+            systemUnderTest.InvalidPlayAttempt();
+
+            Assert.IsTrue( systemUnderTest.ViewModel.GetPropertyValue<bool>( PlayerHandGamePiecePM.CAN_MOVE_PROPERTY ) );
+        }
     }
 }

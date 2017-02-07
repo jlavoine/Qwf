@@ -36,6 +36,8 @@ namespace Qwf.Client {
         public void AttemptToPlayPieceInSlot( IPlayerHandGamePiecePM i_piecePM ) {
             if ( Slot.CanPlacePieceIntoSlot( i_piecePM.GamePiece ) ) {
                 i_piecePM.Play();
+            } else {
+                i_piecePM.InvalidPlayAttempt();
             }
         }
 

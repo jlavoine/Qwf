@@ -19,7 +19,7 @@ namespace Qwf.Client {
         private Vector3 mStartPosition;
 
         public void OnBeginDrag( PointerEventData i_eventData ) {
-            BlockRaycasts( false );
+            PM.AttemptingToPlay();
             SaveStartPosition();
         }
 
@@ -28,7 +28,6 @@ namespace Qwf.Client {
         }
 
         public void OnEndDrag( PointerEventData i_eventData ) {
-            BlockRaycasts( true );
             ResetPosition();
         }
 
