@@ -13,7 +13,7 @@ namespace Qwf.Client {
         public void ByDefault_IsVisibleProperty_IsFalse() {
             ResetMovesPM systemUnderTest = new ResetMovesPM();
 
-            Assert.AreEqual( 0f, systemUnderTest.ViewModel.GetPropertyValue<float>( ResetMovesPM.IS_VISIBLE_PROPERTY ) );
+            AssertIsVisibleProperty( systemUnderTest, false );
         }
 
         [Test]
@@ -30,7 +30,6 @@ namespace Qwf.Client {
             systemUnderTest.Dispose();
 
             MyMessenger.Instance.Received().RemoveListener( ClientGameEvents.MADE_MOVE, Arg.Any<Callback>() );
-
         }
 
         [Test]
@@ -39,7 +38,31 @@ namespace Qwf.Client {
 
             systemUnderTest.OnMadeMove();
 
-            Assert.AreEqual( 1f, systemUnderTest.ViewModel.GetPropertyValue<float>( ResetMovesPM.IS_VISIBLE_PROPERTY ) );
+            AssertIsVisibleProperty( systemUnderTest, true );
+        }
+
+        [Test]
+        public void WhenMovesAreReset_EventIsSent() {
+            ResetMovesPM systemUnderTest = new ResetMovesPM();
+
+            systemUnderTest.ResetMoves();
+
+            MyMessenger.Instance.Received().Send( ClientGameEvents.RESET_MOVES );
+        }
+
+        [Test]
+        public void WhenMovesAreReset_IsVisiblePropertyIsFalse() {
+            ResetMovesPM systemUnderTest = new ResetMovesPM();
+            systemUnderTest.ViewModel.SetProperty( ResetMovesPM.IS_VISIBLE_PROPERTY, 1f );
+
+            systemUnderTest.ResetMoves();
+
+            AssertIsVisibleProperty( systemUnderTest, false );
+        }
+
+        private void AssertIsVisibleProperty( ResetMovesPM i_systemUnderTest, bool i_visible ) {
+            float fAlpha = i_visible ? 1f : 0f;
+            Assert.AreEqual( fAlpha, i_systemUnderTest.ViewModel.GetPropertyValue<float>( ResetMovesPM.IS_VISIBLE_PROPERTY ) );
         }
     }
 }

@@ -27,6 +27,11 @@ namespace Qwf.Client {
             SetIsVisibleProperty( true );
         }
 
+        public void ResetMoves() {
+            MyMessenger.Instance.Send( ClientGameEvents.RESET_MOVES );
+            SetIsVisibleProperty( false );
+        }
+
         private void SetIsVisibleProperty( bool i_visible ) {
             float fAlpha = i_visible ? 1f : 0f;
             ViewModel.SetProperty( IS_VISIBLE_PROPERTY, fAlpha );

@@ -14,5 +14,9 @@ namespace Qwf.Client {
 
             mPM.Dispose();
         }
+
+        public void OnClick() {
+            mPM.ResetMoves();
+        }
     }
 }
