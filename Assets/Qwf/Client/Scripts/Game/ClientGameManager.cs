@@ -2,6 +2,9 @@
 
 namespace Qwf.Client {
     public class ClientGameManager {
+        public const int MAX_MOVES_PER_TURN = 3; // TODO constants somewhere?
+
+        private int mMovesMade = 0;
 
         public ClientGameManager() {
             ListenForMessages( true );
@@ -20,7 +23,11 @@ namespace Qwf.Client {
         }
 
         public void OnMadeMove() {
+            mMovesMade++;
 
+            if ( mMovesMade == MAX_MOVES_PER_TURN ) {
+                MyMessenger.Instance.Send( ClientGameEvents.MAX_MOVES_MADE );
+            }
         }
     }
 }
