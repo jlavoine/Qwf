@@ -7,6 +7,15 @@ namespace Qwf.Client {
     public class TestGameObstaclePM : QwfUnitTest {
 
         [Test]
+        public void WhenCreatingWithNullData_DefaultPropertiesExpected() {
+            GameObstaclePM systemUnderTest = new GameObstaclePM( null );
+
+            Assert.AreEqual( string.Empty, systemUnderTest.ViewModel.GetPropertyValue<string>( GameObstaclePM.IMAGE_PROPERTY ) );
+            Assert.AreEqual( GameObstaclePM.FINAL_BLOW_PREFIX + "0", systemUnderTest.ViewModel.GetPropertyValue<string>( GameObstaclePM.FINAL_BLOW_PROPERTY ) );
+            Assert.AreEqual( 0f, systemUnderTest.ViewModel.GetPropertyValue<float>( GameObstaclePM.VISIBLE_PROPERTY ) );
+        }
+
+        [Test]
         public void WhenUpdating_PropertiesSetToExpected() {
             IGameObstacleUpdate mockUpdate = Substitute.For<IGameObstacleUpdate>();
             mockUpdate.GetImageKey().Returns( "TestKey" );
