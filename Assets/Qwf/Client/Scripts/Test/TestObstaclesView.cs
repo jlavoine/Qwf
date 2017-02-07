@@ -82,17 +82,8 @@ namespace Qwf.Client {
         }
 
         private void SendRandomUpdate() {
-            if ( mPM == null ) {
-                IGameObstaclesUpdate randomUpdate = CreateRandomUpdate( 3 );
-                mPM = new GameObstaclesPM( randomUpdate );
-                MyMessenger.Instance.Send<IGameObstaclesUpdate>( ClientMessages.UPDATE_OBSTACLES, randomUpdate );
-
-                View.Init( mPM );
-            }
-            else {
-                IGameObstaclesUpdate randomUpdate = CreateRandomUpdate( Random.Range( 1, 4 ) );
-                MyMessenger.Instance.Send<IGameObstaclesUpdate>( ClientMessages.UPDATE_OBSTACLES, randomUpdate );
-            }
+            IGameObstaclesUpdate randomUpdate = CreateRandomUpdate( Random.Range( 1, 4 ) );
+            MyMessenger.Instance.Send<IGameObstaclesUpdate>( ClientMessages.UPDATE_OBSTACLES, randomUpdate );           
         }
     }
 }

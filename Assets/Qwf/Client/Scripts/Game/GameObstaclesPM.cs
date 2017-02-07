@@ -6,8 +6,10 @@ namespace Qwf.Client {
         private List<GameObstaclePM> mObstaclePMs;
         public List<GameObstaclePM> ObstaclePMs { get { return mObstaclePMs; } private set { mObstaclePMs = value; } }
 
-        public GameObstaclesPM( IGameObstaclesUpdate i_data ) {
-            CreateObstaclePMs( i_data );
+        public const int DEFAULT_OBSTACLE_COUNT = 3;    // TODO constant!
+
+        public GameObstaclesPM() {
+            CreateObstaclePMs( );
             ListenForMessages( true );
         }
 
@@ -24,12 +26,11 @@ namespace Qwf.Client {
             }
         }
 
-        private void CreateObstaclePMs( IGameObstaclesUpdate i_data ) {
+        private void CreateObstaclePMs() {
             ObstaclePMs = new List<GameObstaclePM>();
-            int count = i_data.GetObstaclesCount();
             
-            for ( int i = 0; i < count; ++i ) {
-                CreateObstaclePM( i_data.GetUpdate( i ) );
+            for ( int i = 0; i < DEFAULT_OBSTACLE_COUNT; ++i ) {
+                CreateObstaclePM( null );
             }
         }
 

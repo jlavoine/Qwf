@@ -26,26 +26,32 @@ namespace Qwf.Client {
         }
 
         public void SetProperties( IGameObstacleUpdate i_data ) {
-            SetImageProperty( i_data );
-            SetFinalBlowProperty( i_data );
-            SetVisibility( true );
+            if ( i_data != null ) {
+                SetImageProperty( i_data.GetImageKey() );
+                SetFinalBlowProperty( i_data.GetFinalBlowValue() );
+                SetVisibility( true );
+            } else {
+                SetImageProperty( string.Empty );
+                SetFinalBlowProperty( 0 );
+                SetVisibility( false );
+            }
         }
 
         public void SetVisibility( bool i_visible ) {
             ViewModel.SetProperty( VISIBLE_PROPERTY, i_visible ? 1f : 0f );
         }
 
-        private void SetImageProperty( IGameObstacleUpdate i_data ) {
-            ViewModel.SetProperty( IMAGE_PROPERTY, i_data.GetImageKey() );
+        private void SetImageProperty( string i_key ) {
+            ViewModel.SetProperty( IMAGE_PROPERTY, i_key );
         }
 
-        private void SetFinalBlowProperty( IGameObstacleUpdate i_data ) {
-            ViewModel.SetProperty( FINAL_BLOW_PROPERTY, FINAL_BLOW_PREFIX + i_data.GetFinalBlowValue() );
+        private void SetFinalBlowProperty( int i_value ) {
+            ViewModel.SetProperty( FINAL_BLOW_PROPERTY, FINAL_BLOW_PREFIX + i_value );
         }
 
         private void CreateAllGamePieceSlotPMs( IGameObstacleUpdate i_data ) {
             SlotPiecePMs = new List<GamePieceSlotPM>();
-            int slotCount = i_data.GetSlotCount();
+            int slotCount = i_data == null ? 0 : i_data.GetSlotCount();
             for ( int i = 0; i < DEFAULT_SLOT_COUNT; ++i ) {
                 if ( i < slotCount ) {
                     AddSlotPiecePM( i_data.GetSlotUpdate( i ) );                    

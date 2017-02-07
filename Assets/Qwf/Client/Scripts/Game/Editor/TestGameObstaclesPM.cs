@@ -14,7 +14,7 @@ namespace Qwf.Client {
             IGameObstaclesUpdate mockUpdate = Substitute.For<IGameObstaclesUpdate>();
             mockUpdate.GetObstaclesCount().Returns( 3 );
 
-            GameObstaclesPM systemUnderTest = new GameObstaclesPM( mockUpdate );
+            GameObstaclesPM systemUnderTest = new GameObstaclesPM();
 
             Assert.AreEqual( 3, systemUnderTest.ObstaclePMs.Count );
         }
@@ -22,7 +22,7 @@ namespace Qwf.Client {
         [Test]
         public void OnCreating_SubscribeToUpdateFromServer() {
             IGameObstaclesUpdate mockUpdate = Substitute.For<IGameObstaclesUpdate>();
-            GameObstaclesPM systemUnderTest = new GameObstaclesPM( mockUpdate );
+            GameObstaclesPM systemUnderTest = new GameObstaclesPM();
 
             MyMessenger.Instance.Received().AddListener<IGameObstaclesUpdate>( ClientMessages.UPDATE_OBSTACLES, Arg.Any<Callback<IGameObstaclesUpdate>>() );
         }
@@ -30,7 +30,7 @@ namespace Qwf.Client {
         [Test]
         public void OnDisposing_UnsubscribeToUpdateFromServer() {
             IGameObstaclesUpdate mockUpdate = Substitute.For<IGameObstaclesUpdate>();
-            GameObstaclesPM systemUnderTest = new GameObstaclesPM( mockUpdate );
+            GameObstaclesPM systemUnderTest = new GameObstaclesPM();
 
             systemUnderTest.Dispose();
 

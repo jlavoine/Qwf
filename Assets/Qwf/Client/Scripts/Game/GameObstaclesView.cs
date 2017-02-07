@@ -5,9 +5,15 @@ namespace Qwf.Client {
     public class GameObstaclesView : GroupView {
         public List<GameObstacleView> ObstacleViews;
 
-        public void Init( GameObstaclesPM i_pm ) {
-            SetModel( i_pm.ViewModel );
-            InitIndividualObstacleViews( i_pm );
+        void Start() {
+            MyMessenger.Instance.Send<IGameObstaclesUpdate>( ClientMessages.UPDATE_OBSTACLES, null ); // send this first! otherwise the PM also gets the message
+            Init();            
+        }
+
+        public void Init() {
+            GameObstaclesPM pm = new GameObstaclesPM();
+            SetModel( pm.ViewModel );
+            InitIndividualObstacleViews( pm );
         }
 
         private void InitIndividualObstacleViews( GameObstaclesPM i_pm ) {
