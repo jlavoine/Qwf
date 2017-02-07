@@ -9,6 +9,7 @@ namespace Qwf.Server {
             // mediationBinder.Bind<NewExampleView>().To<NewExampleMediator>();
 
             injectionBinder.Bind<IGameRules>().To<GameRules>();
+            injectionBinder.Bind<IScoreKeeper>().To<ScoreKeeper>().ToSingleton();
 
             //Bind Commands and Signals            
             commandBinder.Bind<CreateGamePlayerSignal>().To<CreateGamePlayerCommand>();
