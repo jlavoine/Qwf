@@ -4,9 +4,6 @@ namespace Qwf {
         private IGamePieceData mData;
 
         public GamePiece( IGamePieceData i_data ) {
-            if (i_data == null ) {
-                UnityEngine.Debug.LogError( "hai" );
-            }
             mData = i_data;
         }
 
