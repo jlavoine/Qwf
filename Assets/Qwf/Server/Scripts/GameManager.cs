@@ -2,6 +2,8 @@
 namespace Qwf {
     public class GameManager : IGameManager {
         private IGameBoard mBoard;
+        public IGameBoard GameBoard { get { return mBoard; } }
+
         private IScoreKeeper mScoreKeeper;
 
         public GameManager( IGameBoard i_board, IScoreKeeper i_scoreKeeper ) {
