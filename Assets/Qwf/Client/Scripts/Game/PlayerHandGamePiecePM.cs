@@ -33,10 +33,12 @@ namespace Qwf.Client {
             if ( i_listen ) {
                 MyMessenger.Instance.AddListener( ClientGameEvents.MAX_MOVES_MADE, OnMaxMovesMade );
                 MyMessenger.Instance.AddListener( ClientGameEvents.RESET_MOVES, OnMovesReset );
+                MyMessenger.Instance.AddListener<ITurnUpdate>( ClientMessages.UPDATE_TURN, OnTurnUpdate );
             }
             else {
                 MyMessenger.Instance.RemoveListener( ClientGameEvents.MAX_MOVES_MADE, OnMaxMovesMade );
                 MyMessenger.Instance.RemoveListener( ClientGameEvents.RESET_MOVES, OnMovesReset );
+                MyMessenger.Instance.RemoveListener<ITurnUpdate>( ClientMessages.UPDATE_TURN, OnTurnUpdate );
             }
         }
 
@@ -53,6 +55,14 @@ namespace Qwf.Client {
 
         private void SetCanMoveProperty( bool i_canMove ) {
             ViewModel.SetProperty( CAN_MOVE_PROPERTY, i_canMove );
+        }
+
+        public void OnTurnUpdate( ITurnUpdate i_update ) {
+            if ( i_update.IsThisPlayerActive() ) {
+                SetCanMoveProperty( true );
+            } else {
+                SetCanMoveProperty( false );
+            }
         }
     }
 }

@@ -14,6 +14,7 @@ namespace Qwf.Client {
 
             MyMessenger.Instance.Received().AddListener( ClientGameEvents.MAX_MOVES_MADE, Arg.Any<Callback>() );
             MyMessenger.Instance.Received().AddListener( ClientGameEvents.RESET_MOVES, Arg.Any<Callback>() );
+            MyMessenger.Instance.Received().AddListener<ITurnUpdate>( ClientMessages.UPDATE_TURN, Arg.Any<Callback<ITurnUpdate>>() );
         }
 
         [Test]
@@ -24,6 +25,7 @@ namespace Qwf.Client {
 
             MyMessenger.Instance.Received().RemoveListener( ClientGameEvents.MAX_MOVES_MADE, Arg.Any<Callback>() );
             MyMessenger.Instance.Received().RemoveListener( ClientGameEvents.RESET_MOVES, Arg.Any<Callback>() );
+            MyMessenger.Instance.Received().RemoveListener<ITurnUpdate>( ClientMessages.UPDATE_TURN, Arg.Any<Callback<ITurnUpdate>>() );
         }
 
         [Test]
@@ -107,6 +109,30 @@ namespace Qwf.Client {
             systemUnderTest.OnMovesReset();
 
             Assert.AreEqual( 0f, systemUnderTest.ViewModel.GetPropertyValue<float>( PlayerHandGamePiecePM.VISIBLE_PROPERTY ) );
+        }
+
+        [Test]
+        public void WhenPlayersTurn_CanMovePropertyIsTrue() {
+            PlayerHandGamePiecePM systemUnderTest = new PlayerHandGamePiecePM( null, "" );
+            ITurnUpdate mockUpdate = Substitute.For<ITurnUpdate>();
+            mockUpdate.IsThisPlayerActive().Returns( true );
+            systemUnderTest.ViewModel.SetProperty( PlayerHandGamePiecePM.CAN_MOVE_PROPERTY, false );
+
+            systemUnderTest.OnTurnUpdate( mockUpdate );
+
+            Assert.IsTrue( systemUnderTest.ViewModel.GetPropertyValue<bool>( PlayerHandGamePiecePM.CAN_MOVE_PROPERTY ) );
+        }
+
+        [Test]
+        public void WhenNotPlayersTurn_CanMovePropertyIsFalse() {
+            PlayerHandGamePiecePM systemUnderTest = new PlayerHandGamePiecePM( null, "" );
+            ITurnUpdate mockUpdate = Substitute.For<ITurnUpdate>();
+            mockUpdate.IsThisPlayerActive().Returns( false );
+            systemUnderTest.ViewModel.SetProperty( PlayerHandGamePiecePM.CAN_MOVE_PROPERTY, true );
+
+            systemUnderTest.OnTurnUpdate( mockUpdate );
+
+            Assert.IsFalse( systemUnderTest.ViewModel.GetPropertyValue<bool>( PlayerHandGamePiecePM.CAN_MOVE_PROPERTY ) );
         }
     }
 }
