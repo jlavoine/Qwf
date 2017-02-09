@@ -13,7 +13,7 @@ namespace Qwf.Client {
 
         }
 
-        private IGameObstaclesUpdate CreateRandomUpdate( int i_numObstacles ) {
+        private GameObstaclesUpdate CreateRandomUpdate( int i_numObstacles ) {
             GameObstaclesUpdate update = new GameObstaclesUpdate();
             update.Obstacles = new List<GameObstacleUpdate>();
 
@@ -82,8 +82,8 @@ namespace Qwf.Client {
         }
 
         private void SendRandomUpdate() {
-            IGameObstaclesUpdate randomUpdate = CreateRandomUpdate( Random.Range( 1, 4 ) );
-            MyMessenger.Instance.Send<IGameObstaclesUpdate>( ClientMessages.UPDATE_OBSTACLES, randomUpdate );           
+            GameObstaclesUpdate randomUpdate = CreateRandomUpdate( Random.Range( 1, 4 ) );
+            MyMessenger.Instance.Send<GameObstaclesUpdate>( ClientMessages.UPDATE_OBSTACLES, randomUpdate );           
         }
     }
 }

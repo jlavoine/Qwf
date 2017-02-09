@@ -19,10 +19,10 @@ namespace Qwf.Client {
 
         private void ListenForMessages( bool i_listen ) {
             if ( i_listen ) {
-                MyMessenger.Instance.AddListener<IGameObstaclesUpdate>( ClientMessages.UPDATE_OBSTACLES, OnUpdateFromServer );
+                MyMessenger.Instance.AddListener<GameObstaclesUpdate>( ClientMessages.UPDATE_OBSTACLES, OnUpdateFromServer );
             }
             else {
-                MyMessenger.Instance.RemoveListener<IGameObstaclesUpdate>( ClientMessages.UPDATE_OBSTACLES, OnUpdateFromServer );
+                MyMessenger.Instance.RemoveListener<GameObstaclesUpdate>( ClientMessages.UPDATE_OBSTACLES, OnUpdateFromServer );
             }
         }
 
@@ -38,7 +38,8 @@ namespace Qwf.Client {
             ObstaclePMs.Add( new GameObstaclePM( i_data ) );
         }
 
-        public void OnUpdateFromServer( IGameObstaclesUpdate i_update ) {
+        public void OnUpdateFromServer( GameObstaclesUpdate i_update ) {
+            UnityEngine.Debug.LogError( "Got an update from server" );
             int obstacleCount = i_update.GetObstaclesCount();
             for ( int i = 0; i < ObstaclePMs.Count; ++i ) {
                 if ( i < obstacleCount ) {
