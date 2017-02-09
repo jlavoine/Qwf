@@ -29,7 +29,7 @@ namespace Qwf.Client {
         public void IfIncomingUpdateIsNull_PropertiesSetAsExpected() {
             GamePieceSlotPM systemUnderTest = new GamePieceSlotPM( null );
 
-            Assert.AreEqual( "0", systemUnderTest.ViewModel.GetPropertyValue<string>( GamePieceSlotPM.SLOT_PIECE_TYPE_PROPERTY ) );
+            Assert.AreEqual( "1", systemUnderTest.ViewModel.GetPropertyValue<string>( GamePieceSlotPM.SLOT_PIECE_TYPE_PROPERTY ) );
             Assert.AreEqual( 0f, systemUnderTest.ViewModel.GetPropertyValue<float>( GamePieceSlotPM.VISIBLE_PROPERTY ) );
         }
 
