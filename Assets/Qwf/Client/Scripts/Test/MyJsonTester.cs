@@ -25,7 +25,38 @@ public class MyJsonTester : MonoBehaviour {
         UnityEngine.Debug.LogError( json );
         */
 
-        TestInterfaces();
+        //TestInterfaces();
+
+        TestObstacleData();
+    }
+
+    private void TestObstacleData() {
+        List<GameObstacleData> list = new List<GameObstacleData>();
+        GameObstacleData one = new GameObstacleData();
+        one.FinalBlowValue = 3;
+        one.SlotsData = new List<GamePieceSlotData>();
+
+        GamePieceSlotData slotOne = new GamePieceSlotData();
+        slotOne.PieceType = 1;
+        slotOne.ScoreValue = 1;
+
+        GamePieceSlotData slot2 = new GamePieceSlotData();
+        slot2.PieceType = 3;
+        slot2.ScoreValue = 1;
+
+        one.SlotsData.Add( slotOne );
+        one.SlotsData.Add( slot2 );
+
+        GameObstacleData two = new GameObstacleData();
+        two.FinalBlowValue = 2;
+        two.SlotsData = new List<GamePieceSlotData>();
+        two.SlotsData.Add( slotOne );
+
+        list.Add( one );
+        list.Add( two );
+
+        string json = JsonConvert.SerializeObject( list );
+        UnityEngine.Debug.LogError( json );
     }
 
     private void TestInterfaces() {
