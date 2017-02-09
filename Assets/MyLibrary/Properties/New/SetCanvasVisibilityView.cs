@@ -17,7 +17,6 @@ namespace MyLibrary {
         public override void UpdateView() {
             SetCanvasGroupAlpha();
             SetCanvasInteractables();
-            SetCanvasBlockRaycasts();
         }
 
         private void SetCanvasGroupAlpha() {           
