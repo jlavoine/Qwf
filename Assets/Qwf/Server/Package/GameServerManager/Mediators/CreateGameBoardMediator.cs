@@ -7,9 +7,7 @@ using strange.extensions.signal.impl;
 namespace Qwf.Server {
     public class GameBoardCreatedSignal : Signal<GameBoard> { }
 
-    public class CreateGameBoardMediator : Mediator {
-        [Inject] public CreateGameBoardView View { get; set; }
-
+    public class CreateGameBoardMediator : Mediator {        
         [Inject] public LogSignal Logger { get; set; }
 
         [Inject] public IGameRules GameRules { get; set; }
@@ -41,7 +39,7 @@ namespace Qwf.Server {
 
             foreach ( GameObstacleData obstacleData in allObstacleData ) {
                 List<IGamePieceSlot> slots = CreateSlotsFromObstacle( obstacleData );
-                IGameObstacle obstacle = new GameObstacle( slots, obstacleData.FinalBlowValue );
+                IGameObstacle obstacle = new GameObstacle( slots, obstacleData );
                 allObstacles.Add( obstacle );
             }
 

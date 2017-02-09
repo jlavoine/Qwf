@@ -8,9 +8,11 @@ namespace Qwf.Server {
         public override void MapBindings( ICommandBinder commandBinder, ICrossContextInjectionBinder injectionBinder, IMediationBinder mediationBinder ) {            
             mediationBinder.Bind<CreateGameBoardView>().To<CreateGameBoardMediator>();
             mediationBinder.Bind<CreateGameManagerView>().To<CreateGameManagerMediator>();
+            mediationBinder.Bind<GameManagerView>().To<GameManagerMediator>();
 
             injectionBinder.Bind<GameBoardCreatedSignal>().ToSingleton();
             injectionBinder.Bind<PlayerAddedSignal>().ToSingleton();
+            injectionBinder.Bind<GameManagerCreatedSignal>().ToSingleton();
 
             injectionBinder.Bind<IGameRules>().To<GameRules>();
             injectionBinder.Bind<IScoreKeeper>().To<ScoreKeeper>().ToSingleton();
