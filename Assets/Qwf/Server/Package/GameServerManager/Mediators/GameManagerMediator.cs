@@ -30,14 +30,32 @@ namespace Qwf.Server {
         }
 
         private void SendStartingDataToPlayers() {
+            SendStartingObstacleData();
+            PickAndSendStartingPlayer();
+        }
+
+        private void SendStartingObstacleData() {
             GameObstaclesUpdate update = GetGameObstaclesUpdate();
             string updateJSON = JsonConvert.SerializeObject( update );
-            UnityEngine.Debug.LogError( "Starting obstacle data: " + updateJSON );
-            //Logger.Dispatch( LoggerTypes.Info, string.Format( "Sending starting obstacles to players: " + updateJSON ) );
 
             foreach ( var uconn in UnityNetworkingData.Connections ) {
-                Logger.Dispatch( LoggerTypes.Info, "Sending the data to " + uconn.PlayFabId );
+                Logger.Dispatch( LoggerTypes.Info, "Sending starting obstacle data to " + uconn.PlayFabId );
                 uconn.Connection.Send( NetworkMessages.UpdateObstacles, new StringMessage() {
+                    value = updateJSON
+                } );
+            }
+        }
+
+        private void PickAndSendStartingPlayer() {
+            string startingPlayer = UnityNetworkingData.Connections[0].PlayFabId;
+            TurnUpdate update = new TurnUpdate();
+            update.ActivePlayer = startingPlayer;
+
+            string updateJSON = JsonConvert.SerializeObject( update );
+
+            foreach ( var uconn in UnityNetworkingData.Connections ) {
+                Logger.Dispatch( LoggerTypes.Info, "Sending starting turn update data to " + uconn.PlayFabId );
+                uconn.Connection.Send( NetworkMessages.UpdateTurn, new StringMessage() {
                     value = updateJSON
                 } );
             }
