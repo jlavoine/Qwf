@@ -55,7 +55,7 @@ namespace Qwf.Client {
 
         private void SetPropertiesForMissingData() {
             SetValueProperty( 0 );
-            SetIconProperty( 0 );
+            SetIconProperty( 1 );
             SetOutlineProperty( false );
             SetVisibility( false );
         }
