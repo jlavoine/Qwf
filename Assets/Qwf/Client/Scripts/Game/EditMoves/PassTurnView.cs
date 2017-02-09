@@ -16,7 +16,7 @@ namespace Qwf.Client {
         }
 
         public void OnClick() {
-
+            mPM.ProcessAction();
         }
     }
 }

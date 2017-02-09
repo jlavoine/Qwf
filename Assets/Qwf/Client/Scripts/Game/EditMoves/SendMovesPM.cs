@@ -1,7 +1,7 @@
 ﻿using MyLibrary;
 
 namespace Qwf.Client {
-    public class SendMovesPM : GenericViewModel {
+    public class SendMovesPM : MakeMovePM {
         public const string VISIBLE_PROPERTY = "IsVisible";
 
         public SendMovesPM() {
@@ -22,6 +22,10 @@ namespace Qwf.Client {
                 MyMessenger.Instance.RemoveListener( ClientGameEvents.MADE_MOVE, OnMadeMove );
                 MyMessenger.Instance.RemoveListener( ClientGameEvents.RESET_MOVES, OnResetMoves );
             }
+        }
+
+        public override void ProcessAction() {
+            base.ProcessAction();
         }
 
         public void OnMadeMove() {
