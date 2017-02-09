@@ -17,6 +17,11 @@ namespace MyLibrary {
         }
 
         public override void UpdateView() {
+            string propertyValue = GetValue<string>();
+            if ( string.IsNullOrEmpty( propertyValue ) ) {
+                return;
+            }
+
             string imageKey = Prefix + GetValue<string>();
             Sprite sprite = SpriteExtensions.GetSpriteFromResource( imageKey );
 

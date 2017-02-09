@@ -56,7 +56,7 @@ namespace Qwf.Client {
 
         private void SetPropertiesForMissingPieceUpdate() {
             // this is actually valid -- it just means there's no piece slot
-            SetSlotPieceTypeProperty( "0" );
+            SetSlotPieceTypeProperty( "1" );
             SetVisibility( false );            
         }
 
