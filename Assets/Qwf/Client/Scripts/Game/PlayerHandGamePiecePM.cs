@@ -7,7 +7,7 @@ namespace Qwf.Client {
         public PlayerHandGamePiecePM( IGamePieceData i_piece, string i_playerViewing ) : base( i_piece, i_playerViewing ) {
             ListenForMessages( true );
 
-            SetCanMoveProperty( true );
+            SetCanMoveProperty( false );
         }
 
         public override void Dispose() {
