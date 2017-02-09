@@ -178,6 +178,8 @@ public class ClientExampleScript : MonoBehaviour
     private void RegisterQwfHandlers( NetworkClient i_network ) {
         i_network.RegisterHandler( NetworkMessages.UpdatePlayerHand, OnUpdatePlayerHand );
         i_network.RegisterHandler( NetworkMessages.UpdateObstacles, OnUpdateObstacles );
+        i_network.RegisterHandler( NetworkMessages.UpdateTurn, OnUpdateTurn );
+        i_network.RegisterHandler( NetworkMessages.UpdateScore, OnUpdateScore );
     }
 
     private void OnUpdatePlayerHand(NetworkMessage netMsg) {
@@ -188,8 +190,20 @@ public class ClientExampleScript : MonoBehaviour
 
     private void OnUpdateObstacles(NetworkMessage netMsg) {
         StringMessage message = netMsg.ReadMessage<StringMessage>();
-        GameObstaclesUpdate data = JsonConvert.DeserializeObject<GameObstaclesUpdate>( message.value );
-        MyMessenger.Instance.Send<GameObstaclesUpdate>( ClientMessages.UPDATE_OBSTACLES, data );
+        IGameObstaclesUpdate data = JsonConvert.DeserializeObject<GameObstaclesUpdate>( message.value );
+        MyMessenger.Instance.Send<IGameObstaclesUpdate>( ClientMessages.UPDATE_OBSTACLES, data );
+    }
+
+    private void OnUpdateTurn( NetworkMessage netMsg ) {
+        StringMessage message = netMsg.ReadMessage<StringMessage>();
+        ITurnUpdate data = JsonConvert.DeserializeObject<TurnUpdate>( message.value );
+        MyMessenger.Instance.Send<ITurnUpdate>( ClientMessages.UPDATE_TURN, data );
+    }
+
+    private void OnUpdateScore( NetworkMessage netMsg ) {
+        StringMessage message = netMsg.ReadMessage<StringMessage>();
+        IMatchScoreUpdateData data = JsonConvert.DeserializeObject<MatchScoreUpdateData>( message.value );
+        MyMessenger.Instance.Send<IMatchScoreUpdateData>( ClientMessages.UPDATE_SCORE, data );
     }
 
     private void OnConnected(NetworkMessage netMsg) {
