@@ -54,8 +54,7 @@ namespace Qwf.Client {
         }
 
         private void AttemptMoveToSlot( GamePieceSlotPM i_slotPM ) {
-            i_slotPM.AttemptToPlayPieceInSlot( PM );
-            UnityEngine.Debug.LogError( "Can the incoming piece be placed: " + i_slotPM.Slot.CanPlacePieceIntoSlot( PM.GamePiece ) );
+            i_slotPM.AttemptToPlayPieceInSlot( PM );            
         }
 
         private void BlockRaycasts( bool i_block ) {
