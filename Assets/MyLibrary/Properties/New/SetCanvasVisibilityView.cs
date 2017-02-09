@@ -17,6 +17,7 @@ namespace MyLibrary {
         public override void UpdateView() {
             SetCanvasGroupAlpha();
             SetCanvasInteractables();
+            SetCanvasBlockRaycasts();
         }
 
         private void SetCanvasGroupAlpha() {           
@@ -25,7 +26,12 @@ namespace MyLibrary {
 
         private void SetCanvasInteractables() {
             bool isInteractable = GetValue<float>() > 0;
-            CanvasGroup.interactable = isInteractable;
+            CanvasGroup.interactable = isInteractable;            
+        }
+
+        private void SetCanvasBlockRaycasts() {
+            bool shouldBlock = GetValue<float>() > 0;
+            CanvasGroup.blocksRaycasts = shouldBlock;
         }
     }
 }
