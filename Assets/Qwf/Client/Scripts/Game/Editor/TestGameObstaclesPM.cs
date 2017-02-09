@@ -21,7 +21,7 @@ namespace Qwf.Client {
             GameObstaclesUpdate mockUpdate = Substitute.For<GameObstaclesUpdate>();
             GameObstaclesPM systemUnderTest = new GameObstaclesPM();
 
-            MyMessenger.Instance.Received().AddListener<GameObstaclesUpdate>( ClientMessages.UPDATE_OBSTACLES, Arg.Any<Callback<GameObstaclesUpdate>>() );
+            MyMessenger.Instance.Received().AddListener<IGameObstaclesUpdate>( ClientMessages.UPDATE_OBSTACLES, Arg.Any<Callback<IGameObstaclesUpdate>>() );
         }
 
         [Test]
@@ -31,7 +31,7 @@ namespace Qwf.Client {
 
             systemUnderTest.Dispose();
 
-            MyMessenger.Instance.Received().RemoveListener<GameObstaclesUpdate>( ClientMessages.UPDATE_OBSTACLES, Arg.Any<Callback<GameObstaclesUpdate>>() );
+            MyMessenger.Instance.Received().RemoveListener<IGameObstaclesUpdate>( ClientMessages.UPDATE_OBSTACLES, Arg.Any<Callback<IGameObstaclesUpdate>>() );
         }
     }
 }

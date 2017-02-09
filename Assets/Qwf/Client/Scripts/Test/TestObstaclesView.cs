@@ -83,7 +83,7 @@ namespace Qwf.Client {
 
         private void SendRandomUpdate() {
             GameObstaclesUpdate randomUpdate = CreateRandomUpdate( Random.Range( 1, 4 ) );
-            MyMessenger.Instance.Send<GameObstaclesUpdate>( ClientMessages.UPDATE_OBSTACLES, randomUpdate );           
+            MyMessenger.Instance.Send<IGameObstaclesUpdate>( ClientMessages.UPDATE_OBSTACLES, randomUpdate );           
         }
     }
 }

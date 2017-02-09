@@ -73,7 +73,7 @@ namespace Qwf.Client {
 
         [Test]
         public void OnReceivingObstaclesUpdate_UpdateIsCached() {
-            IGameObstaclesUpdate mockUpdate = Substitute.For<IGameObstaclesUpdate>();
+            GameObstaclesUpdate mockUpdate = new GameObstaclesUpdate();
             ResetMovesPM systemUnderTest = new ResetMovesPM();
 
             systemUnderTest.OnUpdateObstacles( mockUpdate );
