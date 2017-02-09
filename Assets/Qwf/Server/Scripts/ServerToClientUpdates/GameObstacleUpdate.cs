@@ -28,5 +28,15 @@ namespace Qwf {
         public IGamePieceSlotUpdate GetSlotUpdate( int i_index ) {
             return PieceSlots[i_index];
         }
+
+        public static GameObstacleUpdate GetUpdate( IGameObstacle i_obstacle ) {
+            GameObstacleUpdate update = new GameObstacleUpdate();
+            update.FinalBlowValue = i_obstacle.GetFinalBlowValue();
+            update.Id = i_obstacle.GetId();
+
+            update.PieceSlots = GamePieceSlotUpdate.GetUpdate( i_obstacle.GetSlots() );
+
+            return update;
+        }
     }
 }

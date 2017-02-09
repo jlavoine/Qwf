@@ -4,11 +4,19 @@ namespace Qwf {
     public class GameObstacle : IGameObstacle {
         private List<IGamePieceSlot> mSlots;
 
-        private int mScoreValue;
+        private IGameObstacleData mData;
 
-        public GameObstacle( List<IGamePieceSlot> i_slots, int i_scoreValue ) {
-            mScoreValue = i_scoreValue;
+        public GameObstacle( List<IGamePieceSlot> i_slots, IGameObstacleData i_data ) {
+            mData = i_data;
             mSlots = i_slots;
+        }
+
+        public string GetId() {
+            return mData.GetId();
+        }
+
+        public int GetFinalBlowValue() {
+            return mData.GetFinalBlowValue();
         }
 
         public List<IGamePieceSlot> GetSlots() {
@@ -47,7 +55,7 @@ namespace Qwf {
         }
 
         private void AwardPointsToCurrentPlayer( IScoreKeeper i_scoreKeeper, IGamePlayer i_player ) {
-            i_scoreKeeper.AddPointsToPlayer( i_player, mScoreValue );
+            i_scoreKeeper.AddPointsToPlayer( i_player, GetFinalBlowValue() );
         }
 
         private void ScoreAllSlots( IScoreKeeper i_scoreKeeper ) {

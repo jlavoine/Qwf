@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 namespace Qwf {
-    public interface IGameObstacle {
+    public interface IGameObstacle : IGameObstacleData {
         List<IGamePieceSlot> GetSlots();
 
         bool CanPieceBePlacedIntoSlot( IServerGamePiece i_piece, IGamePieceSlot i_slot );
