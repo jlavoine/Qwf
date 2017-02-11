@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using System.Collections.Generic;
+using NSubstitute;
 
 #pragma warning disable 0414
 
@@ -42,6 +43,24 @@ namespace Qwf {
         [Test, TestCaseSource( "OpponentScoreTests" )]
         public void MatchScoreUpdates_ReturnsCorrectOpponentScore( string i_playerId, int i_expectedResult ) {
             Assert.AreEqual( i_expectedResult, mSystemUnderTest.GetScoreForOpponent( i_playerId ) );
+        }
+
+        [Test]
+        public void WhenCreatingUpdate_ProperDataIsFilledIn() {
+            IGamePlayer player1 = Substitute.For<IGamePlayer>();
+            player1.Id.Returns( "P1" );
+
+            IGamePlayer player2 = Substitute.For<IGamePlayer>();
+            player2.Id.Returns( "P2" );
+
+            IScoreKeeper mockScoreKeeper = Substitute.For<IScoreKeeper>();
+            mockScoreKeeper.GetPlayerScore( player1 ).Returns( 100 );
+            mockScoreKeeper.GetPlayerScore( player2 ).Returns( 50 );
+
+            MatchScoreUpdateData systemUnderTest = MatchScoreUpdateData.Create( player1, player2, mockScoreKeeper );
+
+            Assert.AreEqual( 100, systemUnderTest.GetScoreForPlayer( "P1" ) );
+            Assert.AreEqual( 50, systemUnderTest.GetScoreForPlayer( "P2" ) );
         }
     }
 }

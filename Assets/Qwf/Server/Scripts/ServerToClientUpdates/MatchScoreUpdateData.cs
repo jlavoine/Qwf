@@ -21,5 +21,14 @@ namespace Qwf {
 
             return 0;   // fallback if no opponent was found
         }
+
+        public static MatchScoreUpdateData Create( IGamePlayer i_player1, IGamePlayer i_player2, IScoreKeeper i_scoreKeeper ) {
+            MatchScoreUpdateData data = new MatchScoreUpdateData();
+            data.Scores = new Dictionary<string, int>();
+            data.Scores.Add( i_player1.Id, i_scoreKeeper.GetPlayerScore( i_player1 ) );
+            data.Scores.Add( i_player2.Id, i_scoreKeeper.GetPlayerScore( i_player2 ) );
+
+            return data;
+        }
     }
 }
