@@ -36,9 +36,19 @@ namespace Qwf.Client {
             if ( Slot.CanPlacePieceIntoSlot( i_piecePM.GamePiece ) ) {                
                 i_piecePM.Play();
                 UpdateGamePieceInSlot( i_piecePM.GamePiece );
+                SendMoveEvent( i_piecePM, Slot );
             } else {
                 i_piecePM.InvalidPlayAttempt();
             }
+        }
+
+        private void SendMoveEvent( IPlayerHandGamePiecePM i_playedPiece, IGamePieceSlot i_slot ) {
+            ClientMoveAttempt moveAttempt = new ClientMoveAttempt();
+            moveAttempt.PieceInHandIndex = i_playedPiece.Index;
+            moveAttempt.ObstacleIndex = i_slot.GetObstacleIndex();
+            moveAttempt.ObstacleSlotIndex = i_slot.GetIndex();
+
+            MyMessenger.Instance.Send<ClientMoveAttempt>( ClientGameEvents.MADE_MOVE, moveAttempt );
         }
 
         private void SetSlot( IGamePieceSlotUpdate i_data ) {

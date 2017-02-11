@@ -20,7 +20,7 @@ namespace Qwf.Client {
         public void WhenCreating_SubscribesToMessages() {
             SendMovesPM systemUnderTest = new SendMovesPM();
 
-            MyMessenger.Instance.Received().AddListener( ClientGameEvents.MADE_MOVE, Arg.Any<Callback>() );
+            MyMessenger.Instance.Received().AddListener<IClientMoveAttempt>( ClientGameEvents.MADE_MOVE, Arg.Any<Callback<IClientMoveAttempt>>() );
             MyMessenger.Instance.Received().AddListener( ClientGameEvents.RESET_MOVES, Arg.Any<Callback>() );
         }
 
@@ -30,7 +30,7 @@ namespace Qwf.Client {
 
             systemUnderTest.Dispose();
 
-            MyMessenger.Instance.Received().RemoveListener( ClientGameEvents.MADE_MOVE, Arg.Any<Callback>() );
+            MyMessenger.Instance.Received().RemoveListener<IClientMoveAttempt>( ClientGameEvents.MADE_MOVE, Arg.Any<Callback<IClientMoveAttempt>>() );
             MyMessenger.Instance.Received().RemoveListener( ClientGameEvents.RESET_MOVES, Arg.Any<Callback>() );
         }
 
@@ -40,7 +40,7 @@ namespace Qwf.Client {
             systemUnderTest.ViewModel.SetProperty( SendMovesPM.VISIBLE_PROPERTY, 0f );
             systemUnderTest.ViewModel.SetProperty( SendMovesPM.USE_PROPERTY, 0f );
 
-            systemUnderTest.OnMadeMove();
+            systemUnderTest.OnMadeMove( Substitute.For<IClientMoveAttempt>() );
 
             Assert.AreEqual( 1f, systemUnderTest.ViewModel.GetPropertyValue<float>( SendMovesPM.VISIBLE_PROPERTY ) );
             Assert.IsTrue( systemUnderTest.ViewModel.GetPropertyValue<bool>( MakeMovePM.USE_PROPERTY ) );

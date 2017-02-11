@@ -13,7 +13,7 @@ namespace Qwf.Client {
         public void WhenCreating_SubscribesToMessages() {
             ClientGameManager systemUnderTest = new ClientGameManager();
 
-            MyMessenger.Instance.Received().AddListener( ClientGameEvents.MADE_MOVE, Arg.Any<Callback>() );
+            MyMessenger.Instance.Received().AddListener<IClientMoveAttempt>( ClientGameEvents.MADE_MOVE, Arg.Any<Callback<IClientMoveAttempt>>() );
             MyMessenger.Instance.Received().AddListener( ClientGameEvents.RESET_MOVES, Arg.Any<Callback>() );
         }
 
@@ -23,7 +23,7 @@ namespace Qwf.Client {
 
             systemUnderTest.Dispose();
 
-            MyMessenger.Instance.Received().RemoveListener( ClientGameEvents.MADE_MOVE, Arg.Any<Callback>() );
+            MyMessenger.Instance.Received().RemoveListener<IClientMoveAttempt>( ClientGameEvents.MADE_MOVE, Arg.Any<Callback<IClientMoveAttempt>>() );
             MyMessenger.Instance.Received().RemoveListener( ClientGameEvents.RESET_MOVES, Arg.Any<Callback>() );
         }
 
@@ -32,7 +32,7 @@ namespace Qwf.Client {
             ClientGameManager systemUnderTest = new ClientGameManager();
 
             for ( int i = 0; i < ClientGameManager.MAX_MOVES_PER_TURN; ++i ) {
-                systemUnderTest.OnMadeMove();
+                systemUnderTest.OnMadeMove( Substitute.For<IClientMoveAttempt>() );
             }
 
             MyMessenger.Instance.Received( 1 ).Send( ClientGameEvents.MAX_MOVES_MADE );
@@ -43,7 +43,7 @@ namespace Qwf.Client {
             ClientGameManager systemUnderTest = new ClientGameManager();
 
             for ( int i = 0; i < ClientGameManager.MAX_MOVES_PER_TURN-1; ++i ) {
-                systemUnderTest.OnMadeMove();
+                systemUnderTest.OnMadeMove( Substitute.For<IClientMoveAttempt>() );
             }
 
             MyMessenger.Instance.DidNotReceive().Send( ClientGameEvents.MAX_MOVES_MADE );

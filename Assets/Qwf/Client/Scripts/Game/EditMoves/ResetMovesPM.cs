@@ -20,16 +20,16 @@ namespace Qwf.Client {
 
         private void ListenForMessages( bool i_listen ) {
             if ( i_listen ) {
-                MyMessenger.Instance.AddListener( ClientGameEvents.MADE_MOVE, OnMadeMove );
+                MyMessenger.Instance.AddListener<IClientMoveAttempt>( ClientGameEvents.MADE_MOVE, OnMadeMove );
                 MyMessenger.Instance.AddListener<IGameObstaclesUpdate>( ClientMessages.UPDATE_OBSTACLES, OnUpdateObstacles );
             }
             else {
-                MyMessenger.Instance.RemoveListener( ClientGameEvents.MADE_MOVE, OnMadeMove );
+                MyMessenger.Instance.RemoveListener<IClientMoveAttempt>( ClientGameEvents.MADE_MOVE, OnMadeMove );
                 MyMessenger.Instance.RemoveListener<IGameObstaclesUpdate>( ClientMessages.UPDATE_OBSTACLES, OnUpdateObstacles );
             }
         }
 
-        public void OnMadeMove() {
+        public void OnMadeMove( IClientMoveAttempt i_attempt ) {
             SetInteractableProperties( true );
         }
 

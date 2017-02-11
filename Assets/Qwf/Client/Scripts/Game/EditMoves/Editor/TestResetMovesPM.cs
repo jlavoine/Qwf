@@ -21,7 +21,7 @@ namespace Qwf.Client {
         public void WhenCreating_SubscribesToMessages() {
             ResetMovesPM systemUnderTest = new ResetMovesPM();
 
-            MyMessenger.Instance.Received().AddListener( ClientGameEvents.MADE_MOVE, Arg.Any<Callback>() );
+            MyMessenger.Instance.Received().AddListener<IClientMoveAttempt>( ClientGameEvents.MADE_MOVE, Arg.Any<Callback<IClientMoveAttempt>>() );
             MyMessenger.Instance.Received().AddListener<IGameObstaclesUpdate>( ClientMessages.UPDATE_OBSTACLES, Arg.Any<Callback<IGameObstaclesUpdate>>() );
         }
 
@@ -31,7 +31,7 @@ namespace Qwf.Client {
 
             systemUnderTest.Dispose();
 
-            MyMessenger.Instance.Received().RemoveListener( ClientGameEvents.MADE_MOVE, Arg.Any<Callback>() );
+            MyMessenger.Instance.Received().RemoveListener<IClientMoveAttempt>( ClientGameEvents.MADE_MOVE, Arg.Any<Callback<IClientMoveAttempt>>() );
             MyMessenger.Instance.Received().RemoveListener<IGameObstaclesUpdate>( ClientMessages.UPDATE_OBSTACLES, Arg.Any<Callback<IGameObstaclesUpdate>>() );
         }
 
@@ -39,7 +39,7 @@ namespace Qwf.Client {
         public void AfterMoveIsMade_InteractablePropertiesAreTrue() {
             ResetMovesPM systemUnderTest = new ResetMovesPM();
 
-            systemUnderTest.OnMadeMove();
+            systemUnderTest.OnMadeMove( Substitute.For<IClientMoveAttempt>() );
 
             AssertIsVisibleProperty( systemUnderTest, true );
             Assert.AreEqual( true, systemUnderTest.ViewModel.GetPropertyValue<bool>( ResetMovesPM.USE_PROPERTY ) );

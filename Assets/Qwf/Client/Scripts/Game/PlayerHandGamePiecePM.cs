@@ -23,8 +23,7 @@ namespace Qwf.Client {
             Index = i_index;
         }
 
-        public void Play() {
-            MyMessenger.Instance.Send( ClientGameEvents.MADE_MOVE );
+        public void Play() {            
             SetVisibility( false );
         }
 

@@ -46,15 +46,6 @@ namespace Qwf.Client {
         }
 
         [Test]
-        public void WhenPlayingPiece_MoveMadeEventIsSent() {
-            PlayerHandGamePiecePM systemUnderTest = new PlayerHandGamePiecePM( Substitute.For<IGamePieceData>(), "" );
-
-            systemUnderTest.Play();
-
-            MyMessenger.Instance.Received( 1 ).Send( ClientGameEvents.MADE_MOVE );
-        }
-
-        [Test]
         public void WhenPlayingPiece_CanSeePieceProperty_IsFalse() {
             PlayerHandGamePiecePM systemUnderTest = new PlayerHandGamePiecePM( Substitute.For<IGamePieceData>(), "" );
 
