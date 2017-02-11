@@ -13,7 +13,7 @@ namespace Qwf.Server {
 
         [Inject] public GameManagerCreatedSignal GameManagerCreatedSignal { get; set; }
 
-        private GameManager mManager;
+        [Inject] public IGameManager GameManager { get; set; }
 
         public override void OnRegister() {
             Logger.Dispatch( LoggerTypes.Info, string.Format( "GameManagerMediator.OnRegister()" ) );
@@ -21,10 +21,8 @@ namespace Qwf.Server {
             GameManagerCreatedSignal.AddOnce( OnGameManagerCreated );
         }
 
-        private void OnGameManagerCreated( GameManager i_manager ) {
+        private void OnGameManagerCreated() {
             Logger.Dispatch( LoggerTypes.Info, string.Format( "Received GameManager" ) );
-
-            mManager = i_manager;
 
             SendStartingDataToPlayers();
         }
@@ -62,7 +60,7 @@ namespace Qwf.Server {
         }
 
         private GameObstaclesUpdate GetGameObstaclesUpdate() {
-            IGameBoard board = mManager.GameBoard;
+            IGameBoard board = GameManager.Board;
             GameObstaclesUpdate update = GameObstaclesUpdate.Create( board.GetCurrentObstacles() );
 
             return update;
