@@ -7,6 +7,19 @@ namespace Qwf {
     public class TestPlayerTurn {
 
         [Test]
+        public void IfMovesMoreThanMax_PlayerTurnNotValid() {
+            List<IGameMove> moves = new List<IGameMove>();
+            for ( int i = 0; i < PlayerTurn.MAX_MOVES_IN_TURN+1; ++i ) {
+                moves.Add( GetMoveOfLegalStatus( true ) );
+            }
+            
+            PlayerTurn systemUnderTest = new PlayerTurn( Substitute.For<IGamePlayer>(), moves );
+
+            bool isValid = systemUnderTest.IsValid( Substitute.For<IGameBoard>() );
+            Assert.IsFalse( isValid );
+        }
+
+        [Test]
         public void IfAnyMoveIsNotLegal_PlayerTurnNotValid() {
             List<IGameMove> moves = new List<IGameMove>();
             moves.Add( GetMoveOfLegalStatus( true ) );

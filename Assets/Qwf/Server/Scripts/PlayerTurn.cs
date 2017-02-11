@@ -5,6 +5,8 @@ namespace Qwf {
         private IGamePlayer mPlayer;
         private List<IGameMove> mMoves;
 
+        public const int MAX_MOVES_IN_TURN = 3; // TODO constants?
+
         public PlayerTurn( IGamePlayer i_player, List<IGameMove> i_moves ) {
             mPlayer = i_player;
             mMoves = i_moves;
@@ -15,7 +17,7 @@ namespace Qwf {
         }
 
         public bool IsValid( IGameBoard i_board ) {
-            return AreMovesLegal( i_board ) && !AreAnyDuplicatePiecesInMoves();
+            return mMoves.Count <= MAX_MOVES_IN_TURN && AreMovesLegal( i_board ) && !AreAnyDuplicatePiecesInMoves();
         }
 
         public void Process() {
