@@ -61,12 +61,54 @@ namespace Qwf {
         }
 
         [Test]
+        public void AfterTurnIsProcessed_ActiveAndInactivePlayersSwitch() {
+            GameManager systemUnderTest = new GameManager( Substitute.For<IGameBoard>(), Substitute.For<IScoreKeeper>() );
+            IGamePlayer p1 = Substitute.For<IGamePlayer>();
+            p1.Id.Returns( "P1" );
+            IGamePlayer p2 = Substitute.For<IGamePlayer>();
+            p2.Id.Returns( "P2" );
+            systemUnderTest.ActivePlayer = p1;
+            systemUnderTest.InactivePlayer = p2;
+
+            TakeValidTurn( systemUnderTest );
+
+            Assert.AreEqual( p1, systemUnderTest.InactivePlayer );
+            Assert.AreEqual( p2, systemUnderTest.ActivePlayer );
+        }
+
+        static object[] GameManagerReadyTests = {
+            new object[] { Substitute.For<IGameBoard>(), Substitute.For<IScoreKeeper>(), Substitute.For<IGamePlayer>(), Substitute.For<IGamePlayer>(), true },
+            new object[] { null, Substitute.For<IScoreKeeper>(), Substitute.For<IGamePlayer>(), Substitute.For<IGamePlayer>(), false },
+            new object[] { Substitute.For<IGameBoard>(), Substitute.For<IScoreKeeper>(), Substitute.For<IGamePlayer>(), null, false },
+            new object[] { Substitute.For<IGameBoard>(), Substitute.For<IScoreKeeper>(), null, Substitute.For<IGamePlayer>(), false },
+            new object[] { Substitute.For<IGameBoard>(), null, Substitute.For<IGamePlayer>(), Substitute.For<IGamePlayer>(), false },
+
+        };
+
+        [Test, TestCaseSource("GameManagerReadyTests")]
+        public void GameManagerIsReady_WhenExpected( IGameBoard i_board, IScoreKeeper i_scoreKeeper, IGamePlayer i_player1, IGamePlayer i_player2, bool i_expected ) {
+            GameManager systemUnderTest = new GameManager( i_board, i_scoreKeeper );
+
+            if ( i_player1 != null ) {
+                i_player1.Id.Returns( "P1" );
+                systemUnderTest.AddPlayer( i_player1 );
+            }
+
+            if ( i_player2 != null ) {
+                i_player2.Id.Returns( "P2" );
+                systemUnderTest.AddPlayer( i_player2 );
+            }
+            
+            Assert.AreEqual( i_expected, systemUnderTest.IsReady() );
+        }
+
+        [Test]
         public void AddingPlayer_AddsToPlayerList() {
             GameManager systemUnderTest = new GameManager();
             IGamePlayer mockPlayer = Substitute.For<IGamePlayer>();
             mockPlayer.Id.Returns( "Joe" );
 
-            systemUnderTest.AddPlayer( mockPlayer, "Joe" );
+            systemUnderTest.AddPlayer( mockPlayer );
 
             IGamePlayer addedPlayer = systemUnderTest.GetPlayerFromId( "Joe" );
             Assert.AreEqual( "Joe", addedPlayer.Id );
