@@ -27,6 +27,8 @@ namespace Qwf.Client {
 
         public override void ProcessAction() {
             base.ProcessAction();
+
+            SendEmptyClientTurnAttempt();
         }
 
         public void OnMadeMove() {
@@ -40,6 +42,14 @@ namespace Qwf.Client {
         private void SetVisibleProperty( bool i_visible ) {
             float fAlpha = i_visible ? 1f : 0f;
             ViewModel.SetProperty( VISIBLE_PROPERTY, fAlpha );
+        }
+
+        private void SendEmptyClientTurnAttempt() {
+            ClientTurnAttempt attempt = new ClientTurnAttempt();
+            attempt.PlayerId = BackendManager.Instance.GetPlayerId();
+            attempt.MoveAttempts = null;
+
+            MyMessenger.Instance.Send<ClientTurnAttempt>( ClientMessages.SEND_TURN_TO_SERVER, attempt );
         }
     }
 }

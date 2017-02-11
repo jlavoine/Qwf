@@ -52,5 +52,15 @@ namespace Qwf.Client {
 
             Assert.AreEqual( 1f, systemUnderTest.ViewModel.GetPropertyValue<float>( PassTurnPM.VISIBLE_PROPERTY ) );
         }
+
+        [Test]
+        public void WhenPassingTurn_EmptyMoveAttemptIsSent() {
+            BackendManager.Instance.GetPlayerId().Returns( "Me" );
+            PassTurnPM systemUnderTest = new PassTurnPM();
+
+            systemUnderTest.ProcessAction();
+
+            MyMessenger.Instance.Received().Send<ClientTurnAttempt>( ClientMessages.SEND_TURN_TO_SERVER, Arg.Is<ClientTurnAttempt>(attempt => attempt.PlayerId == "Me" && attempt.MoveAttempts == null ) );
+        }
     }
 }
