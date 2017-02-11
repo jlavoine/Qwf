@@ -27,6 +27,7 @@ namespace Qwf {
 
         public void AddPlayer( IGamePlayer i_player ) {
             mPlayers.Add( i_player.Id, i_player );
+            PickActivePlayerIfReady();
         }
 
         public IGamePlayer GetPlayerFromId( string i_id ) {
