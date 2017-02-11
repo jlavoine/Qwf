@@ -12,13 +12,16 @@ namespace Qwf {
             return Obstacles[i_index];
         }
 
-        public static GameObstaclesUpdate GetUpdate( List<IGameObstacle> i_obstacles ) {
+        public static GameObstaclesUpdate Create( List<IGameObstacle> i_obstacles ) {
             GameObstaclesUpdate update = new GameObstaclesUpdate();
             update.Obstacles = new List<GameObstacleUpdate>();
 
+            int index = 0;
             foreach ( IGameObstacle obstacle in i_obstacles ) {
-                GameObstacleUpdate obstacleUpdate = GameObstacleUpdate.GetUpdate( obstacle );
+                GameObstacleUpdate obstacleUpdate = GameObstacleUpdate.Create( obstacle, index );
                 update.Obstacles.Add( obstacleUpdate );
+
+                index++;
             }
 
             return update;

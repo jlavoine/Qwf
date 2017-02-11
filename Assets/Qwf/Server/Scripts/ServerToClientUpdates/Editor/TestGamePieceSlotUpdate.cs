@@ -20,9 +20,13 @@ namespace Qwf {
 
             mSystemUnderTest.SlotPieceType = 3;
             mSystemUnderTest.PieceInSlot = blankPiece;
+            mSystemUnderTest.Index = 1;
+            mSystemUnderTest.ObstacleIndex = 5;
 
             Assert.AreEqual( 3, mSystemUnderTest.GetSlotPieceType() );
             Assert.AreEqual( blankPiece, mSystemUnderTest.GetPieceInSlot() );
-        }
+            Assert.AreEqual( 1, mSystemUnderTest.GetIndex() );
+            Assert.AreEqual( 5, mSystemUnderTest.GetObstacleIndex() );
+        } 
     }
 }

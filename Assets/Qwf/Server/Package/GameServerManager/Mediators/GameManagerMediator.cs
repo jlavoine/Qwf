@@ -63,7 +63,7 @@ namespace Qwf.Server {
 
         private GameObstaclesUpdate GetGameObstaclesUpdate() {
             IGameBoard board = mManager.GameBoard;
-            GameObstaclesUpdate update = GameObstaclesUpdate.GetUpdate( board.GetCurrentObstacles() );
+            GameObstaclesUpdate update = GameObstaclesUpdate.Create( board.GetCurrentObstacles() );
 
             return update;
         }

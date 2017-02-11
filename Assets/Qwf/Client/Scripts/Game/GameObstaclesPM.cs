@@ -39,7 +39,6 @@ namespace Qwf.Client {
         }
 
         public void OnUpdateFromServer( IGameObstaclesUpdate i_update ) {
-            UnityEngine.Debug.LogError( "Got an update from server" );
             int obstacleCount = i_update.GetObstaclesCount();
             for ( int i = 0; i < ObstaclePMs.Count; ++i ) {
                 if ( i < obstacleCount ) {

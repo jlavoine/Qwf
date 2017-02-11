@@ -6,6 +6,7 @@ namespace Qwf {
 
         int GetFinalBlowValue();
         int GetSlotCount();
+        int GetIndex();
 
         IGamePieceSlotUpdate GetSlotUpdate( int i_index );
     }

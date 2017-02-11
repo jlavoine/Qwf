@@ -3,7 +3,7 @@ namespace Qwf {
     public class GamePieceSlot : IGamePieceSlot {
         private IGamePieceSlotData mData;
         private IGamePiece mCurrentPiece;
-
+         
         public GamePieceSlot( IGamePieceSlotData i_data ) {
             mData = i_data;
         }
@@ -14,6 +14,14 @@ namespace Qwf {
 
         public int GetScoreValue() {
             return mData.GetScoreValue();
+        }
+
+        public int GetIndex() {
+            return mData.GetIndex();
+        }
+
+        public int GetObstacleIndex() {
+            return mData.GetObstacleIndex();
         }
 
         public bool CanPlacePieceIntoSlot( IGamePiece i_piece ) {

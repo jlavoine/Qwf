@@ -33,7 +33,7 @@ namespace Qwf.Client {
         }
 
         public void AttemptToPlayPieceInSlot( IPlayerHandGamePiecePM i_piecePM ) {
-            if ( Slot.CanPlacePieceIntoSlot( i_piecePM.GamePiece ) ) {
+            if ( Slot.CanPlacePieceIntoSlot( i_piecePM.GamePiece ) ) {                
                 i_piecePM.Play();
                 UpdateGamePieceInSlot( i_piecePM.GamePiece );
             } else {

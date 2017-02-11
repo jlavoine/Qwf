@@ -34,6 +34,13 @@ namespace Qwf {
         }
 
         [Test]
+        public void GetIndex_EqualsCreatedWithValue() {
+            mSystemUnderTest.Index = 1;
+
+            Assert.AreEqual( 1, mSystemUnderTest.GetIndex() );
+        }         
+
+        [Test]
         public void GetSlotCount_ReturnsExpectedCount() {
             List<GamePieceSlotUpdate> slotUpdates = new List<GamePieceSlotUpdate>();
             slotUpdates.Add( new GamePieceSlotUpdate() );
