@@ -11,6 +11,7 @@ namespace Qwf {
 
         IGamePlayer GetPlayerFromId( string i_id );
         IGamePlayer ActivePlayer { get; }
+        IGamePlayer InactivePlayer { get; }
 
         IGameBoard Board { get; }
     }
