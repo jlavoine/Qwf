@@ -15,6 +15,8 @@ namespace Qwf.Server {
 
         [Inject] public IGameManager GameManager { get; set; }
 
+        [Inject] public SendPlayerTurnUpdateSignal SendPlayerTurnUpdateSignal { get; set; }
+
         public override void OnRegister() {
             Logger.Dispatch( LoggerTypes.Info, string.Format( "GameManagerMediator.OnRegister()" ) );
 
@@ -45,18 +47,8 @@ namespace Qwf.Server {
         }
 
         private void PickAndSendStartingPlayer() {
-            string startingPlayer = UnityNetworkingData.Connections[0].PlayFabId;
-            TurnUpdate update = new TurnUpdate();
-            update.ActivePlayer = startingPlayer;
-
-            string updateJSON = JsonConvert.SerializeObject( update );
-
-            foreach ( var uconn in UnityNetworkingData.Connections ) {
-                Logger.Dispatch( LoggerTypes.Info, "Sending starting turn update data to " + uconn.PlayFabId );
-                uconn.Connection.Send( NetworkMessages.UpdateTurn, new StringMessage() {
-                    value = updateJSON
-                } );
-            }
+            IGamePlayer startingPlayer = GameManager.ActivePlayer;
+            SendPlayerTurnUpdateSignal.Dispatch( startingPlayer );
         }
 
         private GameObstaclesUpdate GetGameObstaclesUpdate() {

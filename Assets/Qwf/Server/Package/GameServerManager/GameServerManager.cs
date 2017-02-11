@@ -24,6 +24,7 @@ namespace Qwf.Server {
             commandBinder.Bind<CreateGamePlayerSignal>().To<CreateGamePlayerCommand>();
             commandBinder.Bind<PlayerTurnProcessedSignal>().To<SendGameUpdatesToPlayersCommand>();
             commandBinder.Bind<SendGamePlayerHandSignal>().To<SendGamePlayerHandCommand>();
+            commandBinder.Bind<SendPlayerTurnUpdateSignal>().To<SendPlayerTurnUpdateCommand>();
             //commandBinder.Bind<SetupUnityNetworkingCompleteSignal>();
             //commandBinder.Bind<ClientDisconnectedSignal>();
         }

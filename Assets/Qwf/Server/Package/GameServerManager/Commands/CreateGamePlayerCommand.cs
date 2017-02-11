@@ -33,7 +33,7 @@ namespace Qwf.Server {
                     PlayerDeckData deckData = JsonConvert.DeserializeObject<PlayerDeckData>( kvp.Value );
                     IGamePlayer player = new GamePlayer( GameRules, deckData, PlayFabId );
                     ScoreKeeper.AddPlayer( player );
-                    GameManager.AddPlayer( player, PlayFabId );
+                    GameManager.AddPlayer( player );
                     UpdatePlayerHandSignal.Dispatch( player );
                     PlayerAddedSignal.Dispatch();
                 }
