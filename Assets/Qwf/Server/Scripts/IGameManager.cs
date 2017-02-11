@@ -7,6 +7,7 @@ namespace Qwf {
         void AddPlayer( IGamePlayer i_player, string i_id );
 
         bool IsReady();
+        bool IsPlayerTurnValidForGameState( IPlayerTurn i_turn );      
 
         IGamePlayer GetPlayerFromId( string i_id );
 

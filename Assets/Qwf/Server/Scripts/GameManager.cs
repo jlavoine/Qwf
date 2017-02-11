@@ -5,6 +5,9 @@ namespace Qwf {
         private IGameBoard mBoard;
         public IGameBoard Board { get { return mBoard; } }
 
+        private IGamePlayer mActivePlayer;
+        public IGamePlayer ActivePlayer { get { return mActivePlayer; } set { mActivePlayer = value; } }
+
         private IScoreKeeper mScoreKeeper;
 
         private Dictionary<string, IGamePlayer> mPlayers = new Dictionary<string, IGamePlayer>();
@@ -40,12 +43,16 @@ namespace Qwf {
         }
 
         public void TryPlayerTurn( IPlayerTurn i_turn ) {
-            if ( i_turn.IsValid( mBoard ) ) {
+            if ( IsPlayerTurnValidForGameState( i_turn ) ) {
                 ProcessTurn( i_turn );
                 FillPlayerHandAfterTurn( i_turn.GetPlayer() );
                 UpdateBoardStateAfterTurn( i_turn.GetPlayer() );
                 CheckForGameOver();
             }
+        }
+
+        public bool IsPlayerTurnValidForGameState( IPlayerTurn i_turn ) {
+            return i_turn.IsValid( mBoard );
         }
 
         private void ProcessTurn( IPlayerTurn i_turn ) {
