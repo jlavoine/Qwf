@@ -64,6 +64,7 @@ public class ClientExampleScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        ListenForMessages( true );
         StartText.text = "Loading...";
 
         if (string.IsNullOrEmpty(TitleId))
@@ -144,6 +145,18 @@ public class ClientExampleScript : MonoBehaviour
 
     }
 
+    void OnDestroy() {
+        ListenForMessages( false );
+    }
+
+    private void ListenForMessages( bool i_listen ) {
+        if ( i_listen ) {
+            MyMessenger.Instance.AddListener<ClientTurnAttempt>( ClientMessages.SEND_TURN_TO_SERVER, SendTurnToServer );
+        } else {
+            MyMessenger.Instance.RemoveListener<ClientTurnAttempt>( ClientMessages.SEND_TURN_TO_SERVER, SendTurnToServer );
+        }
+    }
+
     private void ConnectNetworkClient(string host = "localhost", int port = 7777)
     {
         //Basic Unity Networking Client, note there are other ways to do this
@@ -216,6 +229,13 @@ public class ClientExampleScript : MonoBehaviour
             AuthTicket = !string.IsNullOrEmpty(GameServerAuthTicket) ? GameServerAuthTicket : SessionTicket,
             IsLocal = IsLocalNetwork
         });
+    }
+
+    public void SendTurnToServer( ClientTurnAttempt i_turnAttempt ) {
+        StringMessage message = new StringMessage();
+        message.value = JsonConvert.SerializeObject( i_turnAttempt );
+
+        _network.Send( NetworkMessages.SendTurn, message );
     }
 
     private void OnAuthenticated(NetworkMessage netMsg) {
