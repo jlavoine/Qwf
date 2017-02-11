@@ -9,10 +9,11 @@ namespace Qwf.Client {
     [TestFixture]
     public class TestSendMovesPM : QwfUnitTest {
         [Test]
-        public void WhenCreatingPM_IsVisibleProperty_FalseByDefault() {
+        public void WhenCreatingPM_InteractableProperties_FalseByDefault() {
             SendMovesPM systemUnderTest = new SendMovesPM();
 
             Assert.AreEqual( 0f, systemUnderTest.ViewModel.GetPropertyValue<float>( PassTurnPM.VISIBLE_PROPERTY ) );
+            Assert.IsFalse( systemUnderTest.ViewModel.GetPropertyValue<bool>( MakeMovePM.USE_PROPERTY ) );
         }
 
         [Test]
@@ -34,23 +35,27 @@ namespace Qwf.Client {
         }
 
         [Test]
-        public void WhenMoveIsMade_IsVisibleIsTrue() {
+        public void WhenMoveIsMade_InteractablePropertiesAreTrue() {
             SendMovesPM systemUnderTest = new SendMovesPM();
             systemUnderTest.ViewModel.SetProperty( SendMovesPM.VISIBLE_PROPERTY, 0f );
+            systemUnderTest.ViewModel.SetProperty( SendMovesPM.USE_PROPERTY, 0f );
 
             systemUnderTest.OnMadeMove();
 
             Assert.AreEqual( 1f, systemUnderTest.ViewModel.GetPropertyValue<float>( SendMovesPM.VISIBLE_PROPERTY ) );
+            Assert.IsTrue( systemUnderTest.ViewModel.GetPropertyValue<bool>( MakeMovePM.USE_PROPERTY ) );
         }
 
         [Test]
-        public void WhenMovesReset_IsVisibleIsFalse() {
+        public void WhenMovesReset_InteractablePropertiesAreFalse() {
             SendMovesPM systemUnderTest = new SendMovesPM();
             systemUnderTest.ViewModel.SetProperty( SendMovesPM.VISIBLE_PROPERTY, 1f );
+            systemUnderTest.ViewModel.SetProperty( SendMovesPM.USE_PROPERTY, 1f );
 
             systemUnderTest.OnResetMoves();
 
             Assert.AreEqual( 0f, systemUnderTest.ViewModel.GetPropertyValue<float>( SendMovesPM.VISIBLE_PROPERTY ) );
+            Assert.IsFalse( systemUnderTest.ViewModel.GetPropertyValue<bool>( MakeMovePM.USE_PROPERTY ) );
         }
     }
 }

@@ -3,10 +3,8 @@ using MyLibrary;
 
 namespace Qwf.Client {
     public class PassTurnPM : MakeMovePM {
-        public const string VISIBLE_PROPERTY = "IsVisible";
-
         public PassTurnPM() {
-            SetVisibleProperty( true );
+            SetInteractableProperties( true );
             ListenForMessages( true );
         }
 
@@ -32,16 +30,11 @@ namespace Qwf.Client {
         }
 
         public void OnMadeMove() {
-            SetVisibleProperty( false );
+            SetInteractableProperties( false );
         }
 
         public void OnResetMoves() {
-            SetVisibleProperty( true );
-        }
-
-        private void SetVisibleProperty( bool i_visible ) {
-            float fAlpha = i_visible ? 1f : 0f;
-            ViewModel.SetProperty( VISIBLE_PROPERTY, fAlpha );
+            SetInteractableProperties( true );
         }
 
         private void SendEmptyClientTurnAttempt() {

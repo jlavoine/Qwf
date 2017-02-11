@@ -10,10 +10,11 @@ namespace Qwf.Client {
     public class TestResetMovesPM : QwfUnitTest {
 
         [Test]
-        public void ByDefault_IsVisibleProperty_IsFalse() {
+        public void ByDefault_InteractablePropertiesAreFalse() {
             ResetMovesPM systemUnderTest = new ResetMovesPM();
 
             AssertIsVisibleProperty( systemUnderTest, false );
+            Assert.AreEqual( false, systemUnderTest.ViewModel.GetPropertyValue<bool>( ResetMovesPM.USE_PROPERTY ) );
         }
 
         [Test]
@@ -35,12 +36,13 @@ namespace Qwf.Client {
         }
 
         [Test]
-        public void AfterMoveIsMade_IsVisiblePropertyIsTrue() {
+        public void AfterMoveIsMade_InteractablePropertiesAreTrue() {
             ResetMovesPM systemUnderTest = new ResetMovesPM();
 
             systemUnderTest.OnMadeMove();
 
             AssertIsVisibleProperty( systemUnderTest, true );
+            Assert.AreEqual( true, systemUnderTest.ViewModel.GetPropertyValue<bool>( ResetMovesPM.USE_PROPERTY ) );
         }
 
         [Test]
@@ -62,13 +64,14 @@ namespace Qwf.Client {
         }
 
         [Test]
-        public void WhenMovesAreReset_IsVisiblePropertyIsFalse() {
+        public void WhenMovesAreReset_InteractablePropertiesAsExpected() {
             ResetMovesPM systemUnderTest = new ResetMovesPM();
-            systemUnderTest.ViewModel.SetProperty( ResetMovesPM.IS_VISIBLE_PROPERTY, 1f );
+            systemUnderTest.ViewModel.SetProperty( ResetMovesPM.VISIBLE_PROPERTY, 1f );
 
             systemUnderTest.ResetMoves();
 
             AssertIsVisibleProperty( systemUnderTest, false );
+            Assert.AreEqual( false, systemUnderTest.ViewModel.GetPropertyValue<bool>( ResetMovesPM.USE_PROPERTY ) );
         }
 
         [Test]
@@ -83,7 +86,7 @@ namespace Qwf.Client {
 
         private void AssertIsVisibleProperty( ResetMovesPM i_systemUnderTest, bool i_visible ) {
             float fAlpha = i_visible ? 1f : 0f;
-            Assert.AreEqual( fAlpha, i_systemUnderTest.ViewModel.GetPropertyValue<float>( ResetMovesPM.IS_VISIBLE_PROPERTY ) );
+            Assert.AreEqual( fAlpha, i_systemUnderTest.ViewModel.GetPropertyValue<float>( ResetMovesPM.VISIBLE_PROPERTY ) );
         }
     }
 }

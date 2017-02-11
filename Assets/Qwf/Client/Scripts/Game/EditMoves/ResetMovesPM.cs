@@ -3,14 +3,15 @@ using MyLibrary;
 
 namespace Qwf.Client {
     public class ResetMovesPM : GenericViewModel {
-        public const string IS_VISIBLE_PROPERTY = "IsVisible";
+        public const string VISIBLE_PROPERTY = "IsVisible";
+        public const string USE_PROPERTY = "CanUse";
 
         private IGameObstaclesUpdate mUpdate;
         public IGameObstaclesUpdate CachedUpdate { get { return mUpdate; } set { mUpdate = value; } }
 
         public ResetMovesPM() {
             ListenForMessages( true );
-            SetIsVisibleProperty( false );
+            SetInteractableProperties( false );
         }
 
         public void Dispose() {
@@ -29,22 +30,22 @@ namespace Qwf.Client {
         }
 
         public void OnMadeMove() {
-            SetIsVisibleProperty( true );
+            SetInteractableProperties( true );
         }
 
         public void ResetMoves() {
             MyMessenger.Instance.Send( ClientGameEvents.RESET_MOVES );
             MyMessenger.Instance.Send( ClientMessages.UPDATE_OBSTACLES, CachedUpdate );
-            SetIsVisibleProperty( false );
+            SetInteractableProperties( false );
         }
 
         public void OnUpdateObstacles( IGameObstaclesUpdate i_update ) {
             CachedUpdate = i_update;
         }
 
-        private void SetIsVisibleProperty( bool i_visible ) {
-            float fAlpha = i_visible ? 1f : 0f;
-            ViewModel.SetProperty( IS_VISIBLE_PROPERTY, fAlpha );
+        private void SetInteractableProperties( bool i_interactable ) {
+            ViewModel.SetProperty( VISIBLE_PROPERTY, i_interactable ? 1f : 0f );
+            ViewModel.SetProperty( USE_PROPERTY, i_interactable );
         }
     }
 }

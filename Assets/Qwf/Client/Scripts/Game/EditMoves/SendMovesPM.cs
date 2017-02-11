@@ -2,10 +2,8 @@
 
 namespace Qwf.Client {
     public class SendMovesPM : MakeMovePM {
-        public const string VISIBLE_PROPERTY = "IsVisible";
-
         public SendMovesPM() {
-            SetVisibleProperty( false );
+            SetInteractableProperties( false );
             ListenForMessages( true );
         }
 
@@ -29,16 +27,11 @@ namespace Qwf.Client {
         }
 
         public void OnMadeMove() {
-            SetVisibleProperty( true );
+            SetInteractableProperties( true );
         }
 
         public void OnResetMoves() {
-            SetVisibleProperty( false );
-        }
-
-        private void SetVisibleProperty( bool i_visible ) {
-            float fAlpha = i_visible ? 1f : 0f;
-            ViewModel.SetProperty( VISIBLE_PROPERTY, fAlpha );
+            SetInteractableProperties( false );
         }
     }
 }
