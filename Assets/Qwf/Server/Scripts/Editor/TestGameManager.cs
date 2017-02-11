@@ -60,6 +60,28 @@ namespace Qwf {
             mockBoard.Received().UpdateBoardState( Arg.Any<IScoreKeeper>(), Arg.Any<IGamePlayer>() );
         }
 
+        [Test]
+        public void AddingPlayer_AddsToPlayerList() {
+            GameManager systemUnderTest = new GameManager();
+            IGamePlayer mockPlayer = Substitute.For<IGamePlayer>();
+            mockPlayer.Id.Returns( "Joe" );
+
+            systemUnderTest.AddPlayer( mockPlayer, "Joe" );
+
+            IGamePlayer addedPlayer = systemUnderTest.GetPlayerFromId( "Joe" );
+            Assert.AreEqual( "Joe", addedPlayer.Id );
+            Assert.AreEqual( mockPlayer, addedPlayer );
+        }
+
+        [Test]
+        public void GettingPlayerThatDoesNotExist_ReturnsNull() {
+            GameManager systemUnderTest = new GameManager();
+
+            IGamePlayer noPlayer = systemUnderTest.GetPlayerFromId( "Nobody" );
+
+            Assert.IsNull( noPlayer );
+        }
+
         private void TakeValidTurn( GameManager i_manager ) {
             IPlayerTurn mockTurn = Substitute.For<IPlayerTurn>();
             mockTurn.IsValid( Arg.Any<IGameBoard>() ).Returns( true );
