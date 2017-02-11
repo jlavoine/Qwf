@@ -1,7 +1,11 @@
 ﻿using MyLibrary;
+using System.Collections.Generic;
 
 namespace Qwf.Client {
     public class SendMovesPM : MakeMovePM {
+        private List<IClientMoveAttempt> mMoveAttempts = new List<IClientMoveAttempt>();
+        public List<IClientMoveAttempt> MoveAttempts { get { return mMoveAttempts; } set { mMoveAttempts = value; } }
+
         public SendMovesPM() {
             SetInteractableProperties( false );
             ListenForMessages( true );
@@ -28,10 +32,20 @@ namespace Qwf.Client {
 
         public void OnMadeMove( IClientMoveAttempt i_attempt ) {
             SetInteractableProperties( true );
+            AddMoveAttemptToList( i_attempt );
         }
 
         public void OnResetMoves() {
             SetInteractableProperties( false );
+            ResetMoveAttemptsList();
+        }
+
+        private void ResetMoveAttemptsList() {
+            MoveAttempts = new List<IClientMoveAttempt>();
+        }
+
+        private void AddMoveAttemptToList( IClientMoveAttempt i_attempt ) {
+            MoveAttempts.Add( i_attempt );
         }
 
         private void SendEmptyClientTurnAttempt() {

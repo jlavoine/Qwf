@@ -2,12 +2,42 @@
 using NSubstitute;
 using UnityEngine;
 using MyLibrary;
+using System.Collections.Generic;
 
 #pragma warning disable 0219
 
 namespace Qwf.Client {
     [TestFixture]
     public class TestSendMovesPM : QwfUnitTest {
+        [Test]
+        public void WhenCreatingPM_MoveAttemptsListIsEmpty() {
+            SendMovesPM systemUnderTest = new SendMovesPM();
+
+            Assert.IsEmpty( systemUnderTest.MoveAttempts );
+        }
+
+        [Test]
+        public void WhenMovesReset_MoveAttemptsListIsEmpty() {
+            SendMovesPM systemUnderTest = new SendMovesPM();
+            systemUnderTest.MoveAttempts.Add( Substitute.For<IClientMoveAttempt>() );
+
+            systemUnderTest.OnResetMoves();
+
+            Assert.IsEmpty( systemUnderTest.MoveAttempts );
+        }
+
+        [Test]
+        public void WhenMoveMade_MoveAttemptsListIsAddedTo() {
+            SendMovesPM systemUnderTest = new SendMovesPM();
+            systemUnderTest.MoveAttempts = new List<IClientMoveAttempt>();
+
+            IClientMoveAttempt mockMove = Substitute.For<IClientMoveAttempt>();
+            systemUnderTest.OnMadeMove( mockMove );
+
+            Assert.AreEqual( 1, systemUnderTest.MoveAttempts.Count );
+            Assert.Contains( mockMove, systemUnderTest.MoveAttempts );
+        }
+
         [Test]
         public void WhenCreatingPM_InteractableProperties_FalseByDefault() {
             SendMovesPM systemUnderTest = new SendMovesPM();
