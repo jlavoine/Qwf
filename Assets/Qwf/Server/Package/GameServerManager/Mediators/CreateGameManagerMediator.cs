@@ -34,6 +34,7 @@ namespace Qwf.Server {
         private void OnPlayerAdded() {
             if ( ScoreKeeper.GetNumPlayers() == 2 ) {
                 PlayerAddedSignal.RemoveListener( OnPlayerAdded );
+                GameManager.SetScoreKeeper( ScoreKeeper );
                 Logger.Dispatch( LoggerTypes.Info, string.Format( "Both players joined; setting score keeper" ) );
 
                 GameManagerCreatedSignal.Dispatch();
