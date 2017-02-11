@@ -28,6 +28,8 @@ namespace Qwf.Client {
 
         public override void ProcessAction() {
             base.ProcessAction();
+
+            SendClientTurnAttempt();
         }
 
         public void OnMadeMove( IClientMoveAttempt i_attempt ) {
@@ -48,12 +50,16 @@ namespace Qwf.Client {
             MoveAttempts.Add( i_attempt );
         }
 
-        private void SendEmptyClientTurnAttempt() {
-            ClientTurnAttempt attempt = new ClientTurnAttempt();
-            attempt.PlayerId = BackendManager.Instance.GetPlayerId();
-            attempt.MoveAttempts = null;
+        private void SendClientTurnAttempt() {
+            ClientTurnAttempt turnAttempt = new ClientTurnAttempt();
+            turnAttempt.PlayerId = BackendManager.Instance.GetPlayerId();
+            turnAttempt.MoveAttempts = new List<ClientMoveAttempt>();
 
-            MyMessenger.Instance.Send<ClientTurnAttempt>( ClientMessages.SEND_TURN_TO_SERVER, attempt );
+            foreach ( IClientMoveAttempt moveAttempt in MoveAttempts ) {
+                turnAttempt.MoveAttempts.Add( (ClientMoveAttempt) moveAttempt );
+            }
+
+            MyMessenger.Instance.Send<ClientTurnAttempt>( ClientMessages.SEND_TURN_TO_SERVER, turnAttempt );
         }
     }
 }

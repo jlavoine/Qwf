@@ -39,6 +39,19 @@ namespace Qwf.Client {
         }
 
         [Test]
+        public void WhenProcessingAction_EventWithMovesIsSent() {
+            SendMovesPM systemUnderTest = new SendMovesPM();
+            systemUnderTest.MoveAttempts = new List<IClientMoveAttempt>();
+            systemUnderTest.MoveAttempts.Add( new ClientMoveAttempt() );
+            systemUnderTest.MoveAttempts.Add( new ClientMoveAttempt() );
+            systemUnderTest.MoveAttempts.Add( new ClientMoveAttempt() );
+
+            systemUnderTest.ProcessAction();
+
+            MyMessenger.Instance.Received().Send<ClientTurnAttempt>( ClientMessages.SEND_TURN_TO_SERVER, Arg.Is<ClientTurnAttempt>( attempt => attempt.MoveAttempts.Count == 3 ) );
+        }
+
+        [Test]
         public void WhenCreatingPM_InteractableProperties_FalseByDefault() {
             SendMovesPM systemUnderTest = new SendMovesPM();
 
