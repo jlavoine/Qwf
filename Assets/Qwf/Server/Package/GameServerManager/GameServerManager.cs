@@ -14,7 +14,7 @@ namespace Qwf.Server {
             injectionBinder.Bind<GameBoardCreatedSignal>().ToSingleton();
             injectionBinder.Bind<PlayerAddedSignal>().ToSingleton();
             injectionBinder.Bind<GameManagerCreatedSignal>().ToSingleton();
-            injectionBinder.Bind<PlayerTurnSignal>().ToSingleton();
+            injectionBinder.Bind<PlayerTurnProcessedSignal>().ToSingleton();
 
             injectionBinder.Bind<IGameRules>().To<GameRules>();
             injectionBinder.Bind<IScoreKeeper>().To<ScoreKeeper>().ToSingleton();
@@ -22,6 +22,7 @@ namespace Qwf.Server {
 
             //Bind Commands and Signals            
             commandBinder.Bind<CreateGamePlayerSignal>().To<CreateGamePlayerCommand>();
+            commandBinder.Bind<PlayerTurnProcessedSignal>().To<SendGameUpdatesToPlayersCommand>();
             commandBinder.Bind<SendGamePlayerHandSignal>().To<SendGamePlayerHandCommand>();
             //commandBinder.Bind<SetupUnityNetworkingCompleteSignal>();
             //commandBinder.Bind<ClientDisconnectedSignal>();

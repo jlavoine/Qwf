@@ -7,14 +7,14 @@ using UnityEngine.Networking;
 using UnityEngine.Networking.NetworkSystem;
 
 namespace Qwf.Server {
-    public class PlayerTurnSignal : Signal<IPlayerTurn> { }
+    public class PlayerTurnProcessedSignal : Signal<IPlayerTurn> { }
 
     public class ClientTurnAttemptMediator : Mediator {        
 
         [Inject] public LogSignal Logger { get; set; }
         [Inject] public UnityNetworkingData UnityNetworkingData { get; set; }
 
-        [Inject] public PlayerTurnSignal PlayerTurnSignal { get; set; }
+        [Inject] public PlayerTurnProcessedSignal PlayerTurnProcessed { get; set; }
 
         [Inject] public IGameManager GameManager { get; set; }
 
@@ -30,14 +30,23 @@ namespace Qwf.Server {
                 ClientTurnAttempt turnAttempt = JsonConvert.DeserializeObject<ClientTurnAttempt>( message.value );
 
                 IPlayerTurn turn = CreateTurnFromAttempt( turnAttempt );
-                Logger.Dispatch( LoggerTypes.Info, string.Format( "Trying turn for " + turn.GetPlayer().Id ) );
-                GameManager.TryPlayerTurn( turn );
+                TryToProcessPlayerTurn( turn );                
+            }
+        }
+
+        private void TryToProcessPlayerTurn( IPlayerTurn i_turn ) {
+            // this method does a bit much; I wish GameManager was officially part of Strange, so I could just dispatch an
+            // event instead of checking here
+            Logger.Dispatch( LoggerTypes.Info, string.Format( "Trying turn for " + i_turn.GetPlayer().Id ) );
+
+            if ( GameManager.IsPlayerTurnValidForGameState( i_turn ) ) {
+                GameManager.TryPlayerTurn( i_turn );
+                PlayerTurnProcessed.Dispatch( i_turn );
             }
         }
 
         private bool IsMessageFromConnectedPlayer( NetworkMessage i_message ) {
             var uconn = UnityNetworkingData.Connections.Find( c => c.ConnectionId == i_message.conn.connectionId );
-            bool check = uconn != null;
             return uconn != null;
         }
 
