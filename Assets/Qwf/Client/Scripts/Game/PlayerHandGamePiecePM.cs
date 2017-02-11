@@ -4,6 +4,9 @@ namespace Qwf.Client {
     public class PlayerHandGamePiecePM : GamePiecePM, IPlayerHandGamePiecePM {
         public const string CAN_MOVE_PROPERTY = "CanMovePiece";
 
+        private int mIndex;
+        public int Index { get { return mIndex; } set { mIndex = value; } }
+
         public PlayerHandGamePiecePM( IGamePieceData i_piece, string i_playerViewing ) : base( i_piece, i_playerViewing ) {
             ListenForMessages( true );
 
@@ -14,6 +17,10 @@ namespace Qwf.Client {
             base.Dispose();
 
             ListenForMessages( false );
+        }
+
+        public void SetIndex( int i_index ) {
+            Index = i_index;
         }
 
         public void Play() {

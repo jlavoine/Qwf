@@ -65,6 +65,7 @@ namespace Qwf.Client {
             for ( int i = 0; i < mGamePiecePMs.Count; ++i ) {
                 if ( i < newPieceList.Count ) {
                     mGamePiecePMs[i].SetProperties( newPieceList[i] );
+                    mGamePiecePMs[i].SetIndex( i );
                 }
                 else {
                     mGamePiecePMs[i].SetVisibility( false );

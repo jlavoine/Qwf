@@ -134,5 +134,13 @@ namespace Qwf.Client {
 
             Assert.IsFalse( systemUnderTest.ViewModel.GetPropertyValue<bool>( PlayerHandGamePiecePM.CAN_MOVE_PROPERTY ) );
         }
+
+        [Test]
+        public void SettingIndexOnPiece_ReturnsCorrectIndex() {
+            PlayerHandGamePiecePM systemUnderTest = new PlayerHandGamePiecePM( null, "" );
+            systemUnderTest.SetIndex( 3 );
+
+            Assert.AreEqual( 3, systemUnderTest.Index );
+        }
     }
 }
