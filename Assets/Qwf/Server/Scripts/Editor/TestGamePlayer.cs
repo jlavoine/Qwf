@@ -2,6 +2,8 @@
 using NSubstitute;
 using System.Collections.Generic;
 
+#pragma warning disable 0414
+
 namespace Qwf.Server.UnitTests {
     [TestFixture]
     public class TestGamePlayer {
