@@ -4,6 +4,8 @@ namespace Qwf {
     public interface IGamePlayer {
         string Id { get; }
 
+        IServerGamePiece GetHeldPieceOfIndex( int i_index );
+
         bool IsGamePieceHeld( IServerGamePiece i_piece );
 
         void DrawToFillHand();

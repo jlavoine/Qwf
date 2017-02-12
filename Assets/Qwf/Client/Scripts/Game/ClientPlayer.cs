@@ -30,5 +30,9 @@ namespace Qwf.Client {
         public void RemovePieceFromHand( IServerGamePiece i_piece ) {
             throw new NotImplementedException();
         }
+
+        public IServerGamePiece GetHeldPieceOfIndex( int i_index ) {
+            throw new NotImplementedException();
+        }
     }
 }

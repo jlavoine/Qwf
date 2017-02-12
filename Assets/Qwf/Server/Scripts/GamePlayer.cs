@@ -27,6 +27,14 @@ namespace Qwf.Server {
             DrawStartingHand();
         }      
 
+        public IServerGamePiece GetHeldPieceOfIndex( int i_index ) {
+            if ( mHeldPieces.Count <= i_index || i_index < 0 ) {
+                return null;
+            } else {
+                return mHeldPieces[i_index];
+            }
+        }
+
         public List<IServerGamePiece> GetHeldPieces() {
             return mHeldPieces;
         }

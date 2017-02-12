@@ -93,6 +93,29 @@ namespace Qwf.Server.UnitTests {
             Assert.AreEqual( PLAYER_HAND_SIZE, systemUnderTest.GetHeldPieces().Count );
         }
 
+        static object[] GetHeldPieceOfIndexTests = {
+            new object[] { -1 },    // outside of bounds
+            new object[] { 1 },     // outside of bounds
+            new object[] { 0 }      // within bounds
+        };
+
+        [Test, TestCaseSource( "GetHeldPieceOfIndexTests" )]
+        public void GetHeldPieceOfIndex_ReturnsExpectedValue( int i_index ) {
+            IGameRules mockRules = Substitute.For<IGameRules>();
+            mockRules.GetPlayerHandSize().Returns( 3 );
+            List<IServerGamePiece> mockHand = new List<IServerGamePiece>();
+            IServerGamePiece mockPiece = Substitute.For<IServerGamePiece>();
+            mockHand.Add( mockPiece );
+
+            GamePlayer systemUnderTest = new GamePlayer( mockRules, mockHand, string.Empty );
+
+            if ( i_index != 0 ) {
+                Assert.AreEqual( null, systemUnderTest.GetHeldPieceOfIndex( i_index ) );
+            } else {
+                Assert.AreEqual( mockPiece, systemUnderTest.GetHeldPieceOfIndex( i_index ) );
+            }
+        }
+
         private IGameRules GetStandardRules() {
             IGameRules mockRules = Substitute.For<IGameRules>();
             mockRules.GetPlayerHandSize().Returns( PLAYER_HAND_SIZE );
