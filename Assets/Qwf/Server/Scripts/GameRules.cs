@@ -4,7 +4,7 @@ namespace Qwf {
         public GameRules() { }
 
         public int GetPlayerHandSize() {
-            return 6;
+            return 7;
         }
 
         public int GetMaxCurrentObstacles() {

@@ -4,12 +4,12 @@ using System;
 
 namespace Qwf.Client {
     public class PlayerHandPM : GenericViewModel {
-        public const int DEFAULT_HAND_SIZE = 5; // TODO this should be in a config?
-
         private string m_id;
 
         public List<PlayerHandGamePiecePM> mGamePiecePMs;
         public List<PlayerHandGamePiecePM> GamePiecePMs { get { return mGamePiecePMs; } }
+
+        private IGameRules mRules = new GameRules();
 
         public PlayerHandPM( List<IGamePieceData> i_gamePieces, string i_playerID ) {
             m_id = i_playerID;
@@ -45,7 +45,7 @@ namespace Qwf.Client {
         }
 
         private void AddMissingGamePiecesIfNecessary( string i_playerID ) {
-            for ( int i = mGamePiecePMs.Count; i < DEFAULT_HAND_SIZE; ++i ) {
+            for ( int i = mGamePiecePMs.Count; i < mRules.GetPlayerHandSize(); ++i ) {
                 mGamePiecePMs.Add( new PlayerHandGamePiecePM( null, i_playerID ) );
             }
         }

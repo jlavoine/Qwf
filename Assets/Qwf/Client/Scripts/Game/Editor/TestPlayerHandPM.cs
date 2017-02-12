@@ -45,7 +45,7 @@ namespace Qwf.Client {
 
             PlayerHandPM systemUnderTest = new PlayerHandPM( pieceData, string.Empty );
 
-            Assert.AreEqual( PlayerHandPM.DEFAULT_HAND_SIZE, systemUnderTest.GamePiecePMs.Count );
+            Assert.AreEqual( new GameRules().GetPlayerHandSize(), systemUnderTest.GamePiecePMs.Count );
         }
     }
 }

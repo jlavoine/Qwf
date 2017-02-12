@@ -7,6 +7,8 @@ namespace Qwf.Client {
     public class TestPlayerHand : MonoBehaviour {
         public PlayerHandView View;
 
+        private IGameRules mRules = new GameRules();
+
         void Start() {
         }
 
@@ -23,7 +25,7 @@ namespace Qwf.Client {
 
         void Update() {
             if ( Input.GetKeyDown( KeyCode.Space ) ) {
-                List<GamePieceData> pieces = CreateRandom(Random.Range(4,6));
+                List<GamePieceData> pieces = CreateRandom(Random.Range(4, mRules.GetPlayerHandSize()+1));
                 //OnUpdatePlayerHand
              
                 PlayerHandUpdateData data = new PlayerHandUpdateData();
