@@ -48,7 +48,7 @@ namespace Qwf.Client {
             moveAttempt.ObstacleIndex = i_slot.GetObstacleIndex();
             moveAttempt.ObstacleSlotIndex = i_slot.GetIndex();
 
-            MyMessenger.Instance.Send<ClientMoveAttempt>( ClientGameEvents.MADE_MOVE, moveAttempt );
+            MyMessenger.Instance.Send<IClientMoveAttempt>( ClientGameEvents.MADE_MOVE, moveAttempt );
         }
 
         private void SetSlot( IGamePieceSlotUpdate i_data ) {
