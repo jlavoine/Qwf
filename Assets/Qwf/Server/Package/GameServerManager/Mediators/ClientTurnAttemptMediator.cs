@@ -56,7 +56,13 @@ namespace Qwf.Server {
 
             if ( i_turnAttempt.MoveAttempts != null ) {
                 foreach ( ClientMoveAttempt moveAttempt in i_turnAttempt.MoveAttempts ) {
+                    Logger.Dispatch( LoggerTypes.Info, "Processing move attempt for piece " + moveAttempt.PieceInHandIndex + " on obstacle " + moveAttempt.ObstacleIndex + " on slot " + moveAttempt.ObstacleSlotIndex );
+                    IServerGamePiece heldPiece = player.GetHeldPieceOfIndex( moveAttempt.PieceInHandIndex );
+                    IGameObstacle targetObstacle = GameManager.Board.GetCurrentObstacleOfIndex( moveAttempt.ObstacleIndex );
+                    IGamePieceSlot targetSlot = targetObstacle.GetSlotOfIndex( moveAttempt.ObstacleSlotIndex );
 
+                    IGameMove move = new GameMove( heldPiece, targetObstacle, targetSlot );
+                    moves.Add( move );
                 }
             }
 
