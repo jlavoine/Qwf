@@ -1,5 +1,7 @@
 ﻿/// <summary>
 /// The actual numbers are arbitrary.
+/// Network messages for the client and server to
+/// communicate with one another.
 /// </summary>
 
 namespace Qwf {
