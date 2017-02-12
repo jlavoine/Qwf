@@ -22,6 +22,7 @@ namespace Qwf.Client {
 
             MyMessenger.Instance.Received().AddListener<IClientMoveAttempt>( ClientGameEvents.MADE_MOVE, Arg.Any<Callback<IClientMoveAttempt>>() );
             MyMessenger.Instance.Received().AddListener( ClientGameEvents.RESET_MOVES, Arg.Any<Callback>() );
+            MyMessenger.Instance.Received().AddListener<ClientTurnAttempt>( ClientMessages.SEND_TURN_TO_SERVER, Arg.Any<Callback<ClientTurnAttempt>>() );
         }
 
         [Test]
@@ -32,6 +33,7 @@ namespace Qwf.Client {
 
             MyMessenger.Instance.Received().RemoveListener<IClientMoveAttempt>( ClientGameEvents.MADE_MOVE, Arg.Any<Callback<IClientMoveAttempt>>() );
             MyMessenger.Instance.Received().RemoveListener( ClientGameEvents.RESET_MOVES, Arg.Any<Callback>() );
+            MyMessenger.Instance.Received().RemoveListener<ClientTurnAttempt>( ClientMessages.SEND_TURN_TO_SERVER, Arg.Any<Callback<ClientTurnAttempt>>() );
         }
 
         [Test]
@@ -65,6 +67,18 @@ namespace Qwf.Client {
             systemUnderTest.ProcessAction();
 
             MyMessenger.Instance.Received().Send<ClientTurnAttempt>( ClientMessages.SEND_TURN_TO_SERVER, Arg.Is<ClientTurnAttempt>(attempt => attempt.PlayerId == "Me" && attempt.MoveAttempts == null ) );
+        }
+
+        [Test]
+        public void AfterTurnIsSent_InteractablePropertiesAreTrue() {
+            PassTurnPM systemUnderTest = new PassTurnPM();
+            systemUnderTest.ViewModel.SetProperty( PassTurnPM.VISIBLE_PROPERTY, 0f );
+            systemUnderTest.ViewModel.SetProperty( SendMovesPM.USE_PROPERTY, 0f );
+
+            systemUnderTest.OnTurnSent( new ClientTurnAttempt() );
+
+            Assert.AreEqual( 1f, systemUnderTest.ViewModel.GetPropertyValue<float>( PassTurnPM.VISIBLE_PROPERTY ) );
+            Assert.IsTrue( systemUnderTest.ViewModel.GetPropertyValue<bool>( MakeMovePM.USE_PROPERTY ) );
         }
     }
 }

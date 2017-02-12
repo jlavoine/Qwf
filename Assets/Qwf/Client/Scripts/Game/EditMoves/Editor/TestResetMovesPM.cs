@@ -23,6 +23,7 @@ namespace Qwf.Client {
 
             MyMessenger.Instance.Received().AddListener<IClientMoveAttempt>( ClientGameEvents.MADE_MOVE, Arg.Any<Callback<IClientMoveAttempt>>() );
             MyMessenger.Instance.Received().AddListener<IGameObstaclesUpdate>( ClientMessages.UPDATE_OBSTACLES, Arg.Any<Callback<IGameObstaclesUpdate>>() );
+            MyMessenger.Instance.Received().AddListener<ClientTurnAttempt>( ClientMessages.SEND_TURN_TO_SERVER, Arg.Any<Callback<ClientTurnAttempt>>() );
         }
 
         [Test]
@@ -33,6 +34,7 @@ namespace Qwf.Client {
 
             MyMessenger.Instance.Received().RemoveListener<IClientMoveAttempt>( ClientGameEvents.MADE_MOVE, Arg.Any<Callback<IClientMoveAttempt>>() );
             MyMessenger.Instance.Received().RemoveListener<IGameObstaclesUpdate>( ClientMessages.UPDATE_OBSTACLES, Arg.Any<Callback<IGameObstaclesUpdate>>() );
+            MyMessenger.Instance.Received().RemoveListener<ClientTurnAttempt>( ClientMessages.SEND_TURN_TO_SERVER, Arg.Any<Callback<ClientTurnAttempt>>() );
         }
 
         [Test]
@@ -82,6 +84,18 @@ namespace Qwf.Client {
             systemUnderTest.OnUpdateObstacles( mockUpdate );
 
             Assert.AreEqual( mockUpdate, systemUnderTest.CachedUpdate );
+        }
+
+        [Test]
+        public void AfterTurnIsSent_InteractablePropertiesAreFalse() {
+            ResetMovesPM systemUnderTest = new ResetMovesPM();
+            systemUnderTest.ViewModel.SetProperty( ResetMovesPM.VISIBLE_PROPERTY, 1f );
+            systemUnderTest.ViewModel.SetProperty( ResetMovesPM.USE_PROPERTY, 1f );
+
+            systemUnderTest.OnTurnSent( new ClientTurnAttempt() );
+
+            Assert.AreEqual( 0f, systemUnderTest.ViewModel.GetPropertyValue<float>( ResetMovesPM.VISIBLE_PROPERTY ) );
+            Assert.IsFalse( systemUnderTest.ViewModel.GetPropertyValue<bool>( ResetMovesPM.USE_PROPERTY ) );
         }
 
         private void AssertIsVisibleProperty( ResetMovesPM i_systemUnderTest, bool i_visible ) {

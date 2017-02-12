@@ -22,10 +22,12 @@ namespace Qwf.Client {
             if ( i_listen ) {
                 MyMessenger.Instance.AddListener<IClientMoveAttempt>( ClientGameEvents.MADE_MOVE, OnMadeMove );
                 MyMessenger.Instance.AddListener<IGameObstaclesUpdate>( ClientMessages.UPDATE_OBSTACLES, OnUpdateObstacles );
+                MyMessenger.Instance.AddListener<ClientTurnAttempt>( ClientMessages.SEND_TURN_TO_SERVER, OnTurnSent );
             }
             else {
                 MyMessenger.Instance.RemoveListener<IClientMoveAttempt>( ClientGameEvents.MADE_MOVE, OnMadeMove );
                 MyMessenger.Instance.RemoveListener<IGameObstaclesUpdate>( ClientMessages.UPDATE_OBSTACLES, OnUpdateObstacles );
+                MyMessenger.Instance.RemoveListener<ClientTurnAttempt>( ClientMessages.SEND_TURN_TO_SERVER, OnTurnSent );
             }
         }
 
@@ -41,6 +43,10 @@ namespace Qwf.Client {
 
         public void OnUpdateObstacles( IGameObstaclesUpdate i_update ) {
             CachedUpdate = i_update;
+        }
+
+        public void OnTurnSent( ClientTurnAttempt i_turn ) {
+            SetInteractableProperties( false );
         }
 
         private void SetInteractableProperties( bool i_interactable ) {
