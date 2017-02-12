@@ -115,6 +115,25 @@ namespace Qwf {
             Assert.IsFalse( isGameOver );
         }
 
+        static object[] GetCurrentObstacleOfIndexTests = {
+            new object[] { -1 },    // outside of bounds
+            new object[] { 1 },     // outside of bounds
+            new object[] { 0 }      // within bounds
+        };
+
+        [Test, TestCaseSource( "GetCurrentObstacleOfIndexTests" )]
+        public void GetHeldPieceOfIndex_ReturnsExpectedValue( int i_index ) {
+            List<IGameObstacle> obstacles = GetObstacleList( 1 );
+            GameBoard systemUnderTest = CreateSystemUnderTest( obstacles );
+
+            if ( i_index != 0 ) {
+                Assert.AreEqual( null, systemUnderTest.GetCurrentObstacleOfIndex( i_index ) );
+            }
+            else {
+                Assert.AreEqual( obstacles[0], systemUnderTest.GetCurrentObstacleOfIndex( i_index ) );
+            }
+        }
+
         private GameBoard CreateSystemUnderTest( List<IGameObstacle> i_obstacles ) {
             return new GameBoard( i_obstacles, MAX_CURRENT_OBSTACLES );
         }

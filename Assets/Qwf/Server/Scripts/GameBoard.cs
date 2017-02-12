@@ -22,6 +22,14 @@ namespace Qwf {
             return mCurrentObstacles;
         }
 
+        public IGameObstacle GetCurrentObstacleOfIndex( int i_index ) {
+            if ( i_index < 0 || i_index >= mCurrentObstacles.Count ) {
+                return null;
+            } else {
+                return mCurrentObstacles[i_index];
+            }
+        }
+
         public bool IsObstacleCurrent( IGameObstacle i_obstacle ) {
             return mCurrentObstacles.Contains( i_obstacle );
         }

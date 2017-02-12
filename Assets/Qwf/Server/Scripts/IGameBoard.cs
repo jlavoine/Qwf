@@ -5,6 +5,8 @@ namespace Qwf {
         List<IGameObstacle> GetRemainingObstacles();
         List<IGameObstacle> GetCurrentObstacles();
 
+        IGameObstacle GetCurrentObstacleOfIndex( int i_index );
+
         bool IsObstacleCurrent( IGameObstacle i_obstacle );
         bool IsGameOver();
 
