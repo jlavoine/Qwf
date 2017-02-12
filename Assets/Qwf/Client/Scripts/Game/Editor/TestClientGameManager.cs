@@ -15,6 +15,7 @@ namespace Qwf.Client {
 
             MyMessenger.Instance.Received().AddListener<IClientMoveAttempt>( ClientGameEvents.MADE_MOVE, Arg.Any<Callback<IClientMoveAttempt>>() );
             MyMessenger.Instance.Received().AddListener( ClientGameEvents.RESET_MOVES, Arg.Any<Callback>() );
+            MyMessenger.Instance.Received().AddListener<ClientTurnAttempt>( ClientMessages.SEND_TURN_TO_SERVER, Arg.Any<Callback<ClientTurnAttempt>>() );
         }
 
         [Test]
@@ -25,6 +26,7 @@ namespace Qwf.Client {
 
             MyMessenger.Instance.Received().RemoveListener<IClientMoveAttempt>( ClientGameEvents.MADE_MOVE, Arg.Any<Callback<IClientMoveAttempt>>() );
             MyMessenger.Instance.Received().RemoveListener( ClientGameEvents.RESET_MOVES, Arg.Any<Callback>() );
+            MyMessenger.Instance.Received().RemoveListener<ClientTurnAttempt>( ClientMessages.SEND_TURN_TO_SERVER, Arg.Any<Callback<ClientTurnAttempt>>() );
         }
 
         [Test]
@@ -55,6 +57,16 @@ namespace Qwf.Client {
             systemUnderTest.MovesMade = 2;
 
             systemUnderTest.OnResetMoves();
+
+            Assert.AreEqual( 0, systemUnderTest.MovesMade );
+        }
+
+        [Test]
+        public void AfterTurnIsSent_MoveCounterIsZero() {
+            ClientGameManager systemUnderTest = new ClientGameManager();
+            systemUnderTest.MovesMade = 2;
+
+            systemUnderTest.OnSentTurn( new ClientTurnAttempt() );
 
             Assert.AreEqual( 0, systemUnderTest.MovesMade );
         }
