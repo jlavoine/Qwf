@@ -30,6 +30,8 @@ namespace Qwf.Client {
             base.ProcessAction();
 
             SendClientTurnAttempt();
+            ResetMoveAttemptsList();
+            SetInteractableProperties( false );
         }
 
         public void OnMadeMove( IClientMoveAttempt i_attempt ) {

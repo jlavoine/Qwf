@@ -40,11 +40,7 @@ namespace Qwf.Client {
 
         [Test]
         public void WhenProcessingAction_EventWithMovesIsSent() {
-            SendMovesPM systemUnderTest = new SendMovesPM();
-            systemUnderTest.MoveAttempts = new List<IClientMoveAttempt>();
-            systemUnderTest.MoveAttempts.Add( new ClientMoveAttempt() );
-            systemUnderTest.MoveAttempts.Add( new ClientMoveAttempt() );
-            systemUnderTest.MoveAttempts.Add( new ClientMoveAttempt() );
+            SendMovesPM systemUnderTest = CreateSystemWithMoves( 3 );
 
             systemUnderTest.ProcessAction();
 
@@ -99,6 +95,37 @@ namespace Qwf.Client {
 
             Assert.AreEqual( 0f, systemUnderTest.ViewModel.GetPropertyValue<float>( SendMovesPM.VISIBLE_PROPERTY ) );
             Assert.IsFalse( systemUnderTest.ViewModel.GetPropertyValue<bool>( MakeMovePM.USE_PROPERTY ) );
+        }
+
+        [Test]
+        public void WhenMoveIsSent_InteractablePropertiesAreFalse() {
+            SendMovesPM systemUnderTest = CreateSystemWithMoves( 3 );
+            systemUnderTest.ViewModel.SetProperty( SendMovesPM.VISIBLE_PROPERTY, 1f );
+            systemUnderTest.ViewModel.SetProperty( SendMovesPM.USE_PROPERTY, 1f );
+
+            systemUnderTest.ProcessAction();
+
+            Assert.AreEqual( 0f, systemUnderTest.ViewModel.GetPropertyValue<float>( SendMovesPM.VISIBLE_PROPERTY ) );
+            Assert.IsFalse( systemUnderTest.ViewModel.GetPropertyValue<bool>( MakeMovePM.USE_PROPERTY ) );
+        }
+
+        [Test]
+        public void WhenMoveIsSent_MovesListIsReset() {
+            SendMovesPM systemUnderTest = CreateSystemWithMoves( 3 );
+
+            systemUnderTest.ProcessAction();
+
+            Assert.IsEmpty( systemUnderTest.MoveAttempts );
+        }
+
+        private SendMovesPM CreateSystemWithMoves( int i_moves ) {
+            SendMovesPM systemUnderTest = new SendMovesPM();
+            systemUnderTest.MoveAttempts = new List<IClientMoveAttempt>();
+            for ( int i = 0; i < i_moves; ++i ) {
+                systemUnderTest.MoveAttempts.Add( new ClientMoveAttempt() );
+            }
+            
+            return systemUnderTest;
         }
     }
 }
