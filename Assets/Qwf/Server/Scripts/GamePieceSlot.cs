@@ -53,7 +53,9 @@ namespace Qwf {
         }
 
         public void Score( IScoreKeeper i_scoreKeeper ) {
-            mCurrentPiece.Score( i_scoreKeeper );
+            if ( mCurrentPiece != null ) {
+                i_scoreKeeper.AddPointsToPlayer( mCurrentPiece.GetOwnerId(), GetScoreValue() );
+            }
         }
     }
 }

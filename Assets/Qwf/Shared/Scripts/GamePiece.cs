@@ -30,9 +30,5 @@ namespace Qwf {
         public bool CanOvertakePiece( IGamePiece i_piece ) {
             return GetValue() > i_piece.GetValue();
         }
-
-        public void Score( IScoreKeeper i_scoreKeeper ) {
-            i_scoreKeeper.AddPointsToPlayer( GetOwnerId(), GetValue() );
-        }
     }
 }

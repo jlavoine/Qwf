@@ -48,17 +48,6 @@ namespace Qwf {
         }
 
         [Test]
-        public void WhenScoringPiece_PointsAwardedToOwner() {
-            GamePieceData data = new GamePieceData() { PieceType = PIECE_TYPE_A, Value = PIECE_VALUE, Owner = "Me" };
-            ServerGamePiece systemUnderTest = new ServerGamePiece( mMockOwner, data );
-            IScoreKeeper mockScoreKeeper = Substitute.For<IScoreKeeper>();
-
-            systemUnderTest.Score( mockScoreKeeper );
-
-            mockScoreKeeper.Received().AddPointsToPlayer( "Me", systemUnderTest.GetValue() );
-        }
-
-        [Test]
         public void WhenOwnersMatch_DoOwnersMatchCall_ReturnsTrue() {
             GamePieceData data = new GamePieceData() { PieceType = PIECE_TYPE_A, Value = PIECE_VALUE, Owner = "Me" };
             ServerGamePiece systemUnderTest = new ServerGamePiece( mMockOwner, data );

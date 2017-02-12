@@ -94,11 +94,15 @@ namespace Qwf {
         }
 
         [Test]
-        public void WhenSlotIsScored_PieceIsScored() {
-            mSystemUnderTest.PlacePieceIntoSlot( Substitute.For<IServerGamePiece>() );
-            mSystemUnderTest.Score( Substitute.For<IScoreKeeper>() );
+        public void WhenSlotIsScored_PointsAwardedToPlayerWithPieceInSlot() {
+            IScoreKeeper mockScoreKeeper = Substitute.For<IScoreKeeper>();
+            IServerGamePiece mockPiece = Substitute.For<IServerGamePiece>();
+            mockPiece.GetOwnerId().Returns( "Me" );
 
-            mSystemUnderTest.GetCurrentPiece().Received().Score( Arg.Any<IScoreKeeper>() );
+            mSystemUnderTest.PlacePieceIntoSlot( mockPiece );
+            mSystemUnderTest.Score( mockScoreKeeper );
+
+            mockScoreKeeper.Received().AddPointsToPlayer( "Me", 1 );
         }
     }
 }

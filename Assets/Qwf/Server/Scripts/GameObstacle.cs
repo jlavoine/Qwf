@@ -57,7 +57,7 @@ namespace Qwf {
             return true;
         }
 
-        public void Score( IScoreKeeper i_scoreKeeper, IGamePlayer i_currentPlayer ) {
+        public void Score( IScoreKeeper i_scoreKeeper, IGamePlayer i_currentPlayer ) {            
             AwardPointsToCurrentPlayer( i_scoreKeeper, i_currentPlayer );
             ScoreAllSlots( i_scoreKeeper );
         }
