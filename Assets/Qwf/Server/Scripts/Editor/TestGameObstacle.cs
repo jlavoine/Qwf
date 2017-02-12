@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using NSubstitute;
 
+#pragma warning disable 0414
+
 namespace Qwf {
     [TestFixture]
     public class TestGameObstacle {
@@ -139,6 +141,28 @@ namespace Qwf {
             systemUnderTest.Score( mockScoreKeeper, mockPlayer );
 
             mockScoreKeeper.Received().AddPointsToPlayer( mockPlayer, Arg.Any<int>() );
+        }
+
+        static object[] GetSlotOfIndexTests = {
+            new object[] { -1 },    // outside of bounds
+            new object[] { 1 },     // outside of bounds
+            new object[] { 0 }      // within bounds
+        };
+
+        [Test, TestCaseSource( "GetSlotOfIndexTests" )]
+        public void GetSlotOfIndex_ReturnsExpectedValue( int i_index ) {
+            List<IGamePieceSlot> mockSlots = new List<IGamePieceSlot>();
+            IGamePieceSlot mockSlot = Substitute.For<IGamePieceSlot>();
+            mockSlots.Add( mockSlot );
+
+            GameObstacle systemUnderTest = new GameObstacle( mockSlots, Substitute.For<IGameObstacleData>() );
+
+            if ( i_index != 0 ) {
+                Assert.AreEqual( null, systemUnderTest.GetSlotOfIndex( i_index ) );
+            }
+            else {
+                Assert.AreEqual( mockSlot, systemUnderTest.GetSlotOfIndex( i_index ) );
+            }
         }
     }
 }

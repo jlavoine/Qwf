@@ -4,6 +4,8 @@ namespace Qwf {
     public interface IGameObstacle : IGameObstacleData {
         List<IGamePieceSlot> GetSlots();
 
+        IGamePieceSlot GetSlotOfIndex( int i_index );
+
         bool CanPieceBePlacedIntoSlot( IServerGamePiece i_piece, IGamePieceSlot i_slot );
         bool IsComplete();
         bool CanScore();

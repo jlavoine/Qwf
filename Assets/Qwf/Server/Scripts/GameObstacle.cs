@@ -23,6 +23,14 @@ namespace Qwf {
             return mSlots;
         }
 
+        public IGamePieceSlot GetSlotOfIndex( int i_index ) {
+            if ( i_index < 0 || i_index >= mSlots.Count ) {
+                return null;
+            } else {
+                return mSlots[i_index];
+            }
+        }
+
         public bool CanPieceBePlacedIntoSlot( IServerGamePiece i_piece, IGamePieceSlot i_slot ) {
             if ( DoesObstacleHaveSlot( i_slot ) ) {
                 return i_slot.CanPlacePieceIntoSlot( i_piece );
