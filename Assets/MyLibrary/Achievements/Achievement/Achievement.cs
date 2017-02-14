@@ -23,7 +23,7 @@ namespace MyLibrary {
         }
 
         public string GetName() {
-            return StringTableManager.Get( NAME_KEY + Key );
+            return StringTableManager.Instance.Get( NAME_KEY + Key );
         }
     }
 }

@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 
 namespace MyLibrary {
-    public class StringTable {
+    public class StringTable : IStringTable {
         private Dictionary<string, string> mStringTable = new Dictionary<string, string>();
 
         public StringTable( string i_tableJSON ) {

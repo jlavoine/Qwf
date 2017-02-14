@@ -29,7 +29,7 @@ public class CraLabel : MonoBehaviour {
 		}
 
 		// set the label
-		string strText = StringTableManager.Get(StringKey);
+		string strText = StringTableManager.Instance.Get(StringKey);
 		m_textmesh.text = strText;
 	}
 }

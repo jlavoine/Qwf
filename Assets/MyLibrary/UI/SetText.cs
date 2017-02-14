@@ -10,7 +10,7 @@ public class SetText : MonoBehaviour {
 	/// Awake()
 	///////////////////////////////////////////
 	void Awake() {
-		string strText = StringTableManager.Get( Key );
+		string strText = StringTableManager.Instance.Get( Key );
 		Text text = GetComponent<Text>();
 		text.text = strText;
 	}

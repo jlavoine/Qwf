@@ -84,7 +84,7 @@ namespace Qwf {
         private IEnumerator LoadDataFromBackend() {
             LoginStatusText.text = STATUS_DOWNLOADING_GAME;
            
-            StringTableManager.Init( "English", mBackend );
+            StringTableManager.Instance.Init( "English", mBackend );
             //Constants.Init( mBackend );
             //GenericDataLoader.Init( mBackend );
             //GenericDataLoader.LoadDataOfClass<BuildingData>( GenericDataLoader.BUILDINGS );

@@ -41,7 +41,7 @@ namespace MyLibrary {
         }
 
         void Start() {
-            string label = StringTableManager.Get( StringKey );
+            string label = StringTableManager.Instance.Get( StringKey );
 
             SetText( label );
         }

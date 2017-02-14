@@ -39,7 +39,7 @@ public class DrsStringUtils {
 	// Replaces a tag in a string with a value.
 	///////////////////////////////////////////	
 	public static string FormatNumber( int i_nVal ) {
-		string strDelim = StringTableManager.Get( "NUMBER_DELIMETER" );
+		string strDelim = StringTableManager.Instance.Get( "NUMBER_DELIMETER" );
 		string strVal = i_nVal.ToString("n0");
 		
 		strVal = strVal.Replace(",", strDelim);

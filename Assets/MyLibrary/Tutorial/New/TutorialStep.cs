@@ -41,7 +41,7 @@ namespace MyLibrary {
 
         private void InitAndSetModel() {
             ViewModel model = new ViewModel();
-            model.SetProperty( TEXT_PROPERTY, StringTableManager.Get( StepTextKey ) );
+            model.SetProperty( TEXT_PROPERTY, StringTableManager.Instance.Get( StepTextKey ) );
 
             SetModel( model );
         }
