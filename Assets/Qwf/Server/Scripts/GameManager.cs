@@ -54,12 +54,15 @@ namespace Qwf {
                 SwitchActivePlayer();
                 FillPlayerHandAfterTurn( i_turn.GetPlayer() );
                 UpdateBoardStateAfterTurn( i_turn.GetPlayer() );
-                CheckForGameOver();
             }
         }
 
         public bool IsPlayerTurnValidForGameState( IPlayerTurn i_turn ) {
             return i_turn.IsValid( mBoard );
+        }
+
+        public bool IsGameOver() {
+            return mBoard.IsGameOver();
         }
 
         private void PickActivePlayerIfReady() {
@@ -92,11 +95,6 @@ namespace Qwf {
 
         private void UpdateBoardStateAfterTurn( IGamePlayer i_currentPlayer ) {
             mBoard.UpdateBoardState( mScoreKeeper, i_currentPlayer );
-        }
-
-        private void CheckForGameOver() {
-            if ( mBoard.IsGameOver() ) {
-            }
         }
     }
 }

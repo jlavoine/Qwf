@@ -22,8 +22,7 @@ public class UnityNetworkManagerMediator : EventMediator {
     [Inject] public NotifyMatchmakerPlayerLeftResponseSignal PlayerLeftResponse { get; set; }
     [Inject] public ClientDisconnectedSignal ClientDisconnectedSignal { get; set; }
 
-    [Inject]
-    public CreateGamePlayerSignal CreateGamePlayerSignal { get; set; }
+    [Inject] public CreateGamePlayerSignal CreateGamePlayerSignal { get; set; }
 
     public class AuthTicketMessage : MessageBase
     {

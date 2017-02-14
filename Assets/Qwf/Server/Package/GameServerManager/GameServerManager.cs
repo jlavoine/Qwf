@@ -10,6 +10,7 @@ namespace Qwf.Server {
             mediationBinder.Bind<CreateGameManagerView>().To<CreateGameManagerMediator>();
             mediationBinder.Bind<GameManagerView>().To<GameManagerMediator>();
             mediationBinder.Bind<ClientTurnAttemptView>().To<ClientTurnAttemptMediator>();
+            mediationBinder.Bind<GameOverView>().To<GameOverMediator>();
 
             injectionBinder.Bind<GameBoardCreatedSignal>().ToSingleton();
             injectionBinder.Bind<PlayerAddedSignal>().ToSingleton();

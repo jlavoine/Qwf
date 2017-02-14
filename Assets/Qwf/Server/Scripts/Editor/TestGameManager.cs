@@ -30,16 +30,6 @@ namespace Qwf {
         }
 
         [Test]
-        public void AfterTurnIsProcessed_CheckForGameOver() {
-            IGameBoard mockBoard = Substitute.For<IGameBoard>();
-            GameManager systemUnderTest = new GameManager( mockBoard, Substitute.For<IScoreKeeper>() );
-
-            TakeValidTurn( systemUnderTest );
-
-            mockBoard.Received().IsGameOver();
-        }
-
-        [Test]
         public void AfterTurnIsProcessed_PlayersHandIsFilled() {
             IGamePlayer mockPlayer = Substitute.For<IGamePlayer>();
             IPlayerTurn mockTurn = Substitute.For<IPlayerTurn>();

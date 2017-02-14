@@ -27,5 +27,18 @@ namespace Qwf {
             int currentScore = mPlayerScores[i_player];
             mPlayerScores[i_player] = currentScore + i_points;
         }
+
+        public string GetWinner() {
+            int scoreToBeat = 0;
+            string winner = string.Empty;
+            foreach ( KeyValuePair<string, int> kvp in mPlayerScores ) {
+                if ( kvp.Value > scoreToBeat ) {
+                    scoreToBeat = kvp.Value;
+                    winner = kvp.Key;
+                }
+            }
+
+            return winner;
+        }
     }
 }

@@ -38,5 +38,23 @@ namespace Qwf {
             systemUnderTest.AddPlayer( Substitute.For<IGamePlayer>() );
             Assert.AreEqual( 1, systemUnderTest.GetNumPlayers() );
         }
+
+        [Test]
+        public void GetWinner_ReturnsPlayerWithHigherScore() {
+            ScoreKeeper systemUnderTest = new ScoreKeeper();
+            IGamePlayer p1 = Substitute.For<IGamePlayer>();
+            p1.Id.Returns( "P1" );
+
+            IGamePlayer p2 = Substitute.For<IGamePlayer>();
+            p2.Id.Returns( "P2" );
+
+            systemUnderTest.AddPlayer( p1 );
+            systemUnderTest.AddPlayer( p2 );
+
+            systemUnderTest.AddPointsToPlayer( p1, 100 );
+            systemUnderTest.AddPointsToPlayer( p2, 200 );
+
+            Assert.AreEqual( "P2", systemUnderTest.GetWinner() );
+        }
     }
 }
