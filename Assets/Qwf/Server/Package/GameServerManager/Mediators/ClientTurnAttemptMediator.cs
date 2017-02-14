@@ -8,6 +8,7 @@ using UnityEngine.Networking.NetworkSystem;
 
 namespace Qwf.Server {
     public class PlayerTurnProcessedSignal : Signal<IPlayerTurn> { }
+    public class PostPlayerTurnProcessedSignal : Signal<IPlayerTurn> { }
 
     public class ClientTurnAttemptMediator : Mediator {        
 
@@ -15,6 +16,7 @@ namespace Qwf.Server {
         [Inject] public UnityNetworkingData UnityNetworkingData { get; set; }
 
         [Inject] public PlayerTurnProcessedSignal PlayerTurnProcessed { get; set; }
+        [Inject] public PostPlayerTurnProcessedSignal PostPlayerTurnProcessed { get; set; }
 
         [Inject] public IGameManager GameManager { get; set; }
 
@@ -42,6 +44,7 @@ namespace Qwf.Server {
             if ( GameManager.IsPlayerTurnValidForGameState( i_turn ) ) {
                 GameManager.TryPlayerTurn( i_turn );
                 PlayerTurnProcessed.Dispatch( i_turn );
+                PostPlayerTurnProcessed.Dispatch( i_turn );
             }
         }
 

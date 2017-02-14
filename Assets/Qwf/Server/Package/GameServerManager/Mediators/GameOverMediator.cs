@@ -12,7 +12,7 @@ namespace Qwf.Server {
         [Inject] public PlayFabServerShutdownSignal ShutDownSignal { get; set; }
         [Inject] public UnityNetworkingData UnityNetworkingData { get; set; }
 
-        [Inject] public PlayerTurnProcessedSignal PlayerTurnProcessed { get; set; }
+        [Inject] public PostPlayerTurnProcessedSignal PostPlayerTurnProcessed { get; set; }
 
         [Inject] public IGameManager GameManager { get; set; }
         [Inject] public IScoreKeeper ScoreKeeper { get; set; }
@@ -21,11 +21,12 @@ namespace Qwf.Server {
         public override void OnRegister() {
             Logger.Dispatch( LoggerTypes.Info, string.Format( "GameOverMediator.OnRegister()" ) );
 
-            PlayerTurnProcessed.AddListener( OnTurnProcessed );
+            PostPlayerTurnProcessed.AddListener( OnTurnProcessed );
         }
 
         private void OnTurnProcessed( IPlayerTurn i_turn ) {
-            if ( GameManager.IsGameOver() ) {                
+            if ( GameManager.IsGameOver() ) {
+                PostPlayerTurnProcessed.RemoveListener( OnTurnProcessed );         
                 SendGameOverUpdateToClients();
                 ShutDownServer();                
             }

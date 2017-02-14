@@ -16,6 +16,7 @@ namespace Qwf.Server {
             injectionBinder.Bind<PlayerAddedSignal>().ToSingleton();
             injectionBinder.Bind<GameManagerCreatedSignal>().ToSingleton();
             injectionBinder.Bind<PlayerTurnProcessedSignal>().ToSingleton();
+            injectionBinder.Bind<PostPlayerTurnProcessedSignal>().ToSingleton();
 
             injectionBinder.Bind<IGameRules>().To<GameRules>();
             injectionBinder.Bind<IScoreKeeper>().To<ScoreKeeper>().ToSingleton();
