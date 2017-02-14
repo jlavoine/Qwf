@@ -20,7 +20,26 @@ namespace Qwf.Client {
             GameOverPM systemUnderTest = new GameOverPM();
 
             systemUnderTest.Dispose();
-         
+
+            MyMessenger.Instance.Received().RemoveListener<IGameOverUpdate>( ClientMessages.GAME_OVER_UPDATE, Arg.Any<Callback<IGameOverUpdate>>() );
+        }
+
+        [Test]
+        public void IsVisibleProperty_FalseByDefault() {
+            GameOverPM systemUnderTest = new GameOverPM();
+
+            bool isVisible = systemUnderTest.ViewModel.GetPropertyValue<bool>( GameOverPM.VISIBLE_PROPERTY );
+            Assert.IsFalse( isVisible );
+        }
+
+        [Test]
+        public void AfterGameOverMessage_IsVisibleTrue() {
+            GameOverPM systemUnderTest = new GameOverPM();
+
+            systemUnderTest.OnGameOver( Substitute.For<IGameOverUpdate>() );
+
+            bool isVisible = systemUnderTest.ViewModel.GetPropertyValue<bool>( GameOverPM.VISIBLE_PROPERTY );
+            Assert.IsTrue( isVisible );
         }
     }
 }

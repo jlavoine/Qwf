@@ -3,6 +3,8 @@
 namespace MyLibrary {
     [RequireComponent( typeof( CanvasGroup ) )]
     public class SetCanvasVisibilityView : PropertyView {
+        public bool IsAlphaBoolean;
+
         private CanvasGroup mCanvasGroup;
         public CanvasGroup CanvasGroup {
             get {
@@ -19,18 +21,23 @@ namespace MyLibrary {
             SetCanvasInteractables();
         }
 
-        private void SetCanvasGroupAlpha() {           
-            CanvasGroup.alpha = GetValue<float>();
+        private void SetCanvasGroupAlpha() {
+            CanvasGroup.alpha = GetAlphaValue();
         }
 
         private void SetCanvasInteractables() {
-            bool isInteractable = GetValue<float>() > 0;
+            bool isInteractable = GetAlphaValue() > 0;
             CanvasGroup.interactable = isInteractable;            
         }
 
-        private void SetCanvasBlockRaycasts() {
-            bool shouldBlock = GetValue<float>() > 0;
-            CanvasGroup.blocksRaycasts = shouldBlock;
+        private float GetAlphaValue() {
+            if ( IsAlphaBoolean ) {
+                bool on = GetValue<bool>();
+                return on ? 1f : 0f;
+            }
+            else {
+                return GetValue<float>();
+            }
         }
     }
 }
