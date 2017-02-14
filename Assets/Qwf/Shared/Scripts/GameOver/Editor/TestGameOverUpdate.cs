@@ -1,16 +1,30 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using NUnit.Framework;
+using NSubstitute;
 using UnityEngine;
+using MyLibrary;
 
-public class TestGameOverUpdate : MonoBehaviour {
+#pragma warning disable 0219
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+namespace Qwf.Client {
+    [TestFixture]
+    public class TestGameOverUpdate : QwfUnitTest {
+
+        [Test]
+        public void DidClientWin_ReturnsTrue_WhenClientWon() {
+            BackendManager.Instance.GetPlayerId().Returns( "Me" );
+            GameOverUpdate systemUnderTest = new GameOverUpdate();
+            systemUnderTest.Winner = "Me";
+
+            Assert.IsTrue( systemUnderTest.DidClientWin() );
+        }
+
+        [Test]
+        public void DidClientWin_ReturnsFalse_WhenClientLost() {
+            BackendManager.Instance.GetPlayerId().Returns( "Me" );
+            GameOverUpdate systemUnderTest = new GameOverUpdate();
+            systemUnderTest.Winner = "Them";
+
+            Assert.IsFalse( systemUnderTest.DidClientWin() );
+        }
+    }
 }
