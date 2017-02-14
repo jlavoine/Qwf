@@ -4,6 +4,7 @@ using UnityEngine;
 using MyLibrary;
 
 #pragma warning disable 0219
+#pragma warning disable 0414
 
 namespace Qwf.Client {
     [TestFixture]
@@ -40,6 +41,23 @@ namespace Qwf.Client {
 
             bool isVisible = systemUnderTest.ViewModel.GetPropertyValue<bool>( GameOverPM.VISIBLE_PROPERTY );
             Assert.IsTrue( isVisible );
+        }
+
+        static object[] BodyTextTests = {
+            new object[] { "You lose", GameOverPM.LOST_GAME_KEY, false },
+            new object[] { "You win", GameOverPM.WON_GAME_KEY, true }
+        };
+
+        [Test, TestCaseSource("BodyTextTests")]
+        public void AfterGameOverMessage_BodyTextPropertyAsExpected( string i_expectedMessage, string i_key, bool i_won ) {
+            StringTableManager.Instance.Get( i_key ).Returns( i_expectedMessage );
+            IGameOverUpdate mockUpdate = Substitute.For<IGameOverUpdate>();
+            mockUpdate.DidClientWin().Returns( i_won );
+
+            GameOverPM systemUnderTest = new GameOverPM();
+            systemUnderTest.OnGameOver( mockUpdate );
+
+            Assert.AreEqual( i_expectedMessage, systemUnderTest.ViewModel.GetPropertyValue<string>( GameOverPM.BODY_TEXT_PROPERTY ) );
         }
     }
 }
