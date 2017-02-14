@@ -11,6 +11,7 @@ namespace Qwf {
         public static short UpdateObstacles = 5002;
         public static short UpdateTurn = 5003;
         public static short UpdateScore = 5004;
+        public static short UpdateGameOver = 5005;
 
         // messages TO the server
         public static short SendTurn = 6003;

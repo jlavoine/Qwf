@@ -193,6 +193,7 @@ public class ClientExampleScript : MonoBehaviour
         i_network.RegisterHandler( NetworkMessages.UpdateObstacles, OnUpdateObstacles );
         i_network.RegisterHandler( NetworkMessages.UpdateTurn, OnUpdateTurn );
         i_network.RegisterHandler( NetworkMessages.UpdateScore, OnUpdateScore );
+        i_network.RegisterHandler( NetworkMessages.UpdateGameOver, OnUpdateGameOver );
     }
 
     private void OnUpdatePlayerHand(NetworkMessage netMsg) {
@@ -217,6 +218,12 @@ public class ClientExampleScript : MonoBehaviour
         StringMessage message = netMsg.ReadMessage<StringMessage>();
         IMatchScoreUpdateData data = JsonConvert.DeserializeObject<MatchScoreUpdateData>( message.value );
         MyMessenger.Instance.Send<IMatchScoreUpdateData>( ClientMessages.UPDATE_SCORE, data );
+    }
+
+    private void OnUpdateGameOver( NetworkMessage netMsg ) {
+        StringMessage message = netMsg.ReadMessage<StringMessage>();
+        IGameOverUpdate data = JsonConvert.DeserializeObject<GameOverUpdate>( message.value );
+        MyMessenger.Instance.Send<IGameOverUpdate>( ClientMessages.GAME_OVER_UPDATE, data );
     }
 
     private void OnConnected(NetworkMessage netMsg) {
