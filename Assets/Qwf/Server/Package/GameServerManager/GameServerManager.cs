@@ -1,4 +1,5 @@
-﻿using strange.extensions.command.api;
+﻿#if QWF_SERVER
+using strange.extensions.command.api;
 using strange.extensions.injector.api;
 using strange.extensions.mediation.api;
 
@@ -40,3 +41,4 @@ namespace Qwf.Server {
         }    
     }
 }
+#endif

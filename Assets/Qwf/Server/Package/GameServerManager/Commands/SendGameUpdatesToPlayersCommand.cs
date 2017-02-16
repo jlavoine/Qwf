@@ -1,4 +1,5 @@
-﻿using strange.extensions.command.impl;
+﻿#if QWF_SERVER
+using strange.extensions.command.impl;
 using strange.extensions.signal.impl;
 using PlayFab.ServerModels;
 using System.Collections.Generic;
@@ -49,3 +50,4 @@ namespace Qwf.Server {
         }
     }
 }
+#endif

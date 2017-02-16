@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#if QWF_SERVER
+using System.Collections.Generic;
 using strange.extensions.mediation.impl;
 using PlayFab.ServerModels;
 using Newtonsoft.Json;
@@ -59,3 +60,4 @@ namespace Qwf.Server {
         }
     }
 }
+#endif

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿#if QWF_SERVER
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,3 +15,4 @@ public class PlayerCreationMeaditor : MonoBehaviour {
 		
 	}
 }
+#endif
