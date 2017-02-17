@@ -1,4 +1,4 @@
-﻿#if QWF_SERVER
+﻿#if ENABLE_PLAYFABSERVER_API
 using System.Collections.Generic;
 using strange.extensions.mediation.impl;
 using PlayFab.ServerModels;

@@ -1,4 +1,4 @@
-﻿#if QWF_SERVER
+﻿#if ENABLE_PLAYFABSERVER_API
 using strange.extensions.command.api;
 using strange.extensions.injector.api;
 using strange.extensions.mediation.api;

@@ -1,4 +1,4 @@
-﻿#if QWF_SERVER
+﻿#if ENABLE_PLAYFABSERVER_API
 using strange.extensions.command.impl;
 using strange.extensions.signal.impl;
 using PlayFab.ServerModels;

@@ -1,4 +1,4 @@
-﻿#if QWF_SERVER
+﻿#if ENABLE_PLAYFABSERVER_API
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
