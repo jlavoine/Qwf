@@ -1,3 +1,4 @@
+#if ENABLE_PLAYFABSERVER_API
 using PlayFab.SharedModels;
 using PlayFab.Internal;
 
@@ -1677,3 +1678,4 @@ namespace PlayFab.Events
         }
     }
 }
+#endif

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#if ENABLE_PLAYFABSERVER_API
+using System.Collections.Generic;
 using strange.extensions.mediation.impl;
 using PlayFab.ServerModels;
 using UnityEngine.Networking.NetworkSystem;
@@ -65,3 +66,4 @@ public class NewExampleMediator : Mediator {
         }
     }
 }
+#endif

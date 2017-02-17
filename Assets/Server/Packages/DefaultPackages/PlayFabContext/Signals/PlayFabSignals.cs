@@ -1,3 +1,4 @@
+#if ENABLE_PLAYFABSERVER_API
 using strange.extensions.signal.impl;
 
 #region Base Signals
@@ -1243,3 +1244,4 @@ public class RemovePlayerTagResponseSignal : Signal<PlayFab.ServerModels.RemoveP
 #endregion
 
 #endregion
+#endif

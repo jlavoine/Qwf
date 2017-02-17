@@ -1,3 +1,4 @@
+#if ENABLE_PLAYFABSERVER_API
 using PlayFab;
 using strange.extensions.command.impl;
 
@@ -2031,4 +2032,4 @@ public class RemovePlayerTagCommand : Command
     }
 }
 #endregion
-
+#endif

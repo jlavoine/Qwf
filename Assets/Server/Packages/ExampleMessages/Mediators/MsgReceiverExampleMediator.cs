@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if ENABLE_PLAYFABSERVER_API
+using UnityEngine;
 using System.Collections;
 using PlayFab.ServerModels;
 using strange.extensions.mediation.impl;
@@ -48,3 +49,4 @@ public class MsgReceiverExampleMediator : Mediator {
 
 
 }
+#endif

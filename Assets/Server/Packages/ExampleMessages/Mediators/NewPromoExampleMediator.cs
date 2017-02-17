@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if ENABLE_PLAYFABSERVER_API
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using PlayFab.Internal;
@@ -113,3 +114,4 @@ public class NewPromoExampleMediator : Mediator {
     }
 
 }
+#endif

@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if ENABLE_PLAYFABSERVER_API
+using System;
 using System.Collections;
 using PlayFab.ServerModels;
 using strange.extensions.mediation.impl;
@@ -208,3 +209,4 @@ public class UnityNetworkManagerMediator : EventMediator {
 
 
 }
+#endif
