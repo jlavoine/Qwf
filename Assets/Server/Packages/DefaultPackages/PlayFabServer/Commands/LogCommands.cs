@@ -20,24 +20,23 @@ public class LogSignalCommand : Command
     [Inject] public ServerSettingsData ServerSettingsData { get; set; }
 
     public override void Execute()
-    {
-        Message += "\n";
+    {        
         switch (LoggerType)
         {
             case LoggerTypes.Info:
                 Debug.LogFormat("Info: {0}", Message);
-                ServerSettingsData.LogEntries.Add(string.Format("Info: {0}", Message ));
+                ServerSettingsData.LogEntries.Add(string.Format("Info: {0}\n", Message ));
                 break;
             case LoggerTypes.Warning:
                 Debug.LogWarningFormat("Warning: {0}", Message);
-                ServerSettingsData.LogEntries.Add(string.Format("Warning: {0}", Message));
+                ServerSettingsData.LogEntries.Add(string.Format("Warning: {0}\n", Message));
                 break;
             case LoggerTypes.Error:
                 var e = (Exception) Message;
                 Debug.LogErrorFormat("Status: {0}", e.Message );
                 Debug.LogErrorFormat("Status: {0}", e.StackTrace);
-                ServerSettingsData.LogEntries.Add(string.Format("Status: {0}", e.Message));
-                ServerSettingsData.LogEntries.Add(string.Format("Status-Stack: {0}", e.StackTrace));
+                ServerSettingsData.LogEntries.Add(string.Format("Status: {0}\n", e.Message));
+                ServerSettingsData.LogEntries.Add(string.Format("Status-Stack: {0}\n", e.StackTrace));
                 break;
         }
 
