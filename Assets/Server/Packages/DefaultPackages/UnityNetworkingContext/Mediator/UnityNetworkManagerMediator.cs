@@ -96,8 +96,6 @@ public class UnityNetworkManagerMediator : EventMediator {
         }
     }
 
-    private System.Collections.Generic.List<string> wtf = new System.Collections.Generic.List<string>();
-
     private void OnAuthLocalUserResponse(AuthenticateSessionTicketResult response)
     {
         Logger.Dispatch(LoggerTypes.Info, string.Format("PlayFab Says AuthTicket isValid:{0}", true));
