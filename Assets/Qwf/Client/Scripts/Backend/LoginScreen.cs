@@ -64,7 +64,10 @@ namespace Qwf {
         }
 
         void OnDestroy() {
-            mLogin.OnDestroy();
+            if ( mLogin != null ) {
+                mLogin.OnDestroy();
+            }
+           
             MyMessenger.Instance.RemoveListener( BackendMessages.LOGIN_SUCCESS, OnLoginSuccess );
             MyMessenger.Instance.RemoveListener<IBackendFailure>( BackendMessages.BACKEND_REQUEST_FAIL, OnBackendFailure );
         }
