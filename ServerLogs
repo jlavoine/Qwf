@@ -1,0 +1,699 @@
+Info: Launch from MainGameServer Context.
+
+Info: PlayFab Server Startup Command
+Info: GameId:0 game_build_version:0.01 server:localhost port:7777 endoint:
+Info: Setting Up Unity Networking Server
+Info: Populating Title News
+Info: CreateGameBoardMediator.OnRegister()
+Info: CreateGameManagerMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: ClientTurnAttemptMediator.OnRegister()
+Info: GameOverMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:DF352B70F7C1B528 AuthTicket:DF352B70F7C1B528---FA22-8D457861C324CD9-3A4BD558453CCCA9.76129684022C75F0
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:CDECF881F9EF2304 AuthTicket:CDECF881F9EF2304---FA22-8D4578616B72E71-BC9B534DB828BFB4.E7E8CAB1274FAA82
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: DF352B70F7C1B528
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: DF352B70F7C1B528
+Info: Sending hand to DF352B70F7C1B528
+Info: A Unity Client Disconnected
+Info: Launch from MainGameServer Context.
+Info: PlayFab Server Startup Command
+Info: GameId:0 game_build_version:0.01 server:localhost port:7777 endoint:
+Info: Setting Up Unity Networking Server
+Info: Populating Title News
+Info: CreateGameBoardMediator.OnRegister()
+Info: CreateGameManagerMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: ClientTurnAttemptMediator.OnRegister()
+Info: GameOverMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:DF352B70F7C1B528 AuthTicket:DF352B70F7C1B528---FA22-8D45786355088BD-D5B92E446C2A36BB.161B1A4D53D25D9D
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:CDECF881F9EF2304 AuthTicket:CDECF881F9EF2304---FA22-8D4578630337CD6-BC6F48DDAF103FD6.CE71768CC1CC66BF
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: DF352B70F7C1B528
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: DF352B70F7C1B528
+Info: Sending hand to DF352B70F7C1B528
+Info: A Unity Client Disconnected
+Info: A Unity Client Disconnected
+Info: Launch from MainGameServer Context.
+Info: PlayFab Server Startup Command
+Info: GameId:0 game_build_version:0.01 server:localhost port:7777 endoint:
+Info: Setting Up Unity Networking Server
+Info: Populating Title News
+Info: CreateGameBoardMediator.OnRegister()
+Info: CreateGameManagerMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: ClientTurnAttemptMediator.OnRegister()
+Info: GameOverMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:DF352B70F7C1B528 AuthTicket:DF352B70F7C1B528---FA22-8D457920E9C3D8B-4560CEB6DECF199B.161B6CD2B59A3C62
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: DF352B70F7C1B528
+Info: Sending hand to DF352B70F7C1B528
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:CDECF881F9EF2304 AuthTicket:CDECF881F9EF2304---FA22-8D457921A026D29-C99346EFC7793089.FD51A3A4C1BC109B
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: CDECF881F9EF2304
+Info: Sending hand to CDECF881F9EF2304
+Info: Both players joined; setting score keeper
+Info: Received GameManager
+Info: Sending starting obstacle data to DF352B70F7C1B528
+Info: Sending starting obstacle data to CDECF881F9EF2304
+Info: Sending turn update with active player: DF352B70F7C1B528
+Info: Received GameManager
+Info: Sending starting obstacle data to DF352B70F7C1B528
+Info: Sending starting obstacle data to CDECF881F9EF2304
+Info: Sending turn update with active player: DF352B70F7C1B528
+Info: Processing move attempt for piece 4 on obstacle 2 on slot 3
+Info: Trying turn for DF352B70F7C1B528
+Info: Processed player turn for DF352B70F7C1B528
+Info: Sending starting turn update data to DF352B70F7C1B528
+Info: Sending starting turn update data to CDECF881F9EF2304
+Info: Sending hand to DF352B70F7C1B528
+Info: Sending turn update with active player: CDECF881F9EF2304
+Info: Sending starting turn update data to DF352B70F7C1B528
+Info: Sending starting turn update data to CDECF881F9EF2304
+Info: Processing move attempt for piece 1 on obstacle 1 on slot 2
+Info: Processing move attempt for piece 2 on obstacle 2 on slot 2
+Info: Processing move attempt for piece 6 on obstacle 2 on slot 4
+Info: Trying turn for CDECF881F9EF2304
+Info: Processed player turn for CDECF881F9EF2304
+Info: Sending starting turn update data to DF352B70F7C1B528
+Info: Sending starting turn update data to CDECF881F9EF2304
+Info: Sending hand to CDECF881F9EF2304
+Info: Sending turn update with active player: DF352B70F7C1B528
+Info: Sending starting turn update data to DF352B70F7C1B528
+Info: Sending starting turn update data to CDECF881F9EF2304
+Info: Processing move attempt for piece 2 on obstacle 1 on slot 3
+Info: Processing move attempt for piece 4 on obstacle 2 on slot 1
+Info: Trying turn for DF352B70F7C1B528
+Info: Processed player turn for DF352B70F7C1B528
+Info: Sending starting turn update data to DF352B70F7C1B528
+Info: Sending starting turn update data to CDECF881F9EF2304
+Info: Sending hand to DF352B70F7C1B528
+Info: Sending turn update with active player: CDECF881F9EF2304
+Info: Sending starting turn update data to DF352B70F7C1B528
+Info: Sending starting turn update data to CDECF881F9EF2304
+Info: Processing move attempt for piece 1 on obstacle 2 on slot 0
+Info: Trying turn for CDECF881F9EF2304
+Info: Processed player turn for CDECF881F9EF2304
+Info: Sending starting turn update data to DF352B70F7C1B528
+Info: Sending starting turn update data to CDECF881F9EF2304
+Info: Sending hand to CDECF881F9EF2304
+Info: Sending turn update with active player: DF352B70F7C1B528
+Info: Sending starting turn update data to DF352B70F7C1B528
+Info: Sending starting turn update data to CDECF881F9EF2304
+Info: A Unity Client Disconnected
+Info: Launch from MainGameServer Context.
+Info: PlayFab Server Startup Command
+Info: GameId:0 game_build_version:0.01 server:localhost port:7777 endoint:
+Info: Setting Up Unity Networking Server
+Info: Populating Title News
+Info: CreateGameBoardMediator.OnRegister()
+Info: CreateGameManagerMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: ClientTurnAttemptMediator.OnRegister()
+Info: GameOverMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:DF352B70F7C1B528 AuthTicket:DF352B70F7C1B528---FA22-8D45792530C60BB-B17AF82905B386D5.FBDB058E80CDC265
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:CDECF881F9EF2304 AuthTicket:CDECF881F9EF2304---FA22-8D4579258B9F384-4F867982006BD34C.10559FA94A33B3C9
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: DF352B70F7C1B528
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: DF352B70F7C1B528
+Info: Sending hand to DF352B70F7C1B528
+Info: A Unity Client Disconnected
+Info: Launch from MainGameServer Context.
+Info: PlayFab Server Startup Command
+Info: GameId:0 game_build_version:0.01 server:localhost port:7777 endoint:
+Info: Setting Up Unity Networking Server
+Info: Populating Title News
+Info: CreateGameBoardMediator.OnRegister()
+Info: CreateGameManagerMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: ClientTurnAttemptMediator.OnRegister()
+Info: GameOverMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:DF352B70F7C1B528 AuthTicket:DF352B70F7C1B528---FA22-8D4579432C1F4B9-9BC4A33D9D1226F9.EDBF30779EC4764D
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:CDECF881F9EF2304 AuthTicket:CDECF881F9EF2304---FA22-8D4579435411617-66D5ADD4A7F831FE.7BF5337E37FCC695
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: DF352B70F7C1B528
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: DF352B70F7C1B528
+Info: Sending hand to DF352B70F7C1B528
+Info: A Unity Client Disconnected
+Info: A Unity Client Disconnected
+Info: Launch from MainGameServer Context.
+Info: PlayFab Server Startup Command
+Info: GameId:0 game_build_version:0.01 server:localhost port:7777 endoint:
+Info: Setting Up Unity Networking Server
+Info: Populating Title News
+Info: CreateGameBoardMediator.OnRegister()
+Info: CreateGameManagerMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: ClientTurnAttemptMediator.OnRegister()
+Info: GameOverMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:DF352B70F7C1B528 AuthTicket:DF352B70F7C1B528---FA22-8D45794AF078808-9A2838938B14C65D.D9B19F84EEA2107E
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: DF352B70F7C1B528
+Info: Sending hand to DF352B70F7C1B528
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:CDECF881F9EF2304 AuthTicket:CDECF881F9EF2304---FA22-8D45794AD50AF0C-BB9AF7B23ACCEE8B.98D1FB895E4DF6D9
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: CDECF881F9EF2304
+Info: Sending hand to CDECF881F9EF2304
+Info: Both players joined; setting score keeper
+Info: Received GameManager
+Info: Sending starting obstacle data to DF352B70F7C1B528
+Info: Sending starting obstacle data to CDECF881F9EF2304
+Info: Sending turn update with active player: DF352B70F7C1B528
+Info: Received GameManager
+Info: Sending starting obstacle data to DF352B70F7C1B528
+Info: Sending starting obstacle data to CDECF881F9EF2304
+Info: Sending turn update with active player: DF352B70F7C1B528
+Info: A Unity Client Disconnected
+Info: A Unity Client Disconnected
+Info: Launch from MainGameServer Context.
+Info: PlayFab Server Startup Command
+Info: GameId:0 game_build_version:0.01 server:localhost port:7777 endoint:
+Info: Setting Up Unity Networking Server
+Info: Populating Title News
+Info: CreateGameBoardMediator.OnRegister()
+Info: CreateGameManagerMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: ClientTurnAttemptMediator.OnRegister()
+Info: GameOverMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:DF352B70F7C1B528 AuthTicket:DF352B70F7C1B528---FA22-8D45794EC64FF15-9078EE41F02DA9D0.30433052B1F9D58C
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: DF352B70F7C1B528
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:CDECF881F9EF2304 AuthTicket:CDECF881F9EF2304---FA22-8D45794EEBDCAAA-5CD10820EF26C437.2CEFD67B55831B4F
+Info: Sending hand to DF352B70F7C1B528
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: CDECF881F9EF2304
+Info: Sending hand to CDECF881F9EF2304
+Info: Both players joined; setting score keeper
+Info: Received GameManager
+Info: Sending starting obstacle data to DF352B70F7C1B528
+Info: Sending starting obstacle data to CDECF881F9EF2304
+Info: Sending turn update with active player: DF352B70F7C1B528
+Info: Received GameManager
+Info: Sending starting obstacle data to DF352B70F7C1B528
+Info: Sending starting obstacle data to CDECF881F9EF2304
+Info: Sending turn update with active player: DF352B70F7C1B528
+Info: A Unity Client Disconnected
+Info: Launch from MainGameServer Context.
+Info: PlayFab Server Startup Command
+Info: GameId:0 game_build_version:0.01 server:localhost port:7777 endoint:
+Info: Setting Up Unity Networking Server
+Info: Populating Title News
+Info: CreateGameBoardMediator.OnRegister()
+Info: CreateGameManagerMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: ClientTurnAttemptMediator.OnRegister()
+Info: GameOverMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:DF352B70F7C1B528 AuthTicket:DF352B70F7C1B528---FA22-8D45794F6913FC9-8F41DB3618DB3496.A9EB1E362F8BC27E
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:CDECF881F9EF2304 AuthTicket:CDECF881F9EF2304---FA22-8D45794FE0FA485-6244F52C91E0EFA5.A1499AA7FEBA9DF8
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: DF352B70F7C1B528
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: DF352B70F7C1B528
+Info: Sending hand to DF352B70F7C1B528
+Info: A Unity Client Disconnected
+Info: Launch from MainGameServer Context.
+Info: PlayFab Server Startup Command
+Info: GameId:0 game_build_version:0.01 server:localhost port:7777 endoint:
+Info: Setting Up Unity Networking Server
+Info: Populating Title News
+Info: CreateGameBoardMediator.OnRegister()
+Info: CreateGameManagerMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: ClientTurnAttemptMediator.OnRegister()
+Info: GameOverMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:DF352B70F7C1B528 AuthTicket:DF352B70F7C1B528---FA22-8D457957BEE6E9F-7CFF6D141FDF15B4.BA99CF7540FA6BC5
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:CDECF881F9EF2304 AuthTicket:CDECF881F9EF2304---FA22-8D457957B8270D0-5DE61D801A0D3856.FAF1A9E0AE651E91
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: DF352B70F7C1B528
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: DF352B70F7C1B528
+Info: Sending hand to DF352B70F7C1B528
+Info: A Unity Client Disconnected
+Info: Launch from MainGameServer Context.
+Info: PlayFab Server Startup Command
+Info: GameId:0 game_build_version:0.01 server:localhost port:7777 endoint:
+Info: Setting Up Unity Networking Server
+Info: Populating Title News
+Info: CreateGameBoardMediator.OnRegister()
+Info: CreateGameManagerMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: ClientTurnAttemptMediator.OnRegister()
+Info: GameOverMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:DF352B70F7C1B528 AuthTicket:DF352B70F7C1B528---FA22-8D45795E494A775-4E5D6DF3D25800EF.C7EED9AC69AE5D35
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:CDECF881F9EF2304 AuthTicket:CDECF881F9EF2304---FA22-8D45795E18BCC2A-4002210F7784DB56.489143DE1AC1A8C3
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: DF352B70F7C1B528
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: DF352B70F7C1B528
+Info: Sending hand to DF352B70F7C1B528
+Info: Launch from MainGameServer Context.
+Info: PlayFab Server Startup Command
+Info: GameId:0 game_build_version:0.01 server:localhost port:7777 endoint:
+Info: Setting Up Unity Networking Server
+Info: Populating Title News
+Info: CreateGameBoardMediator.OnRegister()
+Info: CreateGameManagerMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: ClientTurnAttemptMediator.OnRegister()
+Info: GameOverMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:DF352B70F7C1B528 AuthTicket:DF352B70F7C1B528---FA22-8D457962523ECD6-F9570272B22772B9.BB7232C7ACDA79A9
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:CDECF881F9EF2304 AuthTicket:CDECF881F9EF2304---FA22-8D45796266CDF97-EA8B4E3A619B997D.7FE51BA7D90A60A3
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: DF352B70F7C1B528
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: DF352B70F7C1B528
+Info: Sending hand to DF352B70F7C1B528
+Info: A Unity Client Disconnected
+Info: Launch from MainGameServer Context.
+Info: PlayFab Server Startup Command
+Info: GameId:0 game_build_version:0.01 server:localhost port:7777 endoint:
+Info: Setting Up Unity Networking Server
+Info: Populating Title News
+Info: CreateGameBoardMediator.OnRegister()
+Info: CreateGameManagerMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: ClientTurnAttemptMediator.OnRegister()
+Info: GameOverMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:DF352B70F7C1B528 AuthTicket:DF352B70F7C1B528---FA22-8D457974217D079-CD68D09134CBEF3A.105C96EEDEECCBBA
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:CDECF881F9EF2304 AuthTicket:CDECF881F9EF2304---FA22-8D4579743E50B91-F803F7ABCE9EFD3.2D476C27CF00135D
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: DF352B70F7C1B528
+Info: PlayFab Says AuthTicket isValid:True
+Info: Sending hand to DF352B70F7C1B528
+Info: A Unity Client Disconnected
+Info: A Unity Client Disconnected
+Info: Launch from MainGameServer Context.
+Info: PlayFab Server Startup Command
+Info: GameId:0 game_build_version:0.01 server:localhost port:7777 endoint:
+Info: Setting Up Unity Networking Server
+Info: Populating Title News
+Info: CreateGameBoardMediator.OnRegister()
+Info: CreateGameManagerMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: ClientTurnAttemptMediator.OnRegister()
+Info: GameOverMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:DF352B70F7C1B528 AuthTicket:DF352B70F7C1B528---FA22-8D45797C9C116C8-9783F1C2D3E85F83.97B8C6BC674D7385
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:CDECF881F9EF2304 AuthTicket:CDECF881F9EF2304---FA22-8D45797D09CA9E5-BCF77916FC7B4707.1CDF33B5A20018DE
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: DF352B70F7C1B528
+Info: PlayFab Says AuthTicket isValid:True
+Info: Sending hand to DF352B70F7C1B528
+Info: A Unity Client Disconnected
+Info: Launch from MainGameServer Context.
+Info: PlayFab Server Startup Command
+Info: GameId:0 game_build_version:0.01 server:localhost port:7777 endoint:
+Info: Setting Up Unity Networking Server
+Info: Populating Title News
+Info: CreateGameBoardMediator.OnRegister()
+Info: CreateGameManagerMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: ClientTurnAttemptMediator.OnRegister()
+Info: GameOverMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:DF352B70F7C1B528 AuthTicket:DF352B70F7C1B528---FA22-8D457993408BB77-74D20E89097C7F3.12FECAA98439C89B
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: DF352B70F7C1B528
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:CDECF881F9EF2304 AuthTicket:CDECF881F9EF2304---FA22-8D457993577FEEA-691B916D2E906EF.79C80DE1AE73A198
+Info: Sending hand to DF352B70F7C1B528
+Info: Launch from MainGameServer Context.
+Info: PlayFab Server Startup Command
+Info: GameId:0 game_build_version:0.01 server:localhost port:7777 endoint:
+Info: Setting Up Unity Networking Server
+Info: Populating Title News
+Info: CreateGameBoardMediator.OnRegister()
+Info: CreateGameManagerMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: ClientTurnAttemptMediator.OnRegister()
+Info: GameOverMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:DF352B70F7C1B528 AuthTicket:DF352B70F7C1B528---FA22-8D45799783F5B98-2F6C4401DCD97113.D43732D77AF0CAE6
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:CDECF881F9EF2304 AuthTicket:CDECF881F9EF2304---FA22-8D45799771012A1-FD9C889844DD4357.D464BA98786AEB28
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: DF352B70F7C1B528
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: CDECF881F9EF2304
+Info: Sending hand to DF352B70F7C1B528
+Info: Sending hand to CDECF881F9EF2304
+Info: Both players joined; setting score keeper
+Info: Received GameManager
+Info: Sending starting obstacle data to DF352B70F7C1B528
+Info: Sending starting obstacle data to CDECF881F9EF2304
+Info: Sending turn update with active player: DF352B70F7C1B528
+Info: Received GameManager
+Info: Sending starting obstacle data to DF352B70F7C1B528
+Info: Sending starting obstacle data to CDECF881F9EF2304
+Info: Sending turn update with active player: DF352B70F7C1B528
+Info: A Unity Client Disconnected
+Info: Launch from MainGameServer Context.
+Info: PlayFab Server Startup Command
+Info: GameId:0 game_build_version:0.01 server:localhost port:7777 endoint:
+Info: Setting Up Unity Networking Server
+Info: Populating Title News
+Info: CreateGameBoardMediator.OnRegister()
+Info: CreateGameManagerMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: ClientTurnAttemptMediator.OnRegister()
+Info: GameOverMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:CDECF881F9EF2304 AuthTicket:CDECF881F9EF2304---FA22-8D45799B2557F7B-7F0C3D98B6C52F70.BF3A100E2CBFABD1
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: CDECF881F9EF2304
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:DF352B70F7C1B528 AuthTicket:DF352B70F7C1B528---FA22-8D45799B0CD2B57-ABA0355AD41F64B1.BC6250F4BD869B01
+Info: Sending hand to CDECF881F9EF2304
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: DF352B70F7C1B528
+Info: Sending hand to DF352B70F7C1B528
+Info: Both players joined; setting score keeper
+Info: Received GameManager
+Info: Sending starting obstacle data to CDECF881F9EF2304
+Info: Sending starting obstacle data to DF352B70F7C1B528
+Info: Sending turn update with active player: CDECF881F9EF2304
+Info: Received GameManager
+Info: Sending starting obstacle data to CDECF881F9EF2304
+Info: Sending starting obstacle data to DF352B70F7C1B528
+Info: Sending turn update with active player: CDECF881F9EF2304
+Info: Launch from MainGameServer Context.
+Info: PlayFab Server Startup Command
+Info: GameId:0 game_build_version:0.01 server:localhost port:7777 endoint:
+Info: Setting Up Unity Networking Server
+Info: Populating Title News
+Info: CreateGameBoardMediator.OnRegister()
+Info: CreateGameManagerMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: ClientTurnAttemptMediator.OnRegister()
+Info: GameOverMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:DF352B70F7C1B528 AuthTicket:DF352B70F7C1B528---FA22-8D45799C4FF0B53-8D95C0280B365137.D83FFEF310EA0F1D
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: DF352B70F7C1B528
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:CDECF881F9EF2304 AuthTicket:CDECF881F9EF2304---FA22-8D45799C582032F-65663834373CAAF7.9FDEC773F0DB3B3D
+Info: Sending hand to DF352B70F7C1B528
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: CDECF881F9EF2304
+Info: Sending hand to CDECF881F9EF2304
+Info: Both players joined; setting score keeper
+Info: Received GameManager
+Info: Sending starting obstacle data to DF352B70F7C1B528
+Info: Sending starting obstacle data to CDECF881F9EF2304
+Info: Sending turn update with active player: DF352B70F7C1B528
+Info: Received GameManager
+Info: Sending starting obstacle data to DF352B70F7C1B528
+Info: Sending starting obstacle data to CDECF881F9EF2304
+Info: Sending turn update with active player: DF352B70F7C1B528
+Info: Launch from MainGameServer Context.
+Info: PlayFab Server Startup Command
+Info: GameId:0 game_build_version:0.01 server:localhost port:7777 endoint:
+Info: Setting Up Unity Networking Server
+Info: Populating Title News
+Info: CreateGameBoardMediator.OnRegister()
+Info: CreateGameManagerMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: ClientTurnAttemptMediator.OnRegister()
+Info: GameOverMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:CDECF881F9EF2304 AuthTicket:CDECF881F9EF2304---FA22-8D45799DED60B1B-F250064D1C12EA37.B5DB4DEE1A649D08
+Info: A Unity Client Connected
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: CDECF881F9EF2304
+Info: Auth Received: PlayFabId:DF352B70F7C1B528 AuthTicket:DF352B70F7C1B528---FA22-8D45799DE5CE580-9A5F8EC998C3BA63.42231A2587E2AD0A
+Info: Sending hand to CDECF881F9EF2304
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: DF352B70F7C1B528
+Info: Sending hand to DF352B70F7C1B528
+Info: Both players joined; setting score keeper
+Info: Received GameManager
+Info: Sending starting obstacle data to CDECF881F9EF2304
+Info: Sending starting obstacle data to DF352B70F7C1B528
+Info: Sending turn update with active player: CDECF881F9EF2304
+Info: Received GameManager
+Info: Sending starting obstacle data to CDECF881F9EF2304
+Info: Sending starting obstacle data to DF352B70F7C1B528
+Info: Sending turn update with active player: CDECF881F9EF2304
+Info: A Unity Client Disconnected
+Info: Launch from MainGameServer Context.
+Info: PlayFab Server Startup Command
+Info: GameId:0 game_build_version:0.01 server:localhost port:7777 endoint:
+Info: Setting Up Unity Networking Server
+Info: Populating Title News
+Info: CreateGameBoardMediator.OnRegister()
+Info: CreateGameManagerMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: ClientTurnAttemptMediator.OnRegister()
+Info: GameOverMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:CDECF881F9EF2304 AuthTicket:CDECF881F9EF2304---FA22-8D45799FE871AA2-B0A1190ED52576EE.76BDD7579FC44551
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:DF352B70F7C1B528 AuthTicket:DF352B70F7C1B528---FA22-8D45799F74472E9-B80F0DFF6F6C1012.BD6091B50C0D7B4F
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: CDECF881F9EF2304
+Info: Sending hand to CDECF881F9EF2304
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: DF352B70F7C1B528
+Info: Sending hand to DF352B70F7C1B528
+Info: Both players joined; setting score keeper
+Info: Received GameManager
+Info: Sending starting obstacle data to CDECF881F9EF2304
+Info: Sending starting obstacle data to DF352B70F7C1B528
+Info: Sending turn update with active player: CDECF881F9EF2304
+Info: Received GameManager
+Info: Sending starting obstacle data to CDECF881F9EF2304
+Info: Sending starting obstacle data to DF352B70F7C1B528
+Info: Sending turn update with active player: CDECF881F9EF2304
+Info: Launch from MainGameServer Context.
+Info: PlayFab Server Startup Command
+Info: GameId:0 game_build_version:0.01 server:localhost port:7777 endoint:
+Info: Setting Up Unity Networking Server
+Info: Populating Title News
+Info: CreateGameBoardMediator.OnRegister()
+Info: CreateGameManagerMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: ClientTurnAttemptMediator.OnRegister()
+Info: GameOverMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:CDECF881F9EF2304 AuthTicket:CDECF881F9EF2304---FA22-8D4579A1C72853D-48694FE52474246E.2811BAF9C84A19E3
+Info: A Unity Client Connected
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: CDECF881F9EF2304
+Info: Auth Received: PlayFabId:DF352B70F7C1B528 AuthTicket:DF352B70F7C1B528---FA22-8D4579A1A6670C2-E4EFDAA4F662F4D3.EE2CAEC2B53A62D0
+Info: Sending hand to CDECF881F9EF2304
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: DF352B70F7C1B528
+Info: Sending hand to DF352B70F7C1B528
+Info: Both players joined; setting score keeper
+Info: Received GameManager
+Info: Sending starting obstacle data to CDECF881F9EF2304
+Info: Sending starting obstacle data to DF352B70F7C1B528
+Info: Sending turn update with active player: CDECF881F9EF2304
+Info: Received GameManager
+Info: Sending starting obstacle data to CDECF881F9EF2304
+Info: Sending starting obstacle data to DF352B70F7C1B528
+Info: Sending turn update with active player: CDECF881F9EF2304
+Info: Launch from MainGameServer Context.
+Info: PlayFab Server Startup Command
+Info: GameId:0 game_build_version:0.01 server:localhost port:7777 endoint:
+Info: Setting Up Unity Networking Server
+Info: Populating Title News
+Info: CreateGameBoardMediator.OnRegister()
+Info: CreateGameManagerMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: ClientTurnAttemptMediator.OnRegister()
+Info: GameOverMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:DF352B70F7C1B528 AuthTicket:DF352B70F7C1B528---FA22-8D4579A46B553B7-E7F1C400910DBD0A.A86E070C09CE6AA4
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:CDECF881F9EF2304 AuthTicket:CDECF881F9EF2304---FA22-8D4579A445E8432-B9A5BE6EA912DA36.4B2D4B961F489DB1
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: DF352B70F7C1B528
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: CDECF881F9EF2304
+Info: Sending hand to DF352B70F7C1B528
+Info: Sending hand to CDECF881F9EF2304
+Info: Both players joined; setting score keeper
+Info: Received GameManager
+Info: Sending starting obstacle data to DF352B70F7C1B528
+Info: Sending starting obstacle data to CDECF881F9EF2304
+Info: Sending turn update with active player: DF352B70F7C1B528
+Info: Received GameManager
+Info: Sending starting obstacle data to DF352B70F7C1B528
+Info: Sending starting obstacle data to CDECF881F9EF2304
+Info: Sending turn update with active player: DF352B70F7C1B528
+Info: A Unity Client Disconnected
+Info: Launch from MainGameServer Context.
+Info: PlayFab Server Startup Command
+Info: GameId:0 game_build_version:0.01 server:localhost port:7777 endoint:
+Info: Setting Up Unity Networking Server
+Info: Populating Title News
+Info: CreateGameBoardMediator.OnRegister()
+Info: CreateGameManagerMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: ClientTurnAttemptMediator.OnRegister()
+Info: GameOverMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:CDECF881F9EF2304 AuthTicket:CDECF881F9EF2304---FA22-8D4579A5F398042-9820EC06CB22AAEB.2B6156D47D13175F
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:DF352B70F7C1B528 AuthTicket:DF352B70F7C1B528---FA22-8D4579A5D7A0C4F-5B571FA0F52871C6.42C27B08B13F9E3C
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: CDECF881F9EF2304
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: DF352B70F7C1B528
+Info: Sending hand to CDECF881F9EF2304
+Info: Sending hand to DF352B70F7C1B528
+Info: Both players joined; setting score keeper
+Info: Received GameManager
+Info: Sending starting obstacle data to CDECF881F9EF2304
+Info: Sending starting obstacle data to DF352B70F7C1B528
+Info: Sending turn update with active player: CDECF881F9EF2304
+Info: Received GameManager
+Info: Sending starting obstacle data to CDECF881F9EF2304
+Info: Sending starting obstacle data to DF352B70F7C1B528
+Info: Sending turn update with active player: CDECF881F9EF2304
+Info: Launch from MainGameServer Context.
+Info: PlayFab Server Startup Command
+Info: GameId:0 game_build_version:0.01 server:localhost port:7777 endoint:
+Info: Setting Up Unity Networking Server
+Info: Populating Title News
+Info: CreateGameBoardMediator.OnRegister()
+Info: CreateGameManagerMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: ClientTurnAttemptMediator.OnRegister()
+Info: GameOverMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:CDECF881F9EF2304 AuthTicket:CDECF881F9EF2304---FA22-8D4579A749A3C95-3425FF6BD37FDB65.5B2618520A42029F
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:DF352B70F7C1B528 AuthTicket:DF352B70F7C1B528---FA22-8D4579A70C9679B-59A05192E6FE65E1.7368704D3285F2A7
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: CDECF881F9EF2304
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: DF352B70F7C1B528
+Info: Sending hand to CDECF881F9EF2304
+Info: Sending hand to DF352B70F7C1B528
+Info: Both players joined; setting score keeper
+Info: Received GameManager
+Info: Sending starting obstacle data to CDECF881F9EF2304
+Info: Sending starting obstacle data to DF352B70F7C1B528
+Info: Sending turn update with active player: CDECF881F9EF2304
+Info: Received GameManager
+Info: Sending starting obstacle data to CDECF881F9EF2304
+Info: Sending starting obstacle data to DF352B70F7C1B528
+Info: Sending turn update with active player: CDECF881F9EF2304
+Info: A Unity Client Disconnected
+Info: A Unity Client Disconnected
+Info: Launch from MainGameServer Context.
+Info: PlayFab Server Startup Command
+Info: GameId:0 game_build_version:0.01 server:localhost port:7777 endoint:
+Info: Setting Up Unity Networking Server
+Info: Populating Title News
+Info: CreateGameBoardMediator.OnRegister()
+Info: CreateGameManagerMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: ClientTurnAttemptMediator.OnRegister()
+Info: GameOverMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:DF352B70F7C1B528 AuthTicket:DF352B70F7C1B528---FA22-8D4579AA46CDB19-E5E08659156EDB7C.BD55D61E88E97936
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: DF352B70F7C1B528
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:CDECF881F9EF2304 AuthTicket:CDECF881F9EF2304---FA22-8D4579AA4103D58-EBE777A64F6ED723.E5F18FE33B28EF2A
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: CDECF881F9EF2304
+Info: Sending hand to DF352B70F7C1B528
+Info: Sending hand to CDECF881F9EF2304
+Info: Both players joined; setting score keeper
+Info: Received GameManager
+Info: Sending starting obstacle data to DF352B70F7C1B528
+Info: Sending starting obstacle data to CDECF881F9EF2304
+Info: Sending turn update with active player: DF352B70F7C1B528
+Info: Received GameManager
+Info: Sending starting obstacle data to DF352B70F7C1B528
+Info: Sending starting obstacle data to CDECF881F9EF2304
+Info: Sending turn update with active player: DF352B70F7C1B528
+Info: A Unity Client Disconnected
+Info: A Unity Client Disconnected
+Info: Launch from MainGameServer Context.
+Info: PlayFab Server Startup Command
+Info: GameId:0 game_build_version:0.01 server:localhost port:7777 endoint:
+Info: Setting Up Unity Networking Server
+Info: Populating Title News
+Info: CreateGameBoardMediator.OnRegister()
+Info: CreateGameManagerMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: ClientTurnAttemptMediator.OnRegister()
+Info: GameOverMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:DF352B70F7C1B528 AuthTicket:DF352B70F7C1B528---FA22-8D4579AAFEB39BE-5F57607AACE33A29.B20944D76FEF1668
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: DF352B70F7C1B528
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:CDECF881F9EF2304 AuthTicket:CDECF881F9EF2304---FA22-8D4579ABAE6C5DB-1B37022A9B2186C9.9E95AE61AE1E724C
+Info: Sending hand to DF352B70F7C1B528
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: CDECF881F9EF2304
+Info: Sending hand to CDECF881F9EF2304
+Info: Both players joined; setting score keeper
+Info: Received GameManager
+Info: Sending starting obstacle data to DF352B70F7C1B528
+Info: Sending starting obstacle data to CDECF881F9EF2304
+Info: Sending turn update with active player: DF352B70F7C1B528
+Info: Received GameManager
+Info: Sending starting obstacle data to DF352B70F7C1B528
+Info: Sending starting obstacle data to CDECF881F9EF2304
+Info: Sending turn update with active player: DF352B70F7C1B528
