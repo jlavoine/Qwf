@@ -6,7 +6,7 @@ using strange.extensions.mediation.impl;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.Networking.NetworkSystem;
-
+using MyLibrary;
 using Qwf.Server;
 
 public class UnityNetworkManagerMediator : EventMediator {
@@ -34,11 +34,13 @@ public class UnityNetworkManagerMediator : EventMediator {
 
     public override void OnRegister()
     {
-        Debug.LogError( "Registering the network manager" );
         NetworkServer.RegisterHandler(MsgType.Connect, OnServerConnect);
         NetworkServer.RegisterHandler(MsgType.Disconnect, OnServerDisconnect);
         NetworkServer.RegisterHandler(MsgType.Error, OnServerError);
-        NetworkServer.RegisterHandler(200, OnAuthenticateConnection);
+        NetworkServer.RegisterHandler(CoreNetworkMessages.Authenticate, OnAuthenticateConnection);
+
+        AuthenticateSessionTicketResponseSignal.AddListener( OnAuthLocalUserResponse );
+
         StartCoroutine(CheckForConnectionsOrClose());
     }
 
@@ -85,7 +87,7 @@ public class UnityNetworkManagerMediator : EventMediator {
             }
             else
             {
-                AuthenticateSessionTicketResponseSignal.AddOnce(OnAuthLocalUserResponse);
+                //AuthenticateSessionTicketResponseSignal.AddOnce(OnAuthLocalUserResponse); // bug from original code
                 AuthenticateSessionTicketSignal.Dispatch(new AuthenticateSessionTicketRequest()
                 {
                     SessionTicket = message.AuthTicket
@@ -94,19 +96,36 @@ public class UnityNetworkManagerMediator : EventMediator {
         }
     }
 
+    private System.Collections.Generic.List<string> wtf = new System.Collections.Generic.List<string>();
+
     private void OnAuthLocalUserResponse(AuthenticateSessionTicketResult response)
     {
         Logger.Dispatch(LoggerTypes.Info, string.Format("PlayFab Says AuthTicket isValid:{0}", true));
+        
         var uconn = UnityNetworkingData.Connections.Find(c => c.PlayFabId == response.UserInfo.PlayFabId);
-        if (uconn != null)
-        {
+        if (uconn != null) {
+            if ( uconn.IsAuthenticated == true ) {                
+                return;
+            }
+
             uconn.IsAuthenticated = true;
-            uconn.Connection.Send(201, new StringMessage()
-            {
+            uconn.Connection.Send(CoreNetworkMessages.OnAuthenticated, new StringMessage() {
                 value = "Client Authenticated Successfully"
             });
 
+            UnityEngine.Debug.LogError( "About to dispatch the thing with " + response.UserInfo.PlayFabId );
             CreateGamePlayerSignal.Dispatch( response.UserInfo.PlayFabId );
+        }
+
+        int authCount = 0;
+        foreach ( var conn in UnityNetworkingData.Connections ) {
+            if ( conn.IsAuthenticated ) {
+                authCount++;
+            }
+        }
+
+        if ( authCount == 2 ) {
+            AuthenticateSessionTicketResponseSignal.RemoveListener( OnAuthLocalUserResponse );
         }
     }
 
@@ -117,7 +136,7 @@ public class UnityNetworkManagerMediator : EventMediator {
         if (uconn != null)
         {
             uconn.IsAuthenticated = response.TicketIsValid;
-            uconn.Connection.Send(201, new StringMessage()
+            uconn.Connection.Send(CoreNetworkMessages.OnAuthenticated, new StringMessage()
             {
                 value = "Client Authenticated Successfully"
             });
