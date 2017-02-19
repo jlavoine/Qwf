@@ -708,3 +708,36 @@ Info: GameManagerMediator.OnRegister()
 Info: ClientTurnAttemptMediator.OnRegister()
 Info: GameOverMediator.OnRegister()
 Info: GameManagerMediator.OnRegister()
+Info: Launch from MainGameServer Context.
+Info: PlayFab Server Startup Command
+Info: GameId:0 game_build_version:0.01 server:localhost port:7777 endoint:
+Info: Setting Up Unity Networking Server
+Info: Populating Title News
+Info: CreateGameBoardMediator.OnRegister()
+Info: CreateGameManagerMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: ClientTurnAttemptMediator.OnRegister()
+Info: GameOverMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: Launch from MainGameServer Context.
+Info: PlayFab Server Startup Command
+Info: GameId:0 game_build_version:0.01 server:localhost port:7777 endoint:
+Info: Setting Up Unity Networking Server
+Info: Populating Title News
+Info: CreateGameBoardMediator.OnRegister()
+Info: CreateGameManagerMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: ClientTurnAttemptMediator.OnRegister()
+Info: GameOverMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: Launch from MainGameServer Context.
+Info: PlayFab Server Startup Command
+Info: GameId:0 game_build_version:0.01 server:localhost port:7777 endoint:
+Info: Setting Up Unity Networking Server
+Info: Populating Title News
+Info: CreateGameBoardMediator.OnRegister()
+Info: CreateGameManagerMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: ClientTurnAttemptMediator.OnRegister()
+Info: GameOverMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
