@@ -39,46 +39,6 @@ namespace MyLibrary {
             }
 
             PlayFabSettings.TitleId = TitleId;
-#if UNITY_ANDROID && !UNITY_EDITOR
-
-        AndroidJavaClass up = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
-        AndroidJavaObject currentActivity = up.GetStatic<AndroidJavaObject>("currentActivity");
-        AndroidJavaObject contentResolver = currentActivity.Call<AndroidJavaObject>("getContentResolver");
-        AndroidJavaClass secure = new AndroidJavaClass("android.provider.Settings$Secure");
-        string androidId = secure.CallStatic<string>("getString", contentResolver, "android_id");
-
-        PlayFabClientAPI.LoginWithAndroidDeviceID(new LoginWithAndroidDeviceIDRequest() {
-            TitleId = TitleId,
-            AndroidDevice = SystemInfo.deviceModel,
-            AndroidDeviceId = androidId,
-            OS = SystemInfo.operatingSystem,
-            CreateAccount = true
-        }, (result) => {
-            PlayFabId = result.PlayFabId;
-            SessionTicket = result.SessionTicket;
-
-            UnityEngine.Debug.Log("PlayFab Logged In Successfully");
-            StartText.text = "PlayFab Logged In Successfully";
-            //If you want to test locally where you are running the server in the Unity Editor
-            if (IsLocalNetwork) {
-                ConnectNetworkClient();
-            }
-            else {
-                PlayFabClientAPI.Matchmake(new MatchmakeRequest()
-                {
-                    BuildVersion = BuildVersion,
-                    GameMode = GameMode,
-                    Region = GameRegion
-                }, (matchMakeResult) =>
-                {
-                    int port = matchMakeResult.ServerPort ?? 7777;
-                    GameServerAuthTicket = matchMakeResult.Ticket;
-                    ConnectNetworkClient(matchMakeResult.ServerHostname, port);
-                }, PlayFabErrorHandler.HandlePlayFabError);
-                        
-            }
-        }, PlayFabErrorHandler.HandlePlayFabError);
-#else
             PlayFabId = BackendManager.Instance.GetBackend<PlayFabBackend>().PlayerId;
             SessionTicket = BackendManager.Instance.GetBackend<PlayFabBackend>().SessionTicket;
 
@@ -89,7 +49,6 @@ namespace MyLibrary {
             } else {
                 SendMatchMakeRequest();
             }
-#endif
         }
 
         private void SendMatchMakeRequest() {
@@ -131,9 +90,8 @@ namespace MyLibrary {
         }
 
         private void OnConnected( NetworkMessage netMsg ) {
-            StartText.text = "Connected, waiting for Authorization";
-            UnityEngine.Debug.Log( "Network Client connected, You have 30 seconds to Authenticate or you get booted by the server." );
-            UnityEngine.Debug.Log( "Authing with " + GameServerAuthTicket + " or " + SessionTicket );
+            StartText.text =  "Connected, waiting for Authorization";
+
             _network.Send( CoreNetworkMessages.Authenticate, new AuthTicketMessage() {
                 PlayFabId = PlayFabId,
                 AuthTicket = !string.IsNullOrEmpty( GameServerAuthTicket ) ? GameServerAuthTicket : SessionTicket,
@@ -141,7 +99,7 @@ namespace MyLibrary {
             } );
         }
 
-        private void OnAuthenticated( NetworkMessage netMsg ) {
+        private void OnAuthenticated( NetworkMessage netMsg ) {            
             StartText.text = "Ready";
         }
 
