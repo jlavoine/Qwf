@@ -107,11 +107,12 @@ public class UnityNetworkManagerMediator : EventMediator {
             }
 
             uconn.IsAuthenticated = true;
+
+            // send the game player id here!!!
             uconn.Connection.Send(CoreNetworkMessages.OnAuthenticated, new StringMessage() {
                 value = "Client Authenticated Successfully"
             });
-
-            UnityEngine.Debug.LogError( "About to dispatch the thing with " + response.UserInfo.PlayFabId );
+            
             CreateGamePlayerSignal.Dispatch( response.UserInfo.PlayFabId );
         }
 
@@ -131,11 +132,9 @@ public class UnityNetworkManagerMediator : EventMediator {
     {
         Logger.Dispatch(LoggerTypes.Info, string.Format("PlayFab Says AuthTicket isValid:{0}",response.TicketIsValid));
         var uconn = UnityNetworkingData.Connections.Find(c => c.PlayFabId == response.UserInfo.PlayFabId);
-        if (uconn != null)
-        {
+        if (uconn != null) {
             uconn.IsAuthenticated = response.TicketIsValid;
-            uconn.Connection.Send(CoreNetworkMessages.OnAuthenticated, new StringMessage()
-            {
+            uconn.Connection.Send(CoreNetworkMessages.OnAuthenticated, new StringMessage() {
                 value = "Client Authenticated Successfully"
             });
 
@@ -145,12 +144,9 @@ public class UnityNetworkManagerMediator : EventMediator {
     }
 
     // called when a client connects 
-    private void OnServerConnect(NetworkMessage netMsg)
-    {
-        
+    private void OnServerConnect(NetworkMessage netMsg) {        
         UnityNetworkingData.ConnectedClients++;
-        UnityNetworkingData.Connections.Add(new UnityNetworkingData.UnityNetworkConnection()
-        {
+        UnityNetworkingData.Connections.Add(new UnityNetworkingData.UnityNetworkConnection() {
             Connection = netMsg.conn,
             ConnectionId = netMsg.conn.connectionId,
             LobbyId = ServerSettingsData.GameId.ToString(),
