@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 namespace MyLibrary {
-    public class PropertySet : IPropertySet {
+    public class PropertySet {
         public Dictionary<string, Property> Properties = new Dictionary<string, Property>();
 
         public void CreateProperty( string i_key ) {
