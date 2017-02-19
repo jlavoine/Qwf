@@ -19,6 +19,8 @@ namespace MyLibrary {
             }
         }
 
+
+        // can't use this because of AOT issues on iOS...!?
         public T GetPropertyValue<T>( string i_key ) {
             T value = default( T );
 
@@ -28,6 +30,45 @@ namespace MyLibrary {
             }
 
             return value;
+        }
+
+        public int GetPropertyValue_Int( string i_key ) {
+            if ( Properties.ContainsKey( i_key ) ) {
+                Property property = Properties[i_key];
+                return property.GetValue_Int();
+            } else {
+                return 0;
+            }
+        }
+
+        public float GetPropertyValue_Float( string i_key ) {
+            if ( Properties.ContainsKey( i_key ) ) {
+                Property property = Properties[i_key];
+                return property.GetValue_Float();
+            }
+            else {
+                return 0f;
+            }
+        }
+
+        public string GetPropertyValue_String( string i_key ) {
+            if ( Properties.ContainsKey( i_key ) ) {
+                Property property = Properties[i_key];
+                return property.GetValue_String();
+            }
+            else {
+                return string.Empty;
+            }
+        }
+
+        public bool GetPropertyValue_Bool( string i_key ) {
+            if ( Properties.ContainsKey( i_key ) ) {
+                Property property = Properties[i_key];
+                return property.GetValue_Bool();
+            }
+            else {
+                return false;
+            }
         }
 
         public bool HasProperty( string i_key ) {

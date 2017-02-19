@@ -31,7 +31,7 @@ namespace MyLibrary {
             MyMessenger.Instance.RemoveListener( InfoPopupEvents.CLOSE, OnPopupClosed );
         }
 
-        public void QueueInfoPopup( string i_prefabName, IViewModel i_viewModel ) {
+        public void QueueInfoPopup( string i_prefabName, ViewModel i_viewModel ) {
             QueuedInfoPopupData queuedPopup = new QueuedInfoPopupData( i_prefabName, i_viewModel );
             mListPopups.Add( queuedPopup );
             CheckToShowNextPopup();

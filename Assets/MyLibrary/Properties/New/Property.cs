@@ -13,6 +13,8 @@ namespace MyLibrary {
         }
 
         private object mValue;
+
+        // wtf...can't figure out why AOT doesn't like this!?
         public T GetValue<T>() {
             if ( mValue is T ) {
                 return (T) mValue;
@@ -23,11 +25,27 @@ namespace MyLibrary {
             }
         }
 
+        public int GetValue_Int() {
+            return (int) mValue;
+        }
+
+        public float GetValue_Float() {
+            return (float) mValue;
+        }
+
+        public string GetValue_String() {
+            return (string) mValue;
+        }
+
+        public bool GetValue_Bool() {
+            return (bool) mValue;
+        }
+
         public void SetValue( object i_object ) {
             mValue = i_object;
 
             Messenger.Broadcast( "SetDirty_" + ID );
-        }
+        }        
 
         public Property( string i_name, object i_value = null ) {
             mID = Guid.NewGuid();

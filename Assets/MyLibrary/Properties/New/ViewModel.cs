@@ -1,6 +1,6 @@
 ﻿
 namespace MyLibrary {
-    public class ViewModel : PropertySet, IViewModel {
+    public class ViewModel : PropertySet {
 
     }
 }

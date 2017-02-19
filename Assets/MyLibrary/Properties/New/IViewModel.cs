@@ -1,5 +1,5 @@
 ﻿
-namespace MyLibrary {
+/*namespace MyLibrary {
     public interface IViewModel {
         bool HasProperty( string i_propertyName );
 
@@ -9,4 +9,4 @@ namespace MyLibrary {
 
         T GetPropertyValue<T>( string i_propertyName );
     }
-}
+}*/

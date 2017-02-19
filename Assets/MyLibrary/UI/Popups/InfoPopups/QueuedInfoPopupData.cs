@@ -3,9 +3,9 @@ namespace MyLibrary {
     public class QueuedInfoPopupData {
 
         public string PrefabName;
-        public IViewModel ViewModel;
+        public ViewModel ViewModel;
 
-        public QueuedInfoPopupData( string i_prefabName, IViewModel i_viewModel ) {
+        public QueuedInfoPopupData( string i_prefabName, ViewModel i_viewModel ) {
             PrefabName = i_prefabName;
             ViewModel = i_viewModel;
         }
