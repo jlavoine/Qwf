@@ -25,18 +25,18 @@ public class LogSignalCommand : Command
         {
             case LoggerTypes.Info:
                 Debug.LogFormat("Info: {0}", Message);
-                ServerSettingsData.LogEntries.Add(string.Format("Info: {0}\n", Message ));
+                ServerSettingsData.LogEntries.Add(string.Format("Info: {0}" + System.Environment.NewLine, Message ));
                 break;
             case LoggerTypes.Warning:
                 Debug.LogWarningFormat("Warning: {0}", Message);
-                ServerSettingsData.LogEntries.Add(string.Format("Warning: {0}\n", Message));
+                ServerSettingsData.LogEntries.Add(string.Format( "Warning: {0}" + System.Environment.NewLine, Message));
                 break;
             case LoggerTypes.Error:
                 var e = (Exception) Message;
                 Debug.LogErrorFormat("Status: {0}", e.Message );
                 Debug.LogErrorFormat("Status: {0}", e.StackTrace);
-                ServerSettingsData.LogEntries.Add(string.Format("Status: {0}\n", e.Message));
-                ServerSettingsData.LogEntries.Add(string.Format("Status-Stack: {0}\n", e.StackTrace));
+                ServerSettingsData.LogEntries.Add(string.Format( "Status: {0}" + System.Environment.NewLine, e.Message));
+                ServerSettingsData.LogEntries.Add(string.Format( "Status-Stack: {0}" + System.Environment.NewLine, e.StackTrace));
                 break;
         }
 
