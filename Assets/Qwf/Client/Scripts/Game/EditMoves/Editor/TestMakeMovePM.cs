@@ -17,7 +17,7 @@ namespace Qwf.Client {
 
             systemUnderTest.ProcessAction();
 
-            MyMessenger.Instance.Received().Send<ITurnUpdate>( ClientMessages.UPDATE_TURN, Arg.Is<ITurnUpdate>( activePlayer => activePlayer.GetActivePlayer() != "Me" ) );
+            MyMessenger.Instance.Received().Send<ITurnUpdate>( ClientMessages.UPDATE_TURN, Arg.Is<ITurnUpdate>( activePlayer => activePlayer.IsThisPlayerActive() == false ) );
         }
     }
 }

@@ -34,10 +34,7 @@ namespace Qwf.Client {
         }
 
         private bool IsActivePlayersTurn( ITurnUpdate i_update ) {
-            string thisPlayer = BackendManager.Instance.GetPlayerId();
-            string activePlayer = i_update.GetActivePlayer();
-
-            return thisPlayer == activePlayer;
+            return i_update.IsThisPlayerActive();
         }
 
         private void SetDisplayProperty( string i_message ) {

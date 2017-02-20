@@ -2,17 +2,21 @@
 
 namespace Qwf {
     public class TurnUpdate : ITurnUpdate {
-        public string ActivePlayer;
+        // delaying this until a nickname system...I don't want to be sending other player's IDs around
+        /*public string ActivePlayer;
 
         public string GetActivePlayer() {
             return ActivePlayer;
-        }
+        }*/
+
+        public bool IsPlayerActive;
 
         public bool IsThisPlayerActive() {
-            string thisPlayer = BackendManager.Instance.GetPlayerId();
+            return IsPlayerActive;
+            /*string thisPlayer = BackendManager.Instance.GetPlayerId();
             string activePlayer = GetActivePlayer();
 
-            return thisPlayer == activePlayer;
+            return thisPlayer == activePlayer;*/
         }
     }
 }

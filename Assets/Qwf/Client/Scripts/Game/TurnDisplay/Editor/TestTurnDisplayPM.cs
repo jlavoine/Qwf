@@ -27,10 +27,9 @@ namespace Qwf.Client {
 
         [Test]
         public void OnUpdate_IfPlayersTurn_MessageExpected() {
-            BackendManager.Instance.GetPlayerId().Returns( "Me" );
             TurnDisplayPM systemUnderTest = new TurnDisplayPM();
             ITurnUpdate mockUpdate = Substitute.For<ITurnUpdate>();
-            mockUpdate.GetActivePlayer().Returns( "Me" );
+            mockUpdate.IsThisPlayerActive().Returns( true );
 
             systemUnderTest.OnTurnUpdate( mockUpdate );
 
@@ -39,10 +38,9 @@ namespace Qwf.Client {
 
         [Test]
         public void OnUpdate_IfOpponentsTurn_MessageExpected() {
-            BackendManager.Instance.GetPlayerId().Returns( "Me" );
             TurnDisplayPM systemUnderTest = new TurnDisplayPM();
             ITurnUpdate mockUpdate = Substitute.For<ITurnUpdate>();
-            mockUpdate.GetActivePlayer().Returns( "Them" );
+            mockUpdate.IsThisPlayerActive().Returns( false );
 
             systemUnderTest.OnTurnUpdate( mockUpdate );
 

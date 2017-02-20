@@ -741,3 +741,62 @@ Info: GameManagerMediator.OnRegister()
 Info: ClientTurnAttemptMediator.OnRegister()
 Info: GameOverMediator.OnRegister()
 Info: GameManagerMediator.OnRegister()
+Info: Launch from MainGameServer Context.
+Info: PlayFab Server Startup Command
+Info: GameId:0 game_build_version:0.01 server:localhost port:7777 endoint:
+Info: Setting Up Unity Networking Server
+Info: Populating Title News
+Info: CreateGameBoardMediator.OnRegister()
+Info: CreateGameManagerMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: ClientTurnAttemptMediator.OnRegister()
+Info: GameOverMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:DF352B70F7C1B528 AuthTicket:DF352B70F7C1B528---FA22-8D4592CF420C997-5A736DC97D53054.9484A941BC9152C1
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: DF352B70F7C1B528
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:CDECF881F9EF2304 AuthTicket:CDECF881F9EF2304---FA22-8D4592CFECB6174-9E66C010175E0D78.9279C7399BB6EF88
+Info: Sending hand to DF352B70F7C1B528
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: CDECF881F9EF2304
+Info: Sending hand to CDECF881F9EF2304
+Info: Both players joined; setting score keeper
+Info: Received GameManager
+Info: Sending starting obstacle data to DF352B70F7C1B528
+Info: Sending starting obstacle data to CDECF881F9EF2304
+Info: Sending turn update with active player: DF352B70F7C1B528
+Info: Received GameManager
+Info: Sending starting obstacle data to DF352B70F7C1B528
+Info: Sending starting obstacle data to CDECF881F9EF2304
+Info: Sending turn update with active player: DF352B70F7C1B528
+Info: Trying turn for DF352B70F7C1B528
+Info: Processed player turn for DF352B70F7C1B528
+Info: Sending starting turn update data to DF352B70F7C1B528
+Info: Sending starting turn update data to CDECF881F9EF2304
+Info: Sending hand to DF352B70F7C1B528
+Info: Sending turn update with active player: CDECF881F9EF2304
+Info: Sending starting turn update data to DF352B70F7C1B528
+Info: Sending starting turn update data to CDECF881F9EF2304
+Info: Processing move attempt for piece 3 on obstacle 2 on slot 3
+Info: Processing move attempt for piece 4 on obstacle 0 on slot 3
+Info: Processing move attempt for piece 5 on obstacle 2 on slot 1
+Info: Trying turn for CDECF881F9EF2304
+Info: Processed player turn for CDECF881F9EF2304
+Info: Sending starting turn update data to DF352B70F7C1B528
+Info: Sending starting turn update data to CDECF881F9EF2304
+Info: Sending hand to CDECF881F9EF2304
+Info: Sending turn update with active player: DF352B70F7C1B528
+Info: Sending starting turn update data to DF352B70F7C1B528
+Info: Sending starting turn update data to CDECF881F9EF2304
+Info: Processing move attempt for piece 1 on obstacle 2 on slot 2
+Info: Trying turn for DF352B70F7C1B528
+Info: Processed player turn for DF352B70F7C1B528
+Info: Sending starting turn update data to DF352B70F7C1B528
+Info: Sending starting turn update data to CDECF881F9EF2304
+Info: Sending hand to DF352B70F7C1B528
+Info: Sending turn update with active player: CDECF881F9EF2304
+Info: Sending starting turn update data to DF352B70F7C1B528
+Info: Sending starting turn update data to CDECF881F9EF2304
+Info: A Unity Client Disconnected

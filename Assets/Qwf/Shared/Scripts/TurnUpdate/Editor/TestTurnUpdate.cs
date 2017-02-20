@@ -9,7 +9,10 @@ using System.Collections.Generic;
 namespace Qwf.Client {
     [TestFixture]
     public class TestTurnUpdate : QwfUnitTest {
-        [Test]
+        // originally, a TurnUpdate held the id of the active player.
+        // but I thought it was unwise to be passing PlayFab ids around, so I changed it
+        // it to just return a bool
+        /*[Test]
         public void GetActivePlayer_ReturnsExpectedValue() {
             TurnUpdate systemUnderTest = new TurnUpdate();
             systemUnderTest.ActivePlayer = "Me";
@@ -29,6 +32,6 @@ namespace Qwf.Client {
             systemUnderTest.ActivePlayer = i_activePlayer;
 
             Assert.AreEqual( i_expected, systemUnderTest.IsThisPlayerActive() );
-        }
+        }*/
     }
 }

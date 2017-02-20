@@ -14,14 +14,14 @@ namespace Qwf.Client {
         // Update is called once per frame
         void Update() {
             if ( Input.GetKeyDown( KeyCode.Z ) ) {
-                SendUpdate( "Me" );
+                SendUpdate( true );
             } else if ( Input.GetKeyDown( KeyCode.X ) ) {
-                SendUpdate( "Them" );
+                SendUpdate( false );
             }
         }
 
-        private void SendUpdate( string i_player ) {
-            ITurnUpdate update = new TurnUpdate() { ActivePlayer = i_player };
+        private void SendUpdate( bool i_isActivePlayer ) {
+            ITurnUpdate update = new TurnUpdate() { IsPlayerActive = i_isActivePlayer };
             MyMessenger.Instance.Send( ClientMessages.UPDATE_TURN, update );
         }
     }

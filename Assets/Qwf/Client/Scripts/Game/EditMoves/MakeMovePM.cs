@@ -11,7 +11,7 @@ namespace Qwf.Client {
 
         protected void ChangeTurnFromActivePlayer() {
             TurnUpdate update = new TurnUpdate();
-            update.ActivePlayer = string.Empty; // anyone but this player means it's not this player's turn
+            update.IsPlayerActive = false; // anyone but this player means it's not this player's turn
 
             MyMessenger.Instance.Send<ITurnUpdate>( ClientMessages.UPDATE_TURN, update );
         }
