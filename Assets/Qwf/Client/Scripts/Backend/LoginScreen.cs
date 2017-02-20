@@ -46,6 +46,10 @@ namespace Qwf.Client {
             OnPlayerSelected( "Player_2" ); // CDECF881F9EF2304
         }
 
+        public void OnPlayerSelected_3() {
+            OnPlayerSelected( "Player_3" ); // ???
+        }
+
         private void OnPlayerSelected(string player) {
             Destroy( PlayerSelectionArea );
             LoginStatusText.text = STATUS_CONNECTING;
