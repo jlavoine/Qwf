@@ -7,5 +7,6 @@ namespace MyLibrary {
     public class CoreNetworkMessages {
         public const short Authenticate = 200;
         public const short OnAuthenticated = 201;
+        public const short GameReady = 202;
     }
 }

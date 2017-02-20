@@ -8,64 +8,50 @@ using Region = PlayFab.ClientModels.Region;
 using Qwf;
 
 namespace MyLibrary {
-    public class ClientExampleScript : MonoBehaviour {
-        public bool IsLocalNetwork;
-        public string host = "localhost";
-        public int port = 7777;
-        public string TitleId;
-        public string PlayFabId;
-        public string BuildVersion;
-        public string GameMode;
-        public Region GameRegion;
+    public class MatchMaker {
+        private const string TITLE_ID = "FA22";
+        private const string GAME_MODE = "Basic";
+        private const string BUILD_VERSION = "QwF_Server_1";
+        private const Region REGION = Region.USEast;
 
-        //Note I would not normally make the session ticket public.
-        public string SessionTicket;
-        public string GameServerAuthTicket;
+        private const string LOCAL_HOST = "localhost";
+        private const int LOCAL_PORT = 7777;
 
-        public Text Header;
-        public Text Message;
-        public Text StartText;
+        private NetworkClient _network;
+        private string PlayFabId;
+        private string SessionTicket;
+        private string GameServerAuthTicket;
 
-        public NetworkClient _network;
+        private bool mIsLocal;
 
-        private ClientRelay mGameRelay;
+        public MatchMaker() {}
 
-        void Start() {            
-            StartText.text = "Searching for opponent...";
+        public void BeginMatchMakingProcess( bool i_isLocal ) {
+            mIsLocal = i_isLocal;
 
-            if ( string.IsNullOrEmpty( TitleId ) ) {
-                UnityEngine.Debug.LogError( "Please Enter your Title Id on the ClientExampleGameObject" );
-                return;
-            }
-
-            PlayFabSettings.TitleId = TitleId;
+            PlayFabSettings.TitleId = TITLE_ID;
             PlayFabId = BackendManager.Instance.GetBackend<PlayFabBackend>().PlayerId;
             SessionTicket = BackendManager.Instance.GetBackend<PlayFabBackend>().SessionTicket;
-     
-            if ( IsLocalNetwork ) {
+
+            if ( i_isLocal ) {
                 ConnectNetworkClient();
-            } else {
+            }
+            else {
                 SendMatchMakeRequest();
             }
         }
 
         private void SendMatchMakeRequest() {
-            UnityEngine.Debug.Log( "about to match make with " + BuildVersion + " - " + GameMode + " - " + GameRegion );
+            UnityEngine.Debug.Log( "about to match make with " + BUILD_VERSION + " - " + GAME_MODE + " - " + REGION );
             PlayFabClientAPI.Matchmake( new MatchmakeRequest() {
-                BuildVersion = BuildVersion,
-                GameMode = GameMode,
-                Region = GameRegion
+                BuildVersion = BUILD_VERSION,
+                GameMode = GAME_MODE,
+                Region = REGION
             }, ( matchMakeResult ) => {
                 int port = matchMakeResult.ServerPort ?? 7777;
                 GameServerAuthTicket = matchMakeResult.Ticket;
                 ConnectNetworkClient( matchMakeResult.ServerHostname, port );
             }, PlayFabErrorHandler.HandlePlayFabError );
-        }
-
-        void OnDestroy() {
-            if ( mGameRelay != null ) {
-                mGameRelay.Dispose();
-            }
         }
 
         private void ConnectNetworkClient( string host = "localhost", int port = 7777 ) {
@@ -76,12 +62,11 @@ namespace MyLibrary {
             _network.RegisterHandler( MsgType.Disconnect, OnClientDisconnect );
             _network.RegisterHandler( CoreNetworkMessages.GameReady, OnGameReady );
 
-            //mGameRelay = new ClientRelay( new UnityNetworkWrapper( _network ) );
-            //mGameRelay.RegisterServerMessageHandlers();
+            MyMessenger.Instance.Send<IUnityNetworkWrapper>( ClientMessages.NETWORK_CLIENT_CREATED, new UnityNetworkWrapper( _network ) );
 
-            if ( IsLocalNetwork ) {
-                host = this.host;
-                port = this.port;
+            if ( mIsLocal ) {
+                host = LOCAL_HOST;
+                port = LOCAL_PORT;
             }
 
             _network.Connect( host, port );
@@ -89,21 +74,17 @@ namespace MyLibrary {
         }
 
         private void OnConnected( NetworkMessage netMsg ) {
-            StartText.text =  "Connected, waiting for Authorization";
-
             _network.Send( CoreNetworkMessages.Authenticate, new AuthTicketMessage() {
                 PlayFabId = PlayFabId,
                 AuthTicket = !string.IsNullOrEmpty( GameServerAuthTicket ) ? GameServerAuthTicket : SessionTicket,
-                IsLocal = IsLocalNetwork
+                IsLocal = mIsLocal
             } );
         }
 
-        private void OnAuthenticated( NetworkMessage netMsg ) {            
-            StartText.text = "Ready";
-        }
+        private void OnAuthenticated( NetworkMessage netMsg ) {}
 
         private void OnGameReady( NetworkMessage netMsg ) {
-            
+            MyMessenger.Instance.Send( ClientMessages.GAME_READY );
         }
 
         private void OnClientNetworkingError( NetworkMessage netMsg ) {
@@ -111,12 +92,6 @@ namespace MyLibrary {
             UnityEngine.Debug.LogErrorFormat( "Oops Something went wrong. ErrorCode:{0}", errorMessage.errorCode );
         }
 
-        private void OnClientDisconnect( NetworkMessage netMsg ) {
-            StartText.text = "Disconnected";
-        }
-
-        void ClearText() {
-            StartText.text = "";
-        }
+        private void OnClientDisconnect( NetworkMessage netMsg ) {}
     }
 }

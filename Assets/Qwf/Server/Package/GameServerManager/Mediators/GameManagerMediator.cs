@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using strange.extensions.signal.impl;
 using System;
 using UnityEngine.Networking.NetworkSystem;
+using MyLibrary;
 
 namespace Qwf.Server {
     public class GameManagerMediator : Mediator {
@@ -33,6 +34,7 @@ namespace Qwf.Server {
         private void SendStartingDataToPlayers() {
             SendStartingObstacleData();
             PickAndSendStartingPlayer();
+            SendGameReadyMessage();
         }
 
         private void SendStartingObstacleData() {
@@ -57,6 +59,15 @@ namespace Qwf.Server {
             GameObstaclesUpdate update = GameObstaclesUpdate.Create( board.GetCurrentObstacles() );
 
             return update;
+        }
+
+        private void SendGameReadyMessage() {
+            foreach ( var uconn in UnityNetworkingData.Connections ) {
+                Logger.Dispatch( LoggerTypes.Info, "Sending game ready " + uconn.PlayFabId );
+                uconn.Connection.Send( CoreNetworkMessages.GameReady, new StringMessage() {
+                    value = ""
+                } );
+            }
         }
     }
 }

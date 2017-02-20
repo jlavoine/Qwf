@@ -7,7 +7,9 @@ namespace MyLibrary {
     public abstract class CoreClientRelay {
         protected IUnityNetworkWrapper mNetwork;
 
-        public CoreClientRelay( IUnityNetworkWrapper i_network ) {
+        public CoreClientRelay() {}
+
+        public void SetNetworkClient( IUnityNetworkWrapper i_network ) {
             mNetwork = i_network;
         }
 

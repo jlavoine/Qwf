@@ -1,12 +1,11 @@
-﻿using UnityEngine.Networking;
-using MyLibrary;
+﻿using MyLibrary;
 using UnityEngine.Networking.NetworkSystem;
 using Newtonsoft.Json;
 
 namespace Qwf {
     public class ClientRelay : CoreClientRelay {
         
-        public ClientRelay( IUnityNetworkWrapper i_network ) : base( i_network ) {           
+        public ClientRelay() {           
             ListenForMessages( true );
         }
 
@@ -17,10 +16,17 @@ namespace Qwf {
         private void ListenForMessages( bool i_listen ) {
             if ( i_listen ) {
                 MyMessenger.Instance.AddListener<ClientTurnAttempt>( ClientMessages.SEND_TURN_TO_SERVER, SendTurnToServer );
+                MyMessenger.Instance.AddListener<IUnityNetworkWrapper>( ClientMessages.NETWORK_CLIENT_CREATED, OnNetworkClientCreated );
             }
             else {
                 MyMessenger.Instance.RemoveListener<ClientTurnAttempt>( ClientMessages.SEND_TURN_TO_SERVER, SendTurnToServer );
+                MyMessenger.Instance.RemoveListener<IUnityNetworkWrapper>( ClientMessages.NETWORK_CLIENT_CREATED, OnNetworkClientCreated );
             }
+        }
+
+        public void OnNetworkClientCreated( IUnityNetworkWrapper i_network ) {
+            SetNetworkClient( i_network );
+            RegisterServerMessageHandlers();
         }
 
         public void RegisterServerMessageHandlers() {
