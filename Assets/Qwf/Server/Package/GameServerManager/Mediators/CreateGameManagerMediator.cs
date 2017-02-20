@@ -13,6 +13,8 @@ namespace Qwf.Server {
     public class CreateGameManagerMediator : Mediator {
         [Inject] public LogSignal Logger { get; set; }
         [Inject] public UnityNetworkingData UnityNetworkingData { get; set; }
+        [Inject] public SetGameServerInstanceStateSignal SetGameServerInstanceStateSignal { get; set; }
+        [Inject] public ServerSettingsData ServerSettingsData { get; set; }
 
         [Inject] public GameManagerCreatedSignal GameManagerCreatedSignal { get; set; }
         [Inject] public GameBoardCreatedSignal GameBoardCreatedSignal {get; set;}
@@ -33,14 +35,40 @@ namespace Qwf.Server {
         }
 
         private void OnPlayerAdded() {
-            if ( ScoreKeeper.GetNumPlayers() == 2 ) {
-                PlayerAddedSignal.RemoveListener( OnPlayerAdded );
-                GameManager.SetScoreKeeper( ScoreKeeper );
-                Logger.Dispatch( LoggerTypes.Info, string.Format( "Both players joined; setting score keeper" ) );
+            if ( AllPlayersJoined() ) {
+                Logger.Dispatch( LoggerTypes.Info, string.Format( "All players have joined" ) );
 
-                GameManagerCreatedSignal.Dispatch();
+                RemovePlayerAddedSignal();
+                SetScoreKeeperOnGameManager();
+                SendGameManagerCreatedSignal();
+                RemoveServerFromMatchmaker();                                                              
             }
         }        
+
+        private bool AllPlayersJoined() {
+            return ScoreKeeper.GetNumPlayers() == 2;
+        }
+
+        private void RemovePlayerAddedSignal() {
+            PlayerAddedSignal.RemoveListener( OnPlayerAdded );
+        }
+
+        private void SetScoreKeeperOnGameManager() {
+            GameManager.SetScoreKeeper( ScoreKeeper );
+        }
+
+        private void SendGameManagerCreatedSignal() {
+            GameManagerCreatedSignal.Dispatch();
+        }
+
+        private void RemoveServerFromMatchmaker() {
+            Logger.Dispatch( LoggerTypes.Info, "Setting instance to closed for " + ServerSettingsData.GameId.ToString() );
+
+            SetGameServerInstanceStateSignal.Dispatch( new SetGameServerInstanceStateRequest() {
+                LobbyId = ServerSettingsData.GameId.ToString(),
+                State = GameInstanceState.Closed
+            } );
+        }
     }
 }
 #endif
