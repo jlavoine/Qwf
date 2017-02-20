@@ -883,3 +883,51 @@ Info: Sending game ready DF352B70F7C1B528
 Info: Sending game ready CDECF881F9EF2304
 Info: A Unity Client Disconnected
 Info: A Unity Client Disconnected
+Info: Launch from MainGameServer Context.
+Info: PlayFab Server Startup Command
+Info: GameId:0 game_build_version:0.01 server:localhost port:7777 endoint:
+Info: Setting Up Unity Networking Server
+Info: Populating Title News
+Info: CreateGameBoardMediator.OnRegister()
+Info: CreateGameManagerMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: ClientTurnAttemptMediator.OnRegister()
+Info: GameOverMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: Launch from MainGameServer Context.
+Info: PlayFab Server Startup Command
+Info: GameId:0 game_build_version:0.01 server:localhost port:7777 endoint:
+Info: Setting Up Unity Networking Server
+Info: Populating Title News
+Info: CreateGameBoardMediator.OnRegister()
+Info: CreateGameManagerMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: ClientTurnAttemptMediator.OnRegister()
+Info: GameOverMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:DF352B70F7C1B528 AuthTicket:DF352B70F7C1B528---FA22-8D459DF24D56E95-196946A886B856DE.739288C26E877844
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: DF352B70F7C1B528
+Info: Sending hand to DF352B70F7C1B528
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:CDECF881F9EF2304 AuthTicket:CDECF881F9EF2304---FA22-8D459DF25382DB7-4DFD9891D1FCD4DD.A80F7C04157A8148
+Info: PlayFab Says AuthTicket isValid:True
+Info: Creating a player with id: CDECF881F9EF2304
+Info: Max users authed, removing all connection listeners
+Info: Sending hand to CDECF881F9EF2304
+Info: Both players joined; setting score keeper
+Info: Received GameManager
+Info: Sending starting obstacle data to DF352B70F7C1B528
+Info: Sending starting obstacle data to CDECF881F9EF2304
+Info: Sending turn update with active player: DF352B70F7C1B528
+Info: Sending game ready DF352B70F7C1B528
+Info: Sending game ready CDECF881F9EF2304
+Info: Received GameManager
+Info: Sending starting obstacle data to DF352B70F7C1B528
+Info: Sending starting obstacle data to CDECF881F9EF2304
+Info: Sending turn update with active player: DF352B70F7C1B528
+Info: Sending game ready DF352B70F7C1B528
+Info: Sending game ready CDECF881F9EF2304
+Info: A Unity Client Connected
+Info: Auth Received: PlayFabId:A9ED40432D085713 AuthTicket:A9ED40432D085713---FA22-8D459DF26A0BE9F-D815058CEDCB1252.AB3FAAB720006969

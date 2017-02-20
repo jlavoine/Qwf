@@ -32,10 +32,10 @@ public class UnityNetworkManagerMediator : EventMediator {
     }
 
     public override void OnRegister() {
-        NetworkServer.RegisterHandler(MsgType.Connect, OnServerConnect);
-        NetworkServer.RegisterHandler(MsgType.Disconnect, OnServerDisconnect);
-        NetworkServer.RegisterHandler(MsgType.Error, OnServerError);
-        NetworkServer.RegisterHandler(CoreNetworkMessages.Authenticate, OnAuthenticateConnection);
+        NetworkServer.RegisterHandler( MsgType.Connect, OnServerConnect );
+        NetworkServer.RegisterHandler( CoreNetworkMessages.Authenticate, OnAuthenticateConnection );
+        NetworkServer.RegisterHandler( MsgType.Disconnect, OnServerDisconnect );
+        NetworkServer.RegisterHandler( MsgType.Error, OnServerError );        
 
         AuthenticateSessionTicketResponseSignal.AddListener( OnAuthLocalUserResponse );
         RedeemMatchmakerTicketResponseSignal.AddListener( OnAuthUserResponse );
@@ -125,7 +125,7 @@ public class UnityNetworkManagerMediator : EventMediator {
     }
 
     private void RemoveListenersIfAllPlayersAuthed() {
-                int authCount = 0;
+        int authCount = 0;
         foreach ( var conn in UnityNetworkingData.Connections ) {
             if ( conn.IsAuthenticated ) {
                 authCount++;
@@ -133,13 +133,20 @@ public class UnityNetworkManagerMediator : EventMediator {
         }
 
         if ( authCount == 2 ) {
+            Logger.Dispatch( LoggerTypes.Info, "Max users authed, removing all connection listeners" );
             AuthenticateSessionTicketResponseSignal.RemoveListener( OnAuthLocalUserResponse );
             RedeemMatchmakerTicketResponseSignal.RemoveListener( OnAuthUserResponse );
+
+            // TODO stop listening for connections now that all players are authed?
+            //NetworkServer.RegisterHandler( MsgType.Connect, OnServerConnect );
+            //NetworkServer.RegisterHandler( CoreNetworkMessages.Authenticate, OnAuthenticateConnection );
         }
     }
 
     // called when a client connects 
-    private void OnServerConnect(NetworkMessage netMsg) {        
+    private void OnServerConnect(NetworkMessage netMsg) {
+        // TODO here I need to decide: Do I reject clients if the max # of players is already connected/authed?
+          
         UnityNetworkingData.ConnectedClients++;
         UnityNetworkingData.Connections.Add(new UnityNetworkingData.UnityNetworkConnection() {
             Connection = netMsg.conn,
