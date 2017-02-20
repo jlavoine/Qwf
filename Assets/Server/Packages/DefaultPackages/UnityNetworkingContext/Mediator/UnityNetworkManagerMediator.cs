@@ -25,15 +25,13 @@ public class UnityNetworkManagerMediator : EventMediator {
 
     [Inject] public CreateGamePlayerSignal CreateGamePlayerSignal { get; set; }
 
-    public class AuthTicketMessage : MessageBase
-    {
+    public class AuthTicketMessage : MessageBase {
         public string PlayFabId;
         public string AuthTicket;
         public bool IsLocal;
     }
 
-    public override void OnRegister()
-    {
+    public override void OnRegister() {
         NetworkServer.RegisterHandler(MsgType.Connect, OnServerConnect);
         NetworkServer.RegisterHandler(MsgType.Disconnect, OnServerDisconnect);
         NetworkServer.RegisterHandler(MsgType.Error, OnServerError);
@@ -45,24 +43,19 @@ public class UnityNetworkManagerMediator : EventMediator {
         StartCoroutine(CheckForConnectionsOrClose());
     }
 
-    IEnumerator CheckForConnectionsOrClose()
-    {
+    IEnumerator CheckForConnectionsOrClose() {
         yield return new WaitForSeconds(UnityNetworkingData.MaxWaitForConnectSeconds);
-        if (UnityNetworkingData.ConnectedClients == 0)
-        {
+        if (UnityNetworkingData.ConnectedClients == 0) {
             Logger.Dispatch(LoggerTypes.Info, "No Connections were made, shutting down.");
             ShutDownSignal.Dispatch();
         }
     }
 
-    IEnumerator CheckForUnauthenticatedClients(int connectionId)
-    {
+    IEnumerator CheckForUnauthenticatedClients(int connectionId) {
         yield return new WaitForSeconds(UnityNetworkingData.MaxWaitForAuthSeconds);
         var uconn = UnityNetworkingData.Connections.Find(c => c.ConnectionId == connectionId);
-        if (uconn != null)
-        {
-            if (!uconn.IsAuthenticated)
-            {
+        if (uconn != null) {
+            if (!uconn.IsAuthenticated) {
                 uconn.Connection.Disconnect();
             }
         }
@@ -77,15 +70,13 @@ public class UnityNetworkManagerMediator : EventMediator {
 
             if (!message.IsLocal) {
                 //RedeemMatchmakerTicketResponseSignal.AddOnce(OnAuthUserResponse); // bug from original code if multiple players auth at once
-                RedeemMatchmakerTicketSignal.Dispatch(new RedeemMatchmakerTicketRequest()
-                {
+                RedeemMatchmakerTicketSignal.Dispatch(new RedeemMatchmakerTicketRequest() {
                     Ticket = message.AuthTicket,
                     LobbyId = ServerSettingsData.GameId.ToString()
                 });
             } else {
                 //AuthenticateSessionTicketResponseSignal.AddOnce(OnAuthLocalUserResponse); // bug from original code if multiple players auth at once
-                AuthenticateSessionTicketSignal.Dispatch(new AuthenticateSessionTicketRequest()
-                {
+                AuthenticateSessionTicketSignal.Dispatch(new AuthenticateSessionTicketRequest() {
                     SessionTicket = message.AuthTicket
                 });
             }
@@ -165,38 +156,29 @@ public class UnityNetworkManagerMediator : EventMediator {
     }
 
     // called when a client disconnects
-    private void OnServerDisconnect(NetworkMessage netMsg)
-    {
-        if (UnityNetworkingData.ConnectedClients - 1 >= 0)
-        {
+    private void OnServerDisconnect(NetworkMessage netMsg) {
+        if (UnityNetworkingData.ConnectedClients - 1 >= 0) {
             UnityNetworkingData.ConnectedClients--;
         }
 
-        if (UnityNetworkingData.ConnectedClients == 0)
-        {
+        if (UnityNetworkingData.ConnectedClients == 0) {
             StartCoroutine(CheckForConnectionsOrClose());    
         }
 
         var connection = UnityNetworkingData.Connections.Find(c => c.ConnectionId == netMsg.conn.connectionId);
-        if (connection != null)
-        {
-            if (connection.IsAuthenticated && ServerSettingsData.GameId > 0)
-            {
-                PlayerLeftResponse.AddOnce((playerLeftResponse) =>
-                {
+        if (connection != null) {
+            if (connection.IsAuthenticated && ServerSettingsData.GameId > 0) {
+                PlayerLeftResponse.AddOnce((playerLeftResponse) => {
                     ClientDisconnectedSignal.Dispatch(connection.ConnectionId, connection.PlayFabId);
                     Logger.Dispatch(LoggerTypes.Info,string.Format("Player Has Left:{0}",connection.PlayFabId));
                     UnityNetworkingData.Connections.Remove(connection);
                 });
 
-                PlayerLeftSignal.Dispatch(new NotifyMatchmakerPlayerLeftRequest()
-                {
+                PlayerLeftSignal.Dispatch(new NotifyMatchmakerPlayerLeftRequest() {
                     PlayFabId = connection.PlayFabId,
                     LobbyId = ServerSettingsData.GameId.ToString() 
                 });   
-            }
-            else
-            {
+            } else {
                 ClientDisconnectedSignal.Dispatch(connection.ConnectionId,connection.PlayFabId);
                 UnityNetworkingData.Connections.Remove(connection);
             }
@@ -206,24 +188,17 @@ public class UnityNetworkManagerMediator : EventMediator {
     }
 
     // called when a network error occurs
-    public void OnServerError(NetworkMessage netMsg)
-    {
-        try
-        {
+    public void OnServerError(NetworkMessage netMsg) {
+        try {
             var error = netMsg.ReadMessage<ErrorMessage>();
-            if (error != null)
-            {
+            if (error != null) {
                 Logger.Dispatch(LoggerTypes.Info,
                     string.Format("Unity Network Connection Status: code - {0}", error.errorCode));
             }
-        }
-        catch (Exception)
-        {
+        } catch (Exception) {
             Logger.Dispatch(LoggerTypes.Info,"Unity Network Connection Status, but we could not get the reason, check the Unity Logs for more info.");
         }
         ShutDownSignal.Dispatch();
     }
-
-
 }
 #endif
