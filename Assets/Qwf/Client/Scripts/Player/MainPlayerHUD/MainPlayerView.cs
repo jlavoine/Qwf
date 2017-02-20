@@ -1,11 +1,11 @@
 ﻿using MyLibrary;
 
 namespace Qwf.Client {
-    public class EditMovesView : GroupView {
-        private EditMovesPM mPM;      
+    public class MainPlayerView : GroupView {
+        private MainPlayerPM mPM;
 
         void Start() {
-            mPM = new EditMovesPM();
+            mPM = new MainPlayerPM( PlayerManager.Instance.Data );
             SetModel( mPM.ViewModel );
         }
 

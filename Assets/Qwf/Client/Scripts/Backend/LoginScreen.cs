@@ -7,7 +7,7 @@ using TMPro;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Qwf {
+namespace Qwf.Client {
     public class LoginScreen : MonoBehaviour {
         public const string STATUS_WAITING_TO_CHOOSE = "Choose player to login";
         public const string STATUS_CONNECTING = "Connecting to server...";
@@ -25,7 +25,6 @@ namespace Qwf {
 
         private AnalyticsTimer mLoginTimer = new AnalyticsTimer( LibraryAnalyticEvents.LOGIN_TIME, new MyTimer() );
 
-        public GameObject PlayButton;
         public GameObject PlayerSelectionArea;
         public TextMeshProUGUI LoginStatusText;
 
@@ -58,9 +57,14 @@ namespace Qwf {
         private void DoneLoadingData() {
             if ( !mBackendFailure ) {
                 LoginStatusText.gameObject.SetActive( false );
-                PlayButton.SetActive( true );
                 mLoginTimer.StopAndSendAnalytic();
+
+                LoadMainScene();
             }
+        }
+
+        private void LoadMainScene() {
+            SceneManager.LoadScene( "Main" );
         }
 
         void OnDestroy() {
@@ -88,6 +92,8 @@ namespace Qwf {
             LoginStatusText.text = STATUS_DOWNLOADING_GAME;
            
             StringTableManager.Instance.Init( "English", mBackend );
+            PlayerManager.Instance.Init( new PlayerData() );
+
             //Constants.Init( mBackend );
             //GenericDataLoader.Init( mBackend );
             //GenericDataLoader.LoadDataOfClass<BuildingData>( GenericDataLoader.BUILDINGS );
