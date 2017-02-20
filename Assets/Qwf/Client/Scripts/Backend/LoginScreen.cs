@@ -47,7 +47,7 @@ namespace Qwf.Client {
         }
 
         public void OnPlayerSelected_3() {
-            OnPlayerSelected( "Player_3" ); // ???
+            OnPlayerSelected( "Player_3" ); // A9ED40432D085713
         }
 
         private void OnPlayerSelected(string player) {
