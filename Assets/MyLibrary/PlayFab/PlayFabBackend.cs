@@ -225,16 +225,15 @@ namespace MyLibrary {
         public void GetVirtualCurrency( string i_key, Callback<int> requestSuccessCallback ) {
             StartRequest( "Requesting virtual currency: " + i_key );
 
-            GetPlayerCombinedInfoRequest request = new GetPlayerCombinedInfoRequest();
+            GetUserInventoryRequest request = new GetUserInventoryRequest();
 
-            PlayFabClientAPI.GetPlayerCombinedInfo( request, ( result ) => {
+            PlayFabClientAPI.GetUserInventory( request, ( result ) => {
                 RequestComplete( "Request for virtual currency complete: " + i_key, LogTypes.Info );
 
-                int currency = 0;
-                if ( result.InfoResultPayload.UserVirtualCurrency.ContainsKey( i_key ) ) {
-                    currency = result.InfoResultPayload.UserVirtualCurrency[i_key];
-                }
-                else {
+                int currency = 0;               
+                if ( result.VirtualCurrency.ContainsKey( i_key ) ) {
+                    currency = result.VirtualCurrency[i_key];
+                } else {
                     MyMessenger.Instance.Send<LogTypes, string, string>( MyLogger.LOG_EVENT, LogTypes.Error, "No virtual currency for: " + i_key, PLAYFAB );
                 }
 
