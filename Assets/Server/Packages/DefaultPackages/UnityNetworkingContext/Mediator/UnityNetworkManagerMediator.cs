@@ -40,6 +40,7 @@ public class UnityNetworkManagerMediator : EventMediator {
         NetworkServer.RegisterHandler(CoreNetworkMessages.Authenticate, OnAuthenticateConnection);
 
         AuthenticateSessionTicketResponseSignal.AddListener( OnAuthLocalUserResponse );
+        RedeemMatchmakerTicketResponseSignal.AddListener( OnAuthUserResponse );
 
         StartCoroutine(CheckForConnectionsOrClose());
     }
@@ -67,27 +68,22 @@ public class UnityNetworkManagerMediator : EventMediator {
         }
     }
 
-    private void OnAuthenticateConnection(NetworkMessage netMsg)
-    {
+    private void OnAuthenticateConnection(NetworkMessage netMsg) {
         var uconn = UnityNetworkingData.Connections.Find(c => c.ConnectionId == netMsg.conn.connectionId);
-        if (uconn != null)
-        {
+        if (uconn != null) {
             var message = netMsg.ReadMessage<AuthTicketMessage>();
             uconn.PlayFabId = message.PlayFabId;
             Logger.Dispatch(LoggerTypes.Info, string.Format("Auth Received: PlayFabId:{0} AuthTicket:{1}", message.PlayFabId,message.AuthTicket));
 
-            if (!message.IsLocal)
-            {
-                RedeemMatchmakerTicketResponseSignal.AddOnce(OnAuthUserResponse);
+            if (!message.IsLocal) {
+                //RedeemMatchmakerTicketResponseSignal.AddOnce(OnAuthUserResponse); // bug from original code if multiple players auth at once
                 RedeemMatchmakerTicketSignal.Dispatch(new RedeemMatchmakerTicketRequest()
                 {
                     Ticket = message.AuthTicket,
                     LobbyId = ServerSettingsData.GameId.ToString()
                 });
-            }
-            else
-            {
-                //AuthenticateSessionTicketResponseSignal.AddOnce(OnAuthLocalUserResponse); // bug from original code
+            } else {
+                //AuthenticateSessionTicketResponseSignal.AddOnce(OnAuthLocalUserResponse); // bug from original code if multiple players auth at once
                 AuthenticateSessionTicketSignal.Dispatch(new AuthenticateSessionTicketRequest()
                 {
                     SessionTicket = message.AuthTicket
@@ -96,8 +92,7 @@ public class UnityNetworkManagerMediator : EventMediator {
         }
     }
 
-    private void OnAuthLocalUserResponse(AuthenticateSessionTicketResult response)
-    {
+    private void OnAuthLocalUserResponse(AuthenticateSessionTicketResult response) {
         Logger.Dispatch(LoggerTypes.Info, string.Format("PlayFab Says AuthTicket isValid:{0}", true));
         
         var uconn = UnityNetworkingData.Connections.Find(c => c.PlayFabId == response.UserInfo.PlayFabId);
@@ -116,7 +111,30 @@ public class UnityNetworkManagerMediator : EventMediator {
             CreateGamePlayerSignal.Dispatch( response.UserInfo.PlayFabId );
         }
 
-        int authCount = 0;
+        RemoveListenersIfAllPlayersAuthed();
+    }
+
+    private void OnAuthUserResponse(RedeemMatchmakerTicketResult response) {
+        Logger.Dispatch(LoggerTypes.Info, string.Format("PlayFab Says AuthTicket isValid:{0}",response.TicketIsValid));
+        var uconn = UnityNetworkingData.Connections.Find(c => c.PlayFabId == response.UserInfo.PlayFabId);
+        if (uconn != null) {
+            if ( uconn.IsAuthenticated == true ) {
+                return;
+            }
+
+            uconn.IsAuthenticated = response.TicketIsValid;
+            uconn.Connection.Send(CoreNetworkMessages.OnAuthenticated, new StringMessage() {
+                value = "Client Authenticated Successfully"
+            });
+            
+            CreateGamePlayerSignal.Dispatch( response.UserInfo.PlayFabId);
+        }
+
+        RemoveListenersIfAllPlayersAuthed();
+    }
+
+    private void RemoveListenersIfAllPlayersAuthed() {
+                int authCount = 0;
         foreach ( var conn in UnityNetworkingData.Connections ) {
             if ( conn.IsAuthenticated ) {
                 authCount++;
@@ -125,21 +143,7 @@ public class UnityNetworkManagerMediator : EventMediator {
 
         if ( authCount == 2 ) {
             AuthenticateSessionTicketResponseSignal.RemoveListener( OnAuthLocalUserResponse );
-        }
-    }
-
-    private void OnAuthUserResponse(RedeemMatchmakerTicketResult response)
-    {
-        Logger.Dispatch(LoggerTypes.Info, string.Format("PlayFab Says AuthTicket isValid:{0}",response.TicketIsValid));
-        var uconn = UnityNetworkingData.Connections.Find(c => c.PlayFabId == response.UserInfo.PlayFabId);
-        if (uconn != null) {
-            uconn.IsAuthenticated = response.TicketIsValid;
-            uconn.Connection.Send(CoreNetworkMessages.OnAuthenticated, new StringMessage() {
-                value = "Client Authenticated Successfully"
-            });
-
-            UnityEngine.Debug.LogError( "about to send auth with " + response.UserInfo.PlayFabId );
-            CreateGamePlayerSignal.Dispatch( response.UserInfo.PlayFabId);
+            RedeemMatchmakerTicketResponseSignal.RemoveListener( OnAuthUserResponse );
         }
     }
 
