@@ -23,7 +23,7 @@ namespace Qwf.Server {
 
         public override void OnRegister() {
             Logger.Dispatch( LoggerTypes.Info, string.Format( "ClientTurnAttemptMediator.OnRegister()" ) );
-            UnityEngine.Debug.LogError( "registered turn attempt mediator" );
+
             NetworkServer.RegisterHandler( NetworkMessages.SendTurn, OnClientTurnAttempt );
         }
 
