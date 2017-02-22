@@ -29,20 +29,21 @@ namespace Qwf.Server {
         }
 
         private void SendBoardUpdate() {
+            Logger.Dispatch( LoggerTypes.Info, "Sending board update" );
             GameObstaclesUpdate update = GameObstaclesUpdate.Create( GameManager.Board.GetCurrentObstacles() );
             string updateJSON = JsonConvert.SerializeObject( update );
             SendUpdate( NetworkMessages.UpdateObstacles, updateJSON );
         }
 
         private void SendScoreUpdate() {
+            Logger.Dispatch( LoggerTypes.Info, "Sending score update" );
             MatchScoreUpdateData update = MatchScoreUpdateData.Create( GameManager.ActivePlayer, GameManager.InactivePlayer, ScoreKeeper );
             string updateJSON = JsonConvert.SerializeObject( update );
             SendUpdate( NetworkMessages.UpdateScore, updateJSON );
         }
 
         private void SendUpdate( short i_updateType, string i_updateJSON ) {
-            foreach ( var uconn in UnityNetworkingData.Connections ) {
-                Logger.Dispatch( LoggerTypes.Info, "Sending starting turn update data to " + uconn.PlayFabId );
+            foreach ( var uconn in UnityNetworkingData.Connections ) {                
                 uconn.Connection.Send( i_updateType, new StringMessage() {
                     value = i_updateJSON
                 } );
