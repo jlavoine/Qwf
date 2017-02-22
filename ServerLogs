@@ -931,3 +931,60 @@ Info: Sending game ready DF352B70F7C1B528
 Info: Sending game ready CDECF881F9EF2304
 Info: A Unity Client Connected
 Info: Auth Received: PlayFabId:A9ED40432D085713 AuthTicket:A9ED40432D085713---FA22-8D459DF26A0BE9F-D815058CEDCB1252.AB3FAAB720006969
+Info: Launch from MainGameServer Context.
+Info: PlayFab Server Startup Command
+Info: GameId:0 game_build_version:0.01 server:localhost port:7777 endoint:
+Info: Setting Up Unity Networking Server
+Info: Populating Title News
+Info: CreateGameBoardMediator.OnRegister()
+Info: CreateGameManagerMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: ClientTurnAttemptMediator.OnRegister()
+Info: GameOverMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: Launch from MainGameServer Context.
+Info: PlayFab Server Startup Command
+Info: GameId:0 game_build_version:0.01 server:localhost port:7777 endoint:
+Info: Setting Up Unity Networking Server
+Info: Populating Title News
+Info: CreateGameBoardMediator.OnRegister()
+Info: CreateGameManagerMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: ClientTurnAttemptMediator.OnRegister()
+Info: GameOverMediator.OnRegister()
+Info: ClientTurnAttemptMediator.OnRegister()
+Info: Launch from MainGameServer Context.
+Info: PlayFab Server Startup Command
+Info: GameId:0 game_build_version:0.01 server:localhost port:7777 endoint:
+Info: Setting Up Unity Networking Server
+Info: Populating Title News
+Info: Launch from MainGameServer Context.
+Info: PlayFab Server Startup Command
+Info: GameId:0 game_build_version:0.01 server:localhost port:7777 endoint:
+Info: Setting Up Unity Networking Server
+Info: Populating Title News
+Info: CreateGameBoardMediator.OnRegister()
+Info: CreateGameManagerMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: ClientTurnAttemptMediator.OnRegister()
+Info: GameOverMediator.OnRegister()
+Info: Launch from MainGameServer Context.
+Info: PlayFab Server Startup Command
+Info: GameId:0 game_build_version:0.01 server:localhost port:7777 endoint:
+Info: Setting Up Unity Networking Server
+Info: Populating Title News
+Info: CreateGameBoardMediator.OnRegister()
+Info: CreateGameManagerMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: ClientTurnAttemptMediator.OnRegister()
+Info: GameOverMediator.OnRegister()
+Info: Launch from MainGameServer Context.
+Info: PlayFab Server Startup Command
+Info: GameId:0 game_build_version:0.01 server:localhost port:7777 endoint:
+Info: Setting Up Unity Networking Server
+Info: Populating Title News
+Info: CreateGameBoardMediator.OnRegister()
+Info: CreateGameManagerMediator.OnRegister()
+Info: GameManagerMediator.OnRegister()
+Info: ClientTurnAttemptMediator.OnRegister()
+Info: GameOverMediator.OnRegister()
