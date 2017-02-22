@@ -51,7 +51,7 @@ namespace MyLibrary {
                 int port = matchMakeResult.ServerPort ?? 7777;
                 GameServerAuthTicket = matchMakeResult.Ticket;
                 ConnectNetworkClient( matchMakeResult.ServerHostname, port );
-            }, PlayFabErrorHandler.HandlePlayFabError );
+            }, OnMatchMakeError );
         }
 
         private void ConnectNetworkClient( string host = "localhost", int port = 7777 ) {
@@ -93,5 +93,9 @@ namespace MyLibrary {
         }
 
         private void OnClientDisconnect( NetworkMessage netMsg ) {}
+
+        private void OnMatchMakeError( PlayFabError error ) {
+            MyMessenger.Instance.Send( ClientMessages.NO_SERVER_AVAILABLE );
+        }
     }
 }
