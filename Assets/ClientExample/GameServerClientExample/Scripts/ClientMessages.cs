@@ -14,6 +14,7 @@ namespace Qwf {
         // matchmaking related
         public const string NETWORK_CLIENT_CREATED = "ConnectedToServer";
         public const string GAME_READY = "GameReady";
+        public const string NO_SERVER_AVAILABLE = "NoGameServerAvailable";
 
         // sending to the server
         public const string SEND_TURN_TO_SERVER = "SendTurnToServer";
